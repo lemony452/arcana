@@ -1,12 +1,15 @@
 package com.jumzip.arcana.db.entity;
 
 import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity
-@Builder
+@Getter
+@Setter
 public class User {
 
     @Id
@@ -17,7 +20,4 @@ public class User {
     private String nickname;
     private int reportCount;
 
-    public User() {
-
-    }
 }
