@@ -44,8 +44,18 @@ export const CardBox = styled.div`
 `;
 
 export const StyledCard = styled.img`
-  src: url(imgsrc);
   width: calc(100vw / 3);
   height: 100vh;
+  cursor: pointer;
   /* object-fit: fill; */
 `;
+
+// export const NextBtn = styled.img`
+//   position: absolute;
+//   width: 10vh;
+//   height: auto;
+//   right: 0.3vw;
+//   top: calc(50vh - 5vh);
+//   cursor: pointer;
+//   z-index: 1;
+// `;
