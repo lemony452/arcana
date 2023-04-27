@@ -3,15 +3,16 @@ import * as luckySelect from './lucky_karma_select_style';
 import CardB from '../../../Assets/cards/cardb.svg';
 
 interface LuckyKarmaSelectType {
-  setCardContent: React.Dispatch<React.SetStateAction<string>>;
+  setSelectCard: React.Dispatch<React.SetStateAction<number>>;
   cardList: {
     index: number;
     front: string;
     content: string;
+    result: string;
   }[];
 }
 
-function LuckyKarmaSelect({ setCardContent, cardList }: LuckyKarmaSelectType) {
+function LuckyKarmaSelect({ setSelectCard, cardList }: LuckyKarmaSelectType) {
   const [cardState, setCardState] = useState([false, false, false]);
   const [cardAniState, setCardAniState] = useState([false, false, false]);
 
@@ -42,9 +43,9 @@ function LuckyKarmaSelect({ setCardContent, cardList }: LuckyKarmaSelectType) {
       }
       // 카드 인덱스로 컨텐츠 출력
       if (cardState[0] === false && cardState[1] === false && cardState[2] === false) {
-        setCardContent('카드를 골라주세요');
+        setSelectCard(-1);
       } else {
-        setCardContent(cardList[index].content);
+        setSelectCard(index);
       }
     }, 200);
   };
