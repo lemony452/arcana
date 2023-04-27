@@ -11,8 +11,8 @@ export const MainBox = styled.div`
 
 export const CelticBox = styled.div`
   /* background-color: red; */
-  width: 90vh;
-  height: 90vh;
+  height: 90%;
+  aspect-ratio: 1 / 1;
   display: flex;
   justify-content: space-between;
 `;
@@ -63,14 +63,14 @@ export const CelticPartFour = styled.div`
 
 export const CelticOne = styled.div`
   width: 64.08%;
-  height: 63.73%;
+  aspect-ratio: 3 / 5;
   background-color: gold;
   position: relative;
 `;
 
 export const CelticTwo = styled.div`
   width: 64.08%;
-  height: 63.73%;
+  aspect-ratio: 3 / 5;
   background-color: orange;
   position: relative;
   left: 35.5%;
@@ -79,7 +79,7 @@ export const CelticTwo = styled.div`
 
 export const CelticThree = styled.div`
   width: 64.08%;
-  height: 22.75%;
+  aspect-ratio: 3 / 5;
   background-color: gold;
 `;
 
@@ -87,7 +87,7 @@ export const CelticFour = styled(CelticThree)``;
 
 export const CelticFive = styled.div`
   width: 100%;
-  height: 22.75%;
+  aspect-ratio: 3 / 5;
   background-color: gold;
 `;
 
