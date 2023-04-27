@@ -22,14 +22,29 @@ export const TimePartOne = styled.div`
   width: 100%;
   height: 33%;
   background-color: pink;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 export const TimePartTwo = styled.div`
   width: 100%;
   height: 33%;
   background-color: violet;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
 `;
 export const TimePartThree = styled.div`
   width: 100%;
   height: 33%;
   background-color: magenta;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+`;
+
+export const MonthCard = styled.div`
+  height: 90%;
+  aspect-ratio: 3 / 5;
+  background-color: gold;
 `;

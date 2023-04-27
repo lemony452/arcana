@@ -5,9 +5,19 @@ function MonthSpread() {
   return (
     <layer.MainBox>
       <layer.TimeBox>
-        <layer.TimePartOne>1</layer.TimePartOne>
-        <layer.TimePartTwo>2</layer.TimePartTwo>
-        <layer.TimePartThree>3</layer.TimePartThree>
+        <layer.TimePartOne>
+          <layer.MonthCard>7</layer.MonthCard>
+        </layer.TimePartOne>
+        <layer.TimePartTwo>
+          <layer.MonthCard>1</layer.MonthCard>
+          <layer.MonthCard>2</layer.MonthCard>
+          <layer.MonthCard>3</layer.MonthCard>
+        </layer.TimePartTwo>
+        <layer.TimePartThree>
+          <layer.MonthCard>4</layer.MonthCard>
+          <layer.MonthCard>5</layer.MonthCard>
+          <layer.MonthCard>6</layer.MonthCard>
+        </layer.TimePartThree>
       </layer.TimeBox>
     </layer.MainBox>
   );
