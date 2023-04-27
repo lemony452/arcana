@@ -1,0 +1,95 @@
+# cardIndex
+Major: 0 - 21
+Minor: 1 - 10, page: 11, knight: 12, queen: 13, king: 14
+
+# case
+major, wand, pentacle, sword, cup
+
+# spread
+celtic, instant, time
+
+# category - celtic에만 있음
+money, love, job
+
+<celtic>
+
+api.send
+{
+    spread: celtic,
+    category: 'money',
+    question: '미래가 불안하다. 친구들이 차례차례 결혼을 해서. 저의 미래에 대해서 생각하게 되었습니다. 결혼뿐만 아니라 일도, 돈도, 너무 불안해요'
+}
+
+
+
+api.on
+{
+    question: '미래가 불안하다. 친구들이 차례차례 결혼을 해서. 저의 미래에 대해서 생각하게 되었습니다. 결혼뿐만 아니라 일도, 돈도, 너무 불안해요'
+    answer: [
+        {
+            case: 'wand'
+            number: 7,
+            reverse: true,
+            completion: '땅에서 솟아오른 막대기 하나하나가 질문자의 고민을 나타내는 듯, 필사적으로 떨쳐내려고 애쓰는 상태다.',
+        },
+        {
+            case: 'wand'
+            number: 7,
+            reverse: true,
+            completion: '땅에서 솟아오른 막대기 하나하나가 질문자의 고민을 나타내는 듯, 필사적으로 떨쳐내려고 애쓰는 상태다.',
+        },
+        {
+            case: 'wand'
+            number: 7,
+            reverse: true,
+            completion: '땅에서 솟아오른 막대기 하나하나가 질문자의 고민을 나타내는 듯, 필사적으로 떨쳐내려고 애쓰는 상태다.',
+        },
+        {
+            case: 'wand'
+            number: 7,
+            reverse: true,
+            completion: '땅에서 솟아오른 막대기 하나하나가 질문자의 고민을 나타내는 듯, 필사적으로 떨쳐내려고 애쓰는 상태다.',
+        },
+        {
+            case: 'wand'
+            number: 7,
+            reverse: true,
+            completion: '땅에서 솟아오른 막대기 하나하나가 질문자의 고민을 나타내는 듯, 필사적으로 떨쳐내려고 애쓰는 상태다.',
+        },
+        {
+            case: 'wand'
+            number: 7,
+            reverse: true,
+            completion: '땅에서 솟아오른 막대기 하나하나가 질문자의 고민을 나타내는 듯, 필사적으로 떨쳐내려고 애쓰는 상태다.',
+        },
+        {
+            case: 'wand'
+            number: 7,
+            reverse: true,
+            completion: '땅에서 솟아오른 막대기 하나하나가 질문자의 고민을 나타내는 듯, 필사적으로 떨쳐내려고 애쓰는 상태다.',
+        },
+        {
+            case: 'wand'
+            number: 7,
+            reverse: true,
+            completion: '땅에서 솟아오른 막대기 하나하나가 질문자의 고민을 나타내는 듯, 필사적으로 떨쳐내려고 애쓰는 상태다.',
+        },
+        {
+            case: 'wand'
+            number: 7,
+            reverse: true,
+            completion: '땅에서 솟아오른 막대기 하나하나가 질문자의 고민을 나타내는 듯, 필사적으로 떨쳐내려고 애쓰는 상태다.',
+        },
+        {
+            case: 'wand'
+            number: 7,
+            reverse: true,
+            completion: '땅에서 솟아오른 막대기 하나하나가 질문자의 고민을 나타내는 듯, 필사적으로 떨쳐내려고 애쓰는 상태다.',
+        }
+    ]
+}
+
+all {
+    question: '지금까지 나온 내용들을 종합결과로 요약해줘',
+    answer: '당신에게 새로운 인연이 생겨날 거예요!'
+}
