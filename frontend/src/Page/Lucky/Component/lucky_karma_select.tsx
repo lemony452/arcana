@@ -1,19 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import * as luckySelect from './lucky_karma_select_style';
 import CardB from '../../../Assets/cards/cardb.svg';
-import CardF from '../../../Assets/cards/cardf.svg';
-import Gom from '../../../Assets/cards/gom.svg';
 
-function LuckyKarmaSelect() {
+interface LuckyKarmaSelectType {
+  setCardContent: React.Dispatch<React.SetStateAction<string>>;
+  cardList: {
+    index: number;
+    front: string;
+    content: string;
+  }[];
+}
+
+function LuckyKarmaSelect({ setCardContent, cardList }: LuckyKarmaSelectType) {
   const [cardState, setCardState] = useState([false, false, false]);
-  const [cardContent, setCardContent] = useState('카드를 골라주세요');
   const [cardAniState, setCardAniState] = useState([false, false, false]);
-
-  const cardList = [
-    { index: 0, front: CardF, content: '너의 행운 카드는 ㅇㅇㅇ 이야! 아마 너에게 특별한 행운을 가져다 줄걸?' },
-    { index: 1, front: CardF, content: '너의 행운 카드는 ㅇㅇㅇ 이야! 아마 너에게 새로운 시작을 가져다 줄걸?' },
-    { index: 2, front: CardF, content: '너의 행운 카드는 ㅇㅇㅇ 이야! 아마 너에게 놀라운 경험을 가져다 줄걸?' },
-  ];
 
   const cardClickHandler = (index: number) => {
     // 카드 리스트 인덱스따라서 카드를 뒤집음
@@ -53,29 +53,29 @@ function LuckyKarmaSelect() {
     <luckySelect.Body>
       <luckySelect.CardBody>
         {cardList.map((card) => (
-          <luckySelect.Card
-            onClick={() => {
-              cardClickHandler(card.index);
-            }}
-          >
+          <luckySelect.Card>
             {cardState[card.index] ? (
-              <luckySelect.CardFront src={card.front} alt="CardF" cardAniState={cardAniState[card.index]} />
+              <luckySelect.CardFront
+                src={card.front}
+                alt="CardF"
+                cardAniState={cardAniState[card.index]}
+                onClick={() => {
+                  cardClickHandler(card.index);
+                }}
+              />
             ) : (
-              <luckySelect.CardBack src={CardB} alt="CardB" cardAniState={cardAniState[card.index]} />
+              <luckySelect.CardBack
+                src={CardB}
+                alt="CardB"
+                cardAniState={cardAniState[card.index]}
+                onClick={() => {
+                  cardClickHandler(card.index);
+                }}
+              />
             )}
           </luckySelect.Card>
         ))}
       </luckySelect.CardBody>
-      <luckySelect.Dialog>
-        <luckySelect.Name>농담곰</luckySelect.Name>
-        <luckySelect.Content>
-          <hr />
-          {cardContent}
-        </luckySelect.Content>
-      </luckySelect.Dialog>
-      <luckySelect.Gom>
-        <img src={Gom} alt="Gom" />
-      </luckySelect.Gom>
     </luckySelect.Body>
   );
 }
