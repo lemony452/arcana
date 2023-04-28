@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import Celtic from './Page/Celtic/celtic_spread';
-import Time from './Page/Time/time_spread_index';
+import Time from './Page/Time/time_spread';
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
