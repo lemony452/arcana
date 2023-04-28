@@ -10,7 +10,7 @@ export const Dialog = styled.div`
   width: 100%;
   bottom: 0px;
   background: linear-gradient(to left, #ffc1c1, white);
-  height: 33%;
+  height: 33vh;
 `;
 
 export const Name = styled.div`

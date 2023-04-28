@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import styled, { keyframes } from 'styled-components';
 
 export const Body = styled.div`
@@ -12,39 +13,93 @@ export const CardBody = styled.div`
   transform-style: preserve-3d;
 `;
 
-const CardAnimationS = keyframes`
+const CardSlideInAnimation = keyframes`
   0% {
-    transform: rotateY(-90deg)
+    transform: translateY(-100vh) scale(0.8);
+  }
+  65% {
+    transform: translateY(35px) scale(0.8);
+  }
+  90% {
+    transform: translateY(-15px);
+  }
+  95% {
+    transform: translateY(5px);
   }
   100% {
-    transform: rotateY(0deg)
+    transform: translateY(0);
   }
 `;
 
-const CardAnimationE = keyframes`
+const CardSlideOutAnimation = keyframes`
   0% {
-    transform: rotateY(0deg)
+    transform: translateY(0);
+  }
+  10% {
+    transform: translateY(35px) scale(0.8);
   }
   100% {
-    transform: rotateY(-90deg)
+    transform: translateY(-100vh) scale(0.8);
   }
 `;
 
-export const Card = styled.div`
+export const Card = styled(motion.div)`
   padding: 50px;
 `;
 
-export const CardBack = styled.img<{ cardAniState: boolean }>`
+export const CardBackIn = styled(motion.img)<{ cardAniState: number }>`
   width: auto;
   max-height: 350px;
+  cursor: pointer;
   // 매개변수를 받아서 카드를 뒤집는 상태를 조정
-  animation-name: ${(props) => (props.cardAniState ? CardAnimationE : CardAnimationS)};
-  animation-duration: 0.3s;
+  animation-name: ${(props) => (props.cardAniState === 1 ? CardSlideInAnimation : null)};
+  animation-duration: 1s;
+  animation-timing-function: ease-in-out;
 `;
 
-export const CardFront = styled.img<{ cardAniState: boolean }>`
+export const CardBackOut = styled(motion.img)<{ cardAniState: number }>`
   width: auto;
   max-height: 350px;
-  animation-name: ${(props) => (props.cardAniState ? CardAnimationS : CardAnimationE)};
-  animation-duration: 0.3s;
+  cursor: pointer;
+  // 매개변수를 받아서 카드를 뒤집는 상태를 조정
+  animation-name: ${(props) => (props.cardAniState === 2 ? null : CardSlideOutAnimation)};
+  animation-duration: 1s;
+  animation-timing-function: ease-in-out;
 `;
+
+export const SelectCard = styled(motion.img)<{ checkSelectState: boolean; cardAniSelect: number }>`
+  width: auto;
+  max-height: 350px;
+  cursor: pointer;
+`;
+
+export const NullCard = styled.div`
+  width: 212.44px;
+  max-height: 350px;
+`;
+
+// export const CardFront = styled.img<{ cardAniState: boolean }>`
+//   width: auto;
+//   max-height: 350px;
+//   cursor: pointer;
+//   animation-name: ${(props) => (props.cardAniState ? CardUnSelectAnimation : CardUnSelectAnimation)};
+//   animation-duration: 1.5s;
+// `;
+
+// const CardSelectAnimationS = keyframes`
+//   0% {
+//     transform: rotateY(-90deg)
+//   }
+//   100% {
+//     transform: rotateY(0deg)
+//   }
+// `;
+
+// const CardSelectAnimationE = keyframes`
+//   0% {
+//     transform: rotateY(0deg)
+//   }
+//   100% {
+//     transform: rotateY(-90deg)
+//   }
+// `;

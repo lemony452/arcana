@@ -8,8 +8,9 @@ import F14 from '../../Assets/cards/F14.svg';
 import Gom from '../../Assets/cards/gom.svg';
 
 function LuckyPage() {
-  const [selectCard, setSelectCard] = useState(-1);
+  const [selectCard, setSelectCard] = useState(-1); // 선택한 카드
   const [resultPage, setResultPage] = useState(false);
+  const [checkSelectState, setCheckSelectState] = useState(false); // 마지막 선택 질문
 
   const cardList = [
     {
@@ -36,20 +37,31 @@ function LuckyPage() {
     setResultPage(true);
   };
 
+  const cardSelect = checkSelectState ? cardList[selectCard].content : '이 카드를 선택하시겟습니까?';
+  const cardContent = selectCard === -1 ? '카드를 골라주세요' : cardSelect;
+
   return (
     <luckyPage.Body>
       {resultPage ? (
         <LuckyKarmaResult selectCard={selectCard} cardList={cardList} />
       ) : (
-        <LuckyKarmaSelect setSelectCard={setSelectCard} cardList={cardList} />
+        <LuckyKarmaSelect
+          selectCard={selectCard}
+          setSelectCard={setSelectCard}
+          cardList={cardList}
+          checkSelectState={checkSelectState}
+          setCheckSelectState={setCheckSelectState}
+        />
       )}
       <luckyPage.Dialog>
         <luckyPage.Name>농담곰</luckyPage.Name>
         <luckyPage.Content>
           <hr />
-          {selectCard !== -1 ? cardList[selectCard].content : '카드를 골라주세요'}
+          {cardContent}
         </luckyPage.Content>
-        {!resultPage && selectCard !== -1 && <luckyPage.Btn onClick={resultPageHandler}>공유하기</luckyPage.Btn>}
+        {!resultPage && checkSelectState === true && (
+          <luckyPage.Btn onClick={resultPageHandler}>공유하기</luckyPage.Btn>
+        )}
       </luckyPage.Dialog>
       <luckyPage.Gom>
         <img src={Gom} alt="Gom" />
