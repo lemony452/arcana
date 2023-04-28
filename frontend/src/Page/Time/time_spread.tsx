@@ -6,18 +6,21 @@ import { ChatArea, CardArea, DefaultCard } from '../Common/common_style';
 
 const Selecter = () => {
   const [content, setContent] = useState();
-};
 
-const selectComponent = {
-  init: (
-    <layer.MainBox>
-      <Month />
-    </layer.MainBox>
-  ),
-  one: <Year />,
-  two: <Year />,
-  three: <Year />,
-  four: <Year />,
+  const handleClickButton = (e: any) => {
+    const { name } = e.target;
+    setContent(name);
+  };
+
+  const selectComponent = {
+    init: <layer.MainBox>1</layer.MainBox>,
+    one: <layer.MainBox>2</layer.MainBox>,
+    two: <layer.MainBox>3</layer.MainBox>,
+    three: <layer.MainBox>4</layer.MainBox>,
+    four: <layer.MainBox>5</layer.MainBox>,
+  };
+
+  console.log(content);
 };
 
 function TimeSpread() {
