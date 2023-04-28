@@ -87,7 +87,7 @@ node createFineTune.js
 ### 현재 상태 확인
 
 ```sh
-node node listFineTunes.js
+node listFineTunes.js
 ```
 
 명령어를 사용하면 생성한 커스텀 모델들을 확인할 수 있습니다.
