@@ -1,0 +1,46 @@
+pipeline {
+    agent any
+    /*     environment {
+            // docker 설치 후 작성(도커 레포,id)
+
+        }
+
+    tools {} */
+    stages {
+        stage('start') {
+            steps { echo '[process START] (o゜▽゜)o---☆ *:･.:･ﾟ*' }
+        }
+
+        stage('git clone') {
+            steps {
+            checkout scmGit(
+                branches: [[name: 'buildtest']],
+                extensions: [],
+                userRemoteConfigs: [[credentialsId: 'd3511402-7a77-4937-b4f6-d2a49b9e9779',
+                url: 'https://lab.ssafy.com/s08-final/S08P31D107.git']])
+            }
+            /* echo '~~ git clone COMPLETE' */
+
+            post { failure { echo '[error] git clone FAIL (╯°□°）╯︵ ┻━┻ ' } }
+        }
+
+        stage('build Gradle') {
+
+            steps {
+                dir('backend') {
+                    echo "build Gradle..."
+
+                    sh "chmod +x gradlew"
+                    sh "./gradlew clean build"
+                }
+            }
+
+            post { failure { echo '[error] build Gradle FAIL (╯°□°）╯︵ ┻━┻ ' } }
+        }
+        /* stage('build Docker') {}
+        stage('') */
+
+    }
+
+
+}
