@@ -27,7 +27,7 @@ pipeline {
         stage('build Gradle') {
 
             steps {
-                dir('/Arcana/backend') {
+                dir('./Arcana/backend') {
                     echo "build Gradle..."
 
                     sh "chmod +x gradlew"
