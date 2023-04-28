@@ -4,6 +4,7 @@ import logo from './logo.svg';
 import './App.css';
 import Main from './Page/Main';
 import Celtic from './Page/Celtic';
+import LuckyPage from './Page/Lucky/lucky_page';
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/celtic" element={<Celtic />} />
+        <Route path="/lucky" element={<LuckyPage />} />
       </Routes>
     </div>
   );
