@@ -17,13 +17,13 @@ function CelticSpread() {
           <layer.CelticFour>4</layer.CelticFour>
         </layer.CelticPartTwo>
         <layer.CelticPartThree>
-          <layer.CelticSix>6</layer.CelticSix>
+          <layer.CelticFive>6</layer.CelticFive>
         </layer.CelticPartThree>
         <layer.CelticPartFour>
-          <layer.CelticSeven>7</layer.CelticSeven>
-          <layer.CelticEight>8</layer.CelticEight>
-          <layer.CelticNine>9</layer.CelticNine>
-          <layer.CelticTen>10</layer.CelticTen>
+          <layer.CelticFive>7</layer.CelticFive>
+          <layer.CelticFive>8</layer.CelticFive>
+          <layer.CelticFive>9</layer.CelticFive>
+          <layer.CelticFive>10</layer.CelticFive>
         </layer.CelticPartFour>
       </layer.CelticBox>
     </layer.MainBox>

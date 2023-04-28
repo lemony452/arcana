@@ -91,12 +91,12 @@ export const CelticFive = styled.div`
   background-color: gold;
 `;
 
-export const CelticSix = styled(CelticFive)``;
+// export const CelticSix = styled(CelticFive)``;
 
-export const CelticSeven = styled(CelticFive)``;
+// export const CelticSeven = styled(CelticFive)``;
 
-export const CelticEight = styled(CelticFive)``;
+// export const CelticEight = styled(CelticFive)``;
 
-export const CelticNine = styled(CelticFive)``;
+// export const CelticNine = styled(CelticFive)``;
 
-export const CelticTen = styled(CelticFive)``;
+// export const CelticTen = styled(CelticFive)``;
