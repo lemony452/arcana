@@ -50,6 +50,23 @@ export const StyledCard = styled.img`
   /* object-fit: fill; */
 `;
 
+export const CharBox = styled.div`
+  position: absolute;
+  right: 0;
+  width: calc(50vh + calc(100vw / 3));
+  height: 100vh;
+  overflow: hidden;
+`;
+
+export const StyledChar = styled.img`
+  position: absolute;
+  left: 50vh;
+  top: 50vh;
+  transform: translate(-20%, -50%);
+  height: 70vh;
+  width: auto;
+`;
+
 // export const NextBtn = styled.img`
 //   position: absolute;
 //   width: 10vh;
