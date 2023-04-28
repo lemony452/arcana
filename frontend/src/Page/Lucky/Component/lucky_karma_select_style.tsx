@@ -43,6 +43,24 @@ const CardSlideOutAnimation = keyframes`
   }
 `;
 
+const CardSelectAnimationS = keyframes`
+  0% {
+    transform: rotateY(-90deg) scale(1.1);
+  }
+  100% {
+    transform: rotateY(0deg) scale(1.1);
+  }
+`;
+
+const CardSelectAnimationE = keyframes`
+  0% {
+    transform: rotateY(0deg) scale(1.1);
+  }
+  100% {
+    transform: rotateY(-90deg) scale(1.1);;
+  }
+`;
+
 export const Card = styled(motion.div)`
   padding: 50px;
 `;
@@ -67,39 +85,23 @@ export const CardBackOut = styled(motion.img)<{ cardAniState: number }>`
   animation-timing-function: ease-in-out;
 `;
 
-export const SelectCard = styled(motion.img)<{ checkSelectState: boolean; cardAniSelect: number }>`
+export const SelectCardBack = styled(motion.img)<{ cardSelectAniState: boolean; cardAniSelect: number }>`
+  width: auto;
+  max-height: 350px;
+  animation-name: ${(props) => (props.cardSelectAniState ? CardSelectAnimationE : null)};
+  animation-duration: 0.5s;
+  cursor: pointer;
+`;
+
+export const SelectCardFront = styled(motion.img)<{ cardSelectAniState: boolean }>`
   width: auto;
   max-height: 350px;
   cursor: pointer;
+  animation-name: ${(props) => (props.cardSelectAniState ? CardSelectAnimationS : null)};
+  animation-duration: 0.5s;
 `;
 
 export const NullCard = styled.div`
   width: 212.44px;
   max-height: 350px;
 `;
-
-// export const CardFront = styled.img<{ cardAniState: boolean }>`
-//   width: auto;
-//   max-height: 350px;
-//   cursor: pointer;
-//   animation-name: ${(props) => (props.cardAniState ? CardUnSelectAnimation : CardUnSelectAnimation)};
-//   animation-duration: 1.5s;
-// `;
-
-// const CardSelectAnimationS = keyframes`
-//   0% {
-//     transform: rotateY(-90deg)
-//   }
-//   100% {
-//     transform: rotateY(0deg)
-//   }
-// `;
-
-// const CardSelectAnimationE = keyframes`
-//   0% {
-//     transform: rotateY(0deg)
-//   }
-//   100% {
-//     transform: rotateY(-90deg)
-//   }
-// `;

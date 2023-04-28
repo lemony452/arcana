@@ -23,8 +23,9 @@ function LuckyKarmaSelect({
   setCheckSelectState,
 }: LuckyKarmaSelectType) {
   const [cardState, setCardState] = useState([1, 1, 1]); // 카드를 고를시 나머지 2장은 화면에서 슬라이드 아웃
-  const [cardAniSelect, setCardAniSelect] = useState(-1);
+  const [cardAniSelect, setCardAniSelect] = useState(-1); // 화면 바깥 클릭시 선택한 카드를 제외한 나머지 카드 슬라이드 인
   const [cardAniState, setCardAniState] = useState([1, 1, 1]);
+  const [cardSelectAniState, setCardSelectAniState] = useState(false); // 카드 뒤질을때 부드러운 애니메이션용
 
   useEffect(() => {
     setTimeout(() => {
@@ -32,6 +33,8 @@ function LuckyKarmaSelect({
       setCardAniState([2, 2, 2]);
     }, 1000);
   }, []);
+
+  console.log(checkSelectState);
 
   const cardClickHandler = (index: number) => {
     // 카드 리스트 인덱스따라서 카드를 선택함
@@ -61,29 +64,35 @@ function LuckyKarmaSelect({
   };
 
   const bodyClickHandler = () => {
-    if (cardAniState[0] !== 2 || cardAniState[1] !== 2 || cardAniState[2] !== 2) {
-      if (selectCard === 0) {
-        setCardState([2, 1, 1]);
-        setCardAniState([2, 1, 1]);
-      } else if (selectCard === 1) {
-        setCardState([1, 2, 1]);
-        setCardAniState([1, 2, 1]);
-      } else {
-        setCardState([1, 1, 2]);
-        setCardAniState([1, 1, 2]);
+    // 선택카드를 뒤집기 전까진 카드를 다시 선택가능
+    if (checkSelectState !== true) {
+      if (cardAniState[0] !== 2 || cardAniState[1] !== 2 || cardAniState[2] !== 2) {
+        if (selectCard === 0) {
+          setCardState([2, 1, 1]);
+          setCardAniState([2, 1, 1]);
+        } else if (selectCard === 1) {
+          setCardState([1, 2, 1]);
+          setCardAniState([1, 2, 1]);
+        } else if (selectCard === 2) {
+          setCardState([1, 1, 2]);
+          setCardAniState([1, 1, 2]);
+        }
+        setSelectCard(-1);
+        setTimeout(() => {
+          setCardAniSelect(-1);
+          setCardState([2, 2, 2]);
+          setCardAniState([2, 2, 2]);
+        }, 1000);
       }
-      setSelectCard(-1);
-      setTimeout(() => {
-        setCardAniSelect(-1);
-        setCardState([2, 2, 2]);
-        setCardAniState([2, 2, 2]);
-      }, 1000);
     }
   };
 
   // 선택카드 오픈함수
   const selectCardOpenHandler = () => {
-    setCheckSelectState(true);
+    setCardSelectAniState(true);
+    setTimeout(() => {
+      setCheckSelectState(true);
+    }, 350);
   };
 
   const cardInOut = (index: number) => {
@@ -125,30 +134,46 @@ function LuckyKarmaSelect({
     </luckySelect.CardBody>
   );
 
+  const openCard = (index: number) => {
+    if (checkSelectState) {
+      return (
+        <luckySelect.SelectCardFront
+          whileHover={{ scale: [null, 1.2, 1.1] }}
+          transition={{ duration: 0.3 }}
+          src={cardList[index].front}
+          alt="CardB"
+          cardSelectAniState={cardSelectAniState}
+          // 클릭시 카드 오픈
+          onClick={(e) => {
+            e.stopPropagation();
+            selectCardOpenHandler();
+          }}
+        />
+      );
+    }
+    return (
+      <luckySelect.SelectCardBack
+        whileHover={{ scale: [null, 1.2, 1.1] }}
+        transition={{ duration: 0.3 }}
+        src={CardB}
+        alt="CardB"
+        cardSelectAniState={cardSelectAniState}
+        cardAniSelect={cardAniSelect}
+        // 클릭시 카드 오픈
+        onClick={(e) => {
+          e.stopPropagation();
+          selectCardOpenHandler();
+        }}
+      />
+    );
+  };
+
   const threeCard =
     // 선택한 카드 최종 질문
     selectCard !== -1 ? (
       <luckySelect.CardBody>
         {cardList.map((card) => (
-          <luckySelect.Card>
-            {cardState[card.index] ? (
-              <luckySelect.SelectCard
-                whileHover={{ scale: [null, 1.2, 1.1] }}
-                transition={{ duration: 0.3 }}
-                src={CardB}
-                alt="CardB"
-                checkSelectState={checkSelectState}
-                cardAniSelect={cardAniSelect}
-                // 클릭시 카드 오픈
-                onClick={(e) => {
-                  e.stopPropagation();
-                  selectCardOpenHandler();
-                }}
-              />
-            ) : (
-              <luckySelect.NullCard />
-            )}
-          </luckySelect.Card>
+          <luckySelect.Card>{cardState[card.index] ? openCard(card.index) : <luckySelect.NullCard />}</luckySelect.Card>
         ))}
       </luckySelect.CardBody>
     ) : (
