@@ -5,9 +5,25 @@ function YearSpread() {
   return (
     <layer.MainBox>
       <layer.TimeBox>
-        <layer.TimePartOne>1</layer.TimePartOne>
-        <layer.TimePartTwo>2</layer.TimePartTwo>
-        <layer.TimePartThree>3</layer.TimePartThree>
+        <layer.TimePartOne>
+          <layer.YearCard>13</layer.YearCard>
+        </layer.TimePartOne>
+        <layer.TimePartTwo>
+          <layer.YearCard>1</layer.YearCard>
+          <layer.YearCard>2</layer.YearCard>
+          <layer.YearCard>3</layer.YearCard>
+          <layer.YearCard>4</layer.YearCard>
+          <layer.YearCard>5</layer.YearCard>
+          <layer.YearCard>6</layer.YearCard>
+        </layer.TimePartTwo>
+        <layer.TimePartThree>
+          <layer.YearCard>7</layer.YearCard>
+          <layer.YearCard>8</layer.YearCard>
+          <layer.YearCard>9</layer.YearCard>
+          <layer.YearCard>10</layer.YearCard>
+          <layer.YearCard>11</layer.YearCard>
+          <layer.YearCard>12</layer.YearCard>
+        </layer.TimePartThree>
       </layer.TimeBox>
     </layer.MainBox>
   );
