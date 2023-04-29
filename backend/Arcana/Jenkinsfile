@@ -16,7 +16,7 @@ pipeline {
             checkout scmGit(
                 branches: [[name: 'buildtest']],
                 extensions: [],
-                userRemoteConfigs: [[credentialsId: 'd3511402-7a77-4937-b4f6-d2a49b9e9779',
+                userRemoteConfigs: [[credentialsId: 'testcred',
                 url: 'https://lab.ssafy.com/s08-final/S08P31D107.git']])
             }
             /* echo '~~ git clone COMPLETE' */
@@ -29,6 +29,7 @@ pipeline {
             steps {
                 dir('/backend') {
                     echo "build Gradle..."
+                    sh "pwd"
 
                     //sh "cd /Arcana"
                     sh "chmod +x gradlew"
