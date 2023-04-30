@@ -30,9 +30,13 @@ pipeline {
         stage('build Gradle') {
 
             steps {
+                script {
+                    def pwd = sh(script: 'pwd', returnStdout: true).trim()
+                    echo "Current directory is ${pwd}"
+                }
+
                 dir('/backend') {
                     echo "build Gradle..."
-                    sh "pwd"
 
                     //sh "cd /Arcana"
                     sh "chmod +x gradlew"
