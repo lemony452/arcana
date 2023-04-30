@@ -23,7 +23,8 @@ pipeline {
                 )
                         /* echo '~~ git clone COMPLETE' */
 
-            post { failure { echo '[error] git clone FAIL (╯°□°）╯︵ ┻━┻ ' } }
+                post { failure { echo '[error] git clone FAIL (╯°□°）╯︵ ┻━┻ ' } }
+            }
         }
 
         /* stage('build Gradle') {
@@ -43,8 +44,5 @@ pipeline {
         } */
         /* stage('build Docker') {}
         stage('') */
-
     }
-
-
 }
