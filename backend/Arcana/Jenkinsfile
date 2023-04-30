@@ -27,7 +27,7 @@ pipeline {
             post { failure { echo '[error] git clone FAIL (╯°□°）╯︵ ┻━┻ ' } }
         }
 
-        /* stage('build Gradle') {
+        stage('build Gradle') {
 
             steps {
                 dir('/backend') {
@@ -41,7 +41,7 @@ pipeline {
             }
 
             post { failure { echo '[error] build Gradle FAIL (╯°□°）╯︵ ┻━┻ ' } }
-        } */
+        }
         /* stage('build Docker') {}
         stage('') */
     }
