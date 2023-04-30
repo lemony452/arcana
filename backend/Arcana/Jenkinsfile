@@ -34,7 +34,7 @@ pipeline {
                     def pwd = sh(script: 'pwd', returnStdout: true).trim()
                     echo "Current directory is ${pwd}"
                 }
-
+                sh "cd /backend"
                 echo "I think here is... /var/lib/jenkins/workspace/test/backend"
 
                 script {
