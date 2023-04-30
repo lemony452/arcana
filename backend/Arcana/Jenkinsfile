@@ -13,17 +13,16 @@ pipeline {
 
         stage('git clone') {
             steps {
-                checkout([
-                    $class: 'GitSCM',
-                    branches: [[name: 'buildtest']],
-                    extensions: [],
-                    userRemoteConfigs: [[
-                        credentialsId: 'testcred',
-                        url: 'https://lab.ssafy.com/s08-final/S08P31D107.git'
-                    ]]
-                ])
-            }
-            /* echo '~~ git clone COMPLETE' */
+                dir('/backend/Arcana') {
+                        checkout scmGit(
+                            $class: 'GitSCM'
+                            branches: [[name: 'buildtest']],
+                            extensions: [],
+                            userRemoteConfigs: [[credentialsId: 'testcred',
+                            url: 'https://lab.ssafy.com/s08-final/S08P31D107.git']])
+                        }
+                        /* echo '~~ git clone COMPLETE' */
+                }
 
             post { failure { echo '[error] git clone FAIL (╯°□°）╯︵ ┻━┻ ' } }
         }
