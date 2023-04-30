@@ -40,6 +40,8 @@ pipeline {
 
                     sh "chmod +x gradlew"
                     sh "./gradlew clean build"
+
+                    // 설마 이거 빌드할때마다 Gradle 받는거??
                 }
 
                 echo "build Gradle complete!!!"
