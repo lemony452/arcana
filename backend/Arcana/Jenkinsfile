@@ -21,7 +21,7 @@ pipeline {
                         url: 'https://lab.ssafy.com/s08-final/S08P31D107.git'
                     ]]
                 )
-                echo 'git clone complete!!!'
+                echo 'clone Git complete!!!'
             }
 
             post { failure { echo '[error] git clone FAIL (╯°□°）╯︵ ┻━┻ ' } }
@@ -30,25 +30,19 @@ pipeline {
         stage('build Gradle') {
 
             steps {
-                script {
-                    def pwd = sh(script: 'pwd', returnStdout: true).trim()
-                    echo "Current directory is ${pwd}"
-                }
-
                 dir('backend/Arcana') {
-                    echo "I think here is... /var/lib/jenkins/workspace/test/backend/Arcana"
-
                     script {
                         def pwd = sh(script: 'pwd', returnStdout: true).trim()
-                        echo "Current directory is ${pwd}"
+                        echo "Current directory : ${pwd}"
                     }
+
+                    echo "build Gradle..."
+
+                    sh "chmod +x gradlew"
+                    sh "./gradlew clean build"
                 }
 
-
-                //echo "build Gradle..."
-
-                //                     sh "chmod +x gradlew"
-                //                     sh "./gradlew clean build"
+                echo "build Gradle complete!!!"
             }
 
             post { failure { echo '[error] build Gradle FAIL (╯°□°）╯︵ ┻━┻ ' } }
