@@ -21,10 +21,10 @@ pipeline {
                         url: 'https://lab.ssafy.com/s08-final/S08P31D107.git'
                     ]]
                 )
-                        /* echo '~~ git clone COMPLETE' */
-
-                post { failure { echo '[error] git clone FAIL (╯°□°）╯︵ ┻━┻ ' } }
+                echo 'git clone complete!!!'
             }
+
+            post { failure { echo '[error] git clone FAIL (╯°□°）╯︵ ┻━┻ ' } }
         }
 
         /* stage('build Gradle') {
