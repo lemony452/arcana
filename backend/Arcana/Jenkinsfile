@@ -35,27 +35,26 @@ pipeline {
                     echo "Current directory is ${pwd}"
                 }
 
-                dir('/backend') {
-                    echo "I think here is... /var/lib/jenkins/workspace/test/backend"
-                    script {
-                        def pwd = sh(script: 'pwd', returnStdout: true).trim()
-                        echo "Current directory is ${pwd}"
-                    }
+                echo "I think here is... /var/lib/jenkins/workspace/test/backend"
 
-                    //echo "build Gradle..."
-
-                    echo "change directory"
-                    sh "cd /Arcana"
-
-                    echo "I think here is... /var/lib/jenkins/workspace/test/backend"
-                    script {
-                        def pwd = sh(script: 'pwd', returnStdout: true).trim()
-                        echo "Current directory is ${pwd}"
-                    }
-
-//                     sh "chmod +x gradlew"
-//                     sh "./gradlew clean build"
+                script {
+                    def pwd = sh(script: 'pwd', returnStdout: true).trim()
+                    echo "Current directory is ${pwd}"
                 }
+
+                //echo "build Gradle..."
+
+                echo "change directory"
+                sh "cd /Arcana"
+
+                echo "I think here is... /var/lib/jenkins/workspace/test/backend"
+                script {
+                    def pwd = sh(script: 'pwd', returnStdout: true).trim()
+                    echo "Current directory is ${pwd}"
+                }
+
+                //                     sh "chmod +x gradlew"
+                //                     sh "./gradlew clean build"
             }
 
             post { failure { echo '[error] build Gradle FAIL (╯°□°）╯︵ ┻━┻ ' } }
