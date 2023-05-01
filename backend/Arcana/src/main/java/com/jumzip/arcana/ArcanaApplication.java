@@ -8,6 +8,7 @@ public class ArcanaApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(ArcanaApplication.class, args);
+
     }
 
 }

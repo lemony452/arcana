@@ -3,7 +3,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: tester
     password: jumzip@d107
-    url: jdbc:mysql://localhost:3306/tester?characterEncoding=UTF-8&serverTimezone=UTC&autoReconnect=true
+    url: jdbc:mysql://localhost:3306/testdb?characterEncoding=UTF-8&serverTimezone=UTC&autoReconnect=true
     dbcp:
       testOnBorrow: 'true'
       validationQuery: SELECT 1
