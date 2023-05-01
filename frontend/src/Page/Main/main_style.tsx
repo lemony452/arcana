@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 // export const GlobalStyle = createGlobalStyle`
 //   display: flex;
@@ -58,6 +58,15 @@ export const CharBox = styled.div`
   overflow: hidden;
 `;
 
+const MoveChar = keyframes`
+  0% {
+    translate: 0;
+  }
+  100% {
+    translate: -30%;
+  }
+`;
+
 export const StyledChar = styled.img`
   position: absolute;
   left: 50vh;
@@ -65,6 +74,11 @@ export const StyledChar = styled.img`
   transform: translate(-20%, -50%);
   height: 70vh;
   width: auto;
+
+  &.hover {
+    animation: ${MoveChar} 3s;
+    /* animation: name duration timing-function delay iteration-count direction fill-mode; */
+  }
 `;
 
 // export const NextBtn = styled.img`
