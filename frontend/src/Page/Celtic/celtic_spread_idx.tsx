@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-// import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import * as layer from './celtic_spread_style';
 import Celtic from './celtic_spread';
 import * as common from '../Common/common_style';
 
 function CelticSpread() {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const [index, setIndex] = useState(0); // indexpage변화
   const onNext = (e: any) => {
     return setIndex(index + 1);
@@ -16,9 +16,9 @@ function CelticSpread() {
   const showModal = () => {
     setModalOpen(!modalOpen);
   };
-  // const MoveCelticDetail = () => {
-  //   navigate('/celtic/detail');
-  // };
+  const MoveLucky = () => {
+    navigate('/lucky');
+  };
 
   if (index === 0) {
     return (
@@ -171,7 +171,7 @@ function CelticSpread() {
           </common.SideBlock>
         </common.CardArea>
         <common.ChatArea>
-          <common.SpreadBtn onClick={onNext}>다음</common.SpreadBtn>
+          <common.SpreadBtn onClick={MoveLucky}>럭키!</common.SpreadBtn>
         </common.ChatArea>
       </>
     );
