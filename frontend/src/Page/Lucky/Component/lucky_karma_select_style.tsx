@@ -75,6 +75,15 @@ export const CardBackIn = styled(motion.img)<{ cardAniState: number }>`
   animation-timing-function: ease-in-out;
 `;
 
+export const CardBackNormal = styled(motion.img)<{ cardAniState: number }>`
+  width: auto;
+  max-height: 350px;
+  cursor: pointer;
+  animation-name: ${(props) => (props.cardAniState === 0 ? CardSlideOutAnimation : null)};
+  animation-duration: 1s;
+  animation-timing-function: ease-in-out;
+`;
+
 export const CardBackOut = styled(motion.img)<{ cardAniState: number }>`
   width: auto;
   max-height: 350px;
@@ -89,7 +98,7 @@ export const SelectCardBack = styled(motion.img)<{ cardSelectAniState: boolean; 
   width: auto;
   max-height: 350px;
   animation-name: ${(props) => (props.cardSelectAniState ? CardSelectAnimationE : null)};
-  animation-duration: 0.5s;
+  animation-duration: 1s;
   cursor: pointer;
 `;
 
@@ -98,7 +107,7 @@ export const SelectCardFront = styled(motion.img)<{ cardSelectAniState: boolean 
   max-height: 350px;
   cursor: pointer;
   animation-name: ${(props) => (props.cardSelectAniState ? CardSelectAnimationS : null)};
-  animation-duration: 0.5s;
+  animation-duration: 0.8s;
 `;
 
 export const NullCard = styled.div`
