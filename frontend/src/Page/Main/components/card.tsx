@@ -8,7 +8,7 @@ import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
 import 'swiper/css';
 // eslint-disable-next-line import/no-unresolved
 import 'swiper/css/navigation';
-import { useCardStore } from '../../../Store/Main/main';
+import { useCardStore, useHoverStore } from '../../../Store/Main/main';
 import { StyledCard, StyledCircle } from '../main_style';
 import Character from './character';
 import Card0 from '../../../Assets/etc/card0.png';
@@ -16,12 +16,23 @@ import Card1 from '../../../Assets/etc/card1.png';
 import Card2 from '../../../Assets/etc/card2.png';
 
 function Card() {
+  // navigate hook
   const navigate = useNavigate();
+  // swiper hook
   // const swiper = useSwiper();
   // console.log('swiper', swiper);
   const [prevEl, setPrevEl] = useState<HTMLElement | null>(null);
   const [nextEl, setNextEl] = useState<HTMLElement | null>(null);
+
+  // 카드 hovering 변수
   // const [hover, setHover] = useState<string>('');
+  const { hover, setHover } = useHoverStore();
+
+  const Hovering = () => {
+    setHover(hover);
+  };
+
+  // celtic, instant, time 카드
   const { cardIdx, setCardIdx } = useCardStore();
 
   let temp = cardIdx;
@@ -55,13 +66,13 @@ function Card() {
         Slide Prev
       </button>
       <SwiperSlide>
-        <StyledCard onClick={MoveCeltic} src={Card0} />
+        <StyledCard onClick={MoveCeltic} onMouseEnter={Hovering} onMouseLeave={Hovering} src={Card0} />
       </SwiperSlide>
       <SwiperSlide>
-        <StyledCard onClick={MoveCeltic} src={Card1} />
+        <StyledCard onClick={MoveCeltic} onMouseEnter={Hovering} onMouseLeave={Hovering} src={Card1} />
       </SwiperSlide>
       <SwiperSlide>
-        <StyledCard onClick={MoveCeltic} src={Card2} />
+        <StyledCard onClick={MoveCeltic} onMouseEnter={Hovering} onMouseLeave={Hovering} src={Card2} />
       </SwiperSlide>
     </Swiper>
   );
