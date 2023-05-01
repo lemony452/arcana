@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import * as layer from './time_style';
-import Month from './month_spread';
-import Year from './year_spread';
+import Month from './Month/month_spread';
+import Year from './Year/year_spread';
 import { ChatArea, CardArea, DefaultCard } from '../Common/common_style';
 
 const Selecter = () => {
