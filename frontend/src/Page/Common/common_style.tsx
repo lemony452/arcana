@@ -27,3 +27,8 @@ export const SpreadBtn = styled.button`
   height: 30%;
   aspect-ratio: 5 / 3;
 `;
+
+export const SpreadModal = styled.div`
+  height: 20%;
+  aspect-ratio: 1 / 1;
+`;
