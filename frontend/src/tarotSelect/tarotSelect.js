@@ -1,46 +1,46 @@
-import tarot from "./tarot.js";
+import tarot from './tarot.js';
 
 function getTarot(numberCards) {
-    const nums = [];
-    const cards = [];
+  const nums = [];
+  const cards = [];
 
-    while (nums.length <= numberCards) {
-        let n = Math.floor(Math.random() * (77));
+  while (nums.length <= numberCards) {
+    const n = Math.floor(Math.random() * 77);
 
-        if (!sameNum(n)) {
-            nums.push(n);
-        }
+    if (!sameNum(n)) {
+      nums.push(n);
     }
+  }
 
-    for (const num of nums) {
-        // 0.5 미만이면 정방향
-        if (Math.random() < 0.5) {
-            cards.push(tarot[num])
-        }
-        // 0.5 이상이면 역방향
-        else {
-            cards.push(tarot[num + 78])
-        }
+  for (const num of nums) {
+    // 0.5 미만이면 정방향
+    if (Math.random() < 0.5) {
+      cards.push(tarot[num]);
     }
-
-    function sameNum (n) {
-        return nums.find((e) => (e === n));
+    // 0.5 이상이면 역방향
+    else {
+      cards.push(tarot[num + 78]);
     }
+  }
 
-    return cards;
+  function sameNum(n) {
+    return nums.find((e) => e === n);
+  }
+
+  return cards;
 }
 
 function getTarotNames(tarots) {
-    let names = "";
+  let names = '';
 
-    for (const tarot of tarots) {
-        names += tarot["name"];
-        names += ", ";
-    }
+  for (const tarot of tarots) {
+    names += tarot.name;
+    names += ', ';
+  }
 
-    names = names.substring(0, names.length - 2);
+  names = names.substring(0, names.length - 2);
 
-    return names;
+  return names;
 }
 
-export { getTarot, getTarotNames};
+export { getTarot, getTarotNames };
