@@ -22,3 +22,8 @@ export const DefaultCard = styled.div`
   margin: 0 2%;
   position: flex;
 `;
+
+export const SpreadBtn = styled.button`
+  height: 30%;
+  aspect-ratio: 5 / 3;
+`;
