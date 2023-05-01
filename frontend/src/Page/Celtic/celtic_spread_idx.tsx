@@ -2,15 +2,20 @@ import React, { useState } from 'react';
 // import { useNavigate } from 'react-router-dom';
 import * as layer from './celtic_spread_style';
 import Celtic from './celtic_spread';
-import { SpreadBtn, CardArea, DefaultCard, ChatArea, SpreadModal } from '../Common/common_style';
+import * as common from '../Common/common_style';
 
 function CelticSpread() {
   // const navigate = useNavigate();
-  const [index, setIndex] = useState(0);
+  const [index, setIndex] = useState(0); // indexpage변화
   const onNext = (e: any) => {
     return setIndex(index + 1);
   };
   console.log(index);
+
+  const [modalOpen, setModalOpen] = useState(false); // modal
+  const showModal = () => {
+    setModalOpen(!modalOpen);
+  };
   // const MoveCelticDetail = () => {
   //   navigate('/celtic/detail');
   // };
@@ -18,88 +23,156 @@ function CelticSpread() {
   if (index === 0) {
     return (
       <layer.MainBox>
+        <common.SideBlock />
         <Celtic />
-        <SpreadBtn onClick={onNext}>해석보기</SpreadBtn>
+        <common.SideBlock>
+          <common.NextBtn onClick={onNext}>해석보기</common.NextBtn>
+        </common.SideBlock>
       </layer.MainBox>
     );
   }
   if (index === 1) {
     return (
       <>
-        <CardArea>
-          <DefaultCard>1</DefaultCard>
-          <DefaultCard>2</DefaultCard>
-          <SpreadModal>
-            <Celtic />
-          </SpreadModal>
-        </CardArea>
-        <ChatArea>
-          <SpreadBtn onClick={onNext}>다음</SpreadBtn>
-        </ChatArea>
+        <common.CardArea>
+          <common.SideBlock />
+          <common.CardBox>
+            <common.DefaultCard>1</common.DefaultCard>
+            <common.DefaultCard>2</common.DefaultCard>
+          </common.CardBox>
+          <common.SideBlock>
+            <common.SpreadModal onClick={showModal}>
+              <Celtic />
+              {modalOpen ? (
+                <common.ModalBackdrop onClick={showModal}>
+                  <common.ModalView onClick={(e) => e.stopPropagation()}>
+                    <Celtic />
+                    <common.ExitBtn onClick={showModal}>X</common.ExitBtn>
+                  </common.ModalView>
+                </common.ModalBackdrop>
+              ) : null}
+            </common.SpreadModal>
+          </common.SideBlock>
+        </common.CardArea>
+        <common.ChatArea>
+          <common.SpreadBtn onClick={onNext}>다음</common.SpreadBtn>
+        </common.ChatArea>
       </>
     );
   }
   if (index === 2) {
     return (
       <>
-        <CardArea>
-          <DefaultCard>3</DefaultCard>
-          <DefaultCard>4</DefaultCard>
-          <SpreadModal>
-            <Celtic />
-          </SpreadModal>
-        </CardArea>
-        <ChatArea>
-          <SpreadBtn onClick={onNext}>다음</SpreadBtn>
-        </ChatArea>
+        <common.CardArea>
+          <common.SideBlock />
+          <common.CardBox>
+            <common.DefaultCard>3</common.DefaultCard>
+            <common.DefaultCard>4</common.DefaultCard>
+          </common.CardBox>
+          <common.SideBlock>
+            <common.SpreadModal onClick={showModal}>
+              <Celtic />
+              {modalOpen ? (
+                <common.ModalBackdrop onClick={showModal}>
+                  <common.ModalView onClick={(e) => e.stopPropagation()}>
+                    <Celtic />
+                    <common.ExitBtn onClick={showModal}>X</common.ExitBtn>
+                  </common.ModalView>
+                </common.ModalBackdrop>
+              ) : null}
+            </common.SpreadModal>
+          </common.SideBlock>
+        </common.CardArea>
+        <common.ChatArea>
+          <common.SpreadBtn onClick={onNext}>다음</common.SpreadBtn>
+        </common.ChatArea>
       </>
     );
   }
   if (index === 3) {
     return (
       <>
-        <CardArea>
-          <DefaultCard>5</DefaultCard>
-          <DefaultCard>6</DefaultCard>
-          <SpreadModal>
-            <Celtic />
-          </SpreadModal>
-        </CardArea>
-        <ChatArea>
-          <SpreadBtn onClick={onNext}>다음</SpreadBtn>
-        </ChatArea>
+        <common.CardArea>
+          <common.SideBlock />
+          <common.CardBox>
+            <common.DefaultCard>5</common.DefaultCard>
+            <common.DefaultCard>6</common.DefaultCard>
+          </common.CardBox>
+          <common.SideBlock>
+            <common.SpreadModal onClick={showModal}>
+              <Celtic />
+              {modalOpen ? (
+                <common.ModalBackdrop onClick={showModal}>
+                  <common.ModalView onClick={(e) => e.stopPropagation()}>
+                    <Celtic />
+                    <common.ExitBtn onClick={showModal}>X</common.ExitBtn>
+                  </common.ModalView>
+                </common.ModalBackdrop>
+              ) : null}
+            </common.SpreadModal>
+          </common.SideBlock>
+        </common.CardArea>
+        <common.ChatArea>
+          <common.SpreadBtn onClick={onNext}>다음</common.SpreadBtn>
+        </common.ChatArea>
       </>
     );
   }
   if (index === 4) {
     return (
       <>
-        <CardArea>
-          <DefaultCard>7</DefaultCard>
-          <DefaultCard>8</DefaultCard>
-          <DefaultCard>9</DefaultCard>
-          <SpreadModal>
-            <Celtic />
-          </SpreadModal>
-        </CardArea>
-        <ChatArea>
-          <SpreadBtn onClick={onNext}>다음</SpreadBtn>
-        </ChatArea>
+        <common.CardArea>
+          <common.SideBlock />
+          <common.CardBox>
+            <common.DefaultCard>7</common.DefaultCard>
+            <common.DefaultCard>8</common.DefaultCard>
+            <common.DefaultCard>9</common.DefaultCard>
+          </common.CardBox>
+          <common.SideBlock>
+            <common.SpreadModal onClick={showModal}>
+              <Celtic />
+              {modalOpen ? (
+                <common.ModalBackdrop onClick={showModal}>
+                  <common.ModalView onClick={(e) => e.stopPropagation()}>
+                    <Celtic />
+                    <common.ExitBtn onClick={showModal}>X</common.ExitBtn>
+                  </common.ModalView>
+                </common.ModalBackdrop>
+              ) : null}
+            </common.SpreadModal>
+          </common.SideBlock>
+        </common.CardArea>
+        <common.ChatArea>
+          <common.SpreadBtn onClick={onNext}>다음</common.SpreadBtn>
+        </common.ChatArea>
       </>
     );
   }
   if (index === 5) {
     return (
       <>
-        <CardArea>
-          <DefaultCard>10</DefaultCard>
-          <SpreadModal>
-            <Celtic />
-          </SpreadModal>
-        </CardArea>
-        <ChatArea>
-          <SpreadBtn>럭키!</SpreadBtn>
-        </ChatArea>
+        <common.CardArea>
+          <common.SideBlock />
+          <common.CardBox>
+            <common.DefaultCard>10</common.DefaultCard>
+          </common.CardBox>
+          <common.SideBlock>
+            <common.SpreadModal onClick={showModal}>
+              <Celtic />
+              {modalOpen ? (
+                <common.ModalBackdrop onClick={showModal}>
+                  <common.ModalView onClick={(e) => e.stopPropagation()}>
+                    <Celtic />
+                    <common.ExitBtn onClick={showModal}>X</common.ExitBtn>
+                  </common.ModalView>
+                </common.ModalBackdrop>
+              ) : null}
+            </common.SpreadModal>
+          </common.SideBlock>
+        </common.CardArea>
+        <common.ChatArea>
+          <common.SpreadBtn onClick={onNext}>다음</common.SpreadBtn>
+        </common.ChatArea>
       </>
     );
   }
