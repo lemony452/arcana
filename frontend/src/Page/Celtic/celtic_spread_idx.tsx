@@ -7,7 +7,7 @@ import * as common from '../Common/common_style';
 function CelticSpread() {
   const navigate = useNavigate();
   const [index, setIndex] = useState(0); // indexpage변화
-  const onNext = (e: any) => {
+  const onNext = () => {
     return setIndex(index + 1);
   };
   console.log(index);
