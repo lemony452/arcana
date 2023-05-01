@@ -1,7 +1,7 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    username: d107
+    username: test
     password: jumzip@d107
     url: jdbc:mysql://localhost:3306/d107?characterEncoding=UTF-8&serverTimezone=UTC&autoReconnect=true
     dbcp:
