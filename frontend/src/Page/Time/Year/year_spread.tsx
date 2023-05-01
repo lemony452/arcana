@@ -1,5 +1,5 @@
 import React from 'react';
-import * as layer from './time_style';
+import * as layer from '../time_style';
 
 function YearSpread() {
   return (
