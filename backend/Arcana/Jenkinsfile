@@ -33,8 +33,10 @@ pipeline {
                 dir('backend/Arcana') {
 
                     //현재 dir 체크
-                    def pwd = sh(script: 'pwd', returnStdout: true).trim()
-                    echo "Current directory : ${pwd}"
+                    script {
+                        def pwd = sh(script: 'pwd', returnStdout: true).trim()
+                        echo "Current directory : ${pwd}"
+                    }
 
                     echo "build Gradle..."
 
