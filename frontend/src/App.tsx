@@ -8,6 +8,7 @@ import CelticSpread from './Page/Celtic/celtic_spread_idx';
 import MonthSpread from './Page/Time/Month/month_spread_idx';
 import YearSpread from './Page/Time/Year/year_spread_idx';
 import LuckyPage from './Page/Lucky/lucky_page';
+import CelticDetail from './Page/Celtic/detail';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path="/time/month" element={<MonthSpread />} />
         <Route path="/time/year" element={<YearSpread />} />
         <Route path="/lucky" element={<LuckyPage />} />
+        <Route path="/celtic/detail" element={<CelticDetail />} />
       </Routes>
     </div>
   );
