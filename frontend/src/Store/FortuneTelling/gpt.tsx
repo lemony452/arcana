@@ -1,21 +1,16 @@
 import React from 'react';
 import axios from 'axios';
 import { create } from 'zustand';
+import { useFortuneStore } from '../User/fortune';
 // import { Configuration, OpenAIApi } from 'openai';
 
-interface FortuneState {
-  fortune: string;
-  setFortune: (fortune: string) => void;
-}
-
-export const useFortuneStore = create<FortuneState>((set) => ({
-  fortune: '',
-  setFortune: (ans) => {
-    set(() => ({ fortune: ans }));
-  },
-}));
-
-export const createCompletion = async (prompt: string) => {
+export const CreateCompletion = async (tarotList: string, option: string, inputValue: string, position: string) => {
+  // const { addFortune } = useFortuneStore();
+  const prompt = `[카드목록][${tarotList}] 카드가 있다. [방식] celtic-cross. ${option}과 관련된 점을 보고싶다. ${position}번째 카드의 결과만 응답한다. [질문] ${inputValue}`;
+  console.log('option : ', option);
+  console.log('tarotList : ', tarotList);
+  console.log('inputValue : ', inputValue);
+  console.log('prompt : ', prompt);
   let ans;
   const openAiKey = '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';
   try {
@@ -51,5 +46,6 @@ export const createCompletion = async (prompt: string) => {
     // ans = err;
     console.log('prompting err : ', err);
   }
+  // 출력 형식 변경 필요,,
   return ans;
 };
