@@ -48,7 +48,7 @@ pipeline {
             post { failure { echo '[error] build Gradle FAIL (╯°□°）╯︵ ┻━┻ ' } }
         }
 
-        stage('build Docker') {
+        /* stage('build Docker') {
 
             steps {
                 dir('backend/Arcana') {
@@ -64,7 +64,7 @@ pipeline {
                     sh "docker push d107final/docker-test:[version]"
                 }
             }
-        }
+        } */
         /* stage('') {
             sh "docker ps -q --filter 'name=docker-test' | grep -q .
                                 && docker stop docker-test
