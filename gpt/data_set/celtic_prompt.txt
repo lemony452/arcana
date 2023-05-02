@@ -5,15 +5,20 @@ AI 훈련을 위한 데이터는 [데이터]밑에 준비했어.
 
 [데이터]
 {"prompt":"[카드목록][Three of Swords, Four of Wands, The Empress(Reverse), Five of Swords(Reverse), The Hanged Man(Reverse), Eight of Cups(Reverse), The Chariot(Reverse), Two of Wands(Reverse), Queen of Swords, Page of Cups] 카드가 있다. [방식] celtic-cross. 성공과 관련된 점을 보고 싶다. 1, 2번째 카드의 결과만 응답한다. [질문] 이번에 수학 공부를 열심히 한다면 성적을 올릴 수 있을까요?","completion":"수학이 너한테 있어 굉장한 스트레스로 보여 | 이를 극복하기 위해 이번에 열심히 노력하고자 하면 될까 하는게 너의 고민이구나"}
+
 {"prompt":"[카드목록][Three of Swords, Four of Wands, The Empress(Reverse), Five of Swords(Reverse), The Hanged Man(Reverse), Eight of Cups(Reverse), The Chariot(Reverse), Two of Wands(Reverse), Queen of Swords, Page of Cups] 카드가 있다. [방식] celtic-cross. 성공과 관련된 점을 보고 싶다. 3, 4번째 카드의 결과만 응답한다. [질문] 이번에 수학 공부를 열심히 한다면 성적을 올릴 수 있을까요?","completion":"그동안 수학공부를 해도 성적이 쉽사리 오르지 않아 고생을 많이 했구나 | 그래서 이번에는 수단을 가리지 않고 어떻게든 덤비려는 마음가짐을 가지고 있네"}
+
 {"prompt":"[카드목록][Three of Swords, Four of Wands, The Empress(Reverse), Five of Swords(Reverse), The Hanged Man(Reverse), Eight of Cups(Reverse), The Chariot(Reverse), Two of Wands(Reverse), Queen of Swords, Page of Cups] 카드가 있다. [방식] celtic-cross. 성공과 관련된 점을 보고 싶다. 5, 6번째 카드의 결과만 응답한다. [질문] 이번에 수학 공부를 열심히 한다면 성적을 올릴 수 있을까요?","completion":"계속 수학을 잘하기 위해 발버둥 친 너의 여정이 잘 보여 | 이번에도 그 여정이 쉽지만은 않아보여"}
+
 {"prompt":"[카드목록][Three of Swords, Four of Wands, The Empress(Reverse), Five of Swords(Reverse), The Hanged Man(Reverse), Eight of Cups(Reverse), The Chariot(Reverse), Two of Wands(Reverse), Queen of Swords, Page of Cups] 카드가 있다. [방식] celtic-cross. 성공과 관련된 점을 보고 싶다. 7, 8번째 카드의 결과만 응답한다. [질문] 이번에 수학 공부를 열심히 한다면 성적을 올릴 수 있을까요?","completion":"항상 공부를 함에도 오르지 않는 성적에 마음고생이 심했을 거야 | 그리고 주변에서도 왜 그렇게 열심히 했는데 오르지 않는 지 의심하기도 했을 거고"}
+
 {"prompt":"[카드목록][Three of Swords, Four of Wands, The Empress(Reverse), Five of Swords(Reverse), The Hanged Man(Reverse), Eight of Cups(Reverse), The Chariot(Reverse), Two of Wands(Reverse), Queen of Swords, Page of Cups] 카드가 있다. [방식] celtic-cross. 성공과 관련된 점을 보고 싶다. 9, 10번째 카드의 결과만 응답한다. [질문] 이번에 수학 공부를 열심히 한다면 성적을 올릴 수 있을까요?","completion":"그렇기에 너에게서 보이는 강한 의지는 이번엔 꼭 성적을 올릴 수 있는 힘이 될거라고 생각해 | 사랑과 희망이 넘치는 컵이 너의 앞에 놓여 있어. 열심히 해서 좋은 결과를 얻길 바라!"}
+
 {"prompt":"[카드목록][Three of Swords, Four of Wands, The Empress(Reverse), Five of Swords(Reverse), The Hanged Man(Reverse), Eight of Cups(Reverse), The Chariot(Reverse), Two of Wands(Reverse), Queen of Swords, Page of Cups] 카드가 있다. [방식] celtic-cross. 성공과 관련된 점을 보고 싶다. 종합결과만 응답한다. [질문] 이번에 수학 공부를 열심히 한다면 성적을 올릴 수 있을까요?","completion":"과거부터 항상 노력해왔지만 성적이 쉽게 오르지 않아 고생을 많이 했구나. 그렇지만 이번엔 그 어느때보다 성적향상에 대한 의지가 매우 강하다고 생각해. 성적을 올리기에 최적의 환경이 만들어졌으니 노력해서 정진해 나아가길 바라!"}
 
 [참고사항]
 1. [데이터] 형식에 맞춰서 새로운 데이터를 만들어줘.
-2. 새로 만드는 데이터는 [카드목록], [질문], 그리고 completion을 변경해서 만들어줘.
-3. 데이터는 한 번에 2개만 생성해줘.
-4. 데이터의 어투는 [데이터]와 똑같이 해줘.
-5. 질문은 사랑, 성공, 재물 의 범위 안에서 해줘.
+2. 질문은 사랑, 성공, 재물 의 범위 안에서 해줘. 한 데이터 묶음을 만들 때, 한 가지를 선택해서 진행해줘. 그리고 새 데이터를 만들때 새로 선택해줘.
+3. 새로 만드는 데이터는 [카드목록], [질문], 그리고 completion을 변경해서 만들어줘.
+4. 데이터는 한 번에 2줄만 생성해줘.
+5. 데이터의 어투는 [데이터]와 똑같이 해줘.
