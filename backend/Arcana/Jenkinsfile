@@ -64,8 +64,8 @@ pipeline {
                     }
 
                     //[dockerHub Username]/[dockerHub Reponame]:[version]
-                    sh "docker build -t d107final/docker-test"
-                    sh "docker push d107final/docker-test:[version]"
+                    sh "docker build -t d107final/docker-test."
+                    sh "docker push d107final/docker-test"
                 }
             }
         }
