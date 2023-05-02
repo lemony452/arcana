@@ -31,18 +31,15 @@ pipeline {
 
             steps {
                 dir('backend/Arcana') {
-                    script {
-                        def pwd = sh(script: 'pwd', returnStdout: true).trim()
-                        echo "Current directory : ${pwd}"
-                    }
+
+                    //현재 dir 체크
+                    def pwd = sh(script: 'pwd', returnStdout: true).trim()
+                    echo "Current directory : ${pwd}"
 
                     echo "build Gradle..."
 
                     sh "chmod +x gradlew"
                     sh "./gradlew clean build"
-                    sh "./gradlew test -i"
-
-                    // 설마 이거 빌드할때마다 Gradle 받는거??
                 }
 
                 echo "build Gradle complete!!!"
@@ -50,7 +47,28 @@ pipeline {
 
             post { failure { echo '[error] build Gradle FAIL (╯°□°）╯︵ ┻━┻ ' } }
         }
-        /* stage('build Docker') {}
-        stage('') */
+
+        stage('build Docker') {
+
+            steps {
+                dir('backend/Arcana') {
+
+                    echo 'build Docker...'
+
+                    //현재 dir 체크
+                    def pwd = sh(script: 'pwd', returnStdout: true).trim()
+                    echo "Current directory : ${pwd}"
+
+                    //[dockerHub Username]/[dockerHub Reponame]:[version]
+                    sh "docker build -t d107final/docker-test"
+                    sh "docker push d107final/docker-test:[version]"
+                }
+            }
+        }
+        /* stage('') {
+            sh "docker ps -q --filter 'name=docker-test' | grep -q .
+                                && docker stop docker-test
+                                && docker rm docker-test | true"
+        } */
     }
 }
