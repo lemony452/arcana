@@ -1,11 +1,12 @@
 pipeline {
     agent any
-    /*     environment {
-            // docker 설치 후 작성(도커 레포,id)
-
+         environment {
+            imagename = "d107final/docker-test"
+            registryCredential = 'jumzip@d107'
+            dockerImage = ''
         }
 
-    tools {} */
+    //tools {}
     stages {
         stage('start') {
             steps { echo '[process START] (o゜▽゜)o---☆ *:･.:･ﾟ*' }
@@ -61,11 +62,13 @@ pipeline {
                     script {
                         def pwd = sh(script: 'pwd', returnStdout: true).trim()
                         echo "Current directory : ${pwd}"
+
+                        dockerImage = docker.build imagename
                     }
 
                     //[dockerHub Username]/[dockerHub Reponame]:[version]
-                    sh "docker build -t d107final/docker-test."
-                    sh "docker push d107final/docker-test"
+                    /* sh "docker build -t d107final/docker-test."
+                    sh "docker push d107final/docker-test" */
                 }
             }
         }
