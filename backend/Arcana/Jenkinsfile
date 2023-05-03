@@ -66,12 +66,26 @@ pipeline {
                         dockerImage = docker.build imagename
                     }
 
-                    //[dockerHub Username]/[dockerHub Reponame]:[version]
-                    /* sh "docker build -t d107final/docker-test."
-                    sh "docker push d107final/docker-test" */
+                    echo 'build Docker complete!!!'
                 }
+
+                post { failure { echo '[error] build Docker FAIL (╯°□°）╯︵ ┻━┻ ' } }
             }
         }
+
+        stage('push Docker') {
+            echo 'push Docker...'
+            script {
+                def pwd = sh(script: 'pwd', returnStdout: true).trim()
+                echo "Current directory : ${pwd}"
+
+                sh 'docker push d107final/docker-test'
+            }
+
+            post { failure { echo '[error] push Docker FAIL (╯°□°）╯︵ ┻━┻ ' } }
+            echo 'build Docker complete!!!'
+        }
+
         /* stage('') {
             sh "docker ps -q --filter 'name=docker-test' | grep -q .
                                 && docker stop docker-test
