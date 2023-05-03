@@ -126,7 +126,6 @@ function CelticSpread() {
           <common.CardBox>
             <common.DefaultCard>7</common.DefaultCard>
             <common.DefaultCard>8</common.DefaultCard>
-            <common.DefaultCard>9</common.DefaultCard>
           </common.CardBox>
           <common.SideBlock>
             <common.SpreadModal onClick={showModal}>
@@ -154,6 +153,7 @@ function CelticSpread() {
         <common.CardArea>
           <common.SideBlock />
           <common.CardBox>
+            <common.DefaultCard>9</common.DefaultCard>
             <common.DefaultCard>10</common.DefaultCard>
           </common.CardBox>
           <common.SideBlock>
