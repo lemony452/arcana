@@ -100,7 +100,7 @@ pipeline {
 
                 echo 'run Docker...'
                 script {
-                    docker run -d --name docker-test -p 18081:18080 d107final/docker-test
+                    docker run -d --name docker-test -p 18081:18081 d107final/docker-test
                 }
             }
             /* sh "docker ps -q --filter 'name=docker-test' | grep -q .
