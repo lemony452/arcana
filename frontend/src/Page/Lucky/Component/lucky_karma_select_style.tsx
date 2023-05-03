@@ -8,6 +8,7 @@ export const Body = styled.div`
 export const CardBody = styled.div`
   display: flex;
   width: auto;
+  height: calc(100vh / 1.5);
   justify-content: center;
   align-items: center;
   transform-style: preserve-3d;
