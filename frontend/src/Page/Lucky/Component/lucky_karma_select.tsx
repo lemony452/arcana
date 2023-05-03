@@ -147,17 +147,37 @@ function LuckyKarmaSelect({
 
   const openCard = (index: number) => {
     if (checkSelectState) {
+      if (index === 0) {
+        return (
+          <luckySelect.SelectCardFront
+            animate={{ transform: 'translateX(19.85vw)' }}
+            transition={{ duration: 0.8 }}
+            src={cardList[index].front}
+            alt="CardB"
+            $cardselectanistate={cardSelectAniState} // styled component에서 boolean 속성 경고 제거를 위한 '$'
+          />
+        );
+      }
+      if (index === 1) {
+        return (
+          <luckySelect.SelectCardFront
+            initial={{ scale: 1.1 }}
+            animate={{ scale: [1.1, 1.0] }}
+            exit={{ scale: 1.0 }}
+            transition={{ delay: 0.8 }}
+            src={cardList[index].front}
+            alt="CardB"
+            $cardselectanistate={cardSelectAniState} // styled component에서 boolean 속성 경고 제거를 위한 '$'
+          />
+        );
+      }
       return (
         <luckySelect.SelectCardFront
-          initial={{ scale: 1.1 }}
+          animate={{ transform: 'translateX(-19.85vw)' }}
+          transition={{ duration: 0.8 }}
           src={cardList[index].front}
           alt="CardB"
           $cardselectanistate={cardSelectAniState} // styled component에서 boolean 속성 경고 제거를 위한 '$'
-          // 클릭시 카드 선택
-          onClick={(e) => {
-            e.stopPropagation();
-            selectCardOpenHandler(index);
-          }}
         />
       );
     }
