@@ -9,7 +9,7 @@ export const MainBox = styled.div`
   align-items: center;
 `;
 
-export const TimeBox = styled.div`
+export const SelectBox = styled.div`
   /* background-color: red; */
   height: 90%;
   display: flex;
@@ -18,39 +18,25 @@ export const TimeBox = styled.div`
   aspect-ratio: 1 / 1;
 `;
 
-export const TimePartOne = styled.div`
+export const SelectPartOne = styled.div`
   width: 100%;
-  height: 33%;
+  height: 50%;
   /* background-color: pink; */
   display: flex;
   align-items: center;
   justify-content: center;
 `;
-export const TimePartTwo = styled.div`
+export const SelectPartTwo = styled.div`
   width: 100%;
-  height: 33%;
+  height: 50%;
   /* background-color: violet; */
   display: flex;
   align-items: center;
   justify-content: space-around;
 `;
-export const TimePartThree = styled.div`
-  width: 100%;
-  height: 33%;
-  /* background-color: magenta; */
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-`;
 
-export const MonthCard = styled.div`
+export const SelectCard = styled.div`
   height: 90%;
-  aspect-ratio: 3 / 5;
-  background-color: gold;
-`;
-
-export const YearCard = styled.div`
-  height: 80%;
   aspect-ratio: 3 / 5;
   background-color: gold;
 `;
