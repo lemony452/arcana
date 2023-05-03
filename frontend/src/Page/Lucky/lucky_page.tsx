@@ -5,7 +5,8 @@ import LuckyKarmaResult from './Component/lucky_karma_result';
 import F0 from '../../Assets/cards/F0.svg';
 import F9 from '../../Assets/cards/F9.svg';
 import F14 from '../../Assets/cards/F14.svg';
-import Gom from '../../Assets/cards/gom.svg';
+import charDialog0 from '../../Assets/characters/charDialog0.png';
+import { DialogBox, DialogContentStyle, DialogNPC, DialogName, InputBox } from '../../Common/common_styled';
 
 function LuckyPage() {
   const [selectCard, setSelectCard] = useState(-1); // 선택한 카드
@@ -53,19 +54,24 @@ function LuckyPage() {
           setCheckSelectState={setCheckSelectState}
         />
       )}
-      <luckyPage.Dialog>
-        <luckyPage.Name>농담곰</luckyPage.Name>
-        <luckyPage.Content>
-          <hr />
-          {cardContent}
-        </luckyPage.Content>
-        {!resultPage && checkSelectState === true && (
-          <luckyPage.Btn onClick={resultPageHandler}>공유하기</luckyPage.Btn>
-        )}
-      </luckyPage.Dialog>
-      <luckyPage.Gom>
-        <img src={Gom} alt="Gom" />
-      </luckyPage.Gom>
+      <DialogNPC src={charDialog0} />
+      <DialogBox color="#FFC1C1">
+        <div>
+          <DialogName>농담곰</DialogName>
+          <DialogContentStyle>{cardContent}</DialogContentStyle>
+        </div>
+        <InputBox>
+          {!resultPage && checkSelectState === true && (
+            <luckyPage.Btn
+              whileHover={{ scale: [null, 1.1, 1.1] }}
+              transition={{ duration: 0.4 }}
+              onClick={resultPageHandler}
+            >
+              공유하기
+            </luckyPage.Btn>
+          )}
+        </InputBox>
+      </DialogBox>
     </luckyPage.Body>
   );
 }
