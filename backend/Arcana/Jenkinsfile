@@ -65,11 +65,9 @@ pipeline {
 
                         dockerImage = docker.build imagename
                     }
-
+                    post { failure { echo '[error] build Docker FAIL (╯°□°）╯︵ ┻━┻ ' } }
                     echo 'build Docker complete!!!'
                 }
-
-                post { failure { echo '[error] build Docker FAIL (╯°□°）╯︵ ┻━┻ ' } }
             }
         }
 
