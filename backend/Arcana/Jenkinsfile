@@ -100,7 +100,7 @@ pipeline {
 
                 echo 'run Docker...'
                 script {
-                    sh "docker ps -q --filter 'name=docker-test' | grep -q .
+                    sh "docker ps -q --filter 'name=docker-test' | grep -q
                                                     && docker stop docker-test
                                                     && docker rm docker-test | true"
 
