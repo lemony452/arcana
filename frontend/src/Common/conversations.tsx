@@ -37,8 +37,39 @@ export const CelticDetails = () => {
     page3: `5번 카드는 ${tarotNumList[4].name}의 의미는 ${fortune[4]}\n6번 카드는 ${tarotNumList[5].name}의 의미는 ${fortune[5]}`,
     page4: `7번 카드는 ${tarotNumList[6].name}의 의미는 ${fortune[6]}\n8번 카드는 ${tarotNumList[7].name}의 의미는 ${fortune[7]}`,
     page5: `9번 카드는 ${tarotNumList[8].name}의 의미는 ${fortune[8]}\n10번 카드는 ${tarotNumList[9].name}의 의미는 ${fortune[9]}`,
-    page6: `럭키 카드는 ${tarotNumList[10].name}이 나왔어!!`,
+    page6: `럭키 카드는 ${tarotNumList[9].name}이 나왔어!!`,
   };
 
   return CeticDetail;
+};
+
+export const YearDetails = () => {
+  const { tarotNumList, fortune } = useFortuneStore();
+  console.log(tarotNumList);
+
+  const YearDetail = {
+    page1: `어떤 카드인지 설명해줄게!\n1번 카드 ${tarotNumList[0].name}의 의미는 ${fortune[0]}\n2번 카드 ${tarotNumList[1].name}의 의미는 ${fortune[1]}\n3번 카드 ${tarotNumList[2].name}의 의미는 ${fortune[3]}`,
+    page2: `4번 카드 ${tarotNumList[3].name}의 의미는 ${fortune[3]}\n5번 카드 ${tarotNumList[4].name}의 의미는 ${fortune[4]}\n6번 카드 ${tarotNumList[5].name}의 의미는 ${fortune[5]}`,
+    page3: `7번 카드 ${tarotNumList[6].name}의 의미는 ${fortune[6]}\n8번 카드 ${tarotNumList[7].name}의 의미는 ${fortune[7]}\n9번 카드 ${tarotNumList[8].name}의 의미는 ${fortune[8]}`,
+    page4: `10번 카드 ${tarotNumList[9].name}의 의미는 ${fortune[9]}\n11번 카드 ${tarotNumList[10].name}의 의미는 ${fortune[10]}\n12번 카드 ${tarotNumList[11].name}의 의미는 ${fortune[11]}`,
+    page5: `13번 카드는 ${tarotNumList[12].name}의 의미는 ${fortune[12]}`,
+    page6: `럭키 카드는 ${tarotNumList[12].name}이 나왔어!!`,
+  };
+
+  return YearDetail;
+};
+
+export const MonthDetails = () => {
+  const { tarotNumList, fortune } = useFortuneStore();
+  console.log(tarotNumList);
+
+  const MonthDetail = {
+    page1: `어떤 카드인지 설명해줄게!\n1번 카드 ${tarotNumList[0].name}의 의미는 ${fortune[0]}\n2번 카드 ${tarotNumList[1].name}의 의미는 ${fortune[1]}`,
+    page2: `3번 카드는 ${tarotNumList[2].name}의 의미는 ${fortune[2]}\n4번 카드는 ${tarotNumList[3].name}의 의미는 ${fortune[3]}`,
+    page3: `5번 카드는 ${tarotNumList[4].name}의 의미는 ${fortune[4]}\n6번 카드는 ${tarotNumList[5].name}의 의미는 ${fortune[5]}`,
+    page4: `7번 카드는 ${tarotNumList[6].name}의 의미는 ${fortune[6]}`,
+    page5: `럭키 카드는 ${tarotNumList[6].name}이 나왔어!!`,
+  };
+
+  return MonthDetail;
 };
