@@ -93,23 +93,17 @@ pipeline {
         stage('run Docker') {
             steps {
                 echo 'pull Docker...'
-                script {
-                    sh 'docker pull d107final/docker-test'
-                }
-            }
 
-            steps {
+                sh 'docker pull d107final/docker-test'
+
                 echo 'Clean image...'
                 sh 'docker rm -f `docker ps -aq --filter="name=docker-test"`'
                 sh 'docker rmi docker-test'
-            }
 
-            steps {
                 echo 'run Docker...'
-                script {
-                    // 도커 중복시 삭제하고 덮어씌우기 처리 안했으니까 해야함
-                    sh 'docker run -d --name docker-test -p 18081:18081 d107final/docker-test'
-                }
+                // 도커 중복시 삭제하고 덮어씌우기 처리 안했으니까 해야함
+                sh 'docker run -d --name docker-test -p 18081:18081 d107final/docker-test'
+
             }
         }
     }
