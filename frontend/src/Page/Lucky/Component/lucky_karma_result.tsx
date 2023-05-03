@@ -88,9 +88,6 @@ function LuckyKarmaResult({ selectCard, cardList }: LuckyKarmaResultType) {
           <luckResult.Button onClick={sendKakao} style={{ marginInline: '10px' }}>
             <img src={KakaoIcon} alt="kakaoicon" />
           </luckResult.Button>
-          {/* <luckResult.Button onClick={postLinkToInstagram} style={{ marginInline: '10px' }}>
-            <img src={KakaoIcon} alt="kakaoicon" />
-          </luckResult.Button> */}
         </luckResult.Card>
       </luckResult.CardBody>
     </luckResult.Body>
