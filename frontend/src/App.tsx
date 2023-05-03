@@ -9,6 +9,7 @@ import MonthSpread from './Page/Time/Month/month_spread_idx';
 import YearSpread from './Page/Time/Year/year_spread_idx';
 import LuckyPage from './Page/Lucky/lucky_page';
 import CelticDetail from './Page/Celtic/detail';
+import Instant from './Page/Instant';
 
 function App() {
   useEffect(() => {
@@ -26,6 +27,7 @@ function App() {
         <Route path="/time" element={<Time />} />
         <Route path="/time/month" element={<MonthSpread />} />
         <Route path="/time/year" element={<YearSpread />} />
+        <Route path="/instant" element={<Instant />} />
         <Route path="/lucky" element={<LuckyPage />} />
         <Route path="/celtic/detail" element={<CelticDetail />} />
       </Routes>

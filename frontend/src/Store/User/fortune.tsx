@@ -3,7 +3,7 @@ import { create } from 'zustand';
 interface FortuneState {
   fortune: string[];
   tarotNumList: any[];
-  tarotList: string;
+  tarotNameList: string;
   option: string;
   inputValue: string;
   spread: string;
@@ -11,7 +11,7 @@ interface FortuneState {
   setInputValue: (v: string) => void;
   setOption: (opt: string) => void;
   setTarotNumList: (t: any[]) => void;
-  setTarotList: (tarot: string) => void;
+  setTarotNameList: (tarot: string) => void;
   addFortune: (ans: any[]) => void;
   setFortune: (fortune: string[]) => void;
 }
@@ -30,7 +30,7 @@ export const useFortuneStore = create<FortuneState>((set) => ({
     '좋은 운을 누리고, 기회와 행운이 너의 삶에 찾아올 거야',
   ],
   tarotNumList: [],
-  tarotList:
+  tarotNameList:
     'Three of Cups, The Sun(Reverse), Two of Pentacles, The High Priestess, King of Swords(Reverse), Nine of Wands, Seven of Cups(Reverse), The Empress, The Tower(Reverse), Wheel of Fortune',
   option: '사랑운',
   inputValue: '내 사랑운을 봐줘',
@@ -44,8 +44,8 @@ export const useFortuneStore = create<FortuneState>((set) => ({
   setOption: (opt) => {
     set(() => ({ option: opt }));
   },
-  setTarotList: (tarot) => {
-    set(() => ({ tarotList: tarot }));
+  setTarotNameList: (tarotName) => {
+    set(() => ({ tarotNameList: tarotName }));
   },
   addFortune: (ans) => {
     // 스토어에 저장하는 형식 변경 필요,,
