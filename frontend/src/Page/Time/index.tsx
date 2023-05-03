@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useCardStore, useHoverStore } from '../../Store/Main/main';
 import { SpreadBtn } from '../Common/common_style';
 
 function Time() {
