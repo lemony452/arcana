@@ -95,12 +95,18 @@ pipeline {
                 echo 'pull Docker...'
                 script {
                     sh 'docker pull d107final/docker-test'
-
                 }
 
                 echo 'run Docker...'
                 script {
-                    sh "docker rmi docker-test"
+                    sh
+                    '''
+                    if [ $( docker ps -a | grep docker-test | wc -l ) -gt 0 ]; then
+                      sh 'docker stop docker-test'
+                      sh 'docker rmi docker-test'
+                    fi
+                    '''
+
                     sh 'docker run -d --name docker-test -p 18081:18081 d107final/docker-test'
                 }
             }
