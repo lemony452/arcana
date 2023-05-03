@@ -8,7 +8,9 @@ import {
   TwitterShareButton,
   TwitterIcon,
 } from 'react-share';
+import html2canvas from 'html2canvas';
 import KakaoIcon from '../../../Assets/etc/icon-kakao.png';
+import Camera from '../../../Assets/etc/camera.png';
 import * as luckResult from './lucky_karma_result_style';
 
 interface LuckyKarmaResultType {
@@ -39,6 +41,20 @@ function LuckyKarmaResult({ selectCard, cardList }: LuckyKarmaResultType) {
   //   }
   // };
 
+  const capture = () => {
+    const downloadImg = (url: string, name: string) => {
+      const downImg = document.createElement('a');
+      downImg.download = name;
+      downImg.href = url;
+      document.body.appendChild(downImg);
+      downImg.click();
+    };
+    html2canvas(document.querySelector('#capture') as HTMLDivElement).then((canvas) => {
+      const captureImg = canvas.toDataURL('image/jpeg');
+      downloadImg(captureImg, 'tarot.jpg');
+    });
+  };
+
   const sendKakao = () => {
     window.Kakao.Link.sendDefault({
       objectType: 'feed',
@@ -65,30 +81,33 @@ function LuckyKarmaResult({ selectCard, cardList }: LuckyKarmaResultType) {
   return (
     <luckResult.Body>
       <luckResult.CardBody>
-        <luckResult.Card>
+        <luckResult.Card id="capture">
           <luckResult.CardFront style={{ marginInline: '10px' }} src={cardList[selectCard].front} alt="CardF" />
           <p>{cardList[selectCard].result}</p>
-          <FacebookShareButton style={{ marginInline: '10px' }} url={window.location.href}>
-            <FacebookIcon size={32} round borderRadius={24} />
-          </FacebookShareButton>
-          <TwitterShareButton
-            style={{ marginInline: '10px' }}
-            title={cardList[selectCard].result}
-            url="http://localhost:3000"
-          >
-            <TwitterIcon size={32} round borderRadius={24} />
-          </TwitterShareButton>
-          <TelegramShareButton
-            style={{ marginInline: '10px' }}
-            title={cardList[selectCard].result}
-            url="http://localhost:3000"
-          >
-            <TelegramIcon size={32} round borderRadius={24} />
-          </TelegramShareButton>
-          <luckResult.Button onClick={sendKakao} style={{ marginInline: '10px' }}>
-            <img src={KakaoIcon} alt="kakaoicon" />
-          </luckResult.Button>
         </luckResult.Card>
+        <FacebookShareButton style={{ marginInline: '10px' }} url={window.location.href}>
+          <FacebookIcon size={32} round borderRadius={24} />
+        </FacebookShareButton>
+        <TwitterShareButton
+          style={{ marginInline: '10px' }}
+          title={cardList[selectCard].result}
+          url="http://localhost:3000"
+        >
+          <TwitterIcon size={32} round borderRadius={24} />
+        </TwitterShareButton>
+        <TelegramShareButton
+          style={{ marginInline: '10px' }}
+          title={cardList[selectCard].result}
+          url="http://localhost:3000"
+        >
+          <TelegramIcon size={32} round borderRadius={24} />
+        </TelegramShareButton>
+        <luckResult.Button onClick={sendKakao} style={{ marginInline: '10px' }}>
+          <img src={KakaoIcon} alt="kakaoicon" />
+        </luckResult.Button>
+        <luckResult.Button onClick={capture} style={{ marginInline: '10px' }}>
+          <img src={Camera} alt="kakaoicon" />
+        </luckResult.Button>
       </luckResult.CardBody>
     </luckResult.Body>
   );

@@ -62,12 +62,12 @@ const CardSelectAnimationE = keyframes`
 `;
 
 export const Card = styled(motion.div)`
-  padding: 50px;
+  padding: 3vw;
 `;
 
 export const CardBackIn = styled(motion.img)<{ cardanistate: number }>`
-  width: auto;
-  max-height: 350px;
+  width: 13.85vw;
+  aspect-ratio: 3 / 5;
   cursor: pointer;
   // 매개변수를 받아서 카드를 뒤집는 상태를 조정
   animation-name: ${(props) => (props.cardanistate === 1 ? CardSlideInAnimation : null)};
@@ -76,8 +76,8 @@ export const CardBackIn = styled(motion.img)<{ cardanistate: number }>`
 `;
 
 export const CardBackNormal = styled(motion.img)<{ cardanistate: number }>`
-  width: auto;
-  max-height: 350px;
+  width: 13.85vw;
+  aspect-ratio: 3 / 5;
   cursor: pointer;
   animation-name: ${(props) => (props.cardanistate === 0 ? CardSlideOutAnimation : null)};
   animation-duration: 1s;
@@ -85,8 +85,8 @@ export const CardBackNormal = styled(motion.img)<{ cardanistate: number }>`
 `;
 
 export const CardBackOut = styled(motion.img)<{ cardanistate: number }>`
-  width: auto;
-  max-height: 350px;
+  width: 13.85vw;
+  aspect-ratio: 3 / 5;
   cursor: pointer;
   // 매개변수를 받아서 카드를 뒤집는 상태를 조정
   animation-name: ${(props) => (props.cardanistate === 2 ? null : CardSlideOutAnimation)};
@@ -95,22 +95,21 @@ export const CardBackOut = styled(motion.img)<{ cardanistate: number }>`
 `;
 
 export const SelectCardBack = styled(motion.img)<{ $cardselectanistate: boolean }>`
-  width: auto;
-  max-height: 350px;
+  width: 13.85vw;
+  aspect-ratio: 3 / 5;
   animation-name: ${(props) => (props.$cardselectanistate ? CardSelectAnimationE : null)};
   animation-duration: 1s;
   cursor: pointer;
 `;
 
 export const SelectCardFront = styled(motion.img)<{ $cardselectanistate: boolean }>`
-  width: auto;
-  max-height: 350px;
-  cursor: pointer;
+  width: 13.85vw;
+  aspect-ratio: 3 / 5;
   animation-name: ${(props) => (props.$cardselectanistate ? CardSelectAnimationS : null)};
   animation-duration: 0.8s;
 `;
 
 export const NullCard = styled.div`
-  width: 212.44px;
-  max-height: 350px;
+  width: 13.85vw;
+  aspect-ratio: 3 / 5;
 `;

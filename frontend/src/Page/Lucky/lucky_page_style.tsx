@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import styled from 'styled-components';
 
 export const Body = styled.div`
@@ -41,4 +42,13 @@ export const Gom = styled.div`
   }
 `;
 
-export const Btn = styled.div``;
+export const Btn = styled(motion.button)`
+  height: 2.4em;
+  cursor: pointer;
+  background: #fffffe;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
+  font-size: 1.2em;
+  padding: 10px 20px 10px 20px;
+  margin-right: 50px;
+`;
