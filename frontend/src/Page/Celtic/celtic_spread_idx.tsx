@@ -3,6 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import * as layer from './celtic_spread_style';
 import Celtic from './celtic_spread';
 import * as common from '../Common/common_style';
+import Dialog from '../../Common/dialog';
+import { useFortuneStore } from '../../Store/User/fortune';
+import { CelticDetails } from '../../Common/conversations';
+// import { DialogBox, DialogNPC, DialogName, DialogContent } from '../../Common/common_styled';
 
 function CelticSpread() {
   const navigate = useNavigate();
@@ -19,6 +23,12 @@ function CelticSpread() {
   const MoveLucky = () => {
     navigate('/lucky');
   };
+
+  const { fortune, tarotNumList } = useFortuneStore();
+  console.log(tarotNumList);
+
+  const text = CelticDetails();
+  console.log(text);
 
   if (index === 0) {
     return (
@@ -54,9 +64,12 @@ function CelticSpread() {
             </common.SpreadModal>
           </common.SideBlock>
         </common.CardArea>
-        <common.ChatArea>
+        {/* <common.ChatArea>
           <common.SpreadBtn onClick={onNext}>다음</common.SpreadBtn>
-        </common.ChatArea>
+        </common.ChatArea> */}
+        <Dialog content={text.page1} next={false}>
+          <common.SpreadBtn onClick={onNext}>다음</common.SpreadBtn>
+        </Dialog>
       </>
     );
   }
@@ -83,9 +96,12 @@ function CelticSpread() {
             </common.SpreadModal>
           </common.SideBlock>
         </common.CardArea>
-        <common.ChatArea>
+        <Dialog content={text.page2} next={false}>
           <common.SpreadBtn onClick={onNext}>다음</common.SpreadBtn>
-        </common.ChatArea>
+        </Dialog>
+        {/* <common.ChatArea>
+          <common.SpreadBtn onClick={onNext}>다음</common.SpreadBtn>
+        </common.ChatArea> */}
       </>
     );
   }
@@ -112,9 +128,12 @@ function CelticSpread() {
             </common.SpreadModal>
           </common.SideBlock>
         </common.CardArea>
-        <common.ChatArea>
+        <Dialog content={text.page3} next={false}>
           <common.SpreadBtn onClick={onNext}>다음</common.SpreadBtn>
-        </common.ChatArea>
+        </Dialog>
+        {/* <common.ChatArea>
+          <common.SpreadBtn onClick={onNext}>다음</common.SpreadBtn>
+        </common.ChatArea> */}
       </>
     );
   }
@@ -141,9 +160,12 @@ function CelticSpread() {
             </common.SpreadModal>
           </common.SideBlock>
         </common.CardArea>
-        <common.ChatArea>
+        <Dialog content={text.page4} next={false}>
           <common.SpreadBtn onClick={onNext}>다음</common.SpreadBtn>
-        </common.ChatArea>
+        </Dialog>
+        {/* <common.ChatArea>
+          <common.SpreadBtn onClick={onNext}>다음</common.SpreadBtn>
+        </common.ChatArea> */}
       </>
     );
   }
@@ -170,9 +192,12 @@ function CelticSpread() {
             </common.SpreadModal>
           </common.SideBlock>
         </common.CardArea>
-        <common.ChatArea>
+        <Dialog content={text.page5} next={false}>
           <common.SpreadBtn onClick={MoveLucky}>럭키!</common.SpreadBtn>
-        </common.ChatArea>
+        </Dialog>
+        {/* <common.ChatArea>
+          <common.SpreadBtn onClick={onNext}>다음</common.SpreadBtn>
+        </common.ChatArea> */}
       </>
     );
   }
