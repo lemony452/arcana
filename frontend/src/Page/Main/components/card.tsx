@@ -14,6 +14,7 @@ import Character from './character';
 import Card0 from '../../../Assets/etc/card0.png';
 import Card1 from '../../../Assets/etc/card1.png';
 import Card2 from '../../../Assets/etc/card2.png';
+import { useFortuneStore } from '../../../Store/User/fortune';
 
 function Card() {
   // navigate hook
@@ -23,6 +24,8 @@ function Card() {
   // console.log('swiper', swiper);
   const [prevEl, setPrevEl] = useState<HTMLElement | null>(null);
   const [nextEl, setNextEl] = useState<HTMLElement | null>(null);
+
+  const { setSpread } = useFortuneStore();
 
   // 카드 hovering 변수
   // const [hover, setHover] = useState<string>('');
@@ -49,6 +52,7 @@ function Card() {
     // console.log(swiper.slideNext());
   };
   const MoveCeltic = () => {
+    setSpread('celtic');
     navigate('/celtic');
   };
 
