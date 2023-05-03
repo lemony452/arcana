@@ -1,31 +1,35 @@
 import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getTarot, getTarotNames } from './tarotSelect';
-import { OptionBtn, InputText, SubmitBtn } from '../../Common/common_styled';
+import { OptionBtn, InputText, SubmitBtn, DialogNPC } from '../../Common/common_styled';
 import { CelticConversations } from '../../Common/conversations';
 import Dialog from '../../Common/dialog';
 import { CreateCompletion } from '../../Store/FortuneTelling/gpt';
-import { SpreadBtn } from '../Common/common_style';
 import { useFortuneStore } from '../../Store/User/fortune';
+import charDialog0 from '../../Assets/characters/charDialog0.png';
 
 function Celtic() {
   const [celticText, SetcelticText] = useState(CelticConversations.c1);
   const [next, SetNext] = useState(false);
   const [option, SetOption] = useState('');
   const inputValueRef = useRef<HTMLInputElement>(null);
-  const { setTarotList, setOption, setInputValue, addFortune, tarotList } = useFortuneStore();
+  const { setTarotNameList, setOption, setInputValue, addFortune, setTarotNumList } = useFortuneStore();
   const navigate = useNavigate();
+
+  // 특수 문자 처리
   const reg = /[`~!@#$%^&*()_|+\-=?;:'",.<>\\{\\}\\[\]\\\\/ ]/gim;
-  // let CelticText = CelticConversations.c1;
+
+  // celtic 옵션 선택 함수
   const OptionClick = (fortune: keyof typeof CelticConversations.c2): void => {
     SetcelticText(CelticConversations.c2[fortune]);
     console.log(CelticConversations.c2[fortune]);
     // 타로카드 10장 + 럭키카드 1장 뽑기
     const tarots = getTarot(10);
     console.log(tarots);
+    setTarotNumList(tarots);
     // 10장의 카드이름 목록 리스트
     const TarotList = getTarotNames(tarots);
-    setTarotList(TarotList);
+    setTarotNameList(TarotList);
     console.log(TarotList);
     // 고민 입력 플로우로 진행
     SetOption(fortune);
@@ -68,12 +72,12 @@ function Celtic() {
   };
 
   return (
-    <>
-      <div>celtic 페이지입니다</div>
-      {/* <SpreadBtn onClick={MoveCelticSpread}>다음</SpreadBtn> */}
-      <Dialog text={celticText} idx={0}>
+    <div style={{ width: '100vw', height: '100vh', position: 'relative' }}>
+      <div>celtic 페이지입니다 여기에 카드 전체 스프레딩 하기</div>
+      <DialogNPC src={charDialog0} />
+      <Dialog content={celticText} next={next}>
         {next ? (
-          <form onSubmit={saveInput}>
+          <form style={{ display: 'flex', alignItems: 'center' }} onSubmit={saveInput}>
             <InputText ref={inputValueRef} type="text" placeholder="고민을 입력해주세요" />
             <SubmitBtn />
           </form>
@@ -85,7 +89,7 @@ function Celtic() {
           </>
         )}
       </Dialog>
-    </>
+    </div>
   );
 }
 

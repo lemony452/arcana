@@ -12,6 +12,7 @@ import SelectTwo from './Page/Select/Two/two_spread_idx';
 import SelectThree from './Page/Select/Three/three_spread_idx';
 import LuckyPage from './Page/Lucky/lucky_page';
 import CelticDetail from './Page/Celtic/detail';
+import Instant from './Page/Instant';
 
 function App() {
   useEffect(() => {
