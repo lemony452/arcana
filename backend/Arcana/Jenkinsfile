@@ -81,7 +81,7 @@ pipeline {
                         sh 'docker push d107final/docker-test'
                     }
 
-                post { failure { echo '[error] push Docker FAIL (╯°□°）╯︵ ┻━┻ ' } }
+                //post { failure { echo '[error] push Docker FAIL (╯°□°）╯︵ ┻━┻ ' } }
                 echo 'build Docker complete!!!'
             }
         }
