@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { SpreadBtn } from '../Common/common_style';
 
-function Celtic() {
+function Time() {
   const navigate = useNavigate();
   const MoveMonth = () => {
     navigate('/time/month');
@@ -20,4 +20,4 @@ function Celtic() {
   );
 }
 
-export default Celtic;
+export default Time;
