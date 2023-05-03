@@ -36,6 +36,8 @@ export const SelectPartTwo = styled.div`
 `;
 
 export const SelectCard = styled.div`
+  margin-left: 5%;
+  margin-right: 5%;
   height: 90%;
   aspect-ratio: 3 / 5;
   background-color: gold;
