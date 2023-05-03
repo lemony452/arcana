@@ -6,6 +6,9 @@ import F0 from '../../Assets/cards/F0.svg';
 import F9 from '../../Assets/cards/F9.svg';
 import F14 from '../../Assets/cards/F14.svg';
 import Gom from '../../Assets/cards/gom.svg';
+import Dialog from '../../Common/dialog';
+import charDialog0 from '../../Assets/characters/charDialog0.png';
+import { DialogNPC } from '../../Common/common_styled';
 
 function LuckyPage() {
   const [selectCard, setSelectCard] = useState(-1); // 선택한 카드
@@ -42,6 +45,7 @@ function LuckyPage() {
 
   return (
     <luckyPage.Body>
+      <DialogNPC src={charDialog0} />
       {resultPage ? (
         <LuckyKarmaResult selectCard={selectCard} cardList={cardList} />
       ) : (
@@ -53,7 +57,12 @@ function LuckyPage() {
           setCheckSelectState={setCheckSelectState}
         />
       )}
-      <luckyPage.Dialog>
+      <Dialog content={cardContent} next={false}>
+        {!resultPage && checkSelectState === true && (
+          <luckyPage.Btn onClick={resultPageHandler}>공유하기</luckyPage.Btn>
+        )}
+      </Dialog>
+      {/* <luckyPage.Dialog>
         <luckyPage.Name>농담곰</luckyPage.Name>
         <luckyPage.Content>
           <hr />
@@ -65,7 +74,7 @@ function LuckyPage() {
       </luckyPage.Dialog>
       <luckyPage.Gom>
         <img src={Gom} alt="Gom" />
-      </luckyPage.Gom>
+      </luckyPage.Gom> */}
     </luckyPage.Body>
   );
 }

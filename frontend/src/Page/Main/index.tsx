@@ -2,16 +2,19 @@ import React from 'react';
 import { TitleBox, Title, SubTitle, StyledCircle, CardBox } from './main_style';
 import Card from './components/card';
 import Character from './components/character';
-import { useCardStore } from '../../Store/Main/main';
+import { useCardStore, useHoverStore } from '../../Store/Main/main';
 
 function Main() {
-  const { cardIdx } = useCardStore();
+  const { cardOrder } = useCardStore();
+  const { hover } = useHoverStore();
   let color = 'pink';
-  if (cardIdx === 1) {
+  if (cardOrder === 'time') {
     color = 'blue';
-  } else if (cardIdx === 2) {
+  } else if (cardOrder === 'instant') {
     color = 'green';
   }
+  console.log(cardOrder);
+  console.log(hover);
   return (
     <div style={{ position: 'relative' }}>
       <TitleBox>

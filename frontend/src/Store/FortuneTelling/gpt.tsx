@@ -4,11 +4,11 @@ import { create } from 'zustand';
 import { useFortuneStore } from '../User/fortune';
 // import { Configuration, OpenAIApi } from 'openai';
 
-export const CreateCompletion = async (tarotList: string, option: string, inputValue: string, position: string) => {
+export const CreateCompletion = async (tarotNameList: string, option: string, inputValue: string, position: string) => {
   // const { addFortune } = useFortuneStore();
-  const prompt = `[카드목록][${tarotList}] 카드가 있다. [방식] celtic-cross. ${option}과 관련된 점을 보고싶다. ${position}번째 카드의 결과만 응답한다. [질문] ${inputValue}`;
+  const prompt = `[카드목록][${tarotNameList}] 카드가 있다. [방식] celtic-cross. ${option}과 관련된 점을 보고싶다. ${position}번째 카드의 결과만 응답한다. [질문] ${inputValue}`;
   console.log('option : ', option);
-  console.log('tarotList : ', tarotList);
+  console.log('tarotNameList : ', tarotNameList);
   console.log('inputValue : ', inputValue);
   console.log('prompt : ', prompt);
   let ans;
