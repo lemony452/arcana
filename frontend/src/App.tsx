@@ -13,7 +13,6 @@ function App() {
     if (!window.Kakao.isInitialized()) {
       window.Kakao.init('0ade17c4bb67884b61fea115aa44192b'); // 카카오 api 키
     }
-    console.log(window.Kakao.isInitialized());
   }, []);
   return (
     <div className="App">

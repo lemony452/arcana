@@ -1,45 +1,12 @@
 import React from 'react';
-import axios from 'axios';
+// import axios from 'axios';
 import {
-  EmailShareButton,
-  EmailIcon,
   FacebookShareButton,
   FacebookIcon,
-  FacebookMessengerIcon,
-  HatenaShareButton,
-  HatenaIcon,
-  InstapaperShareButton,
-  InstapaperIcon,
-  LineShareButton,
-  LineIcon,
-  LinkedinShareButton,
-  LinkedinIcon,
-  LivejournalShareButton,
-  LivejournalIcon,
-  MailruShareButton,
-  MailruIcon,
-  OKShareButton,
-  OKIcon,
-  PinterestShareButton,
-  PinterestIcon,
-  PocketShareButton,
-  PocketIcon,
-  RedditShareButton,
-  RedditIcon,
   TelegramShareButton,
   TelegramIcon,
-  TumblrShareButton,
-  TumblrIcon,
   TwitterShareButton,
   TwitterIcon,
-  ViberShareButton,
-  ViberIcon,
-  VKShareButton,
-  VKIcon,
-  WhatsappShareButton,
-  WhatsappIcon,
-  WorkplaceShareButton,
-  WorkplaceIcon,
 } from 'react-share';
 import KakaoIcon from '../../../Assets/etc/icon-kakao.png';
 import * as luckResult from './lucky_karma_result_style';
@@ -55,34 +22,20 @@ interface LuckyKarmaResultType {
 }
 
 function LuckyKarmaResult({ selectCard, cardList }: LuckyKarmaResultType) {
-  // const ACCESS_TOKEN =
+  // const accessToken =
   //   'IGQVJVaG56V0FpdXNoaVFrcG5YcGp3ZAHEySUo4ZAkhIeTN2NjBtNUdRWEh1dl8tVTBIUHJiRmQ3MmFTNVZAWcVJFLW43eGc4Y3dWLWhESGFMU0FJRUNpSjF6b2kzU2RPd09GSzUzQVZAQTnFsX1c4S2RXRQZDZD';
-  // const MEDIA_ENDPOINT = 'https://graph.instagram.com/me/media';
-  // const PUBLISH_ENDPOINT = 'https://graph.instagram.com/me/media_publish';
+  // const mediaUrl = 'https://api.instagram.com/v1/media/';
 
-  // const sendInstagram = async () => {
+  // const postLinkToInstagram = async () => {
   //   try {
-  //     // Upload image to Instagram
-  //     const mediaResponse = await axios.post(`${MEDIA_ENDPOINT}`, {
-  //       access_token: ACCESS_TOKEN,
-  //       image_url:
-  //         'https://png.pngtree.com/png-vector/20210326/ourmid/pngtree-sing-moon-tarot-symbol-png-image_3139433.jpg',
-  //       caption: cardList[selectCard].result,
+  //     const response = await axios.post(mediaUrl, {
+  //       access_token: accessToken,
+  //       caption: 'Check out my homepage!',
+  //       url: 'http://localhost:3000',
   //     });
-  //     const mediaId = mediaResponse.data.id;
-
-  //     // Share media to your feed
-  //     const publishResponse = await axios.post(`${PUBLISH_ENDPOINT}`, {
-  //       access_token: ACCESS_TOKEN,
-  //       media_id: mediaId,
-  //       caption: cardList[selectCard].result,
-  //       media_url: 'http://localhost:3000',
-  //       media_type: 'IMAGE', // Change to "IMAGE" if sharing an image instead
-  //     });
-
-  //     console.log('Successfully shared to Instagram!');
+  //     console.log('Link posted successfully:', response.data);
   //   } catch (error) {
-  //     console.error('Error sharing to Instagram:', error);
+  //     console.error('Error posting link:', error);
   //   }
   // };
 
@@ -135,7 +88,7 @@ function LuckyKarmaResult({ selectCard, cardList }: LuckyKarmaResultType) {
           <luckResult.Button onClick={sendKakao} style={{ marginInline: '10px' }}>
             <img src={KakaoIcon} alt="kakaoicon" />
           </luckResult.Button>
-          {/* <luckResult.Button onClick={sendInstagram} style={{ marginInline: '10px' }}>
+          {/* <luckResult.Button onClick={postLinkToInstagram} style={{ marginInline: '10px' }}>
             <img src={KakaoIcon} alt="kakaoicon" />
           </luckResult.Button> */}
         </luckResult.Card>

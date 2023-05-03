@@ -23,7 +23,6 @@ function LuckyKarmaSelect({
   setCheckSelectState,
 }: LuckyKarmaSelectType) {
   const [cardState, setCardState] = useState([1, 1, 1]); // 0 화면에 안보임, 1 슬라이드, 2 비선택(작아짐), 3 화면에 보임
-  const [cardAniSelect, setCardAniSelect] = useState(-1);
   const [cardAniState, setCardAniState] = useState([1, 1, 1]);
   const [cardSelectAniState, setCardSelectAniState] = useState(false); // 카드 뒤질을때 부드러운 애니메이션용
 
@@ -39,7 +38,6 @@ function LuckyKarmaSelect({
     // 카드 리스트 인덱스따라서 카드를 선택함
     if (cardAniState[index] === 2 || cardAniState[index] === 3) {
       setSelectCard(index);
-      setCardAniSelect(index);
       if (index === 0) {
         setCardAniState([3, 2, 2]);
         setCardState([3, 2, 2]);
@@ -57,7 +55,6 @@ function LuckyKarmaSelect({
     // 선택카드를 뒤집기 전까진 카드를 다시 선택가능
     if (checkSelectState !== true) {
       setSelectCard(-1);
-      setCardAniSelect(-1);
       setCardState([3, 3, 3]);
       setCardAniState([3, 3, 3]);
     }
@@ -96,7 +93,7 @@ function LuckyKarmaSelect({
           initial={{ scale: 1 }}
           src={CardB}
           alt="CardB"
-          cardAniState={cardAniState[index]}
+          cardanistate={cardAniState[index]}
           onClick={(e) => {
             e.stopPropagation();
             cardClickHandler(index);
@@ -113,7 +110,7 @@ function LuckyKarmaSelect({
           initial={{ scale: 1 }}
           animate={{ scale: 0.75 }}
           exit={{ scale: 0.75 }}
-          cardAniState={cardAniState[index]}
+          cardanistate={cardAniState[index]}
           src={CardB}
           alt="CardB"
           onClick={(e) => {
@@ -130,7 +127,7 @@ function LuckyKarmaSelect({
         initial={{ scale: 1 }}
         src={CardB}
         alt="CardB"
-        cardAniState={cardAniState[index]}
+        cardanistate={cardAniState[index]}
         onClick={(e) => {
           e.stopPropagation();
           cardClickHandler(index);
@@ -143,7 +140,7 @@ function LuckyKarmaSelect({
   const showCard = (
     <luckySelect.CardBody>
       {cardList.map((card) => (
-        <luckySelect.Card>{cardInOut(card.index)}</luckySelect.Card>
+        <luckySelect.Card key={card.index}>{cardInOut(card.index)}</luckySelect.Card>
       ))}
     </luckySelect.CardBody>
   );
@@ -155,7 +152,7 @@ function LuckyKarmaSelect({
           initial={{ scale: 1.1 }}
           src={cardList[index].front}
           alt="CardB"
-          cardSelectAniState={cardSelectAniState}
+          $cardselectanistate={cardSelectAniState} // styled component에서 boolean 속성 경고 제거를 위한 '$'
           // 클릭시 카드 선택
           onClick={(e) => {
             e.stopPropagation();
@@ -173,7 +170,7 @@ function LuckyKarmaSelect({
           initial={{ scale: 1 }}
           animate={{ scale: 0.75 }}
           exit={{ scale: 0.75 }}
-          cardAniState={cardAniState[index]}
+          cardanistate={cardAniState[index]}
           src={CardB}
           alt="CardB"
           onClick={(e) => {
@@ -190,8 +187,7 @@ function LuckyKarmaSelect({
         initial={{ scale: 1 }}
         src={CardB}
         alt="CardB"
-        cardSelectAniState={cardSelectAniState}
-        cardAniSelect={cardAniSelect}
+        $cardselectanistate={cardSelectAniState}
         // 클릭시 카드 선택
         onClick={(e) => {
           e.stopPropagation();
@@ -206,7 +202,9 @@ function LuckyKarmaSelect({
     selectCard !== -1 ? (
       <luckySelect.CardBody>
         {cardList.map((card) => (
-          <luckySelect.Card>{cardState[card.index] ? openCard(card.index) : <luckySelect.NullCard />}</luckySelect.Card>
+          <luckySelect.Card key={card.index}>
+            {cardState[card.index] ? openCard(card.index) : <luckySelect.NullCard />}
+          </luckySelect.Card>
         ))}
       </luckySelect.CardBody>
     ) : (
