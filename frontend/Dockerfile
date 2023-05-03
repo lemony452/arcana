@@ -1,7 +1,8 @@
 FROM node:18.16.0
 
-COPY package*.json ./
-COPY app.js ./
+RUN mkdir -p /app
+WORKDIR /app
+COPY . /app
 
 RUN npm install
 
