@@ -74,16 +74,18 @@ pipeline {
         }
 
         stage('push Docker') {
-            echo 'push Docker...'
-            script {
-                def pwd = sh(script: 'pwd', returnStdout: true).trim()
-                echo "Current directory : ${pwd}"
+            steps {
+                echo 'push Docker...'
+                    script {
+                        def pwd = sh(script: 'pwd', returnStdout: true).trim()
+                        echo "Current directory : ${pwd}"
 
-                sh 'docker push d107final/docker-test'
+                        sh 'docker push d107final/docker-test'
+                    }
+
+                post { failure { echo '[error] push Docker FAIL (╯°□°）╯︵ ┻━┻ ' } }
+                echo 'build Docker complete!!!'
             }
-
-            post { failure { echo '[error] push Docker FAIL (╯°□°）╯︵ ┻━┻ ' } }
-            echo 'build Docker complete!!!'
         }
 
         /* stage('') {
