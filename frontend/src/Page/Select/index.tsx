@@ -2,22 +2,22 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { SpreadBtn } from '../Common/common_style';
 
-function Celtic() {
+function Select() {
   const navigate = useNavigate();
-  const MoveMonth = () => {
-    navigate('/time/month');
+  const MoveTwo = () => {
+    navigate('/select/two');
   };
-  const MoveYear = () => {
-    navigate('/time/year');
+  const MoveThree = () => {
+    navigate('/select/three');
   };
 
   return (
     <>
       <div>let 질문을 받았다 가정하자</div>
-      <SpreadBtn onClick={MoveMonth}>월간</SpreadBtn>
-      <SpreadBtn onClick={MoveYear}>올해</SpreadBtn>
+      <SpreadBtn onClick={MoveTwo}>2가지 고민</SpreadBtn>
+      <SpreadBtn onClick={MoveThree}>3가지 고민</SpreadBtn>
     </>
   );
 }
 
-export default Celtic;
+export default Select;
