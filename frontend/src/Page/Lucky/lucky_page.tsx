@@ -5,7 +5,6 @@ import LuckyKarmaResult from './Component/lucky_karma_result';
 import F0 from '../../Assets/cards/F0.svg';
 import F9 from '../../Assets/cards/F9.svg';
 import F14 from '../../Assets/cards/F14.svg';
-// import charDialog0 from '../../Assets/characters/charDialog0.png';
 // import { DialogBox, DialogContentStyle, DialogNPC, DialogName, InputBox } from '../../Common/common_styled';
 import Gom from '../../Assets/cards/gom.svg';
 import Dialog from '../../Common/dialog';
