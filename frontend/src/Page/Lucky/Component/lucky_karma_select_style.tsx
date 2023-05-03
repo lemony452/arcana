@@ -65,40 +65,49 @@ export const Card = styled(motion.div)`
   padding: 50px;
 `;
 
-export const CardBackIn = styled(motion.img)<{ cardAniState: number }>`
+export const CardBackIn = styled(motion.img)<{ cardanistate: number }>`
   width: auto;
   max-height: 350px;
   cursor: pointer;
   // 매개변수를 받아서 카드를 뒤집는 상태를 조정
-  animation-name: ${(props) => (props.cardAniState === 1 ? CardSlideInAnimation : null)};
+  animation-name: ${(props) => (props.cardanistate === 1 ? CardSlideInAnimation : null)};
   animation-duration: 1s;
   animation-timing-function: ease-in-out;
 `;
 
-export const CardBackOut = styled(motion.img)<{ cardAniState: number }>`
+export const CardBackNormal = styled(motion.img)<{ cardanistate: number }>`
+  width: auto;
+  max-height: 350px;
+  cursor: pointer;
+  animation-name: ${(props) => (props.cardanistate === 0 ? CardSlideOutAnimation : null)};
+  animation-duration: 1s;
+  animation-timing-function: ease-in-out;
+`;
+
+export const CardBackOut = styled(motion.img)<{ cardanistate: number }>`
   width: auto;
   max-height: 350px;
   cursor: pointer;
   // 매개변수를 받아서 카드를 뒤집는 상태를 조정
-  animation-name: ${(props) => (props.cardAniState === 2 ? null : CardSlideOutAnimation)};
+  animation-name: ${(props) => (props.cardanistate === 2 ? null : CardSlideOutAnimation)};
   animation-duration: 1s;
   animation-timing-function: ease-in-out;
 `;
 
-export const SelectCardBack = styled(motion.img)<{ cardSelectAniState: boolean; cardAniSelect: number }>`
+export const SelectCardBack = styled(motion.img)<{ $cardselectanistate: boolean }>`
   width: auto;
   max-height: 350px;
-  animation-name: ${(props) => (props.cardSelectAniState ? CardSelectAnimationE : null)};
-  animation-duration: 0.5s;
+  animation-name: ${(props) => (props.$cardselectanistate ? CardSelectAnimationE : null)};
+  animation-duration: 1s;
   cursor: pointer;
 `;
 
-export const SelectCardFront = styled(motion.img)<{ cardSelectAniState: boolean }>`
+export const SelectCardFront = styled(motion.img)<{ $cardselectanistate: boolean }>`
   width: auto;
   max-height: 350px;
   cursor: pointer;
-  animation-name: ${(props) => (props.cardSelectAniState ? CardSelectAnimationS : null)};
-  animation-duration: 0.5s;
+  animation-name: ${(props) => (props.$cardselectanistate ? CardSelectAnimationS : null)};
+  animation-duration: 0.8s;
 `;
 
 export const NullCard = styled.div`
