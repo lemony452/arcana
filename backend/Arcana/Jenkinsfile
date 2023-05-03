@@ -22,10 +22,11 @@ pipeline {
                         url: 'https://lab.ssafy.com/s08-final/S08P31D107.git'
                     ]]
                 )
-                echo 'clone Git complete!!!'
             }
-
-            post { failure { echo '[error] git clone FAIL (╯°□°）╯︵ ┻━┻ ' } }
+            post {
+                success { echo 'clone Git complete!!!' }
+                failure { echo '[error] git clone FAIL (╯°□°）╯︵ ┻━┻ ' }
+            }
         }
 
         stage('build Gradle') {
@@ -44,11 +45,12 @@ pipeline {
                     sh "chmod +x gradlew"
                     sh "./gradlew clean build"
                 }
-
-                echo "build Gradle complete!!!"
             }
 
-            post { failure { echo '[error] build Gradle FAIL (╯°□°）╯︵ ┻━┻ ' } }
+            post {
+                success { echo 'build Gradle complete!!!' }
+                failure { echo '[error] build Gradle FAIL (╯°□°）╯︵ ┻━┻ ' }
+            }
         }
 
         stage('build Docker') {
@@ -65,9 +67,12 @@ pipeline {
 
                         dockerImage = docker.build imagename
                     }
-                    //post { failure { echo '[error] build Docker FAIL (╯°□°）╯︵ ┻━┻ ' } }
-                    echo 'build Docker complete!!!'
                 }
+            }
+
+            post {
+                success { echo 'build Docker complete!!!' }
+                failure { echo '[error] build Docker FAIL (╯°□°）╯︵ ┻━┻ ' }
             }
         }
 
@@ -75,21 +80,34 @@ pipeline {
             steps {
                 echo 'push Docker...'
                     script {
-                        def pwd = sh(script: 'pwd', returnStdout: true).trim()
-                        echo "Current directory : ${pwd}"
-
                         sh 'docker push d107final/docker-test'
                     }
+            }
 
-                //post { failure { echo '[error] push Docker FAIL (╯°□°）╯︵ ┻━┻ ' } }
-                echo 'build Docker complete!!!'
+            post {
+                success { echo 'build Docker complete!!!' }
+                failure { echo '[error] push Docker FAIL (╯°□°）╯︵ ┻━┻ ' }
             }
         }
 
-        /* stage('') {
-            sh "docker ps -q --filter 'name=docker-test' | grep -q .
+        stage('run Docker') {
+            steps {
+                echo 'pull Docker...'
+                script {
+                    sh 'docker pull d107final/docker-test'
+
+                }
+
+                echo 'run Docker...'
+                script {
+                    docker run -d --name docker-test -p 8085:8080 d107final/docker-test
+                }
+            }
+            /* sh "docker ps -q --filter 'name=docker-test' | grep -q .
                                 && docker stop docker-test
-                                && docker rm docker-test | true"
-        } */
+                                && docker rm docker-test | true" */
+        }
     }
 }
+
+// 도커 중복시 삭제하고 덮어씌우기 처리 안했으니까 해야함
