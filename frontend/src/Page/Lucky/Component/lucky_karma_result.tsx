@@ -18,6 +18,8 @@ interface LuckyKarmaResultType {
   cardList: {
     index: number;
     front: string;
+    num: string;
+    title: string;
     content: string;
     result: string;
   }[];
@@ -82,8 +84,11 @@ function LuckyKarmaResult({ selectCard, cardList }: LuckyKarmaResultType) {
     <luckResult.Body>
       <luckResult.CardBody>
         <luckResult.Card id="capture">
-          <luckResult.CardFront style={{ marginInline: '10px' }} src={cardList[selectCard].front} alt="CardF" />
-          <p>{cardList[selectCard].result}</p>
+          <luckResult.CardTitle>
+            {cardList[selectCard].num}.{cardList[selectCard].title}
+          </luckResult.CardTitle>
+          <luckResult.CardFront src={cardList[selectCard].front} alt="CardF" />
+          <luckResult.Cardcontent>{cardList[selectCard].result}</luckResult.Cardcontent>
         </luckResult.Card>
         <FacebookShareButton style={{ marginInline: '10px' }} url={window.location.href}>
           <FacebookIcon size={32} round borderRadius={24} />
@@ -106,7 +111,7 @@ function LuckyKarmaResult({ selectCard, cardList }: LuckyKarmaResultType) {
           <img src={KakaoIcon} alt="kakaoicon" />
         </luckResult.Button>
         <luckResult.Button onClick={capture} style={{ marginInline: '10px' }}>
-          <img src={Camera} alt="kakaoicon" />
+          <img src={Camera} alt="camera" />
         </luckResult.Button>
       </luckResult.CardBody>
     </luckResult.Body>
