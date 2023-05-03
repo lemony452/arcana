@@ -4,7 +4,6 @@ import * as layer from './celtic_spread_style';
 import Celtic from './celtic_spread';
 import * as common from '../Common/common_style';
 import Dialog from '../../Common/dialog';
-import { useFortuneStore } from '../../Store/User/fortune';
 import { CelticDetails } from '../../Common/conversations';
 import charDialog0 from '../../Assets/characters/charDialog0.png';
 import { DialogNPC } from '../../Common/common_styled';
@@ -24,9 +23,6 @@ function CelticSpread() {
   const MoveLucky = () => {
     navigate('/lucky');
   };
-
-  const { fortune, tarotNumList } = useFortuneStore();
-  console.log(tarotNumList);
 
   const text = CelticDetails();
   console.log(text);

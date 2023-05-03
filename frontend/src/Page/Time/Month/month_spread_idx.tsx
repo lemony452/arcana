@@ -3,6 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import * as layer from '../time_style';
 import Month from './month_spread';
 import * as common from '../../Common/common_style';
+import Dialog from '../../../Common/dialog';
+import charDialog0 from '../../../Assets/characters/charDialog0.png';
+import { DialogNPC } from '../../../Common/common_styled';
+import { MonthDetails } from '../../../Common/conversations';
 
 function MonthSpread() {
   const navigate = useNavigate();
@@ -19,6 +23,9 @@ function MonthSpread() {
   const MoveLucky = () => {
     navigate('/lucky');
   };
+
+  const text = MonthDetails();
+  console.log(text);
 
   if (index === 0) {
     return (
@@ -54,9 +61,13 @@ function MonthSpread() {
             </common.SpreadModal>
           </common.SideBlock>
         </common.CardArea>
-        <common.ChatArea>
+        {/* <common.ChatArea>
           <common.SpreadBtn onClick={onNext}>다음</common.SpreadBtn>
-        </common.ChatArea>
+        </common.ChatArea> */}
+        <DialogNPC src={charDialog0} />
+        <Dialog content={text.page1} next={false}>
+          <common.SpreadBtn onClick={onNext}>다음</common.SpreadBtn>
+        </Dialog>
       </>
     );
   }
@@ -83,9 +94,13 @@ function MonthSpread() {
             </common.SpreadModal>
           </common.SideBlock>
         </common.CardArea>
-        <common.ChatArea>
+        {/* <common.ChatArea>
           <common.SpreadBtn onClick={onNext}>다음</common.SpreadBtn>
-        </common.ChatArea>
+        </common.ChatArea> */}
+        <DialogNPC src={charDialog0} />
+        <Dialog content={text.page2} next={false}>
+          <common.SpreadBtn onClick={onNext}>다음</common.SpreadBtn>
+        </Dialog>
       </>
     );
   }
@@ -112,9 +127,13 @@ function MonthSpread() {
             </common.SpreadModal>
           </common.SideBlock>
         </common.CardArea>
-        <common.ChatArea>
+        {/* <common.ChatArea>
           <common.SpreadBtn onClick={onNext}>다음</common.SpreadBtn>
-        </common.ChatArea>
+        </common.ChatArea> */}
+        <DialogNPC src={charDialog0} />
+        <Dialog content={text.page3} next={false}>
+          <common.SpreadBtn onClick={onNext}>다음</common.SpreadBtn>
+        </Dialog>
       </>
     );
   }
@@ -140,9 +159,13 @@ function MonthSpread() {
             </common.SpreadModal>
           </common.SideBlock>
         </common.CardArea>
-        <common.ChatArea>
+        {/* <common.ChatArea>
           <common.SpreadBtn onClick={MoveLucky}>럭키!</common.SpreadBtn>
-        </common.ChatArea>
+        </common.ChatArea> */}
+        <DialogNPC src={charDialog0} />
+        <Dialog content={text.page4} next={false}>
+          <common.SpreadBtn onClick={MoveLucky}>럭키!</common.SpreadBtn>
+        </Dialog>
       </>
     );
   }
