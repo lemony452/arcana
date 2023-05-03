@@ -1,0 +1,113 @@
+pipeline {
+    agent any
+         environment {
+            imagename = "d107final/docker-test-fe"
+            registryCredential = 'jumzip@d107'
+            dockerImage = ''
+        }
+
+    //tools {}
+    stages {
+        stage('start') {
+            steps { echo '[process START] (o゜▽゜)o---☆ *:･.:･ﾟ*' }
+        }
+
+        stage('git clone') {
+            steps {
+                checkout scmGit(
+                    branches: [[name: 'febuildtest']],
+                    extensions: [],
+                    userRemoteConfigs: [[
+                        credentialsId: 'testcred',
+                        url: 'https://lab.ssafy.com/s08-final/S08P31D107.git'
+                    ]]
+                )
+            }
+            post {
+                success { echo 'clone Git complete!!!' }
+                failure { echo '[error] git clone FAIL (╯°□°）╯︵ ┻━┻ ' }
+            }
+        }
+
+        /* stage('build Gradle') {
+
+            steps {
+                dir('frontend') {
+
+                    //현재 dir 체크
+                    script {
+                        def pwd = sh(script: 'pwd', returnStdout: true).trim()
+                        echo "Current directory : ${pwd}"
+                    }
+
+                    echo "build Gradle..."
+
+                    sh "chmod +x gradlew"
+                    sh "./gradlew clean build"
+                }
+            }
+
+            post {
+                success { echo 'build Gradle complete!!!' }
+                failure { echo '[error] build Gradle FAIL (╯°□°）╯︵ ┻━┻ ' }
+            }
+        } */
+
+        stage('build Docker') {
+
+            steps {
+                dir('frontend') {
+
+                    echo 'build Docker...'
+
+                    //현재 dir 체크
+                    script {
+                        def pwd = sh(script: 'pwd', returnStdout: true).trim()
+                        echo "Current directory : ${pwd}"
+
+                        dockerImage = docker.build imagename
+                    }
+                }
+            }
+
+            post {
+                success { echo 'build Docker complete!!!' }
+                failure { echo '[error] build Docker FAIL (╯°□°）╯︵ ┻━┻ ' }
+            }
+        }
+
+        stage('push Docker') {
+            steps {
+                echo 'push Docker...'
+                    script {
+                        sh 'docker push d107final/docker-test-fe'
+                    }
+            }
+
+            post {
+                success { echo 'build Docker complete!!!' }
+                failure { echo '[error] push Docker FAIL (╯°□°）╯︵ ┻━┻ ' }
+            }
+        }
+
+        stage('run Docker') {
+            steps {
+                echo 'pull Docker...'
+
+                sh 'docker pull d107final/docker-test-fe'
+
+                echo 'Clean image...'
+                sh '''
+                    if test "`docker ps -aq --filter name=docker-test-fe`"; then
+                    docker stop docker-test-fe
+                    docker rm docker-test-fe
+                    fi
+                '''
+
+                echo 'run Docker...'
+                sh 'docker run -d --name docker-test-fe -p 13001:3000 d107final/docker-test-fe'
+
+            }
+        }
+    }
+}
