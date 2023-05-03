@@ -105,7 +105,7 @@ pipeline {
                 '''
 
                 echo 'run Docker...'
-                sh 'docker run -d --name docker-test-fe -p 13001:13001 d107final/docker-test-fe'
+                sh 'docker run -d --name docker-test-fe -p 13001:3000 d107final/docker-test-fe'
 
             }
         }
