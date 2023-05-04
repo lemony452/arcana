@@ -11,6 +11,9 @@ function TwoSpread() {
   const onNext = () => {
     return setIndex(index + 1);
   };
+  const toHome = () => {
+    navigate('/');
+  };
   console.log(index);
 
   // 0일때 카드 고르기를 할지 논의 필요
@@ -36,12 +39,34 @@ function TwoSpread() {
           </common.CardBox>
           <common.SideBlock>
             <common.SpreadModal>
-              <TwoNum />
+              <common.DefaultCard>1</common.DefaultCard>
             </common.SpreadModal>
           </common.SideBlock>
         </common.CardArea>
         <common.ChatArea>
-          <common.SpreadBtn>다음</common.SpreadBtn>
+          <common.SpreadBtn onClick={onNext}>다음</common.SpreadBtn>
+        </common.ChatArea>
+      </>
+    );
+  }
+
+  if (index === 2) {
+    return (
+      <>
+        <common.CardArea>
+          <common.SideBlock />
+          <common.CardBox>
+            <Two />
+          </common.CardBox>
+          <common.SideBlock>
+            <common.SpreadModal>
+              <common.DefaultCard>2</common.DefaultCard>
+              <common.DefaultCard>3</common.DefaultCard>
+            </common.SpreadModal>
+          </common.SideBlock>
+        </common.CardArea>
+        <common.ChatArea>
+          <common.SpreadBtn onClick={toHome}>다음</common.SpreadBtn>
         </common.ChatArea>
       </>
     );
