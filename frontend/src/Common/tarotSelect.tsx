@@ -41,6 +41,15 @@ export function getTarot(numberCards: number) {
   return cards;
 }
 
+export function getLuckyCard() {
+  let num = Math.floor(Math.random() * 21);
+  if (Math.random() >= 0.5) {
+    num += 78;
+  }
+
+  return num;
+}
+
 export function getTarotNames(tarots: TarotType[]) {
   let names = '';
 
