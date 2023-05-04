@@ -52,3 +52,14 @@ export const Btn = styled(motion.button)`
   padding: 10px 20px 10px 20px;
   margin-right: 50px;
 `;
+
+export const Button = styled.button`
+  align-self: center;
+  cursor: pointer;
+  border: 0;
+  background-color: rgba(0, 0, 0, 0);
+  > img {
+    width: 32px;
+    height: 32px;
+  }
+`;
