@@ -13,7 +13,7 @@ function Celtic() {
   const [next, SetNext] = useState(false);
   const [option, SetOption] = useState('');
   const inputValueRef = useRef<HTMLInputElement>(null);
-  const { setTarotNameList, setOption, setInputValue, addFortune, setTarotNumList } = useFortuneStore();
+  const { setTarotNameList, setOption, setInputValue, addFortune, setTarotList } = useFortuneStore();
   const navigate = useNavigate();
 
   // 특수 문자 처리
@@ -26,7 +26,7 @@ function Celtic() {
     // 타로카드 10장 + 럭키카드 1장 뽑기
     const tarots = getTarot(10);
     console.log(tarots);
-    setTarotNumList(tarots);
+    setTarotList(tarots);
     // 10장의 카드이름 목록 리스트
     const TarotList = getTarotNames(tarots);
     setTarotNameList(TarotList);

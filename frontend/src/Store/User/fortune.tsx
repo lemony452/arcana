@@ -2,7 +2,7 @@ import { create } from 'zustand';
 
 interface FortuneState {
   fortune: string[];
-  tarotNumList: any[];
+  tarotList: any[];
   tarotNameList: string;
   option: string;
   inputValue: string;
@@ -10,7 +10,7 @@ interface FortuneState {
   setSpread: (spread: string) => void;
   setInputValue: (v: string) => void;
   setOption: (opt: string) => void;
-  setTarotNumList: (t: any[]) => void;
+  setTarotList: (t: any[]) => void;
   setTarotNameList: (tarot: string) => void;
   addFortune: (ans: any[]) => void;
   setFortune: (fortune: string[]) => void;
@@ -35,7 +35,7 @@ export const useFortuneStore = create<FortuneState>((set) => ({
     '너 자신을 보호하며 안정된 삶을 되찾기 위해 노력해야 해',
     '좋은 운을 누리고, 기회와 행운이 너의 삶에 찾아올 거야',
   ],
-  tarotNumList: [],
+  tarotList: [],
   tarotNameList:
     'The Fool, Eight of Swords(Reverse), Page of Swords(Reverse), Page of Cups, Ace of Pentacles(Reverse), The Magician, Three of Swords, Ten of Cups, The Hanged Man(Reverse), The Fool, Four of Wands(Reverse), Eight of Pentacles(Reverse)',
   option: '사랑운',
@@ -60,7 +60,7 @@ export const useFortuneStore = create<FortuneState>((set) => ({
   setFortune: () => {
     set(() => ({ fortune: [] }));
   },
-  setTarotNumList: (t) => {
-    set((state) => ({ tarotNumList: [...state.tarotNumList, ...t] }));
+  setTarotList: (t) => {
+    set((state) => ({ tarotList: [...state.tarotList, ...t] }));
   },
 }));

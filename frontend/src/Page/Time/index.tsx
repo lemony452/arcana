@@ -14,7 +14,7 @@ function Time() {
   const [next, SetNext] = useState(false);
   // const [option, SetOption] = useState('');
   const inputValueRef = useRef<HTMLInputElement>(null);
-  const { setTarotNameList, setOption, setInputValue, addFortune, setTarotNumList } = useFortuneStore();
+  const { setTarotNameList, setOption, setInputValue, addFortune, setTarotList } = useFortuneStore();
   const navigate = useNavigate();
 
   // celtic 옵션 선택 함수
@@ -72,7 +72,7 @@ function Time() {
       navigate('/time/month');
     }
     console.log(tarots);
-    setTarotNumList(tarots);
+    setTarotList(tarots);
     // 카드이름 목록 리스트
     const TarotList = getTarotNames(tarots);
     setTarotNameList(TarotList);
