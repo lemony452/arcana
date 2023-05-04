@@ -73,3 +73,16 @@ export const MonthDetails = () => {
 
   return MonthDetail;
 };
+
+export const InstantDetails = () => {
+  const { tarotList, fortune } = useFortuneStore();
+  console.log(tarotList);
+
+  const InstantDetail = {
+    page1: `어떤 카드인지 설명해줄게!\n질문자 카드 ${tarotList[0].name}의 의미는 ${fortune[0]}`,
+    page2: `선택지 1번 카드는 ${tarotList[1].name}의 의미는 ${fortune[1]}\n선택지 2번 카드는 ${tarotList[2].name}의 의미는 ${fortune[2]}`,
+    page3: `선택지 1번 카드는 ${tarotList[1].name}의 의미는 ${fortune[1]}\n선택지 2번 카드는 ${tarotList[2].name}의 의미는 ${fortune[2]}\n선택지 3번 카드는 ${tarotList[2].name}의 의미는 ${fortune[2]}`,
+  };
+
+  return InstantDetail;
+};
