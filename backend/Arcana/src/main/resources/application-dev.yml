@@ -1,9 +1,9 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    username: tester
+    username: d107DB
     password: jumzip@d107
-    url: jdbc:mysql://k8d107.p.ssafy.io:3306/testdb?characterEncoding=UTF-8&serverTimezone=UTC&autoReconnect=true
+    url: jdbc:mysql://k8d107.p.ssafy.io:3306/arcanaDB?characterEncoding=UTF-8&serverTimezone=UTC&autoReconnect=true
     dbcp:
       testOnBorrow: 'true'
       validationQuery: SELECT 1
