@@ -9,7 +9,7 @@ interface CaseProps {
 }
 
 function Dialog({ children, content, next }: CaseProps) {
-  const { spread, tarotNumList } = useFortuneStore();
+  const { spread, tarotList } = useFortuneStore();
   let color;
   let charName;
   if (spread === 'celtic') {
@@ -31,7 +31,7 @@ function Dialog({ children, content, next }: CaseProps) {
           <CelticDetail>
             {detail === 1 ? content : null}
             <br />
-            {detail}번 카드는 {tarotNumList[detail - 1].name} , {detail + 1}번 카드는 {tarotNumList[detail].name} 가
+            {detail}번 카드는 {tarotList[detail - 1].name} , {detail + 1}번 카드는 {tarotList[detail].name} 가
             나왔네!
           </CelticDetail>
         ) : (
