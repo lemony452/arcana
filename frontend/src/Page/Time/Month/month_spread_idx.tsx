@@ -31,10 +31,10 @@ function MonthSpread() {
     console.log('럭키카드 번호 : ', luckyIdx);
     setLuckyIdx(luckyIdx);
     // res : { "card_idx" : 0, "luckyment": ""}
-    const res = await API.get(`/api/tarot/lucky/${luckyIdx}`, {
-      params: luckyIdx,
-    });
-    console.log(res);
+    // const res = await API.get(`/api/tarot/lucky/${luckyIdx}`, {
+    //   params: luckyIdx,
+    // });
+    // console.log(res);
     // setLuckyMent(res); // 수정필요
     navigate('/lucky');
   };
