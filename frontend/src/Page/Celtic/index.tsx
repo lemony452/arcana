@@ -1,10 +1,10 @@
 import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getTarot, getTarotNames } from './tarotSelect';
+import { getTarot, getTarotNames } from '../../Common/tarotSelect';
 import { OptionBtn, InputText, SubmitBtn, DialogNPC } from '../../Common/common_styled';
 import { CelticConversations } from '../../Common/conversations';
 import Dialog from '../../Common/dialog';
-import { CreateCompletion } from '../../Store/FortuneTelling/gpt';
+import { CelticGPT } from '../../Store/FortuneTelling/gpt';
 import { useFortuneStore } from '../../Store/User/fortune';
 import charDialog0 from '../../Assets/characters/charDialog0.png';
 
@@ -53,14 +53,20 @@ function Celtic() {
       setInputValue(inputValue!);
       console.log(inputValue);
       // const prompt = `[카드목록][${tarotList}] 카드가 있다. [방식] celtic-cross. ${opt}과 관련된 점을 보고싶다. ${position}번째 카드의 결과만 응답한다. [질문] ${inputValue}`;
+      // celtic 2장씩 총 10장의 운세 풀이 요청
+      const cards = ['1, 2', '3, 4', '5, 6', '7, 8', '9, 10'];
       const getAns = async (t: string, o: string, i: string) => {
         // 타로 운세 풀이를 스토어에 저장
         // 비동기함수로 순서대로 fortune 변수에 값을 추가함
-        let ans = await CreateCompletion(t, o, i, '1, 2');
+        let ans = await CelticGPT(t, o, i, cards[0]);
         addFortune(ans);
-        ans = await CreateCompletion(t, o, i, '3, 4');
+        ans = await CelticGPT(t, o, i, cards[1]);
         addFortune(ans);
-        ans = await CreateCompletion(t, o, i, '5, 6');
+        ans = await CelticGPT(t, o, i, cards[2]);
+        addFortune(ans);
+        ans = await CelticGPT(t, o, i, cards[3]);
+        addFortune(ans);
+        ans = await CelticGPT(t, o, i, cards[4]);
         addFortune(ans);
       };
       // getAns(tarotList, optionPrompt, inputValue!);

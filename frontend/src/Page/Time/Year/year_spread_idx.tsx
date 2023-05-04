@@ -3,6 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import * as layer from '../time_style';
 import Year from './year_spread';
 import * as common from '../../Common/common_style';
+import Dialog from '../../../Common/dialog';
+import charDialog0 from '../../../Assets/characters/charDialog0.png';
+import { DialogNPC } from '../../../Common/common_styled';
+import { YearDetails } from '../../../Common/conversations';
 
 function YearSpread() {
   const navigate = useNavigate();
@@ -19,6 +23,9 @@ function YearSpread() {
   const MoveLucky = () => {
     navigate('/lucky');
   };
+
+  const text = YearDetails();
+  console.log(text);
 
   if (index === 0) {
     return (
@@ -55,9 +62,13 @@ function YearSpread() {
             </common.SpreadModal>
           </common.SideBlock>
         </common.CardArea>
-        <common.ChatArea>
+        {/* <common.ChatArea>
           <common.SpreadBtn onClick={onNext}>다음</common.SpreadBtn>
-        </common.ChatArea>
+        </common.ChatArea> */}
+        <DialogNPC src={charDialog0} />
+        <Dialog content={text.page1} next={false}>
+          <common.SpreadBtn onClick={onNext}>다음</common.SpreadBtn>
+        </Dialog>
       </>
     );
   }
@@ -85,9 +96,13 @@ function YearSpread() {
             </common.SpreadModal>
           </common.SideBlock>
         </common.CardArea>
-        <common.ChatArea>
+        {/* <common.ChatArea>
           <common.SpreadBtn onClick={onNext}>다음</common.SpreadBtn>
-        </common.ChatArea>
+        </common.ChatArea> */}
+        <DialogNPC src={charDialog0} />
+        <Dialog content={text.page2} next={false}>
+          <common.SpreadBtn onClick={onNext}>다음</common.SpreadBtn>
+        </Dialog>
       </>
     );
   }
@@ -115,9 +130,13 @@ function YearSpread() {
             </common.SpreadModal>
           </common.SideBlock>
         </common.CardArea>
-        <common.ChatArea>
+        {/* <common.ChatArea>
           <common.SpreadBtn onClick={onNext}>다음</common.SpreadBtn>
-        </common.ChatArea>
+        </common.ChatArea> */}
+        <DialogNPC src={charDialog0} />
+        <Dialog content={text.page3} next={false}>
+          <common.SpreadBtn onClick={onNext}>다음</common.SpreadBtn>
+        </Dialog>
       </>
     );
   }
@@ -145,9 +164,13 @@ function YearSpread() {
             </common.SpreadModal>
           </common.SideBlock>
         </common.CardArea>
-        <common.ChatArea>
+        {/* <common.ChatArea>
           <common.SpreadBtn onClick={onNext}>다음</common.SpreadBtn>
-        </common.ChatArea>
+        </common.ChatArea> */}
+        <DialogNPC src={charDialog0} />
+        <Dialog content={text.page4} next={false}>
+          <common.SpreadBtn onClick={onNext}>다음</common.SpreadBtn>
+        </Dialog>
       </>
     );
   }
@@ -173,9 +196,13 @@ function YearSpread() {
             </common.SpreadModal>
           </common.SideBlock>
         </common.CardArea>
-        <common.ChatArea>
+        {/* <common.ChatArea>
           <common.SpreadBtn onClick={MoveLucky}>럭키!</common.SpreadBtn>
-        </common.ChatArea>
+        </common.ChatArea> */}
+        <DialogNPC src={charDialog0} />
+        <Dialog content={text.page5} next={false}>
+          <common.SpreadBtn onClick={MoveLucky}>럭키!</common.SpreadBtn>
+        </Dialog>
       </>
     );
   }
