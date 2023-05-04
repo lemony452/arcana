@@ -1,4 +1,4 @@
-import { tarot, TarotType } from '../../Common/tarot';
+import { tarot, TarotType } from './tarot';
 
 export function getTarot(numberCards: number) {
   const nums: number[] = [];
@@ -8,7 +8,7 @@ export function getTarot(numberCards: number) {
     return nums.find((e: number) => e === n);
   }
 
-  while (nums.length <= numberCards) {
+  while (nums.length < numberCards) {
     const num = Math.floor(Math.random() * 77);
 
     if (!sameNum(num)) {
