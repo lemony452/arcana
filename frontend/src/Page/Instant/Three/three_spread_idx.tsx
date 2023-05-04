@@ -35,11 +35,11 @@ function ThreeSpread() {
         <common.CardArea>
           <common.SideBlock />
           <common.CardBox>
-            <Three />
+            <common.DefaultCard>1</common.DefaultCard>
           </common.CardBox>
           <common.SideBlock>
             <common.SpreadModal>
-              <common.DefaultCard>1</common.DefaultCard>
+              <Three />
             </common.SpreadModal>
           </common.SideBlock>
         </common.CardArea>
@@ -56,13 +56,13 @@ function ThreeSpread() {
         <common.CardArea>
           <common.SideBlock />
           <common.CardBox>
-            <Three />
+            <common.DefaultCard>2</common.DefaultCard>
+            <common.DefaultCard>3</common.DefaultCard>
+            <common.DefaultCard>4</common.DefaultCard>
           </common.CardBox>
           <common.SideBlock>
             <common.SpreadModal>
-              <common.DefaultCard>2</common.DefaultCard>
-              <common.DefaultCard>3</common.DefaultCard>
-              <common.DefaultCard>4</common.DefaultCard>
+              <Three />
             </common.SpreadModal>
           </common.SideBlock>
         </common.CardArea>

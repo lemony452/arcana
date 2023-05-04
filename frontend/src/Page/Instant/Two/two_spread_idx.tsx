@@ -35,11 +35,11 @@ function TwoSpread() {
         <common.CardArea>
           <common.SideBlock />
           <common.CardBox>
-            <Two />
+            <common.DefaultCard>1</common.DefaultCard>
           </common.CardBox>
           <common.SideBlock>
             <common.SpreadModal>
-              <common.DefaultCard>1</common.DefaultCard>
+              <Two />
             </common.SpreadModal>
           </common.SideBlock>
         </common.CardArea>
@@ -56,12 +56,12 @@ function TwoSpread() {
         <common.CardArea>
           <common.SideBlock />
           <common.CardBox>
-            <Two />
+            <common.DefaultCard>2</common.DefaultCard>
+            <common.DefaultCard>3</common.DefaultCard>
           </common.CardBox>
           <common.SideBlock>
             <common.SpreadModal>
-              <common.DefaultCard>2</common.DefaultCard>
-              <common.DefaultCard>3</common.DefaultCard>
+              <Two />
             </common.SpreadModal>
           </common.SideBlock>
         </common.CardArea>
