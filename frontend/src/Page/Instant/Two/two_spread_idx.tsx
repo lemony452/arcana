@@ -66,7 +66,7 @@ function TwoSpread() {
           </common.SideBlock>
         </common.CardArea>
         <common.ChatArea>
-          <common.SpreadBtn onClick={toHome}>다음</common.SpreadBtn>
+          <common.SpreadBtn onClick={toHome}>홈으로</common.SpreadBtn>
         </common.ChatArea>
       </>
     );
