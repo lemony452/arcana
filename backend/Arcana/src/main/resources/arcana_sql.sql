@@ -1,58 +1,88 @@
-drop database if exists arcana_db;
-create database arcana_db;
-use arcana_db;
+CREATE SCHEMA IF NOT EXISTS `arcanaDB` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci ;
+USE `arcanaDB` ;
 
-create table user(
-	uid varchar(50),
-    token varchar(50) not null,
-    provider varchar(50) not null,
-    email varchar(50) not null,
-    nickname varchar(50) not null,
-	report_count int not null,
+-- -----------------------------------------------------
+-- Table `arcanaDB`.`CARD`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `arcanaDB`.`CARD` (
+  `card_idx` VARCHAR(5) NOT NULL,
+  `name` VARCHAR(50) NOT NULL,
+  PRIMARY KEY (`card_idx`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
 
-	CONSTRAINT uid primary key(uid)
-);
 
-create table diary(
-	didx int auto_increment,
-    uid_user varchar(50) not null,
-    dcontent varchar(5000) not null,
-    ddate date not null,
-    
-    CONSTRAINT didx primary key(didx),
-    CONSTRAINT uid foreign key(uid_user) REFERENCES user(uid)
-);
+-- -----------------------------------------------------
+-- Table `arcanaDB`.`INSTANT`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `arcanaDB`.`INSTANT` (
+  `idx` VARCHAR(5) NOT NULL,
+  `card_idx` VARCHAR(5) NULL DEFAULT NULL,
+  `question` VARCHAR(2000) NOT NULL,
+  `advice` VARCHAR(2000) NOT NULL,
+  PRIMARY KEY (`idx`),
+  INDEX `card_idx` (`card_idx` ASC) VISIBLE,
+  CONSTRAINT `INSTANT_ibfk_1`
+    FOREIGN KEY (`card_idx`)
+    REFERENCES `arcanaDB`.`CARD` (`card_idx`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
 
-create table report(
-	didx_diary int not null,
-    uid_user varchar(50) not null,
-    card_list json,
-    card_res_list json,
-    question varchar(1000),
-    answer varchar(1000),
-    
-    CONSTRAINT didx foreign key(didx_diary) REFERENCES diary(didx),
-    CONSTRAINT uid_r foreign key(uid_user) REFERENCES user(uid)
-);
 
-create table major_card(
-	major_idx int auto_increment,
-    major_num int not null,
-    major_dir boolean not null,
-    major_keyword json not null,
-    major_description varchar(1000) not null,
-    major_karma varchar(1000) not null,
-    
-    CONSTRAINT major_idx primary key(major_idx)
-);
+-- -----------------------------------------------------
+-- Table `arcanaDB`.`LUCKY`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `arcanaDB`.`LUCKY` (
+  `idx` VARCHAR(5) NOT NULL,
+  `card_idx` VARCHAR(5) NULL DEFAULT NULL,
+  `luckyment` VARCHAR(2000) NOT NULL,
+  PRIMARY KEY (`idx`),
+  INDEX `card_idx` (`card_idx` ASC) VISIBLE,
+  CONSTRAINT `LUCKY_ibfk_1`
+    FOREIGN KEY (`card_idx`)
+    REFERENCES `arcanaDB`.`CARD` (`card_idx`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
 
-create table minor_card(
-	minor_idx int auto_increment,
-    minor_symbol int not null,
-    minor_num int not null,
-    minor_dir boolean not null,
-    minor_keyword json not null,
-    minor_description varchar(1000) not null,
-    
-    CONSTRAINT minor_idx primary key(minor_idx)
-);
+
+-- -----------------------------------------------------
+-- Table `arcanaDB`.`TIME`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `arcanaDB`.`TIME` (
+  `idx` VARCHAR(5) NOT NULL,
+  `card_idx` VARCHAR(5) NULL DEFAULT NULL,
+  `timement` VARCHAR(2000) NOT NULL,
+  PRIMARY KEY (`idx`),
+  INDEX `card_idx` (`card_idx` ASC) VISIBLE,
+  CONSTRAINT `TIME_ibfk_1`
+    FOREIGN KEY (`card_idx`)
+    REFERENCES `arcanaDB`.`CARD` (`card_idx`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `arcanaDB`.`USER`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `arcanaDB`.`USER` (
+  `uid` VARCHAR(50) NOT NULL,
+  `token` VARCHAR(50) NOT NULL,
+  `provider` VARCHAR(50) NOT NULL,
+  `email` VARCHAR(50) NOT NULL,
+  `nickname` VARCHAR(50) NOT NULL,
+  `weekly_count` INT NOT NULL,
+  `ticket` INT NOT NULL,
+  PRIMARY KEY (`uid`),
+  UNIQUE INDEX `nickname` (`nickname` ASC) VISIBLE)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
