@@ -7,6 +7,9 @@ import Dialog from '../../Common/dialog';
 import { CelticDetails } from '../../Common/conversations';
 import charDialog0 from '../../Assets/characters/charDialog0.png';
 import { DialogNPC } from '../../Common/common_styled';
+import { API } from '../../API';
+import { getLuckyCard } from '../../Common/tarotSelect';
+import { useLuckyStore } from '../../Store/User/lucky';
 
 function CelticSpread() {
   const navigate = useNavigate();
@@ -20,7 +23,19 @@ function CelticSpread() {
   const showModal = () => {
     setModalOpen(!modalOpen);
   };
-  const MoveLucky = () => {
+
+  const { setLuckyIdx, setLuckyMent } = useLuckyStore();
+  const MoveLucky = async () => {
+    // 럭키카드 api
+    const luckyIdx = getLuckyCard();
+    console.log('럭키카드 번호 : ', luckyIdx);
+    setLuckyIdx(luckyIdx);
+    // res : { "card_idx" : 0, "luckyment": ""}
+    // const res = await API.get(`/api/tarot/lucky/${luckyIdx}`, {
+    //   params: luckyIdx,
+    // });
+    // console.log(res);
+    // setLuckyMent(res); // 수정필요
     navigate('/lucky');
   };
 
