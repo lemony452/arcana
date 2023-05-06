@@ -1,8 +1,23 @@
 from fastapi import FastAPI
+from domain.summary import summary_router
+from starlette.middleware.cors import CORSMiddleware
 
 app = FastAPI()
 
+# CORS Setting Start
 
-@app.get("/api/v2/hello")
-def hello():
-    return {"message": "안녕하세요 파이보"}
+origins = [
+    "*",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# CORS Setting End
+
+app.include_router(summary_router.router)
