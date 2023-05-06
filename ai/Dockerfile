@@ -3,8 +3,7 @@ FROM python:3.10.11
 RUN mkdir -p /app
 WORKDIR /app
 
-COPY ./fastapi/main.py /app/
-COPY ./fastapi/requirements.txt /app/
+COPY ./fastapi /app/
 
 RUN pip install -r requirements.txt
 
