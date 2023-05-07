@@ -8,6 +8,7 @@ import { TimeGPT } from '../../Store/FortuneTelling/gpt';
 import { useFortuneStore } from '../../Store/User/fortune';
 import charDialog0 from '../../Assets/characters/charDialog0.png';
 import { SpreadBtn } from '../Common/common_style';
+import { API } from '../../API';
 
 function Time() {
   const [celticText, SetcelticText] = useState(TimeConversations.t1);
@@ -18,67 +19,17 @@ function Time() {
   const navigate = useNavigate();
 
   // celtic 옵션 선택 함수
-  const OptionClick = (fortune: keyof typeof TimeConversations.t2): void => {
-    let ans;
-    // time gpt api request 보내기
-    const getAns = async (t: string, o: string, c: string[]) => {
-      if (o === '신년운세') {
-        ans = await TimeGPT(t, o, c[0]);
-        addFortune(ans);
-        ans = await TimeGPT(t, o, c[1]);
-        addFortune(ans);
-        ans = await TimeGPT(t, o, c[2]);
-        addFortune(ans);
-        ans = await TimeGPT(t, o, c[3]);
-        addFortune(ans);
-        ans = await TimeGPT(t, o, c[4]);
-        addFortune(ans);
-        ans = await TimeGPT(t, o, c[5]);
-        addFortune(ans);
-        ans = await TimeGPT(t, o, c[6]);
-        addFortune(ans);
-      } else {
-        ans = await TimeGPT(t, o, c[0]);
-        addFortune(ans);
-        ans = await TimeGPT(t, o, c[1]);
-        addFortune(ans);
-        ans = await TimeGPT(t, o, c[2]);
-        addFortune(ans);
-        ans = await TimeGPT(t, o, c[3]);
-        addFortune(ans);
-      }
-    };
-
+  const OptionClick = async (fortune: keyof typeof TimeConversations.t2) => {
+    // time api request 보내기
+    // const ans = await API.get(`/api/tarot/time/${fortune}`);
+    // console.log(ans);
     SetcelticText(TimeConversations.t2[fortune]);
     console.log(TimeConversations.t2[fortune]);
-    let tarots;
-    let cards: string[];
-    let option;
-    if (fortune === 'year') {
-      // 신년운세
-      // 1~12월 12장 + 종합결과 1장 총 13장 뽑기
-      tarots = getTarot(13);
-      cards = ['1, 2', '3, 4', '5, 6', '7, 8', '9, 10', '11, 12', '13'];
-      option = '신년운세';
-      // 신년운세 페이지로 이동
-      navigate('/time/year');
-    } else {
-      // 월별운세
-      // 1~5, 6~10, 11~15, 16~20, 21~25, 25~ 6장 + 종합결과 1장 총 7장 뽑기
-      tarots = getTarot(7);
-      cards = ['1, 2', '3, 4', '5, 6', '7'];
-      option = '월별운세';
-      // 월별운세 페이지로 이동
-      navigate('/time/month');
-    }
+    const tarots = getTarot(13);
     console.log(tarots);
     setTarotList(tarots);
-    // 카드이름 목록 리스트
-    const TarotList = getTarotNames(tarots);
-    setTarotNameList(TarotList);
-    console.log(TarotList);
-
-    // getAns(TarotList, option, cards);
+    setOption(fortune);
+    navigate(`/time/${fortune}`);
   };
 
   return (
