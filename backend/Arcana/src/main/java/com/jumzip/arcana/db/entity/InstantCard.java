@@ -13,7 +13,7 @@ public class InstantCard {
     @Id
     @Column(name="idx")
     private long idx;
-    @OneToOne
-    @JoinColumn(name="card_idx")
-    private Card card;
+//    @OneToOne
+//    @JoinColumn(name="card_idx")
+//    private Card card;
 }
