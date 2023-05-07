@@ -7,9 +7,17 @@ server:
       enabled: true
       force: true
 
+    #context-path: /
+
 spring:
   profiles:
     active: dev
+
+springdoc:
+  version: '1.7.0'
+  swagger-ui:
+    disable-swagger-default-url: false
+    use-root-path: true
 
   jpa:
     generate-ddl: 'true'
