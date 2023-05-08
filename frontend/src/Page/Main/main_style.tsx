@@ -106,3 +106,14 @@ export const PrevBtn = styled.img`
   transform: scaleX(-1);
   display: none;
 `;
+
+export const SideBtn = styled.img`
+  position: absolute;
+  width: 3vw;
+  height: auto;
+  left: 1vw;
+  top: 1vh;
+  cursor: pointer;
+  position: fixed;
+  transition: 0.4s ease;
+`;

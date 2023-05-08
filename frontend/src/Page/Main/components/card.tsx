@@ -17,7 +17,7 @@ import Card1 from '../../../Assets/etc/card1.png';
 import Card2 from '../../../Assets/etc/card2.png';
 import { useFortuneStore } from '../../../Store/User/fortune';
 
-function Card() {
+function Card({ isOpen }: { isOpen: boolean }) {
   // navigate hook
   // swiper hook
   // const swiper = useSwiper();
@@ -35,7 +35,9 @@ function Card() {
   const { hover, setHover } = useHoverStore();
 
   const Hovering = () => {
-    setHover(hover);
+    if (!isOpen) {
+      setHover(hover);
+    }
   };
 
   // celtic, instant, time 카드 순서 변수
@@ -66,27 +68,33 @@ function Card() {
 
   // celtic 페이지로 이동
   const MoveCeltic = () => {
-    setSpread('celtic');
-    // 메인 페이지로 이동 했을때 값을 초기화해줌
-    setCardOrder('celtic');
-    setHover(hover);
-    navigate('/celtic');
+    if (!isOpen) {
+      setSpread('celtic');
+      // 메인 페이지로 이동 했을때 값을 초기화해줌
+      setCardOrder('celtic');
+      setHover(hover);
+      navigate('/celtic');
+    }
   };
   // time 페이지로 이동
   const MoveTime = () => {
-    setSpread('time');
-    // 메인 페이지로 이동 했을때 값을 초기화해줌
-    setCardOrder('celtic');
-    setHover(hover);
-    navigate('/time');
+    if (!isOpen) {
+      setSpread('time');
+      // 메인 페이지로 이동 했을때 값을 초기화해줌
+      setCardOrder('celtic');
+      setHover(hover);
+      navigate('/time');
+    }
   };
   // instant 페이지로 이동
   const MoveInstant = () => {
-    setSpread('instant');
-    // 메인 페이지로 이동 했을때 값을 초기화해줌
-    setCardOrder('celtic');
-    setHover(hover);
-    navigate('/instant');
+    if (!isOpen) {
+      setSpread('instant');
+      // 메인 페이지로 이동 했을때 값을 초기화해줌
+      setCardOrder('celtic');
+      setHover(hover);
+      navigate('/instant');
+    }
   };
 
   return (
