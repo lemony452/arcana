@@ -6,7 +6,7 @@ WORKDIR /app
 COPY ./fastapi /app/
 
 RUN apt-get update -y
-RUN pip install tensorflow
+RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 
 CMD uvicorn --host=0.0.0.0 --port 18082 main:app
