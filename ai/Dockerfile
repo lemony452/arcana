@@ -1,12 +1,34 @@
-FROM python:3.10.11
+FROM ubuntu:latest
 
+ENV LANG=C.UTF-8
+ENV DEBIAN_FRONTEND=noninteractive
+RUN apt-get update && \
+  apt-get install -y --no-install-recommends tzdata g++ curl
+
+# install java
+RUN apt-get install -y openjdk-8-jdk
+ENV JAVA_HOME="/usr/lib/jvm/java-1.8-openjdk"
+
+# install python
+RUN apt-get install -y python3-pip python3.10-dev
+RUN cd /usr/local/bin && \
+  ln -s /usr/bin/python3 python && \
+  ln -s /usr/bin/pip3 pip && \
+  pip install --upgrade pip
+
+# apt clean
+RUN apt-get clean && \
+  rm -rf /var/lib/apt/lists/*
+
+# copy resources
 RUN mkdir -p /app
 WORKDIR /app
 
 COPY ./fastapi /app/
 
-RUN apt-get update -y
-RUN pip install --upgrade pip
+# install python package
 RUN pip install -r requirements.txt
 
-CMD uvicorn --host=0.0.0.0 --port 18082 main:app
+EXPOSE 18082
+
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "18082"]
