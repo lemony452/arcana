@@ -51,9 +51,8 @@ public class TarotServiceImpl implements TarotService {
         InstantCard[] cardlist = new InstantCard[cardNum];
         int[] idxList = getCardIdxList(cardNum, 22);
         for(int i=0; i<cardNum; i++) {
-
             cardlist[i] = cardRepo.findInstantByCardId(idxList[i]);
         }
-        return new InstantCard[0];
+        return cardlist;
     }
 }

@@ -1,10 +1,8 @@
 package com.jumzip.arcana.api.controller;
 
 import com.jumzip.arcana.api.service.TarotService;
-import com.jumzip.arcana.db.entity.Card;
 import com.jumzip.arcana.db.entity.InstantCard;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,22 +21,15 @@ public class TarotController {
         return cardlist;
     }
 
-//    // 선택지2. api 2개
-//    @Operation(summary = "instant 2way")
-//    @GetMapping("instant/two")
-//    public Card[] GetTwoWay() {
-//        Card[] cardlist = new Card[3];
-//
-//        return cardlist;
-//    }
-//
-//    @Operation(summary = "instant 3way")
-//    @GetMapping("instant/three")
-//    public Card[] GetThreeWay() {
-//        Card[] cardlist = new Card[4];
-//
-//        return cardlist;
-//    }
+    @Operation(summary = "instant question", description = "테스트용")
+    @GetMapping("instant/{cardNum}/question")
+    public String GetInstantQuestion(@PathVariable int cardNum) {
+        InstantCard[] cardlist = tarotService.getInstantResult(cardNum);
+        String question = cardlist[0].getQuestion();
+        return question;
+    }
+
+
 
 
 
