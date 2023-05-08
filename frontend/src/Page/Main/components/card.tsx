@@ -9,8 +9,9 @@ import 'swiper/css';
 // eslint-disable-next-line import/no-unresolved
 import 'swiper/css/navigation';
 import { useCardStore, useHoverStore } from '../../../Store/Main/main';
-import { StyledCard, StyledCircle } from '../main_style';
+import { StyledCard, StyledCircle, NextBtn, PrevBtn } from '../main_style';
 import Character from './character';
+import NextBtnImg from '../../../Assets/etc/nextButton.png';
 import Card0 from '../../../Assets/etc/card0.png';
 import Card1 from '../../../Assets/etc/card1.png';
 import Card2 from '../../../Assets/etc/card2.png';
@@ -95,12 +96,14 @@ function Card() {
       pagination={{ clickable: true }}
       loop
     >
-      <button type="button" ref={(node) => setNextEl(node)} onClick={NextClick}>
+      <NextBtn src={NextBtnImg} ref={(node) => setNextEl(node)} onClick={NextClick} />
+      <PrevBtn src={NextBtnImg} ref={(node) => setPrevEl(node)} onClick={PrevClick} />
+      {/* <button type="button" ref={(node) => setNextEl(node)} onClick={NextClick}>
         Slide Next
-      </button>
-      <button type="button" ref={(node) => setPrevEl(node)} onClick={PrevClick}>
+      </button> */}
+      {/* <button type="button" ref={(node) => setPrevEl(node)} onClick={PrevClick}>
         Slide Prev
-      </button>
+      </button> */}
       <SwiperSlide>
         <StyledCard onClick={MoveCeltic} onMouseEnter={Hovering} onMouseLeave={Hovering} src={Card0} />
       </SwiperSlide>
