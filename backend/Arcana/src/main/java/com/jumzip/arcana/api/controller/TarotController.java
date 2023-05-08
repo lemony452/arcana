@@ -2,6 +2,7 @@ package com.jumzip.arcana.api.controller;
 
 import com.jumzip.arcana.api.service.TarotService;
 import com.jumzip.arcana.db.entity.Card;
+import com.jumzip.arcana.db.entity.InstantCard;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -16,8 +17,8 @@ public class TarotController {
 
     @Operation(summary = "instant ALL")
     @GetMapping("instant/{cardNum}")
-    public Card[] GetInstant(@PathVariable int cardNum) {
-        Card[] cardlist = tarotService.getInstantResult(cardNum);
+    public InstantCard[] GetInstant(@PathVariable int cardNum) {
+        InstantCard[] cardlist = tarotService.getInstantResult(cardNum);
 
         return cardlist;
     }

@@ -5,11 +5,14 @@ import com.jumzip.arcana.db.entity.InstantCard;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface CardRepo {
+public interface CardRepository {
 
     // CARD 관련 : Read ONLY
-    Card findById(Long card_idx);
-    Card findByName(String name);
+    Card findCardByIdx(int card_idx);
+    InstantCard findInstantByCardId(int card_idx);
 
-    InstantCard findByCardId(Long card_idx);
+
+
+
+
 }

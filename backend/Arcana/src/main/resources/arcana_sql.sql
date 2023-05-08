@@ -7,6 +7,7 @@ USE `arcanaDB` ;
 CREATE TABLE IF NOT EXISTS `arcanaDB`.`CARD` (
   `card_idx` VARCHAR(5) NOT NULL,
   `name` VARCHAR(50) NOT NULL,
+  `dtype` VARCHAR(50) NOT NULL,
   PRIMARY KEY (`card_idx`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4

@@ -1,10 +1,11 @@
 package com.jumzip.arcana.api.service;
 
 import com.jumzip.arcana.db.entity.Card;
+import com.jumzip.arcana.db.entity.InstantCard;
 import org.springframework.stereotype.Service;
 
 public interface TarotService {
 
-    public Card[] getInstantResult(int cardNum);
+    public InstantCard[] getInstantResult(int cardNum);
 
 }
