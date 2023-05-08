@@ -2,8 +2,8 @@ spring:
 # spring security dev-user
   security:
     user:
-      name: dev
-      password: jumzip
+      name: developer
+      password: d107
 # local DB setting
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver

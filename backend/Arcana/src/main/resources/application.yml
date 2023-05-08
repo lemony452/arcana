@@ -1,4 +1,5 @@
 server:
+  #local test port
   port: 8080
   error:
     whitelabel:
@@ -21,7 +22,9 @@ spring:
     show-sql: 'true'
     properties:
       hibernate:
-        format_sql: 'true'
+        ddl-auto: update
+        #format_sql: 'true'
+
 
   mvc:
     pathmatch:
