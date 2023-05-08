@@ -98,7 +98,7 @@ pipeline {
 
                 echo 'Clean image...'
                 sh '''
-                    if test "`docker ps -aq --filter name=docker-bet`"; then
+                    if test "`docker ps -aq --filter name=docker-be`"; then
                     docker stop docker-be
                     docker rm docker-be
                     fi
