@@ -6,15 +6,20 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.EntityManager;
-import javax.transaction.Transactional;
+import javax.persistence.*;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaDelete;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.CriteriaUpdate;
+import javax.persistence.metamodel.Metamodel;
+import java.util.List;
+import java.util.Map;
 
 @Repository @Primary
 @RequiredArgsConstructor
-@Transactional
 public class CardRepositorySupport implements CardRepository {
 
-    private final EntityManager em;
+    private static EntityManager em;
 
     // CARD 관련 : Read ONLY
      @Override

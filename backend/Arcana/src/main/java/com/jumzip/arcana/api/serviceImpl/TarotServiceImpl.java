@@ -7,6 +7,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 @Service
@@ -47,12 +49,14 @@ public class TarotServiceImpl implements TarotService {
     }
 
     @Override
-    public InstantCard[] getInstantResult(int cardNum) {
-        InstantCard[] cardlist = new InstantCard[cardNum];
+    public List<InstantCard> getInstantResult(int cardNum) {
+        List<InstantCard> cardlist = new ArrayList<>();
         int[] idxList = getCardIdxList(cardNum, 22);
+
         for(int i=0; i<cardNum; i++) {
-            cardlist[i] = cardRepo.findInstantByCardId(idxList[i]);
+            cardlist.set(i, cardRepo.findInstantByCardId(idxList[i]));
         }
+
         return cardlist;
     }
 }
