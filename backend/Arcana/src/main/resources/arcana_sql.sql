@@ -1,4 +1,4 @@
-#drop schema arcanaDB;
+drop schema arcanaDB;
 CREATE SCHEMA IF NOT EXISTS `arcanaDB` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci ;
 USE `arcanaDB` ;
 
@@ -54,10 +54,10 @@ COLLATE = utf8mb4_0900_ai_ci;
 -- Table `arcanaDB`.`TIME`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `arcanaDB`.`TIME` (
-  `time_idx` int NOT NULL,
+  `idx` int NOT NULL,
   `card_idx` int NOT NULL,
   `timement` VARCHAR(2000) NOT NULL,
-  PRIMARY KEY (`time_idx`),
+  PRIMARY KEY (`idx`),
   INDEX `card_idx` (`card_idx` ASC) VISIBLE,
   CONSTRAINT `TIME_ibfk_1`
     FOREIGN KEY (`card_idx`)
