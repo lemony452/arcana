@@ -24,6 +24,7 @@ parts/
 sdist/
 var/
 wheels/
+share/
 share/python-wheels/
 *.egg-info/
 .installed.cfg
@@ -212,3 +213,6 @@ archive.zip
 # vim temporary files
 *~
 .*.sw?
+
+# pytorch model
+aimodel/summary/kobart_summary/pytorch_model.bin
