@@ -9,9 +9,7 @@ import javax.persistence.*;
 
 @Getter @Setter
 @Entity @Table(name="CARD")
-@Inheritance(strategy = InheritanceType.JOINED)
-@DiscriminatorColumn(name = "dtype")
-public abstract class Card {
+public class Card {
 
     @Id
     @Column(name = "card_idx")

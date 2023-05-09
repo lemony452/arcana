@@ -9,7 +9,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: ssafy
     password: ssafy
-    url: jdbc:mysql://localhost:3306/arcanaDB?characterEncoding=UTF-8&serverTimezone=UTC&autoReconnect=true
+    url: jdbc:mysql://localhost:3306/arcanadb?characterEncoding=UTF-8&serverTimezone=UTC&autoReconnect=true
     dbcp:
       testOnBorrow: 'true'
       validationQuery: SELECT 1

@@ -8,10 +8,16 @@ import lombok.Setter;
 import javax.persistence.*;
 
 @Getter @Setter
-@NoArgsConstructor @RequiredArgsConstructor
 @Entity @Table(name="INSTANT")
-@DiscriminatorValue("instant")
-public class InstantCard extends Card {
+public class InstantCard {
+
+    @Id
+    @Column(name = "idx")
+    private int idx;
+
+    @OneToOne
+    @JoinColumn(name = "card_idx")
+    private Card card;
 
     private String question;
     private String advice;

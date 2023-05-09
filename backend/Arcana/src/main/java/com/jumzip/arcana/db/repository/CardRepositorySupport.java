@@ -2,24 +2,24 @@ package com.jumzip.arcana.db.repository;
 
 import com.jumzip.arcana.db.entity.Card;
 import com.jumzip.arcana.db.entity.InstantCard;
-import lombok.RequiredArgsConstructor;
+import com.jumzip.arcana.db.entity.TimeCard;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.*;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaDelete;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.CriteriaUpdate;
-import javax.persistence.metamodel.Metamodel;
-import java.util.List;
-import java.util.Map;
+import javax.transaction.Transactional;
+
 
 @Repository @Primary
-@RequiredArgsConstructor
+@Transactional
 public class CardRepositorySupport implements CardRepository {
 
-    private static EntityManager em;
+    private final EntityManager em;
+
+    public CardRepositorySupport(EntityManager em) {
+        this.em = em;
+    }
+
 
     // CARD 관련 : Read ONLY
      @Override
@@ -32,8 +32,8 @@ public class CardRepositorySupport implements CardRepository {
         return em.find(InstantCard.class, card_idx);
     }
 
-
-
+    @Override
+    public TimeCard findTimeByCardId(int card_idx) { return em.find(TimeCard.class, card_idx); }
 
 
 }

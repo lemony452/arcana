@@ -1,7 +1,9 @@
 package com.jumzip.arcana.api.serviceImpl;
 
 import com.jumzip.arcana.api.service.TarotService;
+import com.jumzip.arcana.db.entity.Card;
 import com.jumzip.arcana.db.entity.InstantCard;
+import com.jumzip.arcana.db.entity.TimeCard;
 import com.jumzip.arcana.db.repository.CardRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -16,10 +18,11 @@ import java.util.Random;
 @RequiredArgsConstructor
 public class TarotServiceImpl implements TarotService {
 
-    private CardRepository cardRepo;
+    private final CardRepository cardRepo;
 
     /* 뽑는 Card 수 cardNum, 메이저/풀덱 총 카드 수 Deck */
-    public int[] getCardIdxList(int cardNum, int deck) {
+    /* 정방향 카드 idx 리스트 */
+    public int[] UprightCardList(int cardNum, int deck) {
 
         int[] idxList = new int[cardNum];
         Random r = new Random();
@@ -40,23 +43,47 @@ public class TarotServiceImpl implements TarotService {
             idxList[i] = newIdx;
         }
 
-        for(int i=0; i<cardNum; i++) {
+        return idxList;
+    }
+
+    public int[] CardDirMix(int[] idxList) {
+
+        Random r = new Random();
+
+        for(int i=0; i<idxList.length; i++) {
             // r.nextBoolean() == false 카드를 역방향으로 바꾼다
             if(!r.nextBoolean()) {idxList[i] += 78;}
         }
-
         return idxList;
     }
 
     @Override
     public List<InstantCard> getInstantResult(int cardNum) {
         List<InstantCard> cardlist = new ArrayList<>();
-        int[] idxList = getCardIdxList(cardNum, 22);
+        int[] idxList = UprightCardList(cardNum, 22);
+
 
         for(int i=0; i<cardNum; i++) {
-            cardlist.set(i, cardRepo.findInstantByCardId(idxList[i]));
+
+            System.out.print(idxList[i]+ " ");
+        }
+        System.out.println();
+
+        for(int i=0; i<cardNum; i++) {
+            InstantCard instant = cardRepo.findInstantByCardId(idxList[i]);
+            cardlist.add(i, instant);
         }
 
         return cardlist;
     }
+
+    /* 테스트용 */
+    @Override
+    public InstantCard getInstantData(int card_idx) {
+        InstantCard ic = cardRepo.findInstantByCardId(card_idx);
+        System.out.println(ic);
+        return ic;
+    }
+
+
 }
