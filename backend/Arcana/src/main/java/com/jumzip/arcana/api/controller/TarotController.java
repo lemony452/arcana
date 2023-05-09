@@ -20,7 +20,7 @@ public class TarotController {
 
     private final TarotService tarotService;
 
-    //ResEntity로 변경??
+    //ResEntity로 변경, try/catch 적용
     @Operation(summary = "instant ALL", description = "인스턴트 스프레드로 읽을 카드를 선택하고, 카드 정보를 반환한다.")
     @GetMapping("instant/{cardNum}")
     public List<InstantCard> GetInstant(@PathVariable int cardNum) {
