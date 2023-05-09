@@ -15,11 +15,12 @@ function Main() {
   const [goLogin, setGoLogin] = useState(false);
   const cookie = getCookie('token');
   const toggleSide = () => {
-    if (cookie) {
-      setIsOpen(true);
-    } else {
-      setGoLogin(true);
-    }
+    // if (cookie) {
+    //   setIsOpen(true);
+    // } else {
+    //   setGoLogin(true);
+    // }
+    setIsOpen(true);
   };
 
   const { cardOrder } = useCardStore();

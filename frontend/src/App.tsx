@@ -13,7 +13,7 @@ import LuckyPage from './Page/Lucky/lucky_page';
 import CelticDetail from './Page/Celtic/detail';
 import Instant from './Page/Instant';
 import { KakaoRedirect, GoogleRedirect } from './Page/Login/redirect';
-// import Mypage from './Page/Mypage';
+import TarotListDetail from './Page/Mypage/Component/detail';
 
 function App() {
   useEffect(() => {
@@ -38,7 +38,7 @@ function App() {
         <Route path="/celtic/detail" element={<CelticDetail />} />
         <Route path="/authgoogle" element={<GoogleRedirect />} />
         <Route path="/authkakao" element={<KakaoRedirect />} />
-        {/* <Route path="/mypage" element={<Mypage />} /> */}
+        <Route path="/detail" element={<TarotListDetail />} />
       </Routes>
     </div>
   );

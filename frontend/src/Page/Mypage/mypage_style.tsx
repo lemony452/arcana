@@ -14,6 +14,9 @@ export const Side = styled.div`
     left: 0;
     transition: 0.5s ease;
   }
+  &.detail {
+    width: 30vw;
+  }
 `;
 
 export const SideContent = styled.div`
@@ -50,6 +53,12 @@ export const TarotToken = styled.div`
   align-items: center;
   justify-content: space-between;
   margin-bottom: 1em;
+  &.detail {
+    font-size: 1.8em;
+    margin-top: 10vh;
+    margin-bottom: 10vh;
+    justify-content: center;
+  }
 `;
 
 export const TarotListContent = styled.div`
@@ -60,13 +69,18 @@ export const TarotListContent = styled.div`
   /* justify-content: flex-end; */
   align-items: center;
   flex-direction: column;
+  &.detail {
+    height: auto;
+  }
+  &.detail {
+    width: 30vw;
+  }
 `;
 
 export const TitleBox = styled.div`
   display: flex;
-  width: calc(100vw / 4);
+  width: 75%;
   height: 6.5vh;
-  height: calc();
   background: #ebeaee;
   border: 1.5px solid #000000;
   box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
@@ -77,4 +91,61 @@ export const TitleBox = styled.div`
   align-items: center;
   padding: 0 0.7em 0 0.7em;
   margin: 0.5em 0 0.5em 0;
+`;
+
+export const DetailContent = styled.div`
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  width: 70vw;
+  height: 100vh;
+  right: 0;
+`;
+
+export const DetailCover = styled.img`
+  width: 100%;
+  height: 20vh;
+`;
+
+export const DetailTitle = styled.div`
+  position: absolute;
+  font-size: 2.5em;
+  font-weight: bold;
+  left: 1em;
+  top: calc(20vh - 2em);
+`;
+
+export const DetailDate = styled.div`
+  position: absolute;
+  font-size: 1.5em;
+  right: 1em;
+  top: calc(20vh - 2em);
+`;
+
+export const DetailQuestion = styled.div`
+  font-size: 1.5em;
+  margin: 1em 0 1em 1em;
+`;
+
+export const DetailFortune = styled.div`
+  font-size: 1em;
+  width: 80%;
+  height: 70vh;
+  margin-left: 2em;
+`;
+
+export const ReplayTarots = styled.div`
+  position: absolute;
+  display: flex;
+  align-items: center;
+  right: 1em;
+  bottom: 4em;
+`;
+
+export const ReplayLucky = styled.div`
+  position: absolute;
+  display: flex;
+  align-items: center;
+  right: 1em;
+  bottom: 1em;
 `;
