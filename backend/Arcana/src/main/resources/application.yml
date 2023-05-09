@@ -1,0 +1,31 @@
+server:
+  #local test port
+  port: 18081
+  error:
+    whitelabel:
+      enabled: false
+
+  servlet:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+
+spring:
+  profiles:
+    active: dev
+
+  jpa:
+    generate-ddl: 'true'
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    show-sql: 'true'
+    properties:
+      hibernate:
+        ddl-auto: update
+        #format_sql: 'true'
+
+
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
