@@ -26,6 +26,7 @@ deactivate
 3. 패키지 설치
 ```shell
 pip install -r requirements.txt
+pip install git+https://github.com/SKT-AI/KoBART#egg=kobart
 ```
 
 4. 추가된 패키지 문서화

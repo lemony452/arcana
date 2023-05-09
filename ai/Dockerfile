@@ -1,8 +1,10 @@
-FROM ubuntu:latest
+FROM ubuntu:20.04
+
+USER root
 
 ENV LANG=C.UTF-8
 ENV DEBIAN_FRONTEND=noninteractive
-RUN apt-get update && \
+RUN apt-get update && apt-get install git -y && \
   apt-get install -y --no-install-recommends tzdata g++ curl
 
 # install java
@@ -10,11 +12,15 @@ RUN apt-get install -y openjdk-8-jdk
 ENV JAVA_HOME="/usr/lib/jvm/java-1.8-openjdk"
 
 # install python
-RUN apt-get install -y python3-pip python3.10-dev
+RUN apt install software-properties-common -y
+RUN add-apt-repository ppa:deadsnakes/ppa -y
+RUN apt install python3.8 -y
+RUN apt-get install -y python3-pip
 RUN cd /usr/local/bin && \
   ln -s /usr/bin/python3 python && \
   ln -s /usr/bin/pip3 pip && \
   pip install --upgrade pip
+
 
 # apt clean
 RUN apt-get clean && \
@@ -28,6 +34,9 @@ COPY ./fastapi /app/
 
 # install python package
 RUN pip install -r requirements.txt
+
+# install kobart
+RUN pip3 install git+https://github.com/SKT-AI/KoBART#egg=kobart
 
 EXPOSE 18082
 
