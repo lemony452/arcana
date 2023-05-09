@@ -58,8 +58,8 @@ public class TarotServiceImpl implements TarotService {
     }
 
     @Override
-    public List<InstantCard> getInstantResult(int cardNum) {
-        List<InstantCard> cardlist = new ArrayList<>();
+    public List<InstantCard> getInstantList(int cardNum) {
+        List<InstantCard> cardList = new ArrayList<>();
         int[] idxList = UprightCardList(cardNum, 22);
 
 
@@ -71,10 +71,10 @@ public class TarotServiceImpl implements TarotService {
 
         for(int i=0; i<cardNum; i++) {
             InstantCard instant = cardRepo.findInstantByCardId(idxList[i]);
-            cardlist.add(i, instant);
+            cardList.add(i, instant);
         }
 
-        return cardlist;
+        return cardList;
     }
 
     /* 테스트용 */
@@ -83,6 +83,32 @@ public class TarotServiceImpl implements TarotService {
         InstantCard ic = cardRepo.findInstantByCardId(card_idx);
         System.out.println(ic);
         return ic;
+    }
+
+    @Override
+    public List<TimeCard> getTimeList(int cardNum) {
+        List<TimeCard> cardList = new ArrayList<>();
+        int[] idxList = CardDirMix(UprightCardList(cardNum, 78));
+
+        for(int i=0; i<cardNum; i++) {
+
+            System.out.print(idxList[i]+ " ");
+        }
+        System.out.println();
+
+        for(int i=0; i<cardNum; i++) {
+            TimeCard time = cardRepo.findTimeByCardId(idxList[i]);
+            cardList.add(i, time);
+        }
+
+        return cardList;
+    }
+
+    @Override
+    public TimeCard getTimeData(int card_idx) {
+        TimeCard tc = cardRepo.findTimeByCardId(card_idx);
+        System.out.println(tc);
+        return tc;
     }
 
 
