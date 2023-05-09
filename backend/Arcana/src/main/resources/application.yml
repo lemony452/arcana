@@ -1,6 +1,6 @@
 server:
   #local test port
-  port: 8080
+  port: 18081
   error:
     whitelabel:
       enabled: false
