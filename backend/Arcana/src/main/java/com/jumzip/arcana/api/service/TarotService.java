@@ -9,6 +9,11 @@ import java.util.List;
 
 public interface TarotService {
 
-    List<InstantCard> getInstantResult(int cardNum);
+    List<InstantCard> getInstantList(int cardNum);
     InstantCard getInstantData(int card_idx);
+
+    List<TimeCard> getTimeList(int cardNum);
+
+
+    TimeCard getTimeData(int card_idx);
 }
