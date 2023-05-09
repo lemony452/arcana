@@ -3,6 +3,7 @@ package com.jumzip.arcana.api.serviceImpl;
 import com.jumzip.arcana.api.service.TarotService;
 import com.jumzip.arcana.db.entity.Card;
 import com.jumzip.arcana.db.entity.InstantCard;
+import com.jumzip.arcana.db.entity.LuckyCard;
 import com.jumzip.arcana.db.entity.TimeCard;
 import com.jumzip.arcana.db.repository.CardRepository;
 import lombok.RequiredArgsConstructor;
@@ -109,6 +110,15 @@ public class TarotServiceImpl implements TarotService {
         TimeCard tc = cardRepo.findTimeByCardId(card_idx);
         System.out.println(tc);
         return tc;
+    }
+
+    @Override
+    public LuckyCard getLuckyData() {
+        Random r = new Random();
+        int card_idx = r.nextInt(22);
+
+        LuckyCard lc = cardRepo.findLuckyByCardId(card_idx);
+        return lc;
     }
 
 
