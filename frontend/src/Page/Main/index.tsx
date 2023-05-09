@@ -25,12 +25,11 @@ function Main() {
 
   const { cardOrder } = useCardStore();
   const { hover } = useHoverStore();
-  let color = 'pink';
-  if (cardOrder === 'time') {
-    color = 'blue';
-  } else if (cardOrder === 'instant') {
-    color = 'green';
-  }
+  // if (cardOrder === 'time') {
+  //   colorRef.current?.className('time');
+  // } else if (cardOrder === 'instant') {
+  //   color = 'green';
+  // }
 
   console.log(cardOrder);
   console.log(hover);
@@ -43,7 +42,7 @@ function Main() {
         <Title>ARCANA</Title>
         <SubTitle>동물 친구들의 타로 서비스 아르카나</SubTitle>
       </TitleBox>
-      <StyledCircle color={color} />
+      <StyledCircle className={cardOrder} />
       <Character />
       <CardBox>
         <Card isOpen={isOpen} />
