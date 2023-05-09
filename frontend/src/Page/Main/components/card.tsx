@@ -12,9 +12,9 @@ import { useCardStore, useHoverStore } from '../../../Store/Main/main';
 import { StyledCard, StyledCircle, NextBtn, PrevBtn } from '../main_style';
 import Character from './character';
 import NextBtnImg from '../../../Assets/etc/nextButton.png';
-import Card0 from '../../../Assets/etc/card0.png';
-import Card1 from '../../../Assets/etc/card1.png';
-import Card2 from '../../../Assets/etc/card2.png';
+import celticImg from '../../../Assets/etc/celtic.png';
+import timeImg from '../../../Assets/etc/time.png';
+import instantImg from '../../../Assets/etc/instant.png';
 import { useFortuneStore } from '../../../Store/User/fortune';
 
 function Card({ isOpen }: { isOpen: boolean }) {
@@ -113,13 +113,13 @@ function Card({ isOpen }: { isOpen: boolean }) {
         Slide Prev
       </button> */}
       <SwiperSlide>
-        <StyledCard onClick={MoveCeltic} onMouseEnter={Hovering} onMouseLeave={Hovering} src={Card0} />
+        <StyledCard onClick={MoveCeltic} onMouseEnter={Hovering} onMouseLeave={Hovering} src={celticImg} />
       </SwiperSlide>
       <SwiperSlide>
-        <StyledCard onClick={MoveTime} onMouseEnter={Hovering} onMouseLeave={Hovering} src={Card1} />
+        <StyledCard onClick={MoveTime} onMouseEnter={Hovering} onMouseLeave={Hovering} src={timeImg} />
       </SwiperSlide>
       <SwiperSlide>
-        <StyledCard onClick={MoveInstant} onMouseEnter={Hovering} onMouseLeave={Hovering} src={Card2} />
+        <StyledCard onClick={MoveInstant} onMouseEnter={Hovering} onMouseLeave={Hovering} src={instantImg} />
       </SwiperSlide>
     </Swiper>
   );
