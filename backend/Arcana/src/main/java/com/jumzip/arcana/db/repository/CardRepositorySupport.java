@@ -15,7 +15,6 @@ import javax.transaction.Transactional;
 public class CardRepositorySupport implements CardRepository {
 
     private final EntityManager em;
-
     public CardRepositorySupport(EntityManager em) {
         this.em = em;
     }
