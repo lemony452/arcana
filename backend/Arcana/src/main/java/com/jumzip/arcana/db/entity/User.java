@@ -1,15 +1,14 @@
 package com.jumzip.arcana.db.entity;
 
-import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
-@Entity
 @Getter
 @Setter
+@Entity
 public class User {
 
     @Id
@@ -18,6 +17,6 @@ public class User {
     private String provider;
     private String email;
     private String nickname;
-    private int reportCount;
-
+    private int weekly_count;
+    private int ticket;
 }

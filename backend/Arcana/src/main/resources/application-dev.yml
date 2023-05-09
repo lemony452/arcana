@@ -1,12 +1,27 @@
 spring:
+# spring security dev-user
+  security:
+    user:
+      name: developer
+      password: d107
+# local DB setting
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    username: d107DB
-    password: jumzip@d107
-    url: jdbc:mysql://k8d107.p.ssafy.io:3306/arcanaDB?characterEncoding=UTF-8&serverTimezone=UTC&autoReconnect=true
+    username: ssafy
+    password: ssafy
+    url: jdbc:mysql://localhost:3306/arcanadb?characterEncoding=UTF-8&serverTimezone=UTC&autoReconnect=true
     dbcp:
       testOnBorrow: 'true'
       validationQuery: SELECT 1
+#  aws server DB setting
+#  datasource:
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#    username: d107DB
+#    password: jumzip@d107
+#    url: jdbc:mysql://k8d107.p.ssafy.io:3306/arcanaDB?characterEncoding=UTF-8&serverTimezone=UTC&autoReconnect=true
+#    dbcp:
+#      testOnBorrow: 'true'
+#      validationQuery: SELECT 1
 
 # jwt
 jwt:
