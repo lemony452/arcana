@@ -12,6 +12,7 @@ import InstantThree from './Page/Instant/Three/three_spread_idx';
 import LuckyPage from './Page/Lucky/lucky_page';
 import CelticDetail from './Page/Celtic/detail';
 import Instant from './Page/Instant';
+import { KakaoRedirect, GoogleRedirect } from './Page/Login/redirect';
 // import Mypage from './Page/Mypage';
 
 function App() {
@@ -35,6 +36,8 @@ function App() {
         <Route path="/instant/three" element={<InstantThree />} />
         <Route path="/lucky" element={<LuckyPage />} />
         <Route path="/celtic/detail" element={<CelticDetail />} />
+        <Route path="/authgoogle" element={<GoogleRedirect />} />
+        <Route path="/authkakao" element={<KakaoRedirect />} />
         {/* <Route path="/mypage" element={<Mypage />} /> */}
       </Routes>
     </div>
