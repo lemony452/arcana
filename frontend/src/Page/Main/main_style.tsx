@@ -81,12 +81,39 @@ export const StyledChar = styled.img`
   }
 `;
 
-// export const NextBtn = styled.img`
-//   position: absolute;
-//   width: 10vh;
-//   height: auto;
-//   right: 0.3vw;
-//   top: calc(50vh - 5vh);
-//   cursor: pointer;
-//   z-index: 1;
-// `;
+export const NextBtn = styled.img`
+  position: absolute;
+  width: 8vh;
+  height: auto;
+  right: 0.3vw;
+  top: calc(50vh - 5vh);
+  cursor: pointer;
+  z-index: 1;
+  /* visibility: hidden; */
+  /* &.hover {
+    visibility: visible;
+  } */
+`;
+
+export const PrevBtn = styled.img`
+  position: absolute;
+  width: 8vh;
+  height: auto;
+  right: calc(calc(100vw / 3) - 8vh - 0.3vw);
+  top: calc(50vh - 5vh);
+  cursor: pointer;
+  z-index: 1;
+  transform: scaleX(-1);
+  display: none;
+`;
+
+export const SideBtn = styled.img`
+  position: absolute;
+  width: 3vw;
+  height: auto;
+  left: 1vw;
+  top: 1vh;
+  cursor: pointer;
+  position: fixed;
+  transition: 0.4s ease;
+`;
