@@ -19,7 +19,7 @@ export const DialogNPC = styled.img`
   position: absolute;
   bottom: 0;
   left: 1vw;
-  width: 20vw;
+  width: 18vw;
   height: auto;
   z-index: 1;
 `;
@@ -39,15 +39,18 @@ export const DialogName = styled.div`
 
 export const DialogContentStyle = styled.div`
   display: flex;
-  width: 40vw;
+  width: 50vw;
   height: auto;
   font-size: 1.2em;
   white-space: pre-wrap;
+  /* &.option {
+    width: 30vw;
+  } */
 `;
 
 export const OptionGroup = styled.div`
   right: 0;
-  width: 35vw;
+  width: 25vw;
   height: auto;
   display: flex;
   flex-wrap: wrap;
@@ -56,6 +59,9 @@ export const OptionGroup = styled.div`
   align-content: center;
   justify-content: center;
   /* margin-right: 1vw; */
+  /* &.option {
+    width: 45vw;
+  } */
 `;
 
 export const OptionBtn = styled.button`
