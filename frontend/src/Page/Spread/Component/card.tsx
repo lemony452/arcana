@@ -9,13 +9,21 @@ interface SelectedCardType {
   selectedCardList: number[];
   setSelectedCardList: React.Dispatch<React.SetStateAction<number[]>>;
   confirmedCard: boolean;
+  needCardNum: number;
 }
 
-export function SelectedCard({ index, card, selectedCardList, setSelectedCardList, confirmedCard }: SelectedCardType) {
+export function SelectedCard({
+  index,
+  card,
+  selectedCardList,
+  setSelectedCardList,
+  confirmedCard,
+  needCardNum,
+}: SelectedCardType) {
   const [selected, setSelected] = useState(false);
   const handleCardClick = () => {
     if (!selectedCardList.includes(card) && !confirmedCard) {
-      if (selectedCardList.length < 10) {
+      if (selectedCardList.length < needCardNum) {
         setSelected(true);
         setSelectedCardList((array) => [...array, card]);
       }
@@ -69,15 +77,20 @@ export function SelectedCard({ index, card, selectedCardList, setSelectedCardLis
 interface FilppedCardType {
   card: number;
   size: string;
+  setTime: number;
 }
 
-export function FilppedCard({ card, size }: FilppedCardType) {
+export function FilppedCard({ card, size, setTime }: FilppedCardType) {
   const [flipped, setFlipped] = useState(false);
-  const handleCardClick = () => {
-    setFlipped(true);
-  };
+
+  useEffect(() => {
+    setTimeout(() => {
+      setFlipped(true);
+    }, setTime);
+  }, []);
+
   return (
-    <CardStyle.FilppedBody onClick={handleCardClick} size={size}>
+    <CardStyle.FilppedBody size={size}>
       <CardStyle.FilppedCardBody style={{ transform: flipped ? 'rotateY(180deg)' : 'none' }}>
         <CardStyle.FilppedBack size={size}>
           <img src={CardBack} alt="Cardback" />
