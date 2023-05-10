@@ -2,6 +2,7 @@ package com.jumzip.arcana.db.repository;
 
 import com.jumzip.arcana.db.entity.Card;
 import com.jumzip.arcana.db.entity.InstantCard;
+import com.jumzip.arcana.db.entity.LuckyCard;
 import com.jumzip.arcana.db.entity.TimeCard;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
@@ -33,6 +34,9 @@ public class CardRepositorySupport implements CardRepository {
 
     @Override
     public TimeCard findTimeByCardId(int card_idx) { return em.find(TimeCard.class, card_idx); }
+
+    @Override
+    public LuckyCard findLuckyByCardId(int card_idx) { return em.find(LuckyCard.class, card_idx); }
 
 
 }
