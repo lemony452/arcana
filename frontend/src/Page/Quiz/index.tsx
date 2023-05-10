@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 import * as quizStyle from './quiz_style';
+import * as common from '../Common/common_style';
 
 function Quiz() {
   const navigate = useNavigate();
@@ -46,7 +48,16 @@ function Quiz() {
   };
   console.log('correct', correct);
 
-  // 시작페이지
+  // 끝내기 모달
+  const [modalOpen, setModalOpen] = useState(false);
+  const showModal = () => {
+    setModalOpen(!modalOpen);
+  };
+
+  const goHome = () => {
+    navigate('/');
+  };
+
   if (index === 0) {
     return (
       <quizStyle.FullArea>
@@ -119,7 +130,20 @@ function Quiz() {
       <quizStyle.FullArea>
         <quizStyle.LeftArea>
           <quizStyle.CharacterDialog>오늘도 완주를 향해 화이팅! {index}</quizStyle.CharacterDialog>
-          <quizStyle.CharacterArea onClick={onNext}>일단 누르면 다음 문제로</quizStyle.CharacterArea>
+          <quizStyle.CharacterArea onClick={showModal}>
+            여기가 마지막 페이지
+            {modalOpen ? (
+              <common.ModalBackdrop>
+                <common.QuizModal onClick={(e) => e.stopPropagation()}>
+                  토큰 받았으면 집에가 얼른
+                  <common.ToHomeBtn onClick={goHome}>
+                    메인으로 <br />
+                    돌아가기
+                  </common.ToHomeBtn>
+                </common.QuizModal>
+              </common.ModalBackdrop>
+            ) : null}
+          </quizStyle.CharacterArea>
         </quizStyle.LeftArea>
         <quizStyle.RightArea>
           <quizStyle.TimerArea>존야</quizStyle.TimerArea>

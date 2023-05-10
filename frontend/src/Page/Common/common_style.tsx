@@ -88,3 +88,26 @@ export const ModalView = styled.div`
   height: 80vh;
   /* background-color: #ffffff; */
 `;
+
+export const ToHomeBtn = styled.button`
+  background-color: #26b363;
+  border-radius: 10px;
+  text-decoration: none;
+  margin: 10px;
+  padding: 5px 10px;
+  width: 100px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const QuizModal = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 20px;
+  width: 60vw;
+  height: 60vh;
+  background-color: grey;
+`;

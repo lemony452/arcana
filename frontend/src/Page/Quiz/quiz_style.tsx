@@ -10,7 +10,7 @@ export const FullArea = styled.div`
 export const LeftArea = styled.div`
   width: 50%;
   height: 100%;
-  background-color: red;
+  /* background-color: red; */
 `;
 
 export const LeftCard = styled(LeftArea)`
@@ -22,31 +22,31 @@ export const LeftCard = styled(LeftArea)`
 export const RightArea = styled.div`
   width: 50%;
   height: 100%;
-  background-color: blue;
+  /* background-color: blue; */
 `;
 
 export const CharacterDialog = styled.div`
   width: 100%;
   height: 25%;
-  background-color: pink;
+  /* background-color: pink; */
 `;
 
 export const CharacterArea = styled.div`
   width: 100%;
   height: 75%;
-  background-color: magenta;
+  /* background-color: magenta; */
 `;
 
 export const TimerArea = styled.div`
   width: 100%;
   height: 50%;
-  background-color: skyblue;
+  /* background-color: skyblue; */
 `;
 
 export const PeopleArea = styled.div`
   width: 100%;
   height: 50%;
-  background-color: navy;
+  /* background-color: navy; */
 `;
 
 export const CardArea = styled.div`
@@ -72,5 +72,5 @@ export const QuestArea = styled.div`
 export const TimerDivide = styled.div`
   width: 100%;
   height: 25%;
-  background-color: skyblue;
+  /* background-color: skyblue; */
 `;
