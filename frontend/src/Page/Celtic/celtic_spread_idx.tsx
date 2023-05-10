@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import * as layer from './celtic_spread_style';
 import Celtic from './celtic_spread';
+import CelticStart from './celtic_spread_animation';
 import * as common from '../Common/common_style';
 import Dialog from '../../Common/dialog';
 import { CelticDetails } from '../../Common/conversations';
@@ -41,8 +42,9 @@ function CelticSpread() {
   if (index === 0) {
     return (
       <layer.MainBox>
-        <common.SideBlock />
-        <Celtic />
+        <common.SideBlock>
+          <CelticStart />
+        </common.SideBlock>
         <common.SideBlock>
           <common.NextBtn onClick={onNext}>해석보기</common.NextBtn>
         </common.SideBlock>
