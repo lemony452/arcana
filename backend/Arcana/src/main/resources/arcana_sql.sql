@@ -37,10 +37,10 @@ COLLATE = utf8mb4_0900_ai_ci;
 -- Table `arcanaDB`.`LUCKY`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `arcanaDB`.`LUCKY` (
-  `lucky_idx` int NOT NULL,
+  `idx` int NOT NULL,
   `card_idx` int NOT NULL,
   `luckyment` VARCHAR(2000) NOT NULL,
-  PRIMARY KEY (`lucky_idx`),
+  PRIMARY KEY (`idx`),
   INDEX `card_idx` (`card_idx` ASC) VISIBLE,
   CONSTRAINT `LUCKY_ibfk_1`
     FOREIGN KEY (`card_idx`)
