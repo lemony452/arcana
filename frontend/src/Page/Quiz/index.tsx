@@ -3,10 +3,10 @@ import * as quizStyle from './quiz_style';
 
 function Quiz() {
   return (
-    <>
-      <quizStyle.CardArea />
-      <quizStyle.ChatArea />
-    </>
+    <quizStyle.FullArea>
+      <quizStyle.LeftArea />
+      <quizStyle.RightArea />
+    </quizStyle.FullArea>
   );
 }
 
