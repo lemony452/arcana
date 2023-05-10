@@ -41,7 +41,8 @@ function Time() {
     //   setSummary(res);
     // });
     // await setTarotList(ans.data);
-    await navigate(`/time/${f}`);
+    // await navigate(`/time/${f}`);
+    navigate('/spread', { state: `${f}` });
     SetcelticText(TimeConversations.t2[f]);
     setOption(f);
   };

@@ -5,8 +5,9 @@ export const MainBox = styled.div`
   width: 100vw;
   height: 100vh;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
+  overflow: hidden;
 `;
 
 export const TimeBox = styled.div`
@@ -24,7 +25,7 @@ export const TimePartOne = styled.div`
   /* background-color: pink; */
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-around;
 `;
 export const TimePartTwo = styled.div`
   width: 100%;
@@ -53,4 +54,5 @@ export const YearCard = styled.div`
   height: 80%;
   aspect-ratio: 3 / 5;
   background-color: gold;
+  margin-inline: 0.2vw;
 `;
