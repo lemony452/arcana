@@ -150,7 +150,7 @@ function LuckyKarmaSelect({
       if (index === 0) {
         return (
           <luckySelect.SelectCardFront
-            animate={{ transform: 'translateX(19.85vw)' }}
+            animate={{ transform: 'translateX(19.85vw)' }} // 선택한 카드를 중앙으로
             transition={{ duration: 0.8 }}
             src={cardList[index].front}
             alt="CardB"
@@ -163,7 +163,7 @@ function LuckyKarmaSelect({
           <luckySelect.SelectCardFront
             initial={{ scale: 1.1 }}
             animate={{ scale: [1.1, 1.0] }}
-            exit={{ scale: 1.0 }}
+            exit={{ scale: 1.1 }}
             transition={{ delay: 0.8 }}
             src={cardList[index].front}
             alt="CardB"
@@ -173,7 +173,7 @@ function LuckyKarmaSelect({
       }
       return (
         <luckySelect.SelectCardFront
-          animate={{ transform: 'translateX(-19.85vw)' }}
+          animate={{ transform: 'translateX(-19.85vw)' }} // 선택한 카드를 중앙으로
           transition={{ duration: 0.8 }}
           src={cardList[index].front}
           alt="CardB"

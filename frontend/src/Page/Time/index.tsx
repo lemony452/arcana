@@ -15,21 +15,36 @@ function Time() {
   const [next, SetNext] = useState(false);
   // const [option, SetOption] = useState('');
   const inputValueRef = useRef<HTMLInputElement>(null);
-  const { setTarotNameList, setOption, setInputValue, addFortune, setTarotList } = useFortuneStore();
+  const { fortune, setOption, addFortune, setTarotList, setSummary, tarotList } = useFortuneStore();
   const navigate = useNavigate();
 
-  // celtic 옵션 선택 함수
-  const OptionClick = async (fortune: keyof typeof TimeConversations.t2) => {
+  // time 옵션 선택 함수
+  const OptionClick = async (f: keyof typeof TimeConversations.t2) => {
     // time api request 보내기
-    // const ans = await API.get(`/api/tarot/time/${fortune}`);
-    // console.log(ans);
-    SetcelticText(TimeConversations.t2[fortune]);
-    console.log(TimeConversations.t2[fortune]);
-    const tarots = getTarot(13);
-    console.log(tarots);
-    setTarotList(tarots);
-    setOption(fortune);
-    navigate(`/time/${fortune}`);
+    let cardNum: number;
+    if (f === 'year') {
+      cardNum = 12;
+    } else {
+      cardNum = 6;
+    }
+    await API.get(`/api/v1/tarot/time/${cardNum}`).then((res) => {
+      console.log(res);
+      for (let i = 0; i < cardNum; i += 1) {
+        addFortune(res.data[i].timement);
+      }
+      setTarotList(res.data);
+    });
+    // await API.post(`/api/v2/summary`, {
+    //   text: fortune,
+    // }).then((res: any) => {
+    //   console.log(res);
+    //   setSummary(res);
+    // });
+    // await setTarotList(ans.data);
+    // await navigate(`/time/${f}`);
+    navigate('/spread', { state: `${f}` });
+    SetcelticText(TimeConversations.t2[f]);
+    setOption(f);
   };
 
   return (

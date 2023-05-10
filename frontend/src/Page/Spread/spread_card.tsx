@@ -1,0 +1,104 @@
+import React, { useEffect, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import * as spreadCard from './spread_card_style';
+import { SelectedCard } from './Component/card';
+
+function SpreadCard() {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [cardList, setCardList] = useState<number[]>([]);
+  const [needCardNum, setNeedCardNum] = useState<number>(0);
+  const [selectedCardList, setSelectedCardList] = useState<number[]>([]);
+  const [confirmedCard, setConfirmedCard] = useState<boolean>(false);
+
+  // 필요한 카드 갯수
+  useEffect(() => {
+    if (location.state === 'celtic') {
+      setNeedCardNum(10);
+    }
+    if (location.state === 'year') {
+      setNeedCardNum(12);
+    }
+    if (location.state === 'month') {
+      setNeedCardNum(6);
+    }
+    if (location.state === 'three') {
+      setNeedCardNum(4);
+    }
+    if (location.state === 'two') {
+      setNeedCardNum(3);
+    }
+  }, []);
+
+  // 카드 순서 랜덤 리스트
+  useEffect(() => {
+    const cardIndex = (start: number, end: number) => {
+      const array = [];
+      for (let i = start; i < end; i += 1) {
+        array.push(i);
+      }
+      return array;
+    };
+    const shuffle = (array: number[]) => {
+      return array.sort(() => Math.random() - 0.5);
+    };
+    setCardList(shuffle(cardIndex(0, 78)));
+  }, []);
+
+  const confirmedHandler = () => {
+    if (selectedCardList.length === needCardNum) {
+      setConfirmedCard(true);
+      setTimeout(() => {
+        if (location.state === 'celtic') {
+          navigate('/celtic/spread');
+        }
+        if (location.state === 'year') {
+          navigate('/time/year');
+        }
+        if (location.state === 'month') {
+          navigate('/time/month');
+        }
+        if (location.state === 'three') {
+          navigate('/instant/three');
+        }
+        if (location.state === 'two') {
+          navigate('/instant/two');
+        }
+      }, 3000);
+    }
+  };
+
+  const variants = {
+    move: { y: [0, 40, -500] },
+  };
+
+  return (
+    <spreadCard.Body>
+      <spreadCard.NumBody>
+        <spreadCard.Num>
+          선택 {selectedCardList.length} / {needCardNum}
+        </spreadCard.Num>
+        <spreadCard.Button onClick={confirmedHandler}>클릭</spreadCard.Button>
+      </spreadCard.NumBody>
+      <spreadCard.CardBody
+        animate={confirmedCard ? 'move' : 'none'}
+        variants={variants}
+        transition={{ delay: 2, duration: 1, ease: 'easeIn' }}
+      >
+        {cardList.map((card, index) => (
+          <SelectedCard
+            index={index}
+            card={card}
+            key={card}
+            selectedCardList={selectedCardList}
+            setSelectedCardList={setSelectedCardList}
+            confirmedCard={confirmedCard}
+            needCardNum={needCardNum}
+          />
+        ))}
+      </spreadCard.CardBody>
+    </spreadCard.Body>
+  );
+}
+
+export default SpreadCard;

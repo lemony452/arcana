@@ -7,6 +7,7 @@ import {
   TwitterShareButton,
   TwitterIcon,
 } from 'react-share';
+import { useNavigate } from 'react-router-dom';
 import html2canvas from 'html2canvas';
 import * as luckyPage from './lucky_page_style';
 import LuckyKarmaSelect from './Component/lucky_karma_select';
@@ -19,36 +20,40 @@ import charDialog0 from '../../Assets/characters/charDialog0.png';
 import { DialogNPC } from '../../Common/common_styled';
 import KakaoIcon from '../../Assets/etc/icon-kakao.png';
 import Camera from '../../Assets/etc/camera.png';
+import Home from '../../Assets/etc/home.png';
+import { useLuckyStore } from '../../Store/User/lucky';
 
 function LuckyPage() {
+  const navigate = useNavigate();
   const [selectCard, setSelectCard] = useState(-1); // 선택한 카드
   const [resultPage, setResultPage] = useState(false);
   const [checkSelectState, setCheckSelectState] = useState(false); // 마지막 선택 질문
+  const { luckyNum, luckyName, luckyMent } = useLuckyStore();
 
   const cardList = [
     {
       index: 0,
       front: F0,
-      num: '0',
-      title: 'The Fool',
-      content: '너의 행운 카드는 ㅇㅇㅇ 이야! 아마 너에게 특별한 행운을 가져다 줄걸?',
-      result: '고민거리를 향해 나가는 너에게 늘 행운이 함께하길 바라!',
+      num: luckyNum,
+      title: luckyName,
+      content: `너의 행운 카드는 ${luckyName} 이야! 아마 너에게 특별한 행운을 가져다 줄걸?`,
+      result: luckyMent,
     },
     {
       index: 1,
-      front: F9,
-      num: 'IX',
-      title: 'The Hermit',
-      content: '너의 행운 카드는 ㅇㅇㅇ 이야! 아마 너에게 새로운 시작을 가져다 줄걸?',
-      result: '새로운 시작을 위한 첫걸음을 걸어봐!',
+      front: F0,
+      num: luckyNum,
+      title: luckyName,
+      content: `너의 행운 카드는 ${luckyName} 이야! 아마 너에게 특별한 행운을 가져다 줄걸?`,
+      result: luckyMent,
     },
     {
       index: 2,
       front: F14,
-      num: 'XIV',
-      title: 'Temperance',
-      content: '너의 행운 카드는 ㅇㅇㅇ 이야! 아마 너에게 놀라운 경험을 가져다 줄걸?',
-      result: '그 경험이 너에게 좋은 기회가 되기를!',
+      num: luckyNum,
+      title: luckyName,
+      content: `너의 행운 카드는 ${luckyName} 이야! 아마 너에게 특별한 행운을 가져다 줄걸?`,
+      result: luckyMent,
     },
   ];
 
@@ -77,9 +82,9 @@ function LuckyPage() {
   // };
 
   const capture = () => {
-    const downloadImg = (url: string, name: string) => {
+    const downloadImg = (url: string, imgName: string) => {
       const downImg = document.createElement('a');
-      downImg.download = name;
+      downImg.download = imgName;
       downImg.href = url;
       document.body.appendChild(downImg);
       downImg.click();
@@ -113,6 +118,10 @@ function LuckyPage() {
     });
   };
 
+  const goMain = () => {
+    navigate('/');
+  };
+
   return (
     <luckyPage.Body>
       <DialogNPC src={charDialog0} />
@@ -139,31 +148,36 @@ function LuckyPage() {
           </luckyPage.Btn>
         )}
         {resultPage && (
-          <div>
-            <FacebookShareButton style={{ marginInline: '10px' }} url={window.location.href}>
-              <FacebookIcon size={32} round borderRadius={24} />
-            </FacebookShareButton>
-            <TwitterShareButton
-              style={{ marginInline: '10px' }}
-              title={cardList[selectCard].result}
-              url="http://localhost:3000"
-            >
-              <TwitterIcon size={32} round borderRadius={24} />
-            </TwitterShareButton>
-            <TelegramShareButton
-              style={{ marginInline: '10px' }}
-              title={cardList[selectCard].result}
-              url="http://localhost:3000"
-            >
-              <TelegramIcon size={32} round borderRadius={24} />
-            </TelegramShareButton>
-            <luckyPage.Button onClick={sendKakao} style={{ marginInline: '5px' }}>
-              <img src={KakaoIcon} alt="kakaoicon" />
-            </luckyPage.Button>
-            <luckyPage.Button onClick={capture} style={{ marginInline: '5px' }}>
-              <img src={Camera} alt="camera" />
-            </luckyPage.Button>
-          </div>
+          <luckyPage.ButtonBox>
+            <div>
+              <FacebookShareButton style={{ marginInline: '10px' }} url={window.location.href}>
+                <FacebookIcon size={32} round borderRadius={24} />
+              </FacebookShareButton>
+              <TwitterShareButton
+                style={{ marginInline: '10px' }}
+                title={cardList[selectCard].result}
+                url="http://localhost:3000"
+              >
+                <TwitterIcon size={32} round borderRadius={24} />
+              </TwitterShareButton>
+              <TelegramShareButton
+                style={{ marginInline: '10px' }}
+                title={cardList[selectCard].result}
+                url="http://localhost:3000"
+              >
+                <TelegramIcon size={32} round borderRadius={24} />
+              </TelegramShareButton>
+              <luckyPage.Button onClick={sendKakao} style={{ marginInline: '5px' }}>
+                <img src={KakaoIcon} alt="kakaoicon" />
+              </luckyPage.Button>
+              <luckyPage.Button onClick={capture} style={{ marginInline: '5px' }}>
+                <img src={Camera} alt="camera" />
+              </luckyPage.Button>
+            </div>
+            <luckyPage.HomeButton onClick={goMain}>
+              <img src={Home} alt="home" />
+            </luckyPage.HomeButton>
+          </luckyPage.ButtonBox>
         )}
       </Dialog>
     </luckyPage.Body>

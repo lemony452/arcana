@@ -53,8 +53,28 @@ export const Btn = styled(motion.button)`
   margin-right: 50px;
 `;
 
+export const ButtonBox = styled.div`
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+`;
+
 export const Button = styled.button`
   align-self: center;
+  cursor: pointer;
+  border: 0;
+  background-color: rgba(0, 0, 0, 0);
+  > img {
+    width: 32px;
+    height: 32px;
+  }
+`;
+
+export const HomeButton = styled.button`
+  align-self: end;
+  margin-top: 6vh;
+  margin-bottom: 1vh;
   cursor: pointer;
   border: 0;
   background-color: rgba(0, 0, 0, 0);
