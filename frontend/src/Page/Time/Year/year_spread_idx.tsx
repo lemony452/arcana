@@ -10,6 +10,7 @@ import { YearDetails } from '../../../Common/conversations';
 import { useLuckyStore } from '../../../Store/User/lucky';
 import { getLuckyCard } from '../../../Common/tarotSelect';
 import { API } from '../../../API';
+import { useFortuneStore } from '../../../Store/User/fortune';
 
 function YearSpread() {
   const navigate = useNavigate();
@@ -18,24 +19,21 @@ function YearSpread() {
     return setIndex(index + 1);
   };
   console.log(index);
-
+  const { fortune } = useFortuneStore();
+  console.log(fortune);
   const [modalOpen, setModalOpen] = useState(false); // modal
   const showModal = () => {
     setModalOpen(!modalOpen);
   };
-  const { setLuckyIdx, setLuckyMent } = useLuckyStore();
+  const { setLucky, setLuckyMent } = useLuckyStore();
   const MoveLucky = async () => {
     // 럭키카드 api
-    const luckyIdx = getLuckyCard();
-    console.log('럭키카드 번호 : ', luckyIdx);
-    setLuckyIdx(luckyIdx);
-    // res : { "card_idx" : 0, "luckyment": ""}
-    // const res = await API.get(`/api/tarot/lucky/${luckyIdx}`, {
-    //   params: luckyIdx,
-    // });
-    // console.log(res);
-    // setLuckyMent(res); // 수정필요
-    navigate('/lucky');
+    await API.get(`/api/v1/tarot/lucky/`).then((res: any) => {
+      console.log(res);
+      setLucky(res);
+      setLuckyMent(res.luckyment);
+    });
+    await navigate('/lucky');
   };
 
   const text = YearDetails();

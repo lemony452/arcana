@@ -24,19 +24,15 @@ function CelticSpread() {
     setModalOpen(!modalOpen);
   };
 
-  const { setLuckyIdx, setLuckyMent } = useLuckyStore();
+  const { setLucky, setLuckyMent } = useLuckyStore();
   const MoveLucky = async () => {
     // 럭키카드 api
-    const luckyIdx = getLuckyCard();
-    console.log('럭키카드 번호 : ', luckyIdx);
-    setLuckyIdx(luckyIdx);
-    // res : { "card_idx" : 0, "luckyment": ""}
-    // const res = await API.get(`/api/tarot/lucky/${luckyIdx}`, {
-    //   params: luckyIdx,
-    // });
-    // console.log(res);
-    // setLuckyMent(res); // 수정필요
-    navigate('/lucky');
+    await API.get(`/api/v1/tarot/lucky/`).then((res: any) => {
+      console.log(res);
+      setLucky(res);
+      setLuckyMent(res.luckyment);
+    });
+    await navigate('/lucky');
   };
 
   const text = CelticDetails();
@@ -81,7 +77,10 @@ function CelticSpread() {
         </common.ChatArea> */}
         <DialogNPC src={charDialog0} />
         <Dialog content={text.page1} next={false}>
-          <common.SpreadBtn onClick={onNext}>다음</common.SpreadBtn>
+          {/* <common.SpreadBtn onClick={onNext}>다음</common.SpreadBtn> */}
+          <button type="button" onClick={onNext}>
+            다음
+          </button>
         </Dialog>
       </>
     );
