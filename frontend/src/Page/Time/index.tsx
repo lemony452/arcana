@@ -4,11 +4,11 @@ import { getTarot, getTarotNames } from '../../Common/tarotSelect';
 import { OptionBtn, InputText, SubmitBtn, DialogNPC } from '../../Common/common_styled';
 import { TimeConversations } from '../../Common/conversations';
 import Dialog from '../../Common/dialog';
-import { TimeGPT } from '../../Store/FortuneTelling/gpt';
+// import { TimeGPT } from '../../Store/FortuneTelling/gpt';
 import { useFortuneStore } from '../../Store/User/fortune';
 import charDialog0 from '../../Assets/characters/charDialog0.png';
 import { SpreadBtn } from '../Common/common_style';
-import { API } from '../../API';
+import { API, API2 } from '../../API';
 
 function Time() {
   const [celticText, SetcelticText] = useState(TimeConversations.t1);
@@ -27,21 +27,23 @@ function Time() {
     } else {
       cardNum = 6;
     }
+    let timements = '';
     await API.get(`/api/v1/tarot/time/${cardNum}`).then((res) => {
       console.log(res);
       for (let i = 0; i < cardNum; i += 1) {
-        addFortune(res.data[i].timement);
+        timements += res.data[i].timement;
       }
+      addFortune(timements);
       setTarotList(res.data);
     });
-    // await API.post(`/api/v2/summary`, {
-    //   text: fortune,
-    // }).then((res: any) => {
-    //   console.log(res);
-    //   setSummary(res);
-    // });
-    // await setTarotList(ans.data);
     await navigate(`/time/${f}`);
+    await API2.post(`/api/v2/summary`, {
+      text: timements,
+    }).then((res: any) => {
+      console.log(res.data.summary);
+      setSummary(res.data.summary);
+    });
+    // await setTarotList(ans.data);
     SetcelticText(TimeConversations.t2[f]);
     setOption(f);
   };
