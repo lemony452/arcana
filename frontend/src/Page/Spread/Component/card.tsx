@@ -34,57 +34,56 @@ export function SelectedCard({ index, card, selectedCardList, setSelectedCardLis
   }, [confirmedCard]);
 
   const cardSpread = confirmedCard ? (
-    <CardStyle.Body
+    <CardStyle.SelectedBody
       onClick={handleCardClick}
       initial={{ rotate: 1 * index - 39 }}
       animate={{ rotate: 0 }}
       transition={{ delay: 0.7, duration: 1 }}
       style={{ originX: 0.5, originY: 5 }}
     >
-      <CardStyle.CardBody style={{ transform: selected ? 'translateY(-50px)' : 'none' }}>
-        <CardStyle.Front style={{ opacity: selectedCardList.includes(card) ? '1' : '0' }}>
+      <CardStyle.SelectedCardBody style={{ transform: selected ? 'translateY(-50px)' : 'none' }}>
+        <CardStyle.SelectedBack style={{ opacity: selectedCardList.includes(card) ? '1' : '0' }}>
           <img src={CardBack} alt="Cardback" />
-        </CardStyle.Front>
-        <CardStyle.Back>{card}</CardStyle.Back>
-      </CardStyle.CardBody>
-    </CardStyle.Body>
+        </CardStyle.SelectedBack>
+      </CardStyle.SelectedCardBody>
+    </CardStyle.SelectedBody>
   ) : (
-    <CardStyle.Body
+    <CardStyle.SelectedBody
       onClick={handleCardClick}
       initial={{ rotate: -39 }}
       animate={{ rotate: 1 * index - 39 }}
       transition={{ duration: (2 / 78) * index }}
       style={{ originX: 0.5, originY: 5 }}
     >
-      <CardStyle.CardBody style={{ transform: selected ? 'translateY(-50px)' : 'none' }}>
-        <CardStyle.Front>
+      <CardStyle.SelectedCardBody style={{ transform: selected ? 'translateY(-50px)' : 'none' }}>
+        <CardStyle.SelectedBack>
           <img src={CardBack} alt="Cardback" />
-        </CardStyle.Front>
-        <CardStyle.Back>{card}</CardStyle.Back>
-      </CardStyle.CardBody>
-    </CardStyle.Body>
+        </CardStyle.SelectedBack>
+      </CardStyle.SelectedCardBody>
+    </CardStyle.SelectedBody>
   );
 
   return <div>{cardSpread}</div>;
 }
 
-interface FilppededCardType {
+interface FilppedCardType {
   card: number;
+  size: string;
 }
 
-export function FilppedCard({ card }: FilppededCardType) {
+export function FilppedCard({ card, size }: FilppedCardType) {
   const [flipped, setFlipped] = useState(false);
   const handleCardClick = () => {
     setFlipped(true);
   };
   return (
-    <CardStyle.Body onClick={handleCardClick}>
-      <CardStyle.CardBody style={{ transform: flipped ? 'rotateY(180deg)' : 'none' }}>
-        <CardStyle.Front>
+    <CardStyle.FilppedBody onClick={handleCardClick} size={size}>
+      <CardStyle.FilppedCardBody style={{ transform: flipped ? 'rotateY(180deg)' : 'none' }}>
+        <CardStyle.FilppedBack size={size}>
           <img src={CardBack} alt="Cardback" />
-        </CardStyle.Front>
-        <CardStyle.Back>{card}</CardStyle.Back>
-      </CardStyle.CardBody>
-    </CardStyle.Body>
+        </CardStyle.FilppedBack>
+        <CardStyle.FilppedFront size={size}>{card}</CardStyle.FilppedFront>
+      </CardStyle.FilppedCardBody>
+    </CardStyle.FilppedBody>
   );
 }
