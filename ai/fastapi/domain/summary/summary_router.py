@@ -14,8 +14,12 @@ class long_text(BaseModel):
 
 
 @router.post("")
-def summary_test(long_text: long_text):
+def summary(long_text: long_text):
     sry = summary()
     result = sry.get_message(long_text.text)
 
     return {"summary": result}
+
+@router.get("")
+def summary_test():
+    return {"summary": "test summary!"}
