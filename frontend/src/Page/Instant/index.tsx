@@ -26,21 +26,18 @@ function Instant() {
 
   const saveInput = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    // 임시
-    const temp = getTarot(3);
-    console.log('---------------');
-    console.log(temp);
-    setTarotList(temp);
-    const InstantAPI = async (o: string) => {
-      const ans = await API.get(`/api/tarot/instant/${o}`);
-      console.log(ans); // 배열에 담겨옴. 인덱스 0번이 question 나머지는 advice
+
+    const InstantAPI = async (optionParams: number) => {
+      await API.get(`/api/tarot/instant/${optionParams}`).then((res) => console.log(res));
+      // console.log(ans); // 배열에 담겨옴. 인덱스 0번이 question 나머지는 advice
+      // setTarotList(ans);
     };
     if (option === 'two') {
-      // InstantAPI(option);
-      navigate('/instant/two');
+      InstantAPI(3);
+      // navigate('/instant/two');
     } else {
-      // InstantAPI(option);
-      navigate('/instant/three');
+      InstantAPI(4);
+      // navigate('/instant/three');
     }
     setOption(option);
   };
