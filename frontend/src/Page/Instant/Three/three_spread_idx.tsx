@@ -21,7 +21,7 @@ function ThreeSpread() {
     navigate('/');
   };
 
-  const text = InstantDetails();
+  const text = InstantDetails(4);
   console.log(text);
 
   // 0일때 카드 고르기를 할지 논의 필요

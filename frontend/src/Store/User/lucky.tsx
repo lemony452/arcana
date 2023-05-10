@@ -1,17 +1,17 @@
 import { create } from 'zustand';
 
 interface LuckyState {
-  luckyIdx: number;
+  lucky: object;
   luckyMent: string;
-  setLuckyIdx: (luckyIdx: number) => void;
+  setLucky: (lucky: object) => void;
   setLuckyMent: (luckyMent: string) => void;
 }
 
 export const useLuckyStore = create<LuckyState>((set) => ({
-  luckyIdx: 0,
+  lucky: {},
   luckyMent: '',
-  setLuckyIdx: (idx) => {
-    set(() => ({ luckyIdx: idx }));
+  setLucky: (l) => {
+    set(() => ({ lucky: l }));
   },
   setLuckyMent: (ment) => {
     set(() => ({ luckyMent: ment }));
