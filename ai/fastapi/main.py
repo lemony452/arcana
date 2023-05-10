@@ -6,13 +6,13 @@ from starlette.middleware.cors import CORSMiddleware
 from domain.summary import summary_router
 from domain.chatbot import chatbot_router
 
-app = FastAPI()
+app = FastAPI(title='Arcana',
+            description='Arcana FastAPI',
+            openapi_url='/api/v2/openapi.json')
 
 # CORS Setting Start
 
-origins = [
-    "*",
-]
+origins = ["*"]
 
 app.add_middleware(
     CORSMiddleware,

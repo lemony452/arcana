@@ -16,18 +16,27 @@ WORDS = './aimodel/chatbot/words.pkl'
 CLASSES = './aimodel/chatbot/classes.pkl'
 
 class chatbot:
+    def __new__(cls, *args, **kwargs):
+        if not hasattr(cls, "_instance"):
+            cls._instance = super().__new__(cls)
+        return cls._instance
+
     def __init__(self):
-        with open(INTENTS, 'r', encoding='UTF8') as f:
-            self.intents = json.load(f)
+        cls = type(self)
+        if not hasattr(cls, "_init"):
+            cls._init = True
 
-        with open(WORDS, 'rb') as f:
-            self.all_words = pickle.load(f)
+            with open(INTENTS, 'r', encoding='UTF8') as f:
+                self.intents = json.load(f)
 
-        with open(CLASSES, 'rb') as f:
-            self.classes = pickle.load(f)
+            with open(WORDS, 'rb') as f:
+                self.all_words = pickle.load(f)
 
-        self.komoran = Komoran()
-        self.model = load_model(MODEL)
+            with open(CLASSES, 'rb') as f:
+                self.classes = pickle.load(f)
+
+            self.komoran = Komoran()
+            self.model = load_model(MODEL)
 
 
     def clean_up_sentence(self, sentence):
