@@ -28,9 +28,9 @@ function CelticSpread() {
   const MoveLucky = async () => {
     // 럭키카드 api
     await API.get(`/api/v1/tarot/lucky/`).then((res: any) => {
-      console.log(res);
-      setLucky(res);
-      setLuckyMent(res.luckyment);
+      console.log('lucky api 결과 : ', res.data);
+      setLucky(res.data);
+      setLuckyMent(res.data.luckyment);
     });
     await navigate('/lucky');
   };

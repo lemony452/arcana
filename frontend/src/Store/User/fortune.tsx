@@ -21,8 +21,7 @@ interface FortuneState {
 export const useFortuneStore = create<FortuneState>((set) => ({
   fortune: '',
   tarotList: [],
-  tarotNameList:
-    'The Fool, Eight of Swords(Reverse), Page of Swords(Reverse), Page of Cups, Ace of Pentacles(Reverse), The Magician, Three of Swords, Ten of Cups, The Hanged Man(Reverse), The Fool, Four of Wands(Reverse), Eight of Pentacles(Reverse)',
+  tarotNameList: '',
   option: '사랑운',
   inputValue: '내 사랑운을 봐줘',
   spread: '',
