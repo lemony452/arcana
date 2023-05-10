@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import * as layer from '../select_style';
 import Three from './three_spread';
+import ThreeStart from './three_spread_animation';
 import ThreeNum from './three_spread_num';
 import * as common from '../../Common/common_style';
 import { DialogNPC } from '../../../Common/common_styled';
@@ -21,15 +22,16 @@ function ThreeSpread() {
     navigate('/');
   };
 
-  const text = InstantDetails();
+  const text = InstantDetails(4);
   console.log(text);
 
   // 0일때 카드 고르기를 할지 논의 필요
   if (index === 0) {
     return (
       <layer.MainBox>
-        <common.SideBlock />
-        <Three />
+        <common.SideBlock>
+          <ThreeStart />
+        </common.SideBlock>
         <common.SideBlock>
           <common.NextBtn onClick={onNext}>해석보기</common.NextBtn>
         </common.SideBlock>

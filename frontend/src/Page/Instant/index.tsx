@@ -14,7 +14,7 @@ function Instant() {
   const [next, SetNext] = useState(false);
   const [option, SetOption] = useState('');
   const inputValueRef = useRef<HTMLInputElement>(null);
-  const { setTarotNameList, setOption, setInputValue, addFortune, setTarotList } = useFortuneStore();
+  const { setOption, setTarotList } = useFortuneStore();
   const navigate = useNavigate();
 
   const OptionClick = (fortune: keyof typeof InstantConversations.i2) => {
@@ -28,16 +28,16 @@ function Instant() {
     event.preventDefault();
 
     const InstantAPI = async (optionParams: number) => {
-      await API.get(`/api/tarot/instant/${optionParams}`).then((res) => console.log(res));
-      // console.log(ans); // 배열에 담겨옴. 인덱스 0번이 question 나머지는 advice
-      // setTarotList(ans);
+      const ans = await API.get(`/api/v1/tarot/instant/${optionParams}`);
+      console.log(ans); // 배열에 담겨옴. 인덱스 0번이 question 나머지는 advice
+      await setTarotList(ans.data);
+      // await navigate(`/instant/${option}`);
+      navigate('/spread', { state: `${option}` });
     };
     if (option === 'two') {
       InstantAPI(3);
-      // navigate('/instant/two');
     } else {
       InstantAPI(4);
-      // navigate('/instant/three');
     }
     setOption(option);
   };

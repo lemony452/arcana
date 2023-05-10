@@ -71,7 +71,7 @@ function Celtic() {
       };
       // getAns(tarotList, optionPrompt, inputValue!);
       // gpt api 호출하고 spread 페이지로 바로 이동됨
-      navigate('/celtic/spread');
+      navigate('/spread', { state: 'celtic' });
     } else {
       SetcelticText('나한테 장난치지 말구!! 고민을 다시 입력해줘!');
     }
@@ -90,8 +90,8 @@ function Celtic() {
         ) : (
           <>
             <OptionBtn onClick={() => OptionClick('love')}>사랑운 💖</OptionBtn>
-            <OptionBtn onClick={() => OptionClick('success')}>내가 하는 일이 잘될까? 성공운이 궁금해! 👨‍💼</OptionBtn>
-            <OptionBtn onClick={() => OptionClick('money')}>난 부자가 되고싶은데 재물운 봐줄래? 💸</OptionBtn>
+            <OptionBtn onClick={() => OptionClick('success')}>성공운이 궁금해! 👨‍💼</OptionBtn>
+            <OptionBtn onClick={() => OptionClick('money')}>재물운 봐줄래? 💸</OptionBtn>
           </>
         )}
       </Dialog>

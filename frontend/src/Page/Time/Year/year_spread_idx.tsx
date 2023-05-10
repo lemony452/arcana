@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import * as layer from '../time_style';
 import Year from './year_spread';
+import YearStart from './year_spread_animation';
 import * as common from '../../Common/common_style';
 import Dialog from '../../../Common/dialog';
 import charDialog0 from '../../../Assets/characters/charDialog0.png';
@@ -10,6 +11,7 @@ import { YearDetails } from '../../../Common/conversations';
 import { useLuckyStore } from '../../../Store/User/lucky';
 import { getLuckyCard } from '../../../Common/tarotSelect';
 import { API } from '../../../API';
+import { useFortuneStore } from '../../../Store/User/fortune';
 
 function YearSpread() {
   const navigate = useNavigate();
@@ -18,24 +20,22 @@ function YearSpread() {
     return setIndex(index + 1);
   };
   console.log(index);
-
+  const { fortune } = useFortuneStore();
+  console.log(fortune);
   const [modalOpen, setModalOpen] = useState(false); // modal
   const showModal = () => {
     setModalOpen(!modalOpen);
   };
-  const { setLuckyIdx, setLuckyMent } = useLuckyStore();
+  const { setLuckyNum, setLuckyName, setLuckyMent } = useLuckyStore();
   const MoveLucky = async () => {
     // 럭키카드 api
-    const luckyIdx = getLuckyCard();
-    console.log('럭키카드 번호 : ', luckyIdx);
-    setLuckyIdx(luckyIdx);
-    // res : { "card_idx" : 0, "luckyment": ""}
-    // const res = await API.get(`/api/tarot/lucky/${luckyIdx}`, {
-    //   params: luckyIdx,
-    // });
-    // console.log(res);
-    // setLuckyMent(res); // 수정필요
-    navigate('/lucky');
+    await API.get(`/api/v1/tarot/lucky/`).then((res: any) => {
+      console.log(res);
+      setLuckyNum(res.data.card.idx);
+      setLuckyName(res.data.card.name);
+      setLuckyMent(res.data.luckyment);
+    });
+    await navigate('/lucky');
   };
 
   const text = YearDetails();
@@ -44,8 +44,9 @@ function YearSpread() {
   if (index === 0) {
     return (
       <layer.MainBox>
-        <common.SideBlock />
-        <Year />
+        <common.SideBlock>
+          <YearStart />
+        </common.SideBlock>
         <common.SideBlock>
           <common.NextBtn onClick={onNext}>해석보기</common.NextBtn>
         </common.SideBlock>

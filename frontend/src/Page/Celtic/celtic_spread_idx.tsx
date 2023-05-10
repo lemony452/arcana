@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import * as layer from './celtic_spread_style';
 import Celtic from './celtic_spread';
+import CelticStart from './celtic_spread_animation';
 import * as common from '../Common/common_style';
 import Dialog from '../../Common/dialog';
 import { CelticDetails } from '../../Common/conversations';
@@ -24,19 +25,16 @@ function CelticSpread() {
     setModalOpen(!modalOpen);
   };
 
-  const { setLuckyIdx, setLuckyMent } = useLuckyStore();
+  const { setLuckyNum, setLuckyName, setLuckyMent } = useLuckyStore();
   const MoveLucky = async () => {
     // 럭키카드 api
-    const luckyIdx = getLuckyCard();
-    console.log('럭키카드 번호 : ', luckyIdx);
-    setLuckyIdx(luckyIdx);
-    // res : { "card_idx" : 0, "luckyment": ""}
-    // const res = await API.get(`/api/tarot/lucky/${luckyIdx}`, {
-    //   params: luckyIdx,
-    // });
-    // console.log(res);
-    // setLuckyMent(res); // 수정필요
-    navigate('/lucky');
+    await API.get(`/api/v1/tarot/lucky/`).then((res: any) => {
+      console.log(res);
+      setLuckyNum(res.data.card.idx);
+      setLuckyName(res.data.card.name);
+      setLuckyMent(res.data.luckyment);
+    });
+    await navigate('/lucky');
   };
 
   const text = CelticDetails();
@@ -45,8 +43,9 @@ function CelticSpread() {
   if (index === 0) {
     return (
       <layer.MainBox>
-        <common.SideBlock />
-        <Celtic />
+        <common.SideBlock>
+          <CelticStart />
+        </common.SideBlock>
         <common.SideBlock>
           <common.NextBtn onClick={onNext}>해석보기</common.NextBtn>
         </common.SideBlock>
@@ -81,7 +80,10 @@ function CelticSpread() {
         </common.ChatArea> */}
         <DialogNPC src={charDialog0} />
         <Dialog content={text.page1} next={false}>
-          <common.SpreadBtn onClick={onNext}>다음</common.SpreadBtn>
+          {/* <common.SpreadBtn onClick={onNext}>다음</common.SpreadBtn> */}
+          <button type="button" onClick={onNext}>
+            다음
+          </button>
         </Dialog>
       </>
     );
