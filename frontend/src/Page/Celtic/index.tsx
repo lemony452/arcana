@@ -4,7 +4,7 @@ import { getTarot, getTarotNames } from '../../Common/tarotSelect';
 import { OptionBtn, InputText, SubmitBtn, DialogNPC } from '../../Common/common_styled';
 import { CelticConversations } from '../../Common/conversations';
 import Dialog from '../../Common/dialog';
-import { CelticGPT } from '../../Store/FortuneTelling/gpt';
+import { CelticGPT, createCompletion } from '../../Store/FortuneTelling/gpt';
 import { useFortuneStore } from '../../Store/User/fortune';
 import charDialog0 from '../../Assets/characters/charDialog0.png';
 
@@ -13,9 +13,8 @@ function Celtic() {
   const [next, SetNext] = useState(false);
   const [option, SetOption] = useState('');
   const inputValueRef = useRef<HTMLInputElement>(null);
-  const { setTarotNameList, setOption, setInputValue, addFortune, setTarotList } = useFortuneStore();
+  const { setTarotNameList, setOption, setInputValue, addFortune, setTarotList, tarotNameList } = useFortuneStore();
   const navigate = useNavigate();
-
   // 특수 문자 처리
   const reg = /[`~!@#$%^&*()_|+\-=?;:'",.<>\\{\\}\\[\]\\\\/ ]/gim;
 
@@ -35,6 +34,7 @@ function Celtic() {
     SetOption(fortune);
     SetNext(!next);
   };
+
   const saveInput = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     // 선택한 옵션을 prompt로 전달해주기
@@ -54,24 +54,41 @@ function Celtic() {
       console.log(inputValue);
       // const prompt = `[카드목록][${tarotList}] 카드가 있다. [방식] celtic-cross. ${opt}과 관련된 점을 보고싶다. ${position}번째 카드의 결과만 응답한다. [질문] ${inputValue}`;
       // celtic 2장씩 총 10장의 운세 풀이 요청
+      let ans;
       const cards = ['1, 2', '3, 4', '5, 6', '7, 8', '9, 10'];
       const getAns = async (t: string, o: string, i: string) => {
         // 타로 운세 풀이를 스토어에 저장
         // 비동기함수로 순서대로 fortune 변수에 값을 추가함
-        let ans = await CelticGPT(t, o, i, cards[0]);
-        addFortune(ans);
-        ans = await CelticGPT(t, o, i, cards[1]);
-        addFortune(ans);
-        ans = await CelticGPT(t, o, i, cards[2]);
-        addFortune(ans);
-        ans = await CelticGPT(t, o, i, cards[3]);
-        addFortune(ans);
-        ans = await CelticGPT(t, o, i, cards[4]);
-        addFortune(ans);
+        // let ans = await CelticGPT(t, o, i, cards[0]);
+        // addFortune(ans);
+        // ans = await CelticGPT(t, o, i, cards[1]);
+        // addFortune(ans);
+        // ans = await CelticGPT(t, o, i, cards[2]);
+        // addFortune(ans);
+        // ans = await CelticGPT(t, o, i, cards[3]);
+        // addFortune(ans);
+        // ans = await CelticGPT(t, o, i, cards[4]);
+        // addFortune(ans);
+
+        ans = await createCompletion(t, o, i, cards[0]); // 배열에 카드 2장 풀이 담겨서 출력
+        console.log(ans);
+        addFortune(ans![0] + ans![1]);
+        ans = await createCompletion(t, o, i, cards[1]); // 배열에 카드 2장 풀이 담겨서 출력
+        console.log(ans);
+        addFortune(ans![0] + ans![1]);
+        ans = await createCompletion(t, o, i, cards[2]); // 배열에 카드 2장 풀이 담겨서 출력
+        console.log(ans);
+        addFortune(ans![0] + ans![1]);
+        ans = await createCompletion(t, o, i, cards[3]); // 배열에 카드 2장 풀이 담겨서 출력
+        console.log(ans);
+        addFortune(ans![0] + ans![1]);
+        ans = await createCompletion(t, o, i, cards[4]); // 배열에 카드 2장 풀이 담겨서 출력
+        console.log(ans);
+        addFortune(ans![0] + ans![1]);
       };
-      // getAns(tarotList, optionPrompt, inputValue!);
+      getAns(tarotNameList, optionPrompt, inputValue!);
       // gpt api 호출하고 spread 페이지로 바로 이동됨
-      navigate('/celtic/spread');
+      // navigate('/celtic/spread');
     } else {
       SetcelticText('나한테 장난치지 말구!! 고민을 다시 입력해줘!');
     }
