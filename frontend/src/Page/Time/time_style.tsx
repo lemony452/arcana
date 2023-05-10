@@ -20,7 +20,7 @@ export const TimeBox = styled.div`
 
 export const TimePartOne = styled.div`
   width: 100%;
-  height: 33%;
+  height: 50%;
   /* background-color: pink; */
   display: flex;
   align-items: center;
@@ -28,20 +28,20 @@ export const TimePartOne = styled.div`
 `;
 export const TimePartTwo = styled.div`
   width: 100%;
-  height: 33%;
+  height: 50%;
   /* background-color: violet; */
   display: flex;
   align-items: center;
   justify-content: space-around;
 `;
-export const TimePartThree = styled.div`
-  width: 100%;
-  height: 33%;
-  /* background-color: magenta; */
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-`;
+// export const TimePartThree = styled.div`
+//   width: 100%;
+//   height: 33%;
+//   /* background-color: magenta; */
+//   display: flex;
+//   align-items: center;
+//   justify-content: space-around;
+// `;
 
 export const MonthCard = styled.div`
   height: 90%;
