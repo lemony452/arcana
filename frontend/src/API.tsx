@@ -9,3 +9,12 @@ export const API = axios.create({
     // access_token: null,
   },
 });
+
+export const API2 = axios.create({
+  baseURL: `https://k8d107.p.ssafy.io`, // 기본 서버 주소
+  // baseURL: `http://localhost:3000`, // 기본 서버 주소
+  headers: {
+    'Content-Type': 'application/json',
+    // access_token: null,
+  },
+});
