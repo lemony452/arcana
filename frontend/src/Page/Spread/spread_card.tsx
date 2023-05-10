@@ -23,10 +23,10 @@ function SpreadCard() {
       setNeedCardNum(6);
     }
     if (location.state === 'three') {
-      setNeedCardNum(3);
+      setNeedCardNum(4);
     }
     if (location.state === 'two') {
-      setNeedCardNum(2);
+      setNeedCardNum(3);
     }
   }, []);
 
