@@ -3,14 +3,14 @@ import styled from 'styled-components';
 
 export const Body = styled(motion.div)`
   position: absolute;
-  width: 7vw;
+  width: 12.285vh;
   aspect-ratio: 3 / 5;
   perspective: 1100px;
   margin: 5px;
   cursor: pointer;
 `;
 
-export const CardBody = styled(motion.div)<{ index: number }>`
+export const CardBody = styled(motion.div)`
   width: 100%;
   height: 100%;
   position: relative;
@@ -31,7 +31,7 @@ export const Front = styled(motion.div)`
   backface-visibility: hidden;
   transition: 0.5s;
   > img {
-    width: 7vw;
+    width: 12.285vh;
     aspect-ratio: 3 / 5;
   }
   /* border-radius: 10px; */

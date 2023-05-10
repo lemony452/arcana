@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import * as spreadCard from './spread_card_style';
-import Card from './Component/card';
+import { SelectedCard } from './Component/card';
 
 function SpreadCard() {
   const navigate = useNavigate();
   const [cardList, setCardList] = useState<number[]>([]);
-  const [selectedCard, setSelectedCard] = useState<number[]>([]);
+  const [selectedCardList, setSelectedCardList] = useState<number[]>([]);
   const [confirmedCard, setConfirmedCard] = useState<boolean>(false);
   // 카드 순서 랜덤 리스트
   useEffect(() => {
@@ -23,11 +23,11 @@ function SpreadCard() {
     setCardList(shuffle(cardIndex(0, 78)));
   }, []);
   useEffect(() => {
-    console.log(selectedCard);
-  }, [selectedCard]);
+    console.log(selectedCardList);
+  }, [selectedCardList]);
 
   const confirmedHandler = () => {
-    if (selectedCard.length === 10) {
+    if (selectedCardList.length === 10) {
       setConfirmedCard(true);
       setTimeout(() => {
         navigate('/celtic/spread');
@@ -42,7 +42,7 @@ function SpreadCard() {
   return (
     <spreadCard.Body>
       <spreadCard.NumBody>
-        <spreadCard.Num>선택 {selectedCard.length} / 10</spreadCard.Num>
+        <spreadCard.Num>선택 {selectedCardList.length} / 10</spreadCard.Num>
         <spreadCard.Button onClick={confirmedHandler}>클릭</spreadCard.Button>
       </spreadCard.NumBody>
       <spreadCard.CardBody
@@ -51,12 +51,12 @@ function SpreadCard() {
         transition={{ delay: 2, duration: 1, ease: 'easeIn' }}
       >
         {cardList.map((card, index) => (
-          <Card
+          <SelectedCard
             index={index}
             card={card}
             key={card}
-            selectedCard={selectedCard}
-            setSelectedCard={setSelectedCard}
+            selectedCardList={selectedCardList}
+            setSelectedCardList={setSelectedCardList}
             confirmedCard={confirmedCard}
           />
         ))}

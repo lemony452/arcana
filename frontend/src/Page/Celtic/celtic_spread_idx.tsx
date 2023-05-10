@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import * as layer from './celtic_spread_style';
 import Celtic from './celtic_spread';
+import CelticStart from './celtic_spread_animation';
 import * as common from '../Common/common_style';
 import Dialog from '../../Common/dialog';
 import { CelticDetails } from '../../Common/conversations';
@@ -27,9 +28,9 @@ function CelticSpread() {
   const { setLuckyIdx, setLuckyMent } = useLuckyStore();
   const MoveLucky = async () => {
     // 럭키카드 api
-    const luckyIdx = getLuckyCard();
-    console.log('럭키카드 번호 : ', luckyIdx);
-    setLuckyIdx(luckyIdx);
+    // const luckyIdx = getLuckyCard();
+    // console.log('럭키카드 번호 : ', luckyIdx);
+    // setLuckyIdx(luckyIdx);
     // res : { "card_idx" : 0, "luckyment": ""}
     // const res = await API.get(`/api/tarot/lucky/${luckyIdx}`, {
     //   params: luckyIdx,
@@ -45,8 +46,9 @@ function CelticSpread() {
   if (index === 0) {
     return (
       <layer.MainBox>
-        <common.SideBlock />
-        <Celtic />
+        <common.SideBlock>
+          <CelticStart />
+        </common.SideBlock>
         <common.SideBlock>
           <common.NextBtn onClick={onNext}>해석보기</common.NextBtn>
         </common.SideBlock>

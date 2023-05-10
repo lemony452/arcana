@@ -3,32 +3,32 @@ import * as CardStyle from './card_style';
 import CardBack from '../../../Assets/cards/cardb.svg';
 // import CardFront from '../../../Assets/cards/F0.svg';
 
-interface CardType {
+interface SelectedCardType {
   index: number;
   card: number;
-  selectedCard: number[];
-  setSelectedCard: React.Dispatch<React.SetStateAction<number[]>>;
+  selectedCardList: number[];
+  setSelectedCardList: React.Dispatch<React.SetStateAction<number[]>>;
   confirmedCard: boolean;
 }
 
-function Card({ index, card, selectedCard, setSelectedCard, confirmedCard }: CardType) {
-  const [flipped, setFlipped] = useState(false);
+export function SelectedCard({ index, card, selectedCardList, setSelectedCardList, confirmedCard }: SelectedCardType) {
+  const [selected, setSelected] = useState(false);
   const handleCardClick = () => {
-    if (!selectedCard.includes(card) && !confirmedCard) {
-      if (selectedCard.length < 10) {
-        setFlipped(true);
-        setSelectedCard((array) => [...array, card]);
+    if (!selectedCardList.includes(card) && !confirmedCard) {
+      if (selectedCardList.length < 10) {
+        setSelected(true);
+        setSelectedCardList((array) => [...array, card]);
       }
     } else {
-      setFlipped(false);
-      setSelectedCard(selectedCard.filter((num) => num !== card));
+      setSelected(false);
+      setSelectedCardList(selectedCardList.filter((num) => num !== card));
     }
   };
 
   useEffect(() => {
     setTimeout(() => {
       if (confirmedCard) {
-        setFlipped(false);
+        setSelected(false);
       }
     }, 300);
   }, [confirmedCard]);
@@ -41,8 +41,8 @@ function Card({ index, card, selectedCard, setSelectedCard, confirmedCard }: Car
       transition={{ delay: 0.7, duration: 1 }}
       style={{ originX: 0.5, originY: 5 }}
     >
-      <CardStyle.CardBody style={{ transform: flipped ? 'translateY(-50px)' : 'none' }} index={index}>
-        <CardStyle.Front style={{ opacity: selectedCard.includes(card) ? '1' : '0' }}>
+      <CardStyle.CardBody style={{ transform: selected ? 'translateY(-50px)' : 'none' }}>
+        <CardStyle.Front style={{ opacity: selectedCardList.includes(card) ? '1' : '0' }}>
           <img src={CardBack} alt="Cardback" />
         </CardStyle.Front>
         <CardStyle.Back>{card}</CardStyle.Back>
@@ -56,7 +56,7 @@ function Card({ index, card, selectedCard, setSelectedCard, confirmedCard }: Car
       transition={{ duration: (2 / 78) * index }}
       style={{ originX: 0.5, originY: 5 }}
     >
-      <CardStyle.CardBody style={{ transform: flipped ? 'translateY(-50px)' : 'none' }} index={index}>
+      <CardStyle.CardBody style={{ transform: selected ? 'translateY(-50px)' : 'none' }}>
         <CardStyle.Front>
           <img src={CardBack} alt="Cardback" />
         </CardStyle.Front>
@@ -68,4 +68,23 @@ function Card({ index, card, selectedCard, setSelectedCard, confirmedCard }: Car
   return <div>{cardSpread}</div>;
 }
 
-export default Card;
+interface FilppededCardType {
+  card: number;
+}
+
+export function FilppedCard({ card }: FilppededCardType) {
+  const [flipped, setFlipped] = useState(false);
+  const handleCardClick = () => {
+    setFlipped(true);
+  };
+  return (
+    <CardStyle.Body onClick={handleCardClick}>
+      <CardStyle.CardBody style={{ transform: flipped ? 'rotateY(180deg)' : 'none' }}>
+        <CardStyle.Front>
+          <img src={CardBack} alt="Cardback" />
+        </CardStyle.Front>
+        <CardStyle.Back>{card}</CardStyle.Back>
+      </CardStyle.CardBody>
+    </CardStyle.Body>
+  );
+}
