@@ -14,7 +14,7 @@ import java.util.List;
 
 @Tag(description = "타로카드 API", name = "TAROT")
 @RestController
-@RequestMapping("api/tarot/")
+@RequestMapping("api/v1/tarot/")
 @RequiredArgsConstructor
 public class TarotController {
 
