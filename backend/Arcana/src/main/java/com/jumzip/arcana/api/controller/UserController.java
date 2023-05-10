@@ -39,17 +39,19 @@ public class UserController {
             "localId": "5xwsPCWYo...",
             "emailVerified": true,
             "email": "user@example.com",
-            "oauthAccessToken": "[FACEBOOK_ACCESS_TOKEN]",
+            "oauthAccessToken": "[FACEBOOK_ACCESS_TOKEN]", <----- ?
             "firstName": "John",
             "lastName": "Doe",
             "fullName": "John Doe",
             "displayName": "John Doe",
-            "idToken": "[ID_TOKEN]",
+            "idToken": "[ID_TOKEN]", <--------------------------- ?
             "photoUrl": "https://scontent.xx.fbcdn.net/v/...",
-            "refreshToken": "[REFRESH_TOKEN]",
+            "refreshToken": "[REFRESH_TOKEN]", <----------------- ?
             "expiresIn": "3600",
             "rawUserInfo": "{\"updated_time\":\"2017-02-22T01:10:57+0000\",\"gender\":\"male\", ...}"
     }
+
+    이걸 그대로 받아와서 User Entity에 해당하는 값을 대입
 */
     @Operation(summary = "UserInfo 조회", description = "사용자의 정보를 리턴한다")
     @GetMapping("info")
