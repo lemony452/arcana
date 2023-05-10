@@ -1,14 +1,22 @@
 import styled from 'styled-components';
 
-export const ChatArea = styled.div`
+export const FullArea = styled.div`
   width: 100vw;
-  height: 33vh;
-  background-color: #c1ecff;
+  height: 100vh;
+  background-color: purple;
+  display: flex;
 `;
 
-export const CardArea = styled.div`
-  width: 100vw;
-  height: 67vh;
-  background-color: #f0f0f0;
+export const LeftArea = styled.div`
+  width: 50%;
+  height: 100%;
+  background-color: red;
+  display: flex;
+`;
+
+export const RightArea = styled.div`
+  width: 50%;
+  height: 100%;
+  background-color: blue;
   display: flex;
 `;
