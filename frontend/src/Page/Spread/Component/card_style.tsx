@@ -42,7 +42,6 @@ export const FilppedBody = styled(motion.div)<{ size: string }>`
   width: ${(props) => props.size};
   aspect-ratio: 3 / 5;
   perspective: 1100px;
-  margin: 5px;
   cursor: pointer;
 `;
 
@@ -50,7 +49,7 @@ export const FilppedCardBody = styled(motion.div)`
   width: 100%;
   height: 100%;
   position: relative;
-  transition: 0.4s;
+  transition: 1s;
   transform-style: preserve-3d;
   /* border: 2px black solid; */
   /* border-radius: 10px; */
@@ -65,7 +64,6 @@ export const FilppedBack = styled(motion.div)<{ size: string }>`
   line-height: 8vw;
   font-size: 2vw;
   backface-visibility: hidden;
-  transition: 0.5s;
   > img {
     width: ${(props) => props.size};
     aspect-ratio: 3 / 5;

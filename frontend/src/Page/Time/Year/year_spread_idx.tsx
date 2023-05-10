@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import * as layer from '../time_style';
 import Year from './year_spread';
+import YearStart from './year_spread_animation';
 import * as common from '../../Common/common_style';
 import Dialog from '../../../Common/dialog';
 import charDialog0 from '../../../Assets/characters/charDialog0.png';
@@ -43,8 +44,9 @@ function YearSpread() {
   if (index === 0) {
     return (
       <layer.MainBox>
-        <common.SideBlock />
-        <Year />
+        <common.SideBlock>
+          <YearStart />
+        </common.SideBlock>
         <common.SideBlock>
           <common.NextBtn onClick={onNext}>해석보기</common.NextBtn>
         </common.SideBlock>
