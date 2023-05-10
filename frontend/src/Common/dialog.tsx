@@ -25,7 +25,7 @@ function Dialog({ children, content, next }: CaseProps) {
 
   return (
     <DialogBox color={color}>
-      <div>
+      <div style={{ position: 'absolute', left: '22vw' }}>
         <DialogName>{charName}</DialogName>
         {/* {detail !== 0 ? (
           <CelticDetail>
