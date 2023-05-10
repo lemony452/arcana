@@ -7,7 +7,7 @@ interface LuckyKarmaResultType {
   cardList: {
     index: number;
     front: string;
-    num: string;
+    num: number;
     title: string;
     content: string;
     result: string;
