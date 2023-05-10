@@ -54,22 +54,23 @@ public class UserController {
     @Operation(summary = "UserInfo 조회", description = "사용자의 정보를 리턴한다")
     @GetMapping("info")
     public User GetUserInfo(@RequestHeader String uid) {
-        User user = new User();
+        User user = userService.getUserData(uid);
         return user;
     }
 
-    @Operation(summary = "UserInfo 조회", description = "사용자의 정보를 리턴한다")
+    @Operation(summary = "User 닉네임 변경", description = "변경된 닉네임을 리턴한다")
     @PutMapping("nickname")
-    public User UpdateUserNickname(@RequestHeader String uid, @RequestParam String nickname) {
-        User user = new User();
-        return user;
+    public String UpdateUserNickname(@RequestHeader String uid, @RequestParam String nickname) {
+        String newName = userService.getUserData(uid).getNickname();
+        return nickname + " Changed " + newName;
     }
 
-    @Operation(summary = "UserInfo 조회", description = "사용자의 정보를 리턴한다")
+    @Operation(summary = "User 탈퇴")
     @DeleteMapping("delete")
     public String DeleteUser(@RequestHeader String uid) {
-        User user = new User();
-        return user.getUid() + " Delete Complete";
+        User user = userService.getUserData(uid);
+        userService.deleteUser(uid);
+        return user.getEmail() + " Delete Complete";
     }
 
 }
