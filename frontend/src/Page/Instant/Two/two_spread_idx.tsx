@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import * as layer from '../select_style';
 import Two from './two_spread';
+import TwoStart from './two_spread_animation';
 import TwoNum from './two_spread_num';
 import * as common from '../../Common/common_style';
 import { DialogNPC } from '../../../Common/common_styled';
@@ -28,8 +29,9 @@ function TwoSpread() {
   if (index === 0) {
     return (
       <layer.MainBox>
-        <common.SideBlock />
-        <Two />
+        <common.SideBlock>
+          <TwoStart />
+        </common.SideBlock>
         <common.SideBlock>
           <common.NextBtn onClick={onNext}>해석보기</common.NextBtn>
         </common.SideBlock>

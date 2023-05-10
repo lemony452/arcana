@@ -5,8 +5,9 @@ export const MainBox = styled.div`
   width: 100vw;
   height: 100vh;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
+  overflow: hidden;
 `;
 
 export const SelectBox = styled.div`

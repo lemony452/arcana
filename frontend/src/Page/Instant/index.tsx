@@ -31,7 +31,8 @@ function Instant() {
       const ans = await API.get(`/api/v1/tarot/instant/${optionParams}`);
       console.log(ans); // 배열에 담겨옴. 인덱스 0번이 question 나머지는 advice
       await setTarotList(ans.data);
-      await navigate(`/instant/${option}`);
+      // await navigate(`/instant/${option}`);
+      navigate('/spread', { state: `${option}` });
     };
     if (option === 'two') {
       InstantAPI(3);
