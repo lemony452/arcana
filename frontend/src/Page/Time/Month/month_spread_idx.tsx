@@ -37,21 +37,16 @@ function MonthSpread() {
     await navigate('/lucky');
   };
 
-  const [kk, setKk] = useState(false);
-  const kkkkk = () => {
-    setKk(!kk);
-  };
-
   const text = MonthDetails();
   console.log(text);
 
   if (index === 0) {
     return (
       <layer.MainBox>
-        <common.SideBlock>{!kk && <MonthStart />}</common.SideBlock>
-        {kk && <Month />}
         <common.SideBlock>
-          <common.NextBtn onClick={kkkkk}>비교</common.NextBtn>
+          <MonthStart />
+        </common.SideBlock>
+        <common.SideBlock>
           <common.NextBtn onClick={onNext}>해석보기</common.NextBtn>
         </common.SideBlock>
       </layer.MainBox>

@@ -42,7 +42,7 @@ export const FilppedBody = styled(motion.div)<{ size: string }>`
   width: ${(props) => props.size};
   aspect-ratio: 3 / 5;
   perspective: 1100px;
-  cursor: pointer;
+  /* cursor: pointer; */
 `;
 
 export const FilppedCardBody = styled(motion.div)`
