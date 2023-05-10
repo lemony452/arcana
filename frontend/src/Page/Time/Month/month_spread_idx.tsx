@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import * as layer from '../time_style';
 import Month from './month_spread';
+import MonthStart from './month_spread_animation';
 import * as common from '../../Common/common_style';
 import Dialog from '../../../Common/dialog';
 import charDialog0 from '../../../Assets/characters/charDialog0.png';
@@ -36,15 +37,21 @@ function MonthSpread() {
     await navigate('/lucky');
   };
 
+  const [kk, setKk] = useState(false);
+  const kkkkk = () => {
+    setKk(!kk);
+  };
+
   const text = MonthDetails();
   console.log(text);
 
   if (index === 0) {
     return (
       <layer.MainBox>
-        <common.SideBlock />
-        <Month />
+        <common.SideBlock>{!kk && <MonthStart />}</common.SideBlock>
+        {kk && <Month />}
         <common.SideBlock>
+          <common.NextBtn onClick={kkkkk}>비교</common.NextBtn>
           <common.NextBtn onClick={onNext}>해석보기</common.NextBtn>
         </common.SideBlock>
       </layer.MainBox>

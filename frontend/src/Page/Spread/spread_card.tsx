@@ -1,13 +1,35 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import * as spreadCard from './spread_card_style';
 import { SelectedCard } from './Component/card';
 
 function SpreadCard() {
   const navigate = useNavigate();
+  const location = useLocation();
   const [cardList, setCardList] = useState<number[]>([]);
+  const [needCardNum, setNeedCardNum] = useState<number>(0);
   const [selectedCardList, setSelectedCardList] = useState<number[]>([]);
   const [confirmedCard, setConfirmedCard] = useState<boolean>(false);
+
+  // 필요한 카드 갯수
+  useEffect(() => {
+    if (location.state === 'celtic') {
+      setNeedCardNum(10);
+    }
+    if (location.state === 'year') {
+      setNeedCardNum(12);
+    }
+    if (location.state === 'month') {
+      setNeedCardNum(6);
+    }
+    if (location.state === 'three') {
+      setNeedCardNum(3);
+    }
+    if (location.state === 'two') {
+      setNeedCardNum(2);
+    }
+  }, []);
+
   // 카드 순서 랜덤 리스트
   useEffect(() => {
     const cardIndex = (start: number, end: number) => {
@@ -22,15 +44,26 @@ function SpreadCard() {
     };
     setCardList(shuffle(cardIndex(0, 78)));
   }, []);
-  useEffect(() => {
-    console.log(selectedCardList);
-  }, [selectedCardList]);
 
   const confirmedHandler = () => {
-    if (selectedCardList.length === 10) {
+    if (selectedCardList.length === needCardNum) {
       setConfirmedCard(true);
       setTimeout(() => {
-        navigate('/celtic/spread');
+        if (location.state === 'celtic') {
+          navigate('/celtic/spread');
+        }
+        if (location.state === 'year') {
+          navigate('/time/year');
+        }
+        if (location.state === 'month') {
+          navigate('/time/month');
+        }
+        if (location.state === 'three') {
+          navigate('/instant/three');
+        }
+        if (location.state === 'two') {
+          navigate('/instant/two');
+        }
       }, 3000);
     }
   };
@@ -42,7 +75,9 @@ function SpreadCard() {
   return (
     <spreadCard.Body>
       <spreadCard.NumBody>
-        <spreadCard.Num>선택 {selectedCardList.length} / 10</spreadCard.Num>
+        <spreadCard.Num>
+          선택 {selectedCardList.length} / {needCardNum}
+        </spreadCard.Num>
         <spreadCard.Button onClick={confirmedHandler}>클릭</spreadCard.Button>
       </spreadCard.NumBody>
       <spreadCard.CardBody
@@ -58,6 +93,7 @@ function SpreadCard() {
             selectedCardList={selectedCardList}
             setSelectedCardList={setSelectedCardList}
             confirmedCard={confirmedCard}
+            needCardNum={needCardNum}
           />
         ))}
       </spreadCard.CardBody>
