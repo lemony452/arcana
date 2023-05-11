@@ -1,9 +1,9 @@
 server:
   #local test port
-  port: 8080
+#  port: 8080
 
   #aws server port
-  #port: 18081
+  port: 18081
   error:
     whitelabel:
       enabled: false
