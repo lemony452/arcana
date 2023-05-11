@@ -63,21 +63,30 @@ export const CelticGPT = async (tarotNameList: string, option: string, inputValu
 // gpt 출력 처리하기
 const slicingText = (text: string) => {
   const reg = /[`~!@#$%^&*()_|+\-=?;:'",.<>\\{\\}\\[\]\\\\/]/gim;
-  const temp = text.split(' | ');
-  const card1Fortune = temp[0].split(': ')[1].replace(reg, '');
-  const card2Fortune = temp[1].split(': ')[1].replace(reg, '');
-  // console.log(card1Fortune);
-  // console.log(card2Fortune);
+  let temp;
+  let temp2;
+  let card1Fortune;
+  let card2Fortune;
+  if (text.search(/[|]/g) === -1) {
+    [, temp2, card2Fortune] = text.split(':');
+    [card1Fortune] = temp2.split('.');
+  } else {
+    temp = text.split(' | ');
+    card1Fortune = temp[0].split(': ')[1].replace(reg, '');
+    card2Fortune = temp[1].split(': ')[1].replace(reg, '');
+  }
+  card1Fortune = card1Fortune.trim();
+  card2Fortune = card2Fortune.trim();
   return [card1Fortune, card2Fortune];
 };
 
 // 요청 형식
 // [카드목록][{카드배열}] 카드가 있다. [방식] celtic-cross. {운세종류} 관련된 점을 보고 싶다. {해석요청} [질문] {질문내용} 응답은 [응답]처럼 한다. 카드 설명은 1 문장으로 한다. 말투는 구어체로 하고 ~거야 라고 한다. [응답] {카드이름} : {카드설명} | {카드이름} : {카드설명}
+let slicingAns: string[];
 export const createCompletion = async (tarotNameList: string, option: string, inputValue: string, position: string) => {
   const prompt = `[카드목록][${tarotNameList}] 카드가 있다. [방식] celtic-cross. ${option} 관련된 점을 보고 싶다. ${position}번째 카드의 결과만 응답한다. [질문] ${inputValue} 응답은 [응답]처럼 한다. 카드 설명은 1 문장으로 한다. 말투는 구어체로 하고 ~거야 라고 한다. [응답] {카드이름} : {카드설명} | {카드이름} : {카드설명}`;
   console.log(prompt);
   let ans;
-  let slicingAns;
   try {
     const response = await openai.createChatCompletion({
       model: 'gpt-3.5-turbo',
@@ -90,8 +99,8 @@ export const createCompletion = async (tarotNameList: string, option: string, in
       temperature: 0.7,
     });
     if (response.data) {
-      console.log('choices: ', response.data.choices[0].message!.content);
       ans = response.data.choices[0].message!.content;
+      console.log(ans);
       slicingAns = slicingText(ans);
     }
   } catch (err) {
