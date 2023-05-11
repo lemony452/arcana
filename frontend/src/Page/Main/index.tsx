@@ -22,12 +22,12 @@ function Main() {
     // } else {
     //   setGoLogin(true);
     // }
-    setIsOpen(true);
-    // if (isLogin) {
-    //   setIsOpen(true);
-    // } else {
-    //   setGoLogin(true);
-    // }
+    // setIsOpen(true);
+    if (isLogin) {
+      setIsOpen(true);
+    } else {
+      setGoLogin(true);
+    }
   };
 
   const { cardOrder } = useCardStore();

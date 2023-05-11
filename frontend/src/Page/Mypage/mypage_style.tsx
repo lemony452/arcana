@@ -147,3 +147,9 @@ export const ReplayLucky = styled.div`
   right: 1em;
   bottom: 1em;
 `;
+
+export const LogoutBtn = styled.div`
+  position: absolute;
+  font-size: 2em;
+  font-weight: bold;
+`;
