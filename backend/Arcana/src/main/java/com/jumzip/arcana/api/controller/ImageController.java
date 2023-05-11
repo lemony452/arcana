@@ -1,5 +1,7 @@
 package com.jumzip.arcana.api.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import org.slf4j.Logger;
@@ -13,11 +15,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.core.io.Resource;
 
+@Tag(description = "이미지 API", name = "IMAGE")
 @RestController
 @RequestMapping("/api/v1/images")
 public class ImageController {
     private final Logger logger = LoggerFactory.getLogger(ImageController.class);
 
+    @Operation(summary = "image View, Download", description = "이미지를 src 태그로 부르거나 다운로드 하는 기능 "
+        + " \n 0.png ~ 155.png 중 하나를 입력값으로 넣어주세요")
     @GetMapping("/{fileName}")
     public ResponseEntity<Resource> getImageFile(@PathVariable String fileName) throws FileNotFoundException {
         String path = "./images/" + fileName;

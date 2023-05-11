@@ -1,6 +1,8 @@
 package com.jumzip.arcana.db.repository;
 
 import com.jumzip.arcana.db.entity.User;
+import java.util.List;
+import javax.persistence.TypedQuery;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 
@@ -23,4 +25,12 @@ public class UserRepositorySupport implements UserRepository {
 
     @Override
     public User findUserByUid(String uid) { return em.find(User.class, uid); }
+
+    @Override
+    public User findByEmail(String email) {
+        TypedQuery<User> query = em.createQuery("SELECT u FROM User u WHERE u.email = :email", User.class);
+        query.setParameter("email", email);
+        List<User> users = query.getResultList();
+        return users.isEmpty() ? null : users.get(0);
+    }
 }

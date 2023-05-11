@@ -1,8 +1,6 @@
 package com.jumzip.arcana.db.repository;
 
-import com.jumzip.arcana.db.entity.TimeCard;
-import com.jumzip.arcana.db.entity.Card;
-import com.jumzip.arcana.db.entity.InstantCard;
+import com.jumzip.arcana.db.entity.*;
 import com.jumzip.arcana.db.entity.TimeCard;
 import org.springframework.stereotype.Repository;
 
@@ -13,6 +11,7 @@ public interface CardRepository {
     Card findCardByIdx(int card_idx);
     InstantCard findInstantByCardId(int card_idx);
     TimeCard findTimeByCardId(int card_idx);
+    LuckyCard findLuckyByCardId(int card_idx);
 
 
 

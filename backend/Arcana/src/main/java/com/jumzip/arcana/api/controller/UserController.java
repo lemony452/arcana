@@ -1,21 +1,29 @@
 package com.jumzip.arcana.api.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.jumzip.arcana.api.request.UserRegisterRequest;
+import com.jumzip.arcana.api.service.KakaoUserService;
 import com.jumzip.arcana.api.service.UserService;
 import com.jumzip.arcana.db.entity.TimeCard;
 import com.jumzip.arcana.db.entity.User;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import javax.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 
 @Tag(description = "USER API", name = "USER")
 @RestController
-@RequestMapping("api/user/")
+@RequestMapping("api/v1/user/")
 @RequiredArgsConstructor
 public class UserController {
+    private final Logger logger = LoggerFactory.getLogger(UserController.class);
 
     private final UserService userService;
+
+    private final KakaoUserService kakaoUserService;
 
     /* Firebase */
     // uid 헤더로 받아오기, uid로 검색
@@ -81,6 +89,14 @@ public class UserController {
         User user = userService.getUserData(uid);
         userService.deleteUser(uid);
         return user.getEmail() + " Delete Complete";
+    }
+
+    @Operation(summary = "Kakao 로그인")
+    @GetMapping("kakao")
+    public User kakaoLogin(@RequestParam String code, HttpServletResponse response) throws JsonProcessingException {
+        logger.info("start kakaoLogin");
+
+        return kakaoUserService.kakaoLogin(code, response);
     }
 
 }
