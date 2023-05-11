@@ -22,8 +22,8 @@ export const useFortuneStore = create<FortuneState>((set) => ({
   fortune: '',
   tarotList: [],
   tarotNameList: '',
-  option: '사랑운',
-  inputValue: '내 사랑운을 봐줘',
+  option: '',
+  inputValue: '',
   spread: '',
   summary: '',
   setSpread: (s) => {
