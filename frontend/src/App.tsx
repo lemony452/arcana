@@ -13,7 +13,7 @@ import LuckyPage from './Page/Lucky/lucky_page';
 import CelticDetail from './Page/Celtic/detail';
 import Instant from './Page/Instant';
 import Quiz from './Page/Quiz';
-import { KakaoRedirect, GoogleRedirect } from './Page/Login/redirect';
+import { KakaoRedirect } from './Page/Login/redirect';
 import TarotListDetail from './Page/Mypage/Component/detail';
 
 function App() {
@@ -38,7 +38,7 @@ function App() {
         <Route path="/lucky" element={<LuckyPage />} />
         <Route path="/celtic/detail" element={<CelticDetail />} />
         <Route path="/quiz" element={<Quiz />} />
-        <Route path="/authgoogle" element={<GoogleRedirect />} />
+        {/* <Route path="/authgoogle" element={<GoogleRedirect />} /> */}
         <Route path="/authkakao" element={<KakaoRedirect />} />
         <Route path="/detail" element={<TarotListDetail />} />
       </Routes>

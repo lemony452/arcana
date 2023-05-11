@@ -24,7 +24,7 @@ function Celtic() {
     console.log(CelticConversations.c2[fortune]);
     // 타로카드 10장 + 럭키카드 1장 뽑기
     const tarots = getTarot(10);
-    console.log(tarots);
+    console.log(tarots); // {id: 8, name: 'Strength', class: 'major', number: 8, reverse: false}
     setTarotList(tarots);
     // 10장의 카드이름 목록 리스트
     const TarotList = getTarotNames(tarots);
@@ -38,15 +38,15 @@ function Celtic() {
   const saveInput = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     // 선택한 옵션을 prompt로 전달해주기
-    let optionPrompt;
-    if (option === 'love') {
-      optionPrompt = '사랑운';
-    } else if (option === 'success') {
-      optionPrompt = '성공운';
-    } else {
-      optionPrompt = '재물운';
-    }
-    setOption(optionPrompt);
+    // let optionPrompt;
+    // if (option === 'love') {
+    //   optionPrompt = '사랑운';
+    // } else if (option === 'success') {
+    //   optionPrompt = '성공운';
+    // } else {
+    //   optionPrompt = '재물운';
+    // }
+    setOption(option);
     // 입력받은 고민을 prompt로 전달해주기
     const inputValue = inputValueRef.current?.value;
     if (inputValue!.replace(reg, '').length > 1) {
@@ -86,9 +86,9 @@ function Celtic() {
         console.log(ans);
         addFortune(ans![0] + ans![1]);
       };
-      getAns(tarotNameList, optionPrompt, inputValue!);
+      getAns(tarotNameList, option, inputValue!);
       // gpt api 호출하고 spread 페이지로 바로 이동됨
-      // navigate('/celtic/spread');
+      navigate('/celtic/spread');
     } else {
       SetcelticText('나한테 장난치지 말구!! 고민을 다시 입력해줘!');
     }
@@ -106,9 +106,9 @@ function Celtic() {
           </form>
         ) : (
           <>
-            <OptionBtn onClick={() => OptionClick('love')}>사랑운 💖</OptionBtn>
-            <OptionBtn onClick={() => OptionClick('success')}>성공운이 궁금해! 👨‍💼</OptionBtn>
-            <OptionBtn onClick={() => OptionClick('money')}>재물운 봐줄래? 💸</OptionBtn>
+            <OptionBtn onClick={() => OptionClick('사랑운')}>사랑운 💖</OptionBtn>
+            <OptionBtn onClick={() => OptionClick('성공운')}>성공운이 궁금해! 👨‍💼</OptionBtn>
+            <OptionBtn onClick={() => OptionClick('재물운')}>재물운 봐줄래? 💸</OptionBtn>
           </>
         )}
       </Dialog>

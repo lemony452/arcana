@@ -8,12 +8,14 @@ import SideBtnImg from '../../Assets/etc/sideBtn.png';
 import SideBar from '../Mypage';
 import { getCookie } from '../Login/cookie';
 import LoginModal from '../Login/modal';
+import { userInfoStore } from '../../Store/User/info';
 
 function Main() {
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   const [goLogin, setGoLogin] = useState(false);
-  const cookie = getCookie('token');
+  const { isLogin, setIsLogin } = userInfoStore();
+  // const cookie = getCookie('token');
   const toggleSide = () => {
     // if (cookie) {
     //   setIsOpen(true);
@@ -21,6 +23,11 @@ function Main() {
     //   setGoLogin(true);
     // }
     setIsOpen(true);
+    // if (isLogin) {
+    //   setIsOpen(true);
+    // } else {
+    //   setGoLogin(true);
+    // }
   };
 
   const { cardOrder } = useCardStore();
