@@ -22,7 +22,6 @@ public class UserController {
     private final Logger logger = LoggerFactory.getLogger(UserController.class);
 
     private final UserService userService;
-
     private final KakaoUserService kakaoUserService;
 
     /* Firebase */
