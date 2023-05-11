@@ -21,7 +21,7 @@ function UserInfo() {
       </Nickname>
       <TarotToken>
         <div style={{ display: 'flex', textAlign: 'center', alignItems: 'center' }}>
-          <img style={{ width: '4vw', marginRight: '0.3em' }} src={tockenIcon} alt="" />
+          <img style={{ width: '30%', marginRight: '0.3em' }} src={tockenIcon} alt="" />
           <div>타로 토큰</div>
         </div>
         <div>3 개</div>
