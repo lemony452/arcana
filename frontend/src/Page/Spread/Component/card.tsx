@@ -46,7 +46,7 @@ export function SelectedCard({
       onClick={handleCardClick}
       initial={{ rotate: 1 * index - 39 }}
       animate={{ rotate: 0 }}
-      transition={{ delay: 0.7, duration: 1 }}
+      transition={{ delay: 0.7, duration: 0.7, ease: 'easeInOut' }}
       style={{ originX: 0.5, originY: 5 }}
     >
       <CardStyle.SelectedCardBody style={{ transform: selected ? 'translateY(-50px)' : 'none' }}>
@@ -60,7 +60,7 @@ export function SelectedCard({
       onClick={handleCardClick}
       initial={{ rotate: -39 }}
       animate={{ rotate: 1 * index - 39 }}
-      transition={{ duration: (2 / 78) * index }}
+      transition={{ delay: 0.5, duration: (1.5 / 78) * index }}
       style={{ originX: 0.5, originY: 5 }}
     >
       <CardStyle.SelectedCardBody style={{ transform: selected ? 'translateY(-50px)' : 'none' }}>

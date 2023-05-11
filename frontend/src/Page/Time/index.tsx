@@ -4,6 +4,7 @@ import { getTarot, getTarotNames } from '../../Common/tarotSelect';
 import { OptionBtn, InputText, SubmitBtn, DialogNPC } from '../../Common/common_styled';
 import { TimeConversations } from '../../Common/conversations';
 import Dialog from '../../Common/dialog';
+import Npc from '../../Common/npc';
 import { TimeGPT } from '../../Store/FortuneTelling/gpt';
 import { useFortuneStore } from '../../Store/User/fortune';
 import charDialog0 from '../../Assets/characters/charDialog0.png';
@@ -49,8 +50,8 @@ function Time() {
 
   return (
     <div style={{ width: '100vw', height: '100vh', position: 'relative' }}>
-      <div>신년/월별운세 페이지입니다 여기에 카드 전체 스프레딩 하기</div>
-      <DialogNPC src={charDialog0} />
+      <Npc num={1} />
+      {/* <DialogNPC src={charDialog0} /> */}
       <Dialog content={celticText} next={next}>
         <>
           <OptionBtn onClick={() => OptionClick('year')}>신년 운세 봐줘 🐰</OptionBtn>
