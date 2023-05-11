@@ -13,5 +13,7 @@ public class UserRegisterRequest {
     String uid;
     @Schema(name = "email", example = "ssafy@email.com")
     String email;
+    @Schema(name = "provider", example = "Google")
+    String provider;
 
 }
