@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { TarotListContent, TarotToken, TitleBox } from '../mypage_style';
 import cardIcon from '../../../Assets/etc/cardIcon.png';
@@ -13,8 +13,8 @@ function TarotList() {
   return (
     <TarotListContent>
       <TarotToken>
-        <div style={{ display: 'flex', textAlign: 'center', alignItems: 'center' }}>
-          <img style={{ width: '4vw', marginRight: '0.3em' }} src={cardIcon} alt="" />
+        <div style={{ display: 'flex', textAlign: 'center', alignItems: 'center', justifyContent: 'space-between' }}>
+          <img style={{ width: '25%', marginRight: '0.3em' }} src={cardIcon} alt="" />
           <div>타로 운세 목록</div>
         </div>
         <button
@@ -22,7 +22,7 @@ function TarotList() {
           onClick={openTarotList}
           style={{ border: 0, backgroundColor: 'transparent', cursor: 'pointer' }}
         >
-          <img style={{ width: '2.2vw', marginLeft: '0.5em' }} src={nextBtn} alt="" />
+          <img style={{ width: '30%', marginLeft: '0.5em' }} src={nextBtn} alt="" />
         </button>
       </TarotToken>
       <TitleBox>

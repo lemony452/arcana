@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Side = styled.div`
-  width: calc(100vw / 3);
+  width: 27vw;
   height: 100vh;
   background: linear-gradient(180deg, #ffffff 0.01%, #f1e9e4 100%);
   box-shadow: 5px 0px 5px rgba(0, 0, 0, 0.71);
@@ -15,7 +15,7 @@ export const Side = styled.div`
     transition: 0.5s ease;
   }
   &.detail {
-    width: 30vw;
+    width: 27vw;
   }
 `;
 
@@ -26,7 +26,7 @@ export const SideContent = styled.div`
 
 export const UserContent = styled.div`
   display: flex;
-  width: calc(100vw / 3);
+  width: 27vw;
   height: calc(100vh / 3);
   justify-content: center;
   align-items: center;
@@ -46,15 +46,15 @@ export const Nickname = styled.div`
 
 export const TarotToken = styled.div`
   display: flex;
-  font-size: 1.4em;
+  font-size: 1.2em;
   font-weight: bold;
-  width: calc(100vw / 4);
+  width: 80%;
   text-align: center;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 1em;
+  margin: 0 0 1em 0;
   &.detail {
-    font-size: 1.8em;
+    font-size: 1.6em;
     margin-top: 10vh;
     margin-bottom: 10vh;
     justify-content: center;
@@ -63,17 +63,14 @@ export const TarotToken = styled.div`
 
 export const TarotListContent = styled.div`
   display: flex;
-  width: calc(100vw / 3);
+  width: 100%;
   height: calc(100vh / 2);
-  /* justify-content: center; */
-  /* justify-content: flex-end; */
+  /* font-size: ; */
   align-items: center;
   flex-direction: column;
   &.detail {
     height: auto;
-  }
-  &.detail {
-    width: 30vw;
+    width: 27vw;
   }
 `;
 
@@ -91,13 +88,14 @@ export const TitleBox = styled.div`
   align-items: center;
   padding: 0 0.7em 0 0.7em;
   margin: 0.5em 0 0.5em 0;
+  cursor: pointer;
 `;
 
 export const DetailContent = styled.div`
   position: absolute;
   display: flex;
   flex-direction: column;
-  width: 70vw;
+  width: 73vw;
   height: 100vh;
   right: 0;
 `;

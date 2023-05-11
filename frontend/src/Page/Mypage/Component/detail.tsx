@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   Side,
@@ -26,6 +26,53 @@ function TarotListDetail() {
   const MoveMain = () => {
     navigate('/');
   };
+  const [detailQuestion, setQuestion] = useState('내 올해 연애운 봐줘');
+  const [detailOption, setOption] = useState('사랑운💘');
+  const [detailDate, setDate] = useState('23.05.01');
+
+  const temp = [
+    {
+      option: '사랑운',
+      date: '23.05.10',
+      question: '내 올해 연애운 봐줘',
+    },
+    {
+      option: '재물운',
+      date: '23.04.01',
+      question: '이번에 산 주식이 오를까?',
+    },
+    {
+      option: '월별운세',
+      date: '23.03.02',
+      question: '',
+    },
+    {
+      option: '취업운',
+      date: '23.02.01',
+      question: '이번 면접에 합격할 수 있을까?',
+    },
+    {
+      option: '신년운세',
+      date: '23.01.01',
+      question: '',
+    },
+  ];
+  const res = temp.length % 5 ? Math.floor(temp.length / 5) + 1 : Math.floor(temp.length / 5);
+  const [pageNum, setPageNum] = useState(res);
+  const cardList = temp.map((t, idx) => {
+    const ShowDetail = () => {
+      setDate(t.date);
+      setOption(t.option);
+      setQuestion(t.question);
+    };
+    return (
+      <TitleBox onClick={ShowDetail}>
+        <div>{t.option}</div>
+        <div>{t.date}</div>
+      </TitleBox>
+    );
+  });
+  // setPageNum(res);
 
   return (
     <div style={{ position: 'relative' }}>
@@ -47,33 +94,15 @@ function TarotListDetail() {
             </div>
           </TarotToken>
           <div>option</div>
-          <TitleBox>
-            <div>사랑운</div>
-            <div>23.01.01</div>
-          </TitleBox>
-          <TitleBox>
-            <div>사랑운</div>
-            <div>23.01.01</div>
-          </TitleBox>
-          <TitleBox>
-            <div>사랑운</div>
-            <div>23.01.01</div>
-          </TitleBox>
-          <TitleBox>
-            <div>사랑운</div>
-            <div>23.01.01</div>
-          </TitleBox>
-          <TitleBox>
-            <div>사랑운</div>
-            <div>23.01.01</div>
-          </TitleBox>
+          {cardList}
+          <div>{pageNum}</div>
         </TarotListContent>
       </Side>
       <DetailContent>
         <DetailCover src={LoveCoverImg} />
-        <DetailTitle>샛노란 병아리 님의 사랑운💘</DetailTitle>
-        <DetailDate>23.05.01</DetailDate>
-        <DetailQuestion>❝ 내 올해 연애운 봐줘 ❞</DetailQuestion>
+        <DetailTitle>샛노란 병아리 님의 {detailOption}</DetailTitle>
+        <DetailDate>{detailDate}</DetailDate>
+        <DetailQuestion>{detailQuestion ? `❝ ${detailQuestion} ❞` : null}</DetailQuestion>
         <DetailFortune>
           너를 지지해줄 사람들이 많다는 것을 의미해 너 자신의 마음을 잘 이해하고 받아들이는 것이 중요해 신중하게
           고민하고 균형 있게 선택하는 것이 좋아 너의 감정에 귀 기울이면, 너는 사랑에 대한 더욱 깊은 이해와 인연을 만들어
