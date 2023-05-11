@@ -8,6 +8,7 @@ import SideBtnImg from '../../Assets/etc/sideBtn.png';
 import SideBar from '../Mypage';
 import { getCookie } from '../Login/cookie';
 import LoginModal from '../Login/modal';
+import { userInfoStore } from '../../Store/User/info';
 
 function Main() {
   const navigate = useNavigate();
