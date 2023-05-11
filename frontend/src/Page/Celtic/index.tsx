@@ -4,6 +4,7 @@ import { getTarot, getTarotNames } from '../../Common/tarotSelect';
 import { OptionBtn, InputText, SubmitBtn, DialogNPC } from '../../Common/common_styled';
 import { CelticConversations } from '../../Common/conversations';
 import Dialog from '../../Common/dialog';
+import Npc from '../../Common/npc';
 import { CelticGPT } from '../../Store/FortuneTelling/gpt';
 import { useFortuneStore } from '../../Store/User/fortune';
 import charDialog0 from '../../Assets/characters/charDialog0.png';
@@ -79,8 +80,8 @@ function Celtic() {
 
   return (
     <div style={{ width: '100vw', height: '100vh', position: 'relative' }}>
-      <div>celtic 페이지입니다 여기에 카드 전체 스프레딩 하기</div>
-      <DialogNPC src={charDialog0} />
+      <Npc num={0} />
+      {/* <DialogNPC src={charDialog0} /> */}
       <Dialog content={celticText} next={next}>
         {next ? (
           <form style={{ display: 'flex', alignItems: 'center' }} onSubmit={saveInput}>
