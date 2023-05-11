@@ -1,159 +1,95 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import Swal from 'sweetalert2';
-import * as quizStyle from './quiz_style';
-import * as common from '../Common/common_style';
+import React, { useState } from 'react';
+import { fetchQuizQuestions, QuestionsState } from './api';
+// Components
+import QuestionCard from './question_card';
+// Styles
+import { QuizButton, Wrapper } from './quiz_style';
+
+export type AnswerObject = {
+  question: string;
+  answer: string;
+  correct: boolean;
+  correctAnswer: string;
+};
+
+const TOTAL_QUESTIONS = 10;
 
 function Quiz() {
-  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+  const [questions, setQuestions] = useState<QuestionsState[]>([]);
+  const [number, setNumber] = useState(0);
+  const [userAnswers, setUserAnswers] = useState<AnswerObject[]>([]);
+  const [score, setScore] = useState(0);
+  const [gameOver, setGameOver] = useState(true);
 
-  // quiz 풀이시간 카운트 다운
-  const MINUTES_IN_MS = 0;
-  const INTERVAL = 1000;
-  const [timeLeft, setTimeLeft] = useState<number>(MINUTES_IN_MS);
-  const second = String(Math.floor((timeLeft / 1000) % 60)).padStart(2, '0');
-  // const [timeOut, setTimeOut] = useState(false);
+  const startTrivia = async () => {
+    setLoading(true);
+    setGameOver(false);
+    const newQuestions = await fetchQuizQuestions(TOTAL_QUESTIONS);
+    setQuestions(newQuestions);
+    setScore(0);
+    setUserAnswers([]);
+    setNumber(0);
+    setLoading(false);
+  };
 
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setTimeLeft((prevTime) => prevTime - INTERVAL);
-    }, INTERVAL);
-
-    if (timeLeft <= 0) {
-      clearInterval(timer);
-      console.log('타이머가 종료되었습니다.');
+  const checkAnswer = (e: any) => {
+    if (!gameOver) {
+      // User's answer
+      const answer = e.currentTarget.value;
+      // Check answer against correct answer
+      const correct = questions[number].correct_answer === answer;
+      // Add score if answer is correct
+      if (correct) setScore((prev) => prev + 1);
+      // Save the answer in the array for user answers
+      const answerObject = {
+        question: questions[number].question,
+        answer,
+        correct,
+        correctAnswer: questions[number].correct_answer,
+      };
+      setUserAnswers((prev) => [...prev, answerObject]);
     }
-    return () => {
-      clearInterval(timer);
-    };
-  }, [timeLeft]);
-
-  // 문제 번호 증가 및 시간 초기화.
-  const [index, setIndex] = useState(0);
-  const onNext = () => {
-    return [setIndex(index + 1), setTimeLeft(MINUTES_IN_MS + 10 * 1000)];
-  };
-  console.log('qustion', index);
-
-  // 정답체크 state.
-  const [check, setCheck] = useState();
-  const onCheck = () => {
-    return [setTimeLeft(0)];
   };
 
-  // 문제 정답을 세는 state.
-  const [correct, setCorrect] = useState(0);
-  const getRight = () => {
-    return setCorrect(correct + 1);
-  };
-  console.log('correct', correct);
+  const nextQuestion = () => {
+    // Move on to the next question if not the last question
+    const nextQ = number + 1;
 
-  // 끝내기 모달
-  const [modalOpen, setModalOpen] = useState(false);
-  const showModal = () => {
-    setModalOpen(!modalOpen);
-  };
-
-  const goHome = () => {
-    navigate('/');
-  };
-
-  if (index === 0) {
-    return (
-      <quizStyle.FullArea>
-        <quizStyle.LeftArea>
-          <quizStyle.CharacterDialog>오늘도 완주를 향해 화이팅!</quizStyle.CharacterDialog>
-          {/* 아래 onNext는 백엔드 서버에서 시간 받으면 자동으로 실행되게끔 구현해두어여함 */}
-          <quizStyle.CharacterArea onClick={onNext}>일단 누르면 다음 문제로</quizStyle.CharacterArea>
-        </quizStyle.LeftArea>
-        <quizStyle.RightArea>
-          <quizStyle.TimerArea>존야</quizStyle.TimerArea>
-          <quizStyle.PeopleArea>인구수가 꽉 찼습니다.</quizStyle.PeopleArea>
-        </quizStyle.RightArea>
-      </quizStyle.FullArea>
-    );
-  }
-  if (index === 1) {
-    if (timeLeft !== 0) {
-      return (
-        <quizStyle.FullArea>
-          <quizStyle.LeftCard>
-            <quizStyle.CardArea />
-          </quizStyle.LeftCard>
-          <quizStyle.RightArea>
-            <quizStyle.TimerDivide>{second}</quizStyle.TimerDivide>
-            <quizStyle.TimerDivide>문제 만들기 너어어어어무우우우우 귀찮아요!</quizStyle.TimerDivide>
-            <quizStyle.QuestBox>
-              <quizStyle.QuestArea onClick={onCheck}>A</quizStyle.QuestArea>
-              <quizStyle.QuestArea onClick={onCheck}>B</quizStyle.QuestArea>
-              <quizStyle.QuestArea onClick={onCheck}>C</quizStyle.QuestArea>
-              <quizStyle.QuestArea onClick={onCheck}>D</quizStyle.QuestArea>
-            </quizStyle.QuestBox>
-          </quizStyle.RightArea>
-        </quizStyle.FullArea>
-      );
+    if (nextQ === TOTAL_QUESTIONS) {
+      setGameOver(true);
+    } else {
+      setNumber(nextQ);
     }
-    return (
-      <quizStyle.FullArea>
-        <quizStyle.LeftArea>
-          <quizStyle.CharacterDialog>오늘도 완주를 향해 화이팅! {index}</quizStyle.CharacterDialog>
-          <quizStyle.CharacterArea onClick={onNext}>일단 누르면 다음 문제로</quizStyle.CharacterArea>
-        </quizStyle.LeftArea>
-        <quizStyle.RightArea>
-          <quizStyle.TimerArea>존야</quizStyle.TimerArea>
-          <quizStyle.PeopleArea>인구수가 꽉 찼습니다.</quizStyle.PeopleArea>
-        </quizStyle.RightArea>
-      </quizStyle.FullArea>
-    );
-  }
-  if (index === 2) {
-    if (timeLeft !== 0) {
-      return (
-        <quizStyle.FullArea>
-          <quizStyle.LeftCard>
-            <quizStyle.CardArea />
-          </quizStyle.LeftCard>
-          <quizStyle.RightArea>
-            <quizStyle.TimerDivide>{second}</quizStyle.TimerDivide>
-            <quizStyle.TimerDivide>문제 만들기 너어어어어무우우우우 귀찮아요!</quizStyle.TimerDivide>
-            <quizStyle.QuestBox>
-              <quizStyle.QuestArea onClick={onCheck}>A</quizStyle.QuestArea>
-              <quizStyle.QuestArea onClick={onCheck}>B</quizStyle.QuestArea>
-              <quizStyle.QuestArea onClick={onCheck}>C</quizStyle.QuestArea>
-              <quizStyle.QuestArea onClick={onCheck}>D</quizStyle.QuestArea>
-            </quizStyle.QuestBox>
-          </quizStyle.RightArea>
-        </quizStyle.FullArea>
-      );
-    }
-    return (
-      <quizStyle.FullArea>
-        <quizStyle.LeftArea>
-          <quizStyle.CharacterDialog>오늘도 완주를 향해 화이팅! {index}</quizStyle.CharacterDialog>
-          <quizStyle.CharacterArea onClick={showModal}>
-            여기가 마지막 페이지
-            {modalOpen ? (
-              <common.ModalBackdrop>
-                <common.QuizModal onClick={(e) => e.stopPropagation()}>
-                  토큰 받았으면 집에가 얼른
-                  <common.ToHomeBtn onClick={goHome}>
-                    메인으로 <br />
-                    돌아가기
-                  </common.ToHomeBtn>
-                </common.QuizModal>
-              </common.ModalBackdrop>
-            ) : null}
-          </quizStyle.CharacterArea>
-        </quizStyle.LeftArea>
-        <quizStyle.RightArea>
-          <quizStyle.TimerArea>존야</quizStyle.TimerArea>
-          <quizStyle.PeopleArea>인구수가 꽉 찼습니다.</quizStyle.PeopleArea>
-        </quizStyle.RightArea>
-      </quizStyle.FullArea>
-    );
-  }
+  };
 
-  return null;
+  return (
+    <Wrapper>
+      <h1>REACT QUIZ</h1>
+      {gameOver || userAnswers.length === TOTAL_QUESTIONS ? (
+        <QuizButton className="start" onClick={startTrivia}>
+          Start
+        </QuizButton>
+      ) : null}
+      {!gameOver ? <p className="score">Score: {score}</p> : null}
+      {loading ? <p>Loading Questions...</p> : null}
+      {!loading && !gameOver && (
+        <QuestionCard
+          questionNr={number + 1}
+          totalQuestions={TOTAL_QUESTIONS}
+          question={questions[number].question}
+          answers={questions[number].answers}
+          userAnswer={userAnswers ? userAnswers[number] : undefined}
+          callback={checkAnswer}
+        />
+      )}
+      {!gameOver && !loading && userAnswers.length === number + 1 && number !== TOTAL_QUESTIONS - 1 ? (
+        <QuizButton className="next" onClick={nextQuestion}>
+          Next Question
+        </QuizButton>
+      ) : null}
+    </Wrapper>
+  );
 }
 
 export default Quiz;
