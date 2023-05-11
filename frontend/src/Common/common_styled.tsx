@@ -1,5 +1,5 @@
-import React from 'react';
 import styled from 'styled-components';
+import { motion } from 'framer-motion';
 import submitBtn from '../Assets/etc/submitBtn.png';
 
 export const DialogBox = styled.div<{ color: string }>`
@@ -71,6 +71,12 @@ export const OptionBtn = styled.button`
   font-size: 1.2em;
   padding: 10px 20px 10px 20px;
   margin: 10px;
+  cursor: pointer;
+  &:hover {
+    background-color: #f1daff;
+    transform: scale(1.03);
+  }
+  transition: all 0.1s;
 `;
 
 export const InputBox = styled.div`
@@ -116,4 +122,19 @@ export const CelticDetail = styled.div`
   height: auto;
   font-size: 1.2em;
   white-space: pre-wrap;
+`;
+
+export const NpcBox = styled(motion.div)`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const NpcCharacter = styled(motion.div)`
+  width: 30vw;
+  > img {
+    width: 30vw;
+  }
 `;

@@ -7,7 +7,7 @@ import * as common from '../Common/common_style';
 import Dialog from '../../Common/dialog';
 import { CelticDetails } from '../../Common/conversations';
 import charDialog0 from '../../Assets/characters/charDialog0.png';
-import { DialogNPC } from '../../Common/common_styled';
+import { DialogNPC, OptionBtn } from '../../Common/common_styled';
 import { API } from '../../API';
 import { getLuckyCard } from '../../Common/tarotSelect';
 import { useLuckyStore } from '../../Store/User/lucky';
@@ -47,7 +47,7 @@ function CelticSpread() {
           <CelticStart />
         </common.SideBlock>
         <common.SideBlock>
-          <common.NextBtn onClick={onNext}>해석보기</common.NextBtn>
+          <OptionBtn onClick={onNext}>해석보기</OptionBtn>
         </common.SideBlock>
       </layer.MainBox>
     );
@@ -68,7 +68,7 @@ function CelticSpread() {
                 <common.ModalBackdrop onClick={showModal}>
                   <common.ModalView onClick={(e) => e.stopPropagation()}>
                     <Celtic />
-                    <common.ExitBtn onClick={showModal}>X</common.ExitBtn>
+                    <OptionBtn onClick={showModal}>닫기</OptionBtn>
                   </common.ModalView>
                 </common.ModalBackdrop>
               ) : null}
@@ -81,9 +81,7 @@ function CelticSpread() {
         <DialogNPC src={charDialog0} />
         <Dialog content={text.page1} next={false}>
           {/* <common.SpreadBtn onClick={onNext}>다음</common.SpreadBtn> */}
-          <button type="button" onClick={onNext}>
-            다음
-          </button>
+          <OptionBtn onClick={onNext}>다음</OptionBtn>
         </Dialog>
       </>
     );
@@ -104,7 +102,7 @@ function CelticSpread() {
                 <common.ModalBackdrop onClick={showModal}>
                   <common.ModalView onClick={(e) => e.stopPropagation()}>
                     <Celtic />
-                    <common.ExitBtn onClick={showModal}>X</common.ExitBtn>
+                    <OptionBtn onClick={showModal}>닫기</OptionBtn>
                   </common.ModalView>
                 </common.ModalBackdrop>
               ) : null}
@@ -113,7 +111,7 @@ function CelticSpread() {
         </common.CardArea>
         <DialogNPC src={charDialog0} />
         <Dialog content={text.page2} next={false}>
-          <common.SpreadBtn onClick={onNext}>다음</common.SpreadBtn>
+          <OptionBtn onClick={onNext}>다음</OptionBtn>
         </Dialog>
         {/* <common.ChatArea>
           <common.SpreadBtn onClick={onNext}>다음</common.SpreadBtn>
@@ -137,7 +135,7 @@ function CelticSpread() {
                 <common.ModalBackdrop onClick={showModal}>
                   <common.ModalView onClick={(e) => e.stopPropagation()}>
                     <Celtic />
-                    <common.ExitBtn onClick={showModal}>X</common.ExitBtn>
+                    <OptionBtn onClick={showModal}>닫기</OptionBtn>
                   </common.ModalView>
                 </common.ModalBackdrop>
               ) : null}
@@ -146,7 +144,7 @@ function CelticSpread() {
         </common.CardArea>
         <DialogNPC src={charDialog0} />
         <Dialog content={text.page3} next={false}>
-          <common.SpreadBtn onClick={onNext}>다음</common.SpreadBtn>
+          <OptionBtn onClick={onNext}>다음</OptionBtn>
         </Dialog>
         {/* <common.ChatArea>
           <common.SpreadBtn onClick={onNext}>다음</common.SpreadBtn>
@@ -170,7 +168,7 @@ function CelticSpread() {
                 <common.ModalBackdrop onClick={showModal}>
                   <common.ModalView onClick={(e) => e.stopPropagation()}>
                     <Celtic />
-                    <common.ExitBtn onClick={showModal}>X</common.ExitBtn>
+                    <OptionBtn onClick={showModal}>닫기</OptionBtn>
                   </common.ModalView>
                 </common.ModalBackdrop>
               ) : null}
@@ -179,7 +177,7 @@ function CelticSpread() {
         </common.CardArea>
         <DialogNPC src={charDialog0} />
         <Dialog content={text.page4} next={false}>
-          <common.SpreadBtn onClick={onNext}>다음</common.SpreadBtn>
+          <OptionBtn onClick={onNext}>다음</OptionBtn>
         </Dialog>
         {/* <common.ChatArea>
           <common.SpreadBtn onClick={onNext}>다음</common.SpreadBtn>
@@ -203,7 +201,7 @@ function CelticSpread() {
                 <common.ModalBackdrop onClick={showModal}>
                   <common.ModalView onClick={(e) => e.stopPropagation()}>
                     <Celtic />
-                    <common.ExitBtn onClick={showModal}>X</common.ExitBtn>
+                    <OptionBtn onClick={showModal}>닫기</OptionBtn>
                   </common.ModalView>
                 </common.ModalBackdrop>
               ) : null}
@@ -212,7 +210,7 @@ function CelticSpread() {
         </common.CardArea>
         <DialogNPC src={charDialog0} />
         <Dialog content={text.page5} next={false}>
-          <common.SpreadBtn onClick={MoveLucky}>럭키!</common.SpreadBtn>
+          <OptionBtn onClick={MoveLucky}>럭키!</OptionBtn>
         </Dialog>
         {/* <common.ChatArea>
           <common.SpreadBtn onClick={onNext}>다음</common.SpreadBtn>
