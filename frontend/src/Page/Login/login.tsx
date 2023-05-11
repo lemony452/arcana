@@ -12,30 +12,21 @@ export function GoogleLogin() {
   // const GOOGLE_REDIRECT_URI = `https://ssafy-8d107-arcana.firebaseapp.com/__/auth/handler`;
   // const GOOGLE_CLIENT_ID = `122535767259-mir9chcomcejjs8tsagiuqajsogbdjn6.apps.googleusercontent.com`;
   // const GOOGLE_URI = `https://accounts.google.com/o/oauth2/auth?scope=profile&response_type=code&redirect_uri=${GOOGLE_REDIRECT_URI}&client_id=${GOOGLE_CLIENT_ID}`;
-  const [u, setU] = useState();
+  const [userData, setUserData] = useState<any>();
   const { setUser, setIsLogin } = userInfoStore();
 
   const login = () => {
     const provider = new GoogleAuthProvider();
-    signInWithPopup(auth, provider);
+    signInWithPopup(auth, provider)
+      .then((data) => {
+        setUserData(data.user);
+        console.log(data);
+        setIsLogin(true);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
-
-  const logout = () => {
-    signOut(auth);
-  };
-
-  const stateChange = onAuthStateChanged(auth, (currentUser: any) => {
-    setU(currentUser);
-    setUser(currentUser);
-    setIsLogin(true);
-  });
-
-  useEffect(() => {
-    return () => {
-      stateChange();
-      console.log(u);
-    };
-  }, []);
 
   return (
     // <a href={GOOGLE_URI}>
