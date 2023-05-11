@@ -1,5 +1,6 @@
 package com.jumzip.arcana.api.controller;
 
+import com.jumzip.arcana.api.request.UserRegisterRequest;
 import com.jumzip.arcana.api.service.UserService;
 import com.jumzip.arcana.db.entity.TimeCard;
 import com.jumzip.arcana.db.entity.User;
@@ -53,6 +54,13 @@ public class UserController {
 
     이걸 그대로 받아와서 User Entity에 해당하는 값을 대입
 */
+    @Operation(summary = "User DB에 등록", description = "사용자의 정보를 리턴한다")
+    @PostMapping("register")
+    public User registerUser(@RequestBody UserRegisterRequest userReq) {
+        User user = userService.registerUser(userReq);
+        return user;
+    }
+
     @Operation(summary = "UserInfo 조회", description = "사용자의 정보를 리턴한다")
     @GetMapping("info")
     public User GetUserInfo(@RequestHeader String uid) {
