@@ -1,43 +1,12 @@
-FROM ubuntu:20.04
+FROM python:3.8.10
 
-USER root
-
-ENV LANG=C.UTF-8
-ENV DEBIAN_FRONTEND=noninteractive
-RUN apt-get update && apt-get install git -y && \
-  apt-get install -y --no-install-recommends tzdata g++ curl
-
-# install java
-RUN apt-get install -y openjdk-8-jdk
-ENV JAVA_HOME="/usr/lib/jvm/java-1.8-openjdk"
-
-# install python
-RUN apt install software-properties-common -y
-RUN add-apt-repository ppa:deadsnakes/ppa -y
-RUN apt install python3.8 -y
-RUN apt-get install -y python3-pip
-RUN cd /usr/local/bin && \
-  ln -s /usr/bin/python3 python && \
-  ln -s /usr/bin/pip3 pip && \
-  pip install --upgrade pip
-
-
-# apt clean
-RUN apt-get clean && \
-  rm -rf /var/lib/apt/lists/*
-
-# copy resources
 RUN mkdir -p /app
 WORKDIR /app
 
 COPY ./fastapi /app/
 
-# install python package
+# RUN python -m pip install --upgrade pip
+# RUN pip3 install tensorflow==2.12.0
 RUN pip install -r requirements.txt
 
-# install kobart
-RUN pip3 install git+https://github.com/SKT-AI/KoBART#egg=kobart
-
-EXPOSE 18082
-
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "18082"]
+CMD uvicorn --host=0.0.0.0 --port 18082 main:app
