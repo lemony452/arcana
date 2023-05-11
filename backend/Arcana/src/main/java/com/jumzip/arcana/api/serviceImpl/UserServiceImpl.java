@@ -1,5 +1,6 @@
 package com.jumzip.arcana.api.serviceImpl;
 
+import com.jumzip.arcana.api.request.UserRegisterRequest;
 import com.jumzip.arcana.api.service.UserService;
 import com.jumzip.arcana.db.entity.User;
 import com.jumzip.arcana.db.repository.UserRepository;
@@ -14,6 +15,15 @@ import javax.transaction.Transactional;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepo;
+
+    @Override
+    public User registerUser(UserRegisterRequest userReq) {
+        User user = new User();
+        user.setUid(userReq.getUid());
+        user.setEmail(userReq.getEmail());
+        userRepo.saveUser(user);
+        return user;
+    }
 
     @Override
     public User getUserData(String uid) {
