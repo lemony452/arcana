@@ -17,7 +17,7 @@ import F9 from '../../Assets/cards/F9.svg';
 import F14 from '../../Assets/cards/F14.svg';
 import Dialog from '../../Common/dialog';
 import charDialog0 from '../../Assets/characters/charDialog0.png';
-import { DialogNPC } from '../../Common/common_styled';
+import { DialogNPC, OptionBtn } from '../../Common/common_styled';
 import KakaoIcon from '../../Assets/etc/icon-kakao.png';
 import Camera from '../../Assets/etc/camera.png';
 import Home from '../../Assets/etc/home.png';
@@ -138,15 +138,7 @@ function LuckyPage() {
       )}
 
       <Dialog content={cardContent} next={false}>
-        {!resultPage && checkSelectState === true && (
-          <luckyPage.Btn
-            whileHover={{ scale: [null, 1.1, 1.1] }}
-            transition={{ duration: 0.4 }}
-            onClick={resultPageHandler}
-          >
-            공유하기
-          </luckyPage.Btn>
-        )}
+        {!resultPage && checkSelectState === true && <OptionBtn onClick={resultPageHandler}>공유하기</OptionBtn>}
         {resultPage && (
           <luckyPage.ButtonBox>
             <div>

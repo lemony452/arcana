@@ -81,6 +81,9 @@ export const MarkContentTitle = styled(motion.div)`
   font-size: 2vw;
   letter-spacing: 0.5vw;
   font-weight: bolder;
+  color: #09203f;
+  text-shadow: 0 1px 1px #c0c0c0, 0 2px 0 #a8a7a6, 0 3px 0 #8b8a89, 0 4px 0px #7d7b7a, 0 5px 0px #686766,
+    0 6px 3px #5f5e5d;
   z-index: 2;
 `;
 

@@ -5,7 +5,7 @@ import Three from './three_spread';
 import ThreeStart from './three_spread_animation';
 import ThreeNum from './three_spread_num';
 import * as common from '../../Common/common_style';
-import { DialogNPC } from '../../../Common/common_styled';
+import { DialogNPC, OptionBtn } from '../../../Common/common_styled';
 import Dialog from '../../../Common/dialog';
 import charDialog0 from '../../../Assets/characters/charDialog0.png';
 import { InstantDetails } from '../../../Common/conversations';
@@ -33,7 +33,7 @@ function ThreeSpread() {
           <ThreeStart />
         </common.SideBlock>
         <common.SideBlock>
-          <common.NextBtn onClick={onNext}>해석보기</common.NextBtn>
+          <OptionBtn onClick={onNext}>해석보기</OptionBtn>
         </common.SideBlock>
       </layer.MainBox>
     );
@@ -58,7 +58,7 @@ function ThreeSpread() {
         </common.ChatArea> */}
         <DialogNPC src={charDialog0} />
         <Dialog content={text.page1} next={false}>
-          <common.SpreadBtn onClick={onNext}>다음</common.SpreadBtn>
+          <OptionBtn onClick={onNext}>다음</OptionBtn>
         </Dialog>
       </>
     );
@@ -85,7 +85,7 @@ function ThreeSpread() {
         </common.ChatArea> */}
         <DialogNPC src={charDialog0} />
         <Dialog content={text.page3} next={false}>
-          <common.SpreadBtn onClick={toHome}>메인으로</common.SpreadBtn>
+          <OptionBtn onClick={toHome}>메인으로</OptionBtn>
         </Dialog>
       </>
     );
