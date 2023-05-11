@@ -15,6 +15,7 @@ import {
   ReplayTarots,
 } from '../mypage_style';
 import TarotList from './TarotList';
+import { userInfoStore } from '../../../Store/User/info';
 import cardIcon from '../../../Assets/etc/cardIcon.png';
 import homeBtnImg from '../../../Assets/etc/homBtn.png';
 import LoveCoverImg from '../../../Assets/etc/cover1.png';
@@ -26,6 +27,7 @@ function TarotListDetail() {
   const MoveMain = () => {
     navigate('/');
   };
+  const { nickname } = userInfoStore();
   const [detailQuestion, setQuestion] = useState('내 올해 연애운 봐줘');
   const [detailOption, setOption] = useState('사랑운💘');
   const [detailDate, setDate] = useState('23.05.01');
@@ -100,7 +102,9 @@ function TarotListDetail() {
       </Side>
       <DetailContent>
         <DetailCover src={LoveCoverImg} />
-        <DetailTitle>샛노란 병아리 님의 {detailOption}</DetailTitle>
+        <DetailTitle>
+          {nickname}의 {detailOption}
+        </DetailTitle>
         <DetailDate>{detailDate}</DetailDate>
         <DetailQuestion>{detailQuestion ? `❝ ${detailQuestion} ❞` : null}</DetailQuestion>
         <DetailFortune>
