@@ -9,7 +9,7 @@ interface InfoState {
   setIsLogin: (login: boolean) => void;
 }
 
-export const useInfoStore = create<InfoState>((set) => ({
+export const userInfoStore = create<InfoState>((set) => ({
   nickname: '',
   tarotToken: 0,
   isLogin: false,
