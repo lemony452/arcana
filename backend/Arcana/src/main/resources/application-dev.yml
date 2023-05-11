@@ -35,3 +35,7 @@ jwt:
   token-validity-in-seconds: 3600000
   # 1 day
   refresh-token-validity-in-seconds: 86400000
+
+# kakao
+kakao:
+  client: 49505a61dc30b027fd8d12856836c7fb
