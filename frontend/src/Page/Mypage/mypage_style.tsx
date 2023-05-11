@@ -153,3 +153,12 @@ export const LogoutBtn = styled.div`
   font-size: 2em;
   font-weight: bold;
 `;
+
+export const EditNickName = styled.img`
+  width: 1.5em;
+  margin-left: 0.5em;
+`;
+
+export const EditInputBox = styled.input`
+  width: 80%;
+`;
