@@ -6,11 +6,12 @@ import { userInfoStore } from '../../Store/User/info';
 
 function LoginModal({ goLogin, setGoLogin }: { goLogin: any; setGoLogin: any }) {
   const outside = useRef<any>(null);
-  const { isLogin } = userInfoStore();
+  const { isLogin, isSide, setIsSide } = userInfoStore();
 
   const handleClose = (event: any) => {
     if (!outside.current.contains(event.target)) {
       setGoLogin(false);
+      console.log('로그인 모달 사라져라!');
     }
   };
 

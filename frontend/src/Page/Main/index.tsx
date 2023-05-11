@@ -14,7 +14,7 @@ function Main() {
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   const [goLogin, setGoLogin] = useState(false);
-  const { isLogin, setIsLogin } = userInfoStore();
+  const { isLogin, setIsLogin, isSide, setIsSide } = userInfoStore();
   // const cookie = getCookie('token');
   const toggleSide = () => {
     // if (cookie) {
@@ -24,7 +24,9 @@ function Main() {
     // }
     // setIsOpen(true);
     if (isLogin) {
-      setIsOpen(true);
+      // setIsOpen(true);
+      setIsSide(true);
+      setGoLogin(false);
     } else {
       setGoLogin(true);
     }
@@ -37,13 +39,14 @@ function Main() {
   // } else if (cardOrder === 'instant') {
   //   color = 'green';
   // }
+  useEffect(() => {
+    console.log(goLogin);
+  }, [goLogin]);
 
-  console.log(cardOrder);
-  console.log(hover);
   return (
     <div style={{ position: 'relative' }}>
       <SideBtn src={SideBtnImg} onClick={toggleSide} />
-      <SideBar isOpen={isOpen} setIsOpen={setIsOpen} />
+      <SideBar />
       <LoginModal goLogin={goLogin} setGoLogin={setGoLogin} />
       <TitleBox>
         <Title>ARCANA</Title>
@@ -52,7 +55,7 @@ function Main() {
       <StyledCircle className={cardOrder} />
       <Character />
       <CardBox>
-        <Card isOpen={isOpen} />
+        <Card isOpen={isSide} />
       </CardBox>
     </div>
   );
