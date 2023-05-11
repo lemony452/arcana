@@ -17,6 +17,8 @@ public class UserRepositorySupport implements UserRepository {
     }
 
     @Override
+    public void saveUser(User user) { em.persist(user); }
+    @Override
     public void removeUser(String uid) { em.remove(findUserByUid(uid)); }
 
     @Override
