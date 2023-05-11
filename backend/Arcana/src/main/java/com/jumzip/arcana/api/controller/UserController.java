@@ -59,7 +59,6 @@ public class UserController {
             "expiresIn": "3600",
             "rawUserInfo": "{\"updated_time\":\"2017-02-22T01:10:57+0000\",\"gender\":\"male\", ...}"
     }
-
     이걸 그대로 받아와서 User Entity에 해당하는 값을 대입
 */
     @Operation(summary = "User DB에 등록", description = "사용자의 정보를 리턴한다")
