@@ -83,12 +83,12 @@ function Quiz() {
           <quizStyle.RightArea>
             <quizStyle.TimerDivide>{second}</quizStyle.TimerDivide>
             <quizStyle.TimerDivide>문제 만들기 너어어어어무우우우우 귀찮아요!</quizStyle.TimerDivide>
-            <quizStyle.QuestBox>
+            {/* <quizStyle.QuestBox>
               <quizStyle.QuestArea onClick={onCheck}>A</quizStyle.QuestArea>
               <quizStyle.QuestArea onClick={onCheck}>B</quizStyle.QuestArea>
               <quizStyle.QuestArea onClick={onCheck}>C</quizStyle.QuestArea>
               <quizStyle.QuestArea onClick={onCheck}>D</quizStyle.QuestArea>
-            </quizStyle.QuestBox>
+            </quizStyle.QuestBox> */}
           </quizStyle.RightArea>
         </quizStyle.FullArea>
       );
@@ -116,12 +116,12 @@ function Quiz() {
           <quizStyle.RightArea>
             <quizStyle.TimerDivide>{second}</quizStyle.TimerDivide>
             <quizStyle.TimerDivide>문제 만들기 너어어어어무우우우우 귀찮아요!</quizStyle.TimerDivide>
-            <quizStyle.QuestBox>
+            {/* <quizStyle.QuestBox>
               <quizStyle.QuestArea onClick={onCheck}>A</quizStyle.QuestArea>
               <quizStyle.QuestArea onClick={onCheck}>B</quizStyle.QuestArea>
               <quizStyle.QuestArea onClick={onCheck}>C</quizStyle.QuestArea>
               <quizStyle.QuestArea onClick={onCheck}>D</quizStyle.QuestArea>
-            </quizStyle.QuestBox>
+            </quizStyle.QuestBox> */}
           </quizStyle.RightArea>
         </quizStyle.FullArea>
       );

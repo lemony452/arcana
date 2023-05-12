@@ -1,8 +1,8 @@
 import React from 'react';
-// Types
 import { AnswerObject } from './index';
-// Styles
 import { Wrapper, ButtonWrapper, QuestionButton } from './question_card_style';
+import * as quizStyle from './quiz_style';
+import * as common from '../Common/common_style';
 
 type Props = {
   question: string;
@@ -11,28 +11,47 @@ type Props = {
   userAnswer: AnswerObject | undefined;
   questionNr: number;
   totalQuestions: number;
+  timeCount: string;
 };
 
-const QuestionCard: React.FC<Props> = ({ question, answers, callback, userAnswer, questionNr, totalQuestions }) => (
-  <Wrapper>
-    <p className="number">
-      Question: {questionNr} / {totalQuestions}
-    </p>
-    <p dangerouslySetInnerHTML={{ __html: question }} />
-    <div>
-      {answers.map((answer) => (
-        <ButtonWrapper
-          key={answer}
-          correct={userAnswer?.correctAnswer === answer}
-          userClicked={userAnswer?.answer === answer}
-        >
-          <QuestionButton disabled={!!userAnswer} value={answer} onClick={callback}>
-            <span dangerouslySetInnerHTML={{ __html: answer }} />
-          </QuestionButton>
-        </ButtonWrapper>
-      ))}
-    </div>
-  </Wrapper>
+const QuestionCard: React.FC<Props> = ({
+  question,
+  answers,
+  callback,
+  userAnswer,
+  questionNr,
+  totalQuestions,
+  timeCount,
+}) => (
+  <quizStyle.FullArea>
+    <quizStyle.LeftCard>
+      <quizStyle.CardArea />
+    </quizStyle.LeftCard>
+    <quizStyle.RightArea>
+      <quizStyle.TimerDivide>
+        <p className="number">
+          Question: {questionNr} / {totalQuestions}
+        </p>
+        <p>{timeCount}</p>
+      </quizStyle.TimerDivide>
+      <quizStyle.TimerDivide>
+        <p dangerouslySetInnerHTML={{ __html: question }} />
+      </quizStyle.TimerDivide>
+      <div>
+        {answers.map((answer) => (
+          <quizStyle.QuestBox
+            key={answer}
+            correct={userAnswer?.correctAnswer === answer}
+            userClicked={userAnswer?.answer === answer}
+          >
+            <QuestionButton disabled={!!userAnswer} value={answer} onClick={callback}>
+              <span dangerouslySetInnerHTML={{ __html: answer }} />
+            </QuestionButton>
+          </quizStyle.QuestBox>
+        ))}
+      </div>
+    </quizStyle.RightArea>
+  </quizStyle.FullArea>
 );
 
 export default QuestionCard;

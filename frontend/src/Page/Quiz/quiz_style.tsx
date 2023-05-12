@@ -56,11 +56,37 @@ export const CardArea = styled.div`
   display: flex;
 `;
 
-export const QuestBox = styled(PeopleArea)`
+type QuestBoxProps = {
+  correct: boolean;
+  userClicked: boolean;
+};
+
+export const QuestBox = styled.div<QuestBoxProps>`
+  width: 100%;
+  height: 50%;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
   align-items: center;
+
+  transition: all 0.3s ease;
+  :hover {
+    opacity: 0.8;
+  }
+  button {
+    cursor: pointer;
+    user-select: none;
+    font-size: 0.8rem;
+    height: 45%;
+    width: 45%;
+    /* margin: 5px 0; */
+    background-color: teal;
+    border: 3px solid #ffffff;
+    box-shadow: 1px 2px 0px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    color: #fff;
+    text-shadow: 0px 1px 0px rgba(0, 0, 0, 0.25);
+  }
 `;
 
 export const QuestArea = styled.div`
