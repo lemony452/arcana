@@ -8,13 +8,10 @@ import googleBtnImg from '../../Assets/etc/googleBtn.png';
 import kakaoBtnImg from '../../Assets/etc/kakaoBtn.png';
 import { userInfoStore } from '../../Store/User/info';
 import { API } from '../../API';
+import 'dotenv/config';
 
 export function GoogleLogin() {
   // 구글 인가 코드 요청
-  // const GOOGLE_REDIRECT_URI = `https://ssafy-8d107-arcana.firebaseapp.com/__/auth/handler`;
-  // const GOOGLE_CLIENT_ID = `122535767259-mir9chcomcejjs8tsagiuqajsogbdjn6.apps.googleusercontent.com`;
-  // const GOOGLE_URI = `https://accounts.google.com/o/oauth2/auth?scope=profile&response_type=code&redirect_uri=${GOOGLE_REDIRECT_URI}&client_id=${GOOGLE_CLIENT_ID}`;
-  // const [userData, setUserData] = useState<any>();
   const { setUser, setIsLogin, setNickname } = userInfoStore();
 
   const login = async () => {
@@ -41,11 +38,11 @@ export function GoogleLogin() {
 }
 
 export function KakaoLogin() {
+  const { REACT_APP_KAKAO_CLIENT_ID } = process.env;
   // 카카오 인가 코드 요청
-  const KAKAO_CLIENT_ID = '49505a61dc30b027fd8d12856836c7fb';
   // const KAKAO_REDIRECT_URI = `https://k8d107.p.ssafy.io/api/v1/user/kakao`;
   const KAKAO_REDIRECT_URI = `https://k8d107.p.ssafy.io/authkakao`;
-  const KAKAO_URI = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${KAKAO_CLIENT_ID}&redirect_uri=${KAKAO_REDIRECT_URI}`;
+  const KAKAO_URI = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${REACT_APP_KAKAO_CLIENT_ID}&redirect_uri=${KAKAO_REDIRECT_URI}`;
 
   return (
     <a href={KAKAO_URI}>
