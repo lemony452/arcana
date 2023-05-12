@@ -1,5 +1,6 @@
 package com.jumzip.arcana.api.service;
 
+import com.jumzip.arcana.api.request.ReportRequest;
 import com.jumzip.arcana.db.entity.Card;
 import com.jumzip.arcana.db.entity.InstantCard;
 import com.jumzip.arcana.db.entity.LuckyCard;
@@ -19,4 +20,6 @@ public interface TarotService {
     TimeCard getTimeData(int card_idx);
 
     LuckyCard getLuckyData();
+
+    Boolean saveReport(ReportRequest reportRequest);
 }
