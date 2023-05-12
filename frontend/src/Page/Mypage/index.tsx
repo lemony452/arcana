@@ -35,7 +35,7 @@ function SideBar() {
     return () => {
       document.removeEventListener('mousedown', handleClose);
     };
-  });
+  }, [isSide]);
 
   return (
     <Side ref={outside} className={isSide ? 'open' : ''}>

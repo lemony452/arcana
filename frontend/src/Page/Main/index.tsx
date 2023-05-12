@@ -13,8 +13,8 @@ import { userInfoStore } from '../../Store/User/info';
 function Main() {
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
-  const [goLogin, setGoLogin] = useState(false);
-  const { isLogin, setIsLogin, isSide, setIsSide } = userInfoStore();
+  // const [goLogin, setGoLogin] = useState(false);
+  const { isLogin, setIsLogin, isSide, setIsSide, goLogin, setGoLogin } = userInfoStore();
   // const cookie = getCookie('token');
   const toggleSide = () => {
     // if (cookie) {
@@ -26,7 +26,7 @@ function Main() {
     if (isLogin) {
       // setIsOpen(true);
       setIsSide(true);
-      setGoLogin(false);
+      // setGoLogin(false);
     } else {
       setGoLogin(true);
     }
@@ -39,15 +39,22 @@ function Main() {
   // } else if (cardOrder === 'instant') {
   //   color = 'green';
   // }
-  useEffect(() => {
-    console.log(goLogin);
-  }, [goLogin]);
+  // useEffect(() => {
+  //   console.log(goLogin);
+  // }, [goLogin]);
 
   return (
     <div style={{ position: 'relative' }}>
-      <SideBtn src={SideBtnImg} onClick={toggleSide} />
+      {isLogin ? (
+        <SideBtn src={SideBtnImg} onClick={toggleSide} />
+      ) : (
+        <button style={{ position: 'absolute' }} type="button" onClick={toggleSide}>
+          Login
+        </button>
+      )}
+      {/* <SideBtn src={SideBtnImg} onClick={toggleSide} /> */}
       <SideBar />
-      <LoginModal goLogin={goLogin} setGoLogin={setGoLogin} />
+      <LoginModal />
       <TitleBox>
         <Title>ARCANA</Title>
         <SubTitle>동물 친구들의 타로 서비스 아르카나</SubTitle>
