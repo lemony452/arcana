@@ -33,7 +33,7 @@ function LuckyPage() {
   const cardList = [
     {
       index: 0,
-      front: F0,
+      front: `https://k8d107.p.ssafy.io/api/v1/images/${lucky.card.idx}.png`,
       num: lucky.card.idx,
       title: lucky.card.name,
       content: `너의 행운 카드는 ${lucky.card.name} 이야! 아마 너에게 특별한 행운을 가져다 줄걸?`,
@@ -41,7 +41,7 @@ function LuckyPage() {
     },
     {
       index: 1,
-      front: F0,
+      front: `https://k8d107.p.ssafy.io/api/v1/images/${lucky.card.idx}.png`,
       num: lucky.card.idx,
       title: lucky.card.name,
       content: `너의 행운 카드는 ${lucky.card.name} 이야! 아마 너에게 특별한 행운을 가져다 줄걸?`,
@@ -49,7 +49,7 @@ function LuckyPage() {
     },
     {
       index: 2,
-      front: F14,
+      front: `https://k8d107.p.ssafy.io/api/v1/images/${lucky.card.idx}.png`,
       num: lucky.card.idx,
       title: lucky.card.name,
       content: `너의 행운 카드는 ${lucky.card.name} 이야! 아마 너에게 특별한 행운을 가져다 줄걸?`,

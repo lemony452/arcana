@@ -66,31 +66,48 @@ export const CelticPartFour = styled(motion.div)`
 export const CelticOne = styled(motion.div)`
   width: 64.08%;
   aspect-ratio: 3 / 5;
-  background-color: gold;
   position: relative;
+  > img {
+    width: 100%;
+    height: 100%;
+  }
 `;
 
 export const CelticTwo = styled(motion.div)`
   width: 64.08%;
   aspect-ratio: 3 / 5;
-  background-color: orange;
   position: relative;
   left: 35.5%;
   bottom: 27.5%;
+  > img {
+    width: 100%;
+    height: 100%;
+  }
 `;
 
 export const CelticThree = styled(motion.div)`
   width: 64.08%;
   aspect-ratio: 3 / 5;
-  background-color: gold;
+  > img {
+    width: 100%;
+    height: 100%;
+  }
 `;
 
-export const CelticFour = styled(CelticThree)``;
+export const CelticFour = styled(CelticThree)`
+  > img {
+    width: 100%;
+    height: 100%;
+  }
+`;
 
 export const CelticFive = styled(motion.div)`
   width: 100%;
   aspect-ratio: 3 / 5;
-  background-color: gold;
+  > img {
+    width: 100%;
+    height: 100%;
+  }
 `;
 
 // export const CelticSix = styled(CelticFive)``;
