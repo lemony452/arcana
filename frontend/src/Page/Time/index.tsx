@@ -5,7 +5,7 @@ import { OptionBtn, InputText, SubmitBtn, DialogNPC } from '../../Common/common_
 import { TimeConversations } from '../../Common/conversations';
 import Dialog from '../../Common/dialog';
 // import { TimeGPT } from '../../Store/FortuneTelling/gpt';
-import { useFortuneStore } from '../../Store/User/fortune';
+import { useFortuneStore, CardState } from '../../Store/User/fortune';
 import charDialog0 from '../../Assets/characters/charDialog0.png';
 import { SpreadBtn } from '../Common/common_style';
 import { API, API2 } from '../../API';
@@ -19,6 +19,8 @@ function Time() {
   const navigate = useNavigate();
 
   // time 옵션 선택 함수
+  // let TarotList: CardState[];
+  let timements = '';
   const OptionClick = async (f: keyof typeof TimeConversations.t2) => {
     // time api request 보내기
     let cardNum: number;
@@ -27,14 +29,17 @@ function Time() {
     } else {
       cardNum = 6;
     }
-    let timements = '';
     await API.get(`/api/v1/tarot/time/${cardNum}`).then((res) => {
       console.log(res);
+      const resData = res.data;
       for (let i = 0; i < cardNum; i += 1) {
+        delete res.data[i].idx;
         timements += res.data[i].timement;
       }
-      addFortune(timements);
-      setTarotList(res.data);
+      console.log(resData);
+      setTarotList(resData);
+      console.log(timements);
+      // addFortune(timements);
     });
     await navigate(`/time/${f}`);
     await API2.post(`/api/v2/summary`, {
