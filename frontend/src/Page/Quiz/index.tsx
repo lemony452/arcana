@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import SockJS from 'sockjs-client';
 import { fetchQuizQuestions, QuestionsState } from './api';
 import * as quizStyle from './quiz_style';
 import * as common from '../Common/common_style';
@@ -32,6 +33,7 @@ function Quiz() {
   const INTERVAL = 1000;
   const [timeLeft, setTimeLeft] = useState<number>(MINUTES_IN_MS);
 
+  // 날짜를 내 맘대로 바꿔놓고 확인해보기
   const currentTime = () => {
     const date = new Date();
     const hours = String(date.getHours()).padStart(2, '0');
@@ -40,11 +42,11 @@ function Quiz() {
     setRealTime(`${hours}:${minutes}:${seconds}`);
   };
 
-  // const startTimer = () => {
-  //   setInterval(currentTime);
-  // };
+  const startTimer = () => {
+    setInterval(currentTime);
+  };
 
-  // startTimer();
+  startTimer();
 
   // 퀴즈 시작
   const startQuiz = async () => {
