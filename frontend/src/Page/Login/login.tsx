@@ -12,7 +12,7 @@ import { API } from '../../API';
 
 export function GoogleLogin() {
   // 구글 인가 코드 요청
-  const { setUser, setIsLogin, setNickname } = userInfoStore();
+  const { setUser, setIsLogin, setNickname, user, setWeekly, setTicket } = userInfoStore();
 
   const login = async () => {
     const provider = new GoogleAuthProvider();
@@ -24,6 +24,19 @@ export function GoogleLogin() {
         setNickname(userData.displayName!);
         setIsLogin(true);
         setUser({ uid: userData.uid, email: userData.email, providerId: userData.providerId });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    await API.get(`/api/v1/user/info`, {
+      headers: {
+        uid: user.uid,
+      },
+    })
+      .then((res) => {
+        console.log(res);
+        setWeekly(res.data.weekly_count);
+        setTicket(res.data.ticket);
       })
       .catch((err) => {
         console.log(err);
