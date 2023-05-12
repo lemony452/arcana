@@ -4,7 +4,7 @@ import { useCookies } from 'react-cookie';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { setCookie } from './cookie';
 import { API } from '../../API';
-// import { API } from '../../API';
+import { userInfoStore } from '../../Store/User/info';
 
 // export function GoogleRedirect() {
 //   // 쿼리 스트링 형태의 인가코드를 백으로 전달해줘야함
@@ -38,6 +38,7 @@ export function KakaoRedirect() {
   const URLcode = location.search.split('=')[1];
   console.log(URLcode);
   const navigate = useNavigate();
+  const { setUser, setTicket, setToken, setWeekly } = userInfoStore();
 
   useEffect(() => {
     const login = async () => {
@@ -46,7 +47,13 @@ export function KakaoRedirect() {
       // const URLcode = new URL(document.location).searchParams.get('code');
       API.get(`/api/v1/user/kakao?code=${URLcode}`).then((res) => {
         console.log(res);
-        navigate('/', { replace: true });
+        const userData = res.data;
+        setUser({
+          uid: userData.uid,
+          email: userData.email,
+          providerId: userData.provider,
+        });
+        navigate('/');
       });
     };
     login();

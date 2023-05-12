@@ -13,12 +13,18 @@ interface InfoState {
   isLogin: boolean;
   isSide: boolean;
   goLogin: boolean;
+  ticket: number;
+  weekly_count: number;
+  token: number;
   setUser: (user: any) => void;
   setNickname: (name: string) => void;
   setTarotToken: (t: number) => void;
   setIsLogin: (login: boolean) => void;
   setIsSide: (side: boolean) => void;
   setGoLogin: (go: boolean) => void;
+  setTicket: (t: number) => void;
+  setWeekly: (w: number) => void;
+  setToken: (t: number) => void;
 }
 
 export const userInfoStore = create<InfoState>((set) => ({
@@ -32,6 +38,9 @@ export const userInfoStore = create<InfoState>((set) => ({
   isLogin: false,
   isSide: false,
   goLogin: false,
+  ticket: 0,
+  weekly_count: 0,
+  token: 0,
   setUser: (u) => {
     set(() => ({ user: u }));
   },
@@ -49,5 +58,14 @@ export const userInfoStore = create<InfoState>((set) => ({
   },
   setGoLogin: (go) => {
     set(() => ({ goLogin: go }));
+  },
+  setTicket: (t) => {
+    set(() => ({ ticket: t }));
+  },
+  setWeekly: (w) => {
+    set(() => ({ weekly_count: w }));
+  },
+  setToken: (t) => {
+    set(() => ({ token: t }));
   },
 }));
