@@ -9,7 +9,7 @@ import Npc from '../../Common/npc';
 import { useFortuneStore, CardState, saveIndexStore } from '../../Store/User/fortune';
 import charDialog0 from '../../Assets/characters/charDialog0.png';
 import { SpreadBtn } from '../Common/common_style';
-import { API, API2 } from '../../API';
+import { API } from '../../API';
 
 function Time() {
   const [celticText, SetcelticText] = useState(TimeConversations.t1);
@@ -59,7 +59,7 @@ function Time() {
     // await setTarotList(ans.data);
     // await navigate(`/time/${f}`);
     // await navigate(`/time/${f}`);
-    API2.post(`/api/v2/summary`, {
+    API.post(`/api/v2/summary`, {
       text: timements,
     }).then((res: any) => {
       console.log(res.data.summary);
