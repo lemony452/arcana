@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { fetchQuizQuestions, QuestionsState } from './api';
 import * as quizStyle from './quiz_style';
 import * as common from '../Common/common_style';
+import { DialogNPC } from '../../Common/common_styled';
+import charDialog0 from '../../Assets/characters/charDialog0.png';
 import QuestionCard from './question_card';
 
 export type AnswerObject = {
@@ -12,7 +14,7 @@ export type AnswerObject = {
   correctAnswer: string;
 };
 
-const TOTAL_QUESTIONS = 10;
+const TOTAL_QUESTIONS = 2;
 
 function Quiz() {
   const [index, setIndex] = useState(0);
@@ -22,11 +24,27 @@ function Quiz() {
   const [userAnswers, setUserAnswers] = useState<AnswerObject[]>([]);
   const [score, setScore] = useState(0);
   const [gameOver, setGameOver] = useState(true);
+  const [fail, setFail] = useState(false);
+  const [realTime, setRealTime] = useState('00:00:00');
 
   const navigate = useNavigate();
   const MINUTES_IN_MS = 0;
   const INTERVAL = 1000;
   const [timeLeft, setTimeLeft] = useState<number>(MINUTES_IN_MS);
+
+  const currentTime = () => {
+    const date = new Date();
+    const hours = String(date.getHours()).padStart(2, '0');
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+    const seconds = String(date.getSeconds()).padStart(2, '0');
+    setRealTime(`${hours}:${minutes}:${seconds}`);
+  };
+
+  // const startTimer = () => {
+  //   setInterval(currentTime);
+  // };
+
+  // startTimer();
 
   // 퀴즈 시작
   const startQuiz = async () => {
@@ -67,6 +85,7 @@ function Quiz() {
       const correct = questions[number].correct_answer === answer;
       // Add score if answer is correct
       if (correct) setScore((prev) => prev + 1);
+      if (!correct) setFail(true);
       // Save the answer in the array for user answers
       const answerObject = {
         question: questions[number].question,
@@ -106,16 +125,19 @@ function Quiz() {
         <quizStyle.LeftArea>
           <quizStyle.CharacterDialog>오늘도 완주를 향해 화이팅!</quizStyle.CharacterDialog>
           {/* 아래 onNext는 백엔드 서버에서 시간 받으면 자동으로 실행되게끔 구현해두어여함 */}
-          <quizStyle.CharacterArea onClick={startQuiz}>일단 누르면 다음 문제로</quizStyle.CharacterArea>
+          <quizStyle.CharacterArea onClick={startQuiz}>
+            <DialogNPC src={charDialog0} />
+          </quizStyle.CharacterArea>
         </quizStyle.LeftArea>
         <quizStyle.RightArea>
-          <quizStyle.TimerArea>존야</quizStyle.TimerArea>
-          <quizStyle.PeopleArea>인구수가 꽉 찼습니다.</quizStyle.PeopleArea>
+          <quizStyle.TimerDivide>시작까지 남은 시간</quizStyle.TimerDivide>
+          <quizStyle.TimerDivide>{realTime}</quizStyle.TimerDivide>
+          <quizStyle.PeopleArea>현재 참여 인원</quizStyle.PeopleArea>
         </quizStyle.RightArea>
       </quizStyle.FullArea>
     );
   }
-  if (index >= 1 && index <= 9) {
+  if (index >= 1 && index <= TOTAL_QUESTIONS) {
     if (timeLeft !== 0) {
       return (
         <div>
@@ -131,6 +153,21 @@ function Quiz() {
             />
           )}
         </div>
+      );
+    }
+    if (fail === true) {
+      return (
+        <quizStyle.FullArea>
+          {loading ? <p>Loading Questions...</p> : null}
+          <quizStyle.LeftArea>
+            <quizStyle.CharacterDialog>앗 오답이었어요.</quizStyle.CharacterDialog>
+            <quizStyle.CharacterArea onClick={goHome}>틀렸으니 다음기회에</quizStyle.CharacterArea>
+          </quizStyle.LeftArea>
+          <quizStyle.RightArea>
+            <quizStyle.TimerArea>정답자 수를 보여주는 자리 (생존자)</quizStyle.TimerArea>
+            <quizStyle.PeopleArea>정답률 그래프가 들어갈 자리</quizStyle.PeopleArea>
+          </quizStyle.RightArea>
+        </quizStyle.FullArea>
       );
     }
     return (
@@ -143,13 +180,13 @@ function Quiz() {
           <quizStyle.CharacterArea onClick={nextQuestion}>일단 누르면 다음 문제로</quizStyle.CharacterArea>
         </quizStyle.LeftArea>
         <quizStyle.RightArea>
-          <quizStyle.TimerArea>존야</quizStyle.TimerArea>
-          <quizStyle.PeopleArea>인구수가 꽉 찼습니다.</quizStyle.PeopleArea>
+          <quizStyle.TimerArea>정답자 수를 보여주는 자리 (생존자)</quizStyle.TimerArea>
+          <quizStyle.PeopleArea>정답률 그래프가 들어갈 자리</quizStyle.PeopleArea>
         </quizStyle.RightArea>
       </quizStyle.FullArea>
     );
   }
-  if (index === 10) {
+  if (index === TOTAL_QUESTIONS + 1) {
     if (timeLeft !== 0) {
       return (
         <div>
@@ -170,13 +207,13 @@ function Quiz() {
     return (
       <quizStyle.FullArea>
         <quizStyle.LeftArea>
-          <quizStyle.CharacterDialog>오늘도 완주를 향해 화이팅! {index}</quizStyle.CharacterDialog>
+          <quizStyle.CharacterDialog>모든 문제를 다 풀었어요!</quizStyle.CharacterDialog>
           <quizStyle.CharacterArea onClick={showModal}>
-            여기가 마지막 페이지
+            <DialogNPC src={charDialog0} />
             {modalOpen ? (
               <common.ModalBackdrop>
                 <common.QuizModal onClick={(e) => e.stopPropagation()}>
-                  토큰 받았으면 집에가 얼른
+                  보상으로 토큰을 줄게요
                   <common.ToHomeBtn onClick={goHome}>
                     메인으로 <br />
                     돌아가기
@@ -187,8 +224,8 @@ function Quiz() {
           </quizStyle.CharacterArea>
         </quizStyle.LeftArea>
         <quizStyle.RightArea>
-          <quizStyle.TimerArea>존야</quizStyle.TimerArea>
-          <quizStyle.PeopleArea>인구수가 꽉 찼습니다.</quizStyle.PeopleArea>
+          <quizStyle.TimerArea>정답자 수를 보여주는 자리 (생존자)</quizStyle.TimerArea>
+          <quizStyle.PeopleArea>정답률 그래프가 들어갈 자리</quizStyle.PeopleArea>
         </quizStyle.RightArea>
       </quizStyle.FullArea>
     );
