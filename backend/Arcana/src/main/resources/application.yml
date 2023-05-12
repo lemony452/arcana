@@ -13,8 +13,6 @@ server:
       charset: UTF-8
       enabled: true
       force: true
-    context-path:
-
 
 spring:
   profiles:
