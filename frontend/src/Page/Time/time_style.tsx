@@ -47,12 +47,18 @@ export const TimePartTwo = styled.div`
 export const MonthCard = styled.div`
   height: 90%;
   aspect-ratio: 3 / 5;
-  background-color: gold;
+  > img {
+    width: 100%;
+    height: 100%;
+  }
 `;
 
 export const YearCard = styled.div`
   height: 80%;
   aspect-ratio: 3 / 5;
-  background-color: gold;
+  > img {
+    width: 100%;
+    height: 100%;
+  }
   margin-inline: 0.2vw;
 `;

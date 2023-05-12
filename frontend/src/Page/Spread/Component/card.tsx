@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import * as CardStyle from './card_style';
 import CardBack from '../../../Assets/cards/cardb.svg';
+import { saveIndexStore } from '../../../Store/User/fortune';
 // import CardFront from '../../../Assets/cards/F0.svg';
 
 interface SelectedCardType {
@@ -46,7 +47,7 @@ export function SelectedCard({
       onClick={handleCardClick}
       initial={{ rotate: 1 * index - 39 }}
       animate={{ rotate: 0 }}
-      transition={{ delay: 0.7, duration: 1 }}
+      transition={{ delay: 0.7, duration: 0.7, ease: 'easeInOut' }}
       style={{ originX: 0.5, originY: 5 }}
     >
       <CardStyle.SelectedCardBody style={{ transform: selected ? 'translateY(-50px)' : 'none' }}>
@@ -60,7 +61,7 @@ export function SelectedCard({
       onClick={handleCardClick}
       initial={{ rotate: -39 }}
       animate={{ rotate: 1 * index - 39 }}
-      transition={{ duration: (2 / 78) * index }}
+      transition={{ delay: 0.5, duration: (1.5 / 78) * index }}
       style={{ originX: 0.5, originY: 5 }}
     >
       <CardStyle.SelectedCardBody style={{ transform: selected ? 'translateY(-50px)' : 'none' }}>
@@ -82,6 +83,9 @@ interface FilppedCardType {
 
 export function FilppedCard({ card, size, setTime }: FilppedCardType) {
   const [flipped, setFlipped] = useState(false);
+  const { indexList } = saveIndexStore();
+
+  const imgSrc = `https://k8d107.p.ssafy.io/api/v1/images/${indexList[card - 1]}.png`;
 
   useEffect(() => {
     setTimeout(() => {
@@ -93,9 +97,11 @@ export function FilppedCard({ card, size, setTime }: FilppedCardType) {
     <CardStyle.FilppedBody size={size}>
       <CardStyle.FilppedCardBody style={{ transform: flipped ? 'rotateY(180deg)' : 'none' }}>
         <CardStyle.FilppedBack size={size}>
-          <img src={CardBack} alt="Cardback" />
+          <img src={CardBack} alt="CardBack" />
         </CardStyle.FilppedBack>
-        <CardStyle.FilppedFront size={size}>{card}</CardStyle.FilppedFront>
+        <CardStyle.FilppedFront size={size}>
+          <img src={imgSrc} alt="CardFront" />
+        </CardStyle.FilppedFront>
       </CardStyle.FilppedCardBody>
     </CardStyle.FilppedBody>
   );
