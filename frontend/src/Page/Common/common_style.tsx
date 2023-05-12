@@ -30,9 +30,12 @@ export const SideBlock = styled.div`
 export const DefaultCard = styled.div`
   height: 70%;
   aspect-ratio: 3 / 5;
-  background-color: #e2cd0e;
   margin: 0 2%;
   position: flex;
+  > img {
+    height: 100%;
+    width: 100%;
+  }
 `;
 
 export const NextBtn = styled.button`

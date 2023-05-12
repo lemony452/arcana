@@ -11,6 +11,7 @@ import { YearDetails } from '../../../Common/conversations';
 import { useLuckyStore } from '../../../Store/User/lucky';
 import { getLuckyCard } from '../../../Common/tarotSelect';
 import { API } from '../../../API';
+import { saveIndexStore } from '../../../Store/User/fortune';
 
 function YearSpread() {
   const navigate = useNavigate();
@@ -23,6 +24,8 @@ function YearSpread() {
   const showModal = () => {
     setModalOpen(!modalOpen);
   };
+  const { indexList } = saveIndexStore();
+  const imgSrc = (num: number) => `https://k8d107.p.ssafy.io/api/v1/images/${indexList[num - 1]}.png`;
   const { lucky, setLuckyMent, setLucky } = useLuckyStore();
   const MoveLucky = async () => {
     // 럭키카드 api
@@ -61,9 +64,15 @@ function YearSpread() {
         <common.CardArea>
           <common.SideBlock />
           <common.CardBox>
-            <common.DefaultCard>1</common.DefaultCard>
-            <common.DefaultCard>2</common.DefaultCard>
-            <common.DefaultCard>3</common.DefaultCard>
+            <common.DefaultCard>
+              <img src={imgSrc(1)} alt="CardFront" />
+            </common.DefaultCard>
+            <common.DefaultCard>
+              <img src={imgSrc(2)} alt="CardFront" />
+            </common.DefaultCard>
+            <common.DefaultCard>
+              <img src={imgSrc(3)} alt="CardFront" />
+            </common.DefaultCard>
           </common.CardBox>
           <common.SideBlock>
             <common.SpreadModal onClick={showModal}>
@@ -95,9 +104,15 @@ function YearSpread() {
         <common.CardArea>
           <common.SideBlock />
           <common.CardBox>
-            <common.DefaultCard>4</common.DefaultCard>
-            <common.DefaultCard>5</common.DefaultCard>
-            <common.DefaultCard>6</common.DefaultCard>
+            <common.DefaultCard>
+              <img src={imgSrc(4)} alt="CardFront" />
+            </common.DefaultCard>
+            <common.DefaultCard>
+              <img src={imgSrc(5)} alt="CardFront" />
+            </common.DefaultCard>
+            <common.DefaultCard>
+              <img src={imgSrc(6)} alt="CardFront" />
+            </common.DefaultCard>
           </common.CardBox>
           <common.SideBlock>
             <common.SpreadModal onClick={showModal}>
@@ -129,9 +144,15 @@ function YearSpread() {
         <common.CardArea>
           <common.SideBlock />
           <common.CardBox>
-            <common.DefaultCard>7</common.DefaultCard>
-            <common.DefaultCard>8</common.DefaultCard>
-            <common.DefaultCard>9</common.DefaultCard>
+            <common.DefaultCard>
+              <img src={imgSrc(7)} alt="CardFront" />
+            </common.DefaultCard>
+            <common.DefaultCard>
+              <img src={imgSrc(8)} alt="CardFront" />
+            </common.DefaultCard>
+            <common.DefaultCard>
+              <img src={imgSrc(9)} alt="CardFront" />
+            </common.DefaultCard>
           </common.CardBox>
           <common.SideBlock>
             <common.SpreadModal onClick={showModal}>
@@ -163,9 +184,15 @@ function YearSpread() {
         <common.CardArea>
           <common.SideBlock />
           <common.CardBox>
-            <common.DefaultCard>10</common.DefaultCard>
-            <common.DefaultCard>11</common.DefaultCard>
-            <common.DefaultCard>12</common.DefaultCard>
+            <common.DefaultCard>
+              <img src={imgSrc(10)} alt="CardFront" />
+            </common.DefaultCard>
+            <common.DefaultCard>
+              <img src={imgSrc(11)} alt="CardFront" />
+            </common.DefaultCard>
+            <common.DefaultCard>
+              <img src={imgSrc(12)} alt="CardFront" />
+            </common.DefaultCard>
           </common.CardBox>
           <common.SideBlock>
             <common.SpreadModal onClick={showModal}>
