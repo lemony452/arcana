@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { TitleBox, Title, SubTitle, StyledCircle, CardBox, SideBtn } from './main_style';
 import Card from './components/card';
 import Character from './components/character';
@@ -9,6 +9,7 @@ import SideBar from '../Mypage';
 import { getCookie } from '../Login/cookie';
 import LoginModal from '../Login/modal';
 import { userInfoStore } from '../../Store/User/info';
+import { API } from '../../API';
 
 function Main() {
   const navigate = useNavigate();
@@ -32,16 +33,25 @@ function Main() {
     }
   };
 
+  const login = async (urlcode: string) => {
+    console.log('카카오 로그인 중');
+    // await window.open(KAKAO_URI);
+    // const URLcode = new URL(document.location).searchParams.get('code');
+    await API.get(`/api/v1/user/kakao?code=${urlcode}`).then((res) => {
+      console.log(res);
+    });
+    await navigate('/', { replace: true });
+  };
+
   const { cardOrder } = useCardStore();
   const { hover } = useHoverStore();
-  // if (cardOrder === 'time') {
-  //   colorRef.current?.className('time');
-  // } else if (cardOrder === 'instant') {
-  //   color = 'green';
-  // }
-  // useEffect(() => {
-  //   console.log(goLogin);
-  // }, [goLogin]);
+  const location = useLocation();
+
+  if (location.search.includes('=')) {
+    const URLcode = location.search.split('=')[1];
+    console.log(URLcode);
+    login(URLcode);
+  }
 
   return (
     <div style={{ position: 'relative' }}>

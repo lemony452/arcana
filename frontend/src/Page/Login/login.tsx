@@ -1,13 +1,13 @@
 import React, { useEffect, useState, createContext } from 'react';
 import { Cookies } from 'react-cookie';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from 'firebase/auth';
 import { auth } from '../../firebase';
 import { GoogleBtn, KakaoBtn } from './login_style';
 import googleBtnImg from '../../Assets/etc/googleBtn.png';
 import kakaoBtnImg from '../../Assets/etc/kakaoBtn.png';
 import { userInfoStore } from '../../Store/User/info';
-import { API, API2 } from '../../API';
+import { API } from '../../API';
 
 export function GoogleLogin() {
   // 구글 인가 코드 요청
@@ -43,28 +43,29 @@ export function GoogleLogin() {
 export function KakaoLogin() {
   // 카카오 인가 코드 요청
   const KAKAO_CLIENT_ID = '49505a61dc30b027fd8d12856836c7fb';
-  const KAKAO_REDIRECT_URI = `https://k8d107.p.ssafy.io/api/v1/user/kakao`;
+  // const KAKAO_REDIRECT_URI = `https://k8d107.p.ssafy.io/api/v1/user/kakao`;
+  const KAKAO_REDIRECT_URI = `https://k8d107.p.ssafy.io`;
   const KAKAO_URI = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${KAKAO_CLIENT_ID}&redirect_uri=${KAKAO_REDIRECT_URI}`;
   const navigate = useNavigate();
 
-  const login = async () => {
-    setTimeout(() => {
-      console.log('카카오 로그인 중');
-      // await window.open(KAKAO_URI);
-      const URLcode = new URL(window.location.href).searchParams.get('code');
-      console.log(URLcode);
-      API2.get(`/api/v1/user/kakao`, {
-        // code: URLcode
-      }).then((res) => {
-        console.log(res);
-      });
-      navigate('/', { replace: true });
-    }, 3000);
-  };
+  // const location = useLocation();
+  // useEffect(() => {
+  //   const login = async () => {
+  //     console.log('카카오 로그인 중');
+  //     // await window.open(KAKAO_URI);
+  //     // const URLcode = new URL(document.location).searchParams.get('code');
+  //     const URLcode = location.search.split('=')[1];
+  //     console.log(URLcode);
+  //     API.get(`/api/v1/user/kakao?code=${URLcode}`).then((res) => {
+  //       console.log(res);
+  //     });
+  //     navigate('/', { replace: true });
+  //   };
+  // }, []);
 
   return (
-    // <a href={KAKAO_URI}>
-    <KakaoBtn src={kakaoBtnImg} />
-    // </a>?\
+    <a href={KAKAO_URI}>
+      <KakaoBtn src={kakaoBtnImg} />
+    </a>
   );
 }
