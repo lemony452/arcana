@@ -14,7 +14,7 @@ import CelticDetail from './Page/Celtic/detail';
 import Instant from './Page/Instant';
 import SpreadCard from './Page/Spread/spread_card';
 import Quiz from './Page/Quiz';
-import { KakaoRedirect } from './Page/Login/redirect';
+// import { KakaoRedirect } from './Page/Login/redirect';
 import TarotListDetail from './Page/Mypage/Component/detail';
 
 function App() {
@@ -41,7 +41,7 @@ function App() {
         <Route path="/spread" element={<SpreadCard />} />
         <Route path="/quiz" element={<Quiz />} />
         {/* <Route path="/authgoogle" element={<GoogleRedirect />} /> */}
-        <Route path="/authkakao" element={<KakaoRedirect />} />
+        {/* <Route path="/authkakao" element={<KakaoRedirect />} /> */}
         <Route path="/detail" element={<TarotListDetail />} />
       </Routes>
     </div>

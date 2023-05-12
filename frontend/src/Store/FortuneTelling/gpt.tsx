@@ -82,7 +82,7 @@ const slicingText = (text: string) => {
 };
 
 // 요청 형식
-// [카드목록][{카드배열}] 카드가 있다. [방식] celtic-cross. {운세종류} 관련된 점을 보고 싶다. {해석요청} [질문] {질문내용} 응답은 [응답]처럼 한다. 카드 설명은 1 문장으로 한다. 말투는 구어체로 하고 ~거야 라고 한다. [응답] {카드이름} : {카드설명} | {카드이름} : {카드설명}
+// "넌 타로카드 전문가야.\n[카드목록][Nine of Wands(Reverse), Four of Pentacles(Reverse), Page of Cups(Reverse), Five of Swords(Reverse), Five of Pentacles(Reverse), Five of Cups, The World, Queen of Pentacles, Four of Cups, The Hanged Man(Reverse)] 카드가 있어.\n[방식] celtic-cross.\n학업과 관련된 점을 보고 싶어. 9, 10번째 카드의 결과만 응답해줘.\n[질문] 내일 시험인데 잘 볼 수 있을까?\n카드 설명은 반드시 1 문장으로 해줘. 그리고 말투는 반드시 구어체로 하고 ~거야 라고 해줘.\n응답에 카드 이름이 들어갈 필요없어. 응답은 반드시 [응답]의 형태처럼 '|' 기호로 구분해줘.\n[응답] {카드설명} | {카드설명}"
 let slicingAns: string[];
 export const createCompletion = async (tarotNameList: string, option: string, inputValue: string, position: string) => {
   const prompt = `넌 타로카드 전문가야.\n[카드목록][${tarotNameList}] 카드가 있어.\n[방식] celtic-cross.\n${option}과 관련된 점을 보고싶어. ${position}번째 카드의 결과만 응답해줘.\n[질문] ${inputValue}\n카드 설명은 반드시 1 문장으로 해줘. 그리고 말투는 반드시 구어체로 하고 ~거야 라고 해줘.\n응답에 카드 이름이 들어갈 필요없어. 응답은 반드시 [응답]의 형태처럼 '|' 기호로 구분해줘.\n[응답] {카드설명} | {카드설명}`;

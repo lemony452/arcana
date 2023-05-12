@@ -3,6 +3,8 @@ import axios from 'axios';
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
 import { setCookie } from './cookie';
+import { API2 } from '../../API';
+// import { API } from '../../API';
 
 // export function GoogleRedirect() {
 //   // 쿼리 스트링 형태의 인가코드를 백으로 전달해줘야함
@@ -30,18 +32,30 @@ import { setCookie } from './cookie';
 //   return <div>로그인중입니다.</div>;
 // }
 
-export function KakaoRedirect() {
+function KakaoRedirect() {
   const code = new URL(window.location.href).searchParams.get('code');
+  console.log(code);
   const navigate = useNavigate();
 
   useEffect(() => {
     async function KakaoLogin() {
-      const res = await axios.post(`${process.env.REACT_APP_API}/api/user/login/kakao?code=${code}`);
-      const ACCESS_TOKEN = res.headers.authorization;
+      console.log('카카오 로그인 중');
+      await fetch(`https://k8d107.p.ssafy.io//api/v1/user/kakao?code=${code}`)
+        .then((res) => {
+          console.log(res);
+          return res.json();
+        })
+        .then((data) => {
+          console.log(data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      // const ACCESS_TOKEN = res.headers.authorization;
       // const REFRESH_TOKEN = res.headers['refresh-token'];
-      setCookie('token', ACCESS_TOKEN, {
-        path: '/',
-      });
+      // setCookie('token', ACCESS_TOKEN, {
+      //   path: '/',
+      // });
       // setCookie('refreshToken', REFRESH_TOKEN, {
       //   path: '/',
       // });
@@ -50,6 +64,4 @@ export function KakaoRedirect() {
     }
     KakaoLogin();
   }, []);
-
-  return <div>로그인중입니다.</div>;
 }
