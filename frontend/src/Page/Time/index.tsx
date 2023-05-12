@@ -5,11 +5,11 @@ import { OptionBtn, InputText, SubmitBtn, DialogNPC } from '../../Common/common_
 import { TimeConversations } from '../../Common/conversations';
 import Dialog from '../../Common/dialog';
 import Npc from '../../Common/npc';
-import { TimeGPT } from '../../Store/FortuneTelling/gpt';
-import { useFortuneStore } from '../../Store/User/fortune';
+// import { TimeGPT } from '../../Store/FortuneTelling/gpt';
+import { useFortuneStore, CardState } from '../../Store/User/fortune';
 import charDialog0 from '../../Assets/characters/charDialog0.png';
 import { SpreadBtn } from '../Common/common_style';
-import { API } from '../../API';
+import { API, API2 } from '../../API';
 
 function Time() {
   const [celticText, SetcelticText] = useState(TimeConversations.t1);
@@ -20,6 +20,8 @@ function Time() {
   const navigate = useNavigate();
 
   // time 옵션 선택 함수
+  // let TarotList: CardState[];
+  let timements = '';
   const OptionClick = async (f: keyof typeof TimeConversations.t2) => {
     // time api request 보내기
     let cardNum: number;
@@ -30,11 +32,17 @@ function Time() {
     }
     await API.get(`/api/v1/tarot/time/${cardNum}`).then((res) => {
       console.log(res);
+      const resData = res.data;
       for (let i = 0; i < cardNum; i += 1) {
-        addFortune(res.data[i].timement);
+        delete res.data[i].idx;
+        timements += res.data[i].timement;
       }
-      setTarotList(res.data);
+      console.log(resData);
+      setTarotList(resData);
+      console.log(timements);
+      // addFortune(timements);
     });
+
     // await API.post(`/api/v2/summary`, {
     //   text: fortune,
     // }).then((res: any) => {
@@ -44,6 +52,15 @@ function Time() {
     // await setTarotList(ans.data);
     // await navigate(`/time/${f}`);
     navigate('/spread', { state: `${f}` });
+    // await navigate(`/time/${f}`);
+    API2.post(`/api/v2/summary`, {
+      text: timements,
+    }).then((res: any) => {
+      console.log(res.data.summary);
+      setSummary(res.data.summary);
+    });
+    // await setTarotList(ans.data);
+
     SetcelticText(TimeConversations.t2[f]);
     setOption(f);
   };

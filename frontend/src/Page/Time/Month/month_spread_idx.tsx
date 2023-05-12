@@ -30,15 +30,17 @@ function MonthSpread() {
     // 럭키카드 api
     await API.get(`/api/v1/tarot/lucky/`).then((res: any) => {
       console.log(res);
-      setLuckyNum(res.data.card.idx);
-      setLuckyName(res.data.card.name);
+      // setLuckyNum(res.data.card.idx);
+      // setLuckyName(res.data.card.name);
+      console.log('lucky api 결과 : ', res.data);
+      // setLucky(res.data);
       setLuckyMent(res.data.luckyment);
     });
     await navigate('/lucky');
   };
 
   const text = MonthDetails();
-  console.log(text);
+  // console.log(text);
 
   if (index === 0) {
     return (
