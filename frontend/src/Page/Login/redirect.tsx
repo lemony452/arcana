@@ -38,14 +38,14 @@ export function KakaoRedirect() {
   const URLcode = location.search.split('=')[1];
   console.log(URLcode);
   const navigate = useNavigate();
-  const { setUser, setTicket, setToken, setWeekly } = userInfoStore();
+  const { setUser, setTicket, setToken, setWeekly, setIsLogin } = userInfoStore();
 
   useEffect(() => {
     const login = async () => {
       console.log('카카오 로그인 중');
       // await window.open(KAKAO_URI);
       // const URLcode = new URL(document.location).searchParams.get('code');
-      API.get(`/api/v1/user/kakao?code=${URLcode}`).then((res) => {
+      await API.get(`/api/v1/user/kakao?code=${URLcode}`).then((res) => {
         console.log(res);
         const userData = res.data;
         setUser({
@@ -54,6 +54,7 @@ export function KakaoRedirect() {
           providerId: userData.provider,
         });
         navigate('/');
+        setIsLogin(true);
       });
     };
     login();
