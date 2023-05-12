@@ -5,7 +5,7 @@ import { OptionBtn, InputText, SubmitBtn, DialogNPC } from '../../Common/common_
 import { CelticConversations } from '../../Common/conversations';
 import Dialog from '../../Common/dialog';
 import Npc from '../../Common/npc';
-import { CelticGPT, createCompletion } from '../../Store/FortuneTelling/gpt';
+import { createCompletion } from '../../Store/FortuneTelling/gpt';
 import { useFortuneStore, CardState, saveIndexStore } from '../../Store/User/fortune';
 import charDialog0 from '../../Assets/characters/charDialog0.png';
 

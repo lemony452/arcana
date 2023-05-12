@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { Configuration, OpenAIApi } from 'openai';
 import { useFortuneStore } from '../User/fortune';
-import 'dotenv/config';
+// import 'dotenv/config';
 
 const { REACT_APP_OPENAI_KEY } = process.env;
 const configuration = new Configuration({

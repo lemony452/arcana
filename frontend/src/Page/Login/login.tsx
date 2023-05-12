@@ -8,7 +8,7 @@ import googleBtnImg from '../../Assets/etc/googleBtn.png';
 import kakaoBtnImg from '../../Assets/etc/kakaoBtn.png';
 import { userInfoStore } from '../../Store/User/info';
 import { API } from '../../API';
-import 'dotenv/config';
+// import 'dotenv/config';
 
 export function GoogleLogin() {
   // 구글 인가 코드 요청
