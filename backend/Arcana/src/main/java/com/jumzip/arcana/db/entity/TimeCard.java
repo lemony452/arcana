@@ -17,5 +17,6 @@ public class TimeCard {
     @JoinColumn(name = "card_idx")
     private Card card;
 
-    private String timement;
+    @JoinColumn(name = "timement")
+    private String ment;
 }
