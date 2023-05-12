@@ -55,8 +55,8 @@ export const YearDetails = () => {
     page2: `4월 ${tarotList[3].card.name}의 의미는 ${tarotList[3].ment}\n5월 ${tarotList[4].card.name}의 의미는 ${tarotList[4].ment}\n6월 ${tarotList[5].card.name}의 의미는 ${tarotList[5].ment}`,
     page3: `7월 ${tarotList[6].card.name}의 의미는 ${tarotList[6].ment}\n8월 ${tarotList[7].card.name}의 의미는 ${tarotList[7].ment}\n9월 ${tarotList[8].card.name}의 의미는 ${tarotList[8].ment}`,
     page4: `10월 ${tarotList[9].card.name}의 의미는 ${tarotList[9].ment}\n11월 ${tarotList[10].card.name}의 의미는 ${tarotList[10].ment}\n12월 ${tarotList[11].card.name}의 의미는 ${tarotList[11].ment}`,
-    page5: `올 한 해 운세를 요약하자면 ${summary}`,
-    page6: `럭키 카드는 ${lucky.card.name}이 나왔어!!`,
+    page5: `올 한 해 운세를 요약하자면 ${summary}\n행운 카드를 얻고 싶으면 버튼을 누르게!`,
+    page6: `오호, 럭키 카드는 ${lucky.card.name}가 나왔네!!`,
   };
 
   return YearDetail;
@@ -68,10 +68,11 @@ export const MonthDetails = () => {
   console.log(tarotList);
 
   const MonthDetail = {
-    page1: `이번 달 운세를 해석해주겠네\n1~5일 ${tarotList[0].card.name}의 의미는 ${tarotList[0].ment}\n6~10일 ${tarotList[1].card.name}의 의미는 ${tarotList[1].ment}\n11~15일 ${tarotList[2].card.name}의 의미는 ${tarotList[2].ment}`,
-    page2: `16~20일 ${tarotList[3].card.name}의 의미는 ${tarotList[3].ment}\n21~25일 ${tarotList[4].card.name}의 의미는 ${tarotList[4].ment}\n25일~ ${tarotList[5].card.name}의 의미는 ${tarotList[5].ment}`,
-    page3: `이번 달 운세를 요약하자면 ${summary}`,
-    page4: `럭키 카드는 ${lucky.card.name}이 나왔어!!`,
+    page1: `이번 달 운세를 해석해주겠네\n1~5일 ${tarotList[0].card.name}의 의미는 ${tarotList[0].ment}\n6~10일 ${tarotList[1].card.name}의 의미는 ${tarotList[1].ment}`,
+    page2: `11~15일 ${tarotList[2].card.name}의 의미는 ${tarotList[2].ment}\n16~20일 ${tarotList[3].card.name}의 의미는 ${tarotList[3].ment}`,
+    page3: `21~25일 ${tarotList[4].card.name}의 의미는 ${tarotList[4].ment}\n25일~ ${tarotList[5].card.name}의 의미는 ${tarotList[5].ment}`,
+    page4: `이번 달 운세를 요약하자면 ${summary}\n행운 카드를 얻고 싶으면 버튼을 누르게!`,
+    page5: `오호, 럭키 카드는 ${lucky.card.name}가 나왔네!!`,
   };
 
   return MonthDetail;
