@@ -7,7 +7,7 @@ import { GoogleBtn, KakaoBtn } from './login_style';
 import googleBtnImg from '../../Assets/etc/googleBtn.png';
 import kakaoBtnImg from '../../Assets/etc/kakaoBtn.png';
 import { userInfoStore } from '../../Store/User/info';
-import { API } from '../../API';
+import { API, API2 } from '../../API';
 
 export function GoogleLogin() {
   // 구글 인가 코드 요청
@@ -51,19 +51,13 @@ export function KakaoLogin() {
     setTimeout(() => {
       console.log('카카오 로그인 중');
       // await window.open(KAKAO_URI);
-      const code = new URL(window.location.href).searchParams.get('code');
-      console.log(code);
-      fetch(`https://k8d107.p.ssafy.io//api/v1/user/kakao?code=${code}`)
-        .then((res) => {
-          console.log(res);
-          return res.json();
-        })
-        .then((data) => {
-          console.log(data);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      const URLcode = new URL(window.location.href).searchParams.get('code');
+      console.log(URLcode);
+      API2.get(`/api/v1/user/kakao`, {
+        // code: URLcode
+      }).then((res) => {
+        console.log(res);
+      });
       navigate('/', { replace: true });
     }, 3000);
   };
