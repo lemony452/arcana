@@ -144,14 +144,14 @@ function LuckyPage() {
               <TwitterShareButton
                 style={{ marginInline: '10px' }}
                 title={cardList[selectCard].result}
-                url="http://localhost:3000"
+                url="https://k8d107.p.ssafy.io"
               >
                 <TwitterIcon size={32} round borderRadius={24} />
               </TwitterShareButton>
               <TelegramShareButton
                 style={{ marginInline: '10px' }}
                 title={cardList[selectCard].result}
-                url="http://localhost:3000"
+                url="https://k8d107.p.ssafy.io"
               >
                 <TelegramIcon size={32} round borderRadius={24} />
               </TelegramShareButton>
