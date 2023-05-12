@@ -33,25 +33,8 @@ function Main() {
     }
   };
 
-  const login = async (urlcode: string) => {
-    console.log('카카오 로그인 중');
-    // await window.open(KAKAO_URI);
-    // const URLcode = new URL(document.location).searchParams.get('code');
-    await API.get(`/api/v1/user/kakao?code=${urlcode}`).then((res) => {
-      console.log(res);
-    });
-    await navigate('/', { replace: true });
-  };
-
   const { cardOrder } = useCardStore();
   const { hover } = useHoverStore();
-  const location = useLocation();
-
-  if (location.search.includes('=')) {
-    const URLcode = location.search.split('=')[1];
-    console.log(URLcode);
-    login(URLcode);
-  }
 
   return (
     <div style={{ position: 'relative' }}>
