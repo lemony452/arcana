@@ -1,5 +1,6 @@
 package com.jumzip.arcana.api.controller;
 
+import com.jumzip.arcana.api.request.ReportRequest;
 import com.jumzip.arcana.api.service.TarotService;
 import com.jumzip.arcana.db.entity.Card;
 import com.jumzip.arcana.db.entity.InstantCard;
@@ -7,7 +8,12 @@ import com.jumzip.arcana.db.entity.LuckyCard;
 import com.jumzip.arcana.db.entity.TimeCard;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import javax.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,6 +23,7 @@ import java.util.List;
 @RequestMapping("api/v1/tarot/")
 @RequiredArgsConstructor
 public class TarotController {
+    private final Logger logger = LoggerFactory.getLogger(TarotController.class);
 
     private final TarotService tarotService;
 
@@ -60,6 +67,26 @@ public class TarotController {
         LuckyCard lucky = tarotService.getLuckyData();
 
         return lucky;
+    }
+
+    @Operation(summary = "Log Save", description = "운세 기록을 저장 " 
+        + " \n logs 내부에 배열형태로 값을 넣어 보내주세요")
+    @PostMapping("log/save")
+    public ResponseEntity<?> saveReport(@RequestBody ReportRequest reportRequest) {
+        logger.info("start saveTarotLog");
+
+        try {
+            if (tarotService.saveReport(reportRequest)) {
+                return new ResponseEntity<>("SUCCESS", HttpStatus.OK);
+            }
+            else {
+                return new ResponseEntity<>("FAIL", HttpStatus.NOT_FOUND);
+            }
+        } catch (Exception e) {
+            logger.info("save TarotLog error - " + e.getMessage(), e);
+
+            return new ResponseEntity<>("FAIL", HttpStatus.BAD_REQUEST);
+        }
     }
 
 
