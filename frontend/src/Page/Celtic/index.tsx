@@ -6,7 +6,7 @@ import { CelticConversations } from '../../Common/conversations';
 import Dialog from '../../Common/dialog';
 import Npc from '../../Common/npc';
 import { CelticGPT, createCompletion } from '../../Store/FortuneTelling/gpt';
-import { useFortuneStore, CardState } from '../../Store/User/fortune';
+import { useFortuneStore, CardState, saveIndexStore } from '../../Store/User/fortune';
 import charDialog0 from '../../Assets/characters/charDialog0.png';
 
 function Celtic() {
@@ -16,10 +16,12 @@ function Celtic() {
   const inputValueRef = useRef<HTMLInputElement>(null);
   const { setTarotNameList, setOption, setInputValue, setFortune, setTarotList, tarotNameList } = useFortuneStore();
   const navigate = useNavigate();
+  const { setIndexList } = saveIndexStore(); // 카드 인덱스 가져오기
   // 특수 문자 처리
   const reg = /[`~!@#$%^&*()_|+\-=?;:'",.<>\\{\\}\\[\]\\\\/ ]/gim;
 
   let CardList: CardState[];
+  let IndexList: number[];
 
   // celtic 옵션 선택 함수
   const OptionClick = (f: keyof typeof CelticConversations.c2): void => {
@@ -38,6 +40,12 @@ function Celtic() {
       };
       return ListData;
     });
+
+    IndexList = tarots.map((tarot) => {
+      const indexData = tarot.id;
+      return indexData;
+    });
+    setIndexList(IndexList);
     console.log(CardList);
     setTarotList(CardList);
 

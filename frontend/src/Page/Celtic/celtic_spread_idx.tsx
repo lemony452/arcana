@@ -11,6 +11,7 @@ import { DialogNPC, OptionBtn } from '../../Common/common_styled';
 import { API } from '../../API';
 import { getLuckyCard } from '../../Common/tarotSelect';
 import { useLuckyStore } from '../../Store/User/lucky';
+import { saveIndexStore } from '../../Store/User/fortune';
 
 function CelticSpread() {
   const navigate = useNavigate();
@@ -18,6 +19,8 @@ function CelticSpread() {
   const onNext = () => {
     return setIndex(index + 1);
   };
+  const { indexList } = saveIndexStore();
+  const imgSrc = (num: number) => `https://k8d107.p.ssafy.io/api/v1/images/${indexList[num - 1]}.png`;
   console.log(index);
 
   const [modalOpen, setModalOpen] = useState(false); // modal
@@ -63,8 +66,12 @@ function CelticSpread() {
         <common.CardArea>
           <common.SideBlock />
           <common.CardBox>
-            <common.DefaultCard>1</common.DefaultCard>
-            <common.DefaultCard>2</common.DefaultCard>
+            <common.DefaultCard>
+              <img src={imgSrc(1)} alt="CardFront" />
+            </common.DefaultCard>
+            <common.DefaultCard>
+              <img src={imgSrc(2)} alt="CardFront" />
+            </common.DefaultCard>
           </common.CardBox>
           <common.SideBlock>
             <common.SpreadModal onClick={showModal}>
@@ -97,8 +104,12 @@ function CelticSpread() {
         <common.CardArea>
           <common.SideBlock />
           <common.CardBox>
-            <common.DefaultCard>3</common.DefaultCard>
-            <common.DefaultCard>4</common.DefaultCard>
+            <common.DefaultCard>
+              <img src={imgSrc(3)} alt="CardFront" />
+            </common.DefaultCard>
+            <common.DefaultCard>
+              <img src={imgSrc(4)} alt="CardFront" />
+            </common.DefaultCard>
           </common.CardBox>
           <common.SideBlock>
             <common.SpreadModal onClick={showModal}>
@@ -130,8 +141,12 @@ function CelticSpread() {
         <common.CardArea>
           <common.SideBlock />
           <common.CardBox>
-            <common.DefaultCard>5</common.DefaultCard>
-            <common.DefaultCard>6</common.DefaultCard>
+            <common.DefaultCard>
+              <img src={imgSrc(5)} alt="CardFront" />
+            </common.DefaultCard>
+            <common.DefaultCard>
+              <img src={imgSrc(6)} alt="CardFront" />
+            </common.DefaultCard>
           </common.CardBox>
           <common.SideBlock>
             <common.SpreadModal onClick={showModal}>
@@ -163,8 +178,12 @@ function CelticSpread() {
         <common.CardArea>
           <common.SideBlock />
           <common.CardBox>
-            <common.DefaultCard>7</common.DefaultCard>
-            <common.DefaultCard>8</common.DefaultCard>
+            <common.DefaultCard>
+              <img src={imgSrc(7)} alt="CardFront" />
+            </common.DefaultCard>
+            <common.DefaultCard>
+              <img src={imgSrc(8)} alt="CardFront" />
+            </common.DefaultCard>
           </common.CardBox>
           <common.SideBlock>
             <common.SpreadModal onClick={showModal}>
@@ -196,8 +215,12 @@ function CelticSpread() {
         <common.CardArea>
           <common.SideBlock />
           <common.CardBox>
-            <common.DefaultCard>9</common.DefaultCard>
-            <common.DefaultCard>10</common.DefaultCard>
+            <common.DefaultCard>
+              <img src={imgSrc(9)} alt="CardFront" />
+            </common.DefaultCard>
+            <common.DefaultCard>
+              <img src={imgSrc(10)} alt="CardFront" />
+            </common.DefaultCard>
           </common.CardBox>
           <common.SideBlock>
             <common.SpreadModal onClick={showModal}>
