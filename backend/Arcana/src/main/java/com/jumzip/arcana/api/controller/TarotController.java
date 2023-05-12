@@ -76,7 +76,7 @@ public class TarotController {
     }
 
     @Operation(summary = "Log Save", description = "운세 기록을 저장 " 
-        + " \n logs 내부에 배열형태로 값을 넣어 보내주세요")
+        + " \n reports 내부에 배열형태로 값을 넣어 보내주세요")
     @PostMapping("log")
     public ResponseEntity<?> saveReport(@RequestBody ReportRequest reportRequest) {
         logger.info("start saveTarotLog");
