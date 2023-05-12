@@ -149,5 +149,10 @@ public class TarotServiceImpl implements TarotService {
         }
     }
 
+    @Override
+    public List<Report> viewReport(String uid) {
+        return reportRepo.findAllByUid(uid);
+    }
+
 
 }
