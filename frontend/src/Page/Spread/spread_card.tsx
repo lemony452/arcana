@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import * as spreadCard from './spread_card_style';
 import { SelectedCard } from './Component/card';
+import Dialog from '../../Common/dialog';
+import { OptionBtn } from '../../Common/common_styled';
 
 function SpreadCard() {
   const navigate = useNavigate();
@@ -69,22 +71,24 @@ function SpreadCard() {
   };
 
   const variants = {
-    move: { y: [0, 40, -500] },
+    start: { opacity: [0, 1], transition: { duration: 0.5 } },
+    move: { opacity: [1], y: [0, 40, -500], transition: { delay: 2, duration: 0.7, ease: 'easeIn' } },
   };
+
+  const spreadContent =
+    selectedCardList.length === 0
+      ? `카드를 ${needCardNum}장 선택해주세요`
+      : `${selectedCardList.length} / ${needCardNum} 장을 선택하셨습니다`;
 
   return (
     <spreadCard.Body>
-      <spreadCard.NumBody>
+      {/* <spreadCard.NumBody>
         <spreadCard.Num>
           선택 {selectedCardList.length} / {needCardNum}
         </spreadCard.Num>
         <spreadCard.Button onClick={confirmedHandler}>클릭</spreadCard.Button>
-      </spreadCard.NumBody>
-      <spreadCard.CardBody
-        animate={confirmedCard ? 'move' : 'none'}
-        variants={variants}
-        transition={{ delay: 2, duration: 1, ease: 'easeIn' }}
-      >
+      </spreadCard.NumBody> */}
+      <spreadCard.CardBody animate={confirmedCard ? 'move' : 'start'} variants={variants}>
         {cardList.map((card, index) => (
           <SelectedCard
             index={index}
@@ -97,6 +101,11 @@ function SpreadCard() {
           />
         ))}
       </spreadCard.CardBody>
+      <Dialog content={spreadContent} next={false}>
+        {!confirmedCard && selectedCardList.length === needCardNum && (
+          <OptionBtn onClick={confirmedHandler}>선택 완료</OptionBtn>
+        )}
+      </Dialog>
     </spreadCard.Body>
   );
 }
