@@ -2,13 +2,15 @@
 import { initializeApp } from 'firebase/app';
 import { getAnalytics } from 'firebase/analytics';
 import { getAuth } from 'firebase/auth';
+import 'dotenv/config';
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const { REACT_APP_FIREBASE_API_KEY } = process.env;
 const firebaseConfig = {
-  apiKey: 'AIzaSyAsm18-QSUY0yFRJLSfPuUwWNXXtR5NhOs',
+  apiKey: `${REACT_APP_FIREBASE_API_KEY}`,
   authDomain: 'ssafy-8d107-arcana.firebaseapp.com',
   projectId: 'ssafy-8d107-arcana',
   storageBucket: 'ssafy-8d107-arcana.appspot.com',
