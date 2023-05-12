@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { fetchQuizQuestions, QuestionsState } from './api';
 import * as quizStyle from './quiz_style';
+import * as common from '../Common/common_style';
 import QuestionCard from './question_card';
 import { QuizButton, Wrapper } from './quiz_style';
 
@@ -15,6 +16,7 @@ export type AnswerObject = {
 const TOTAL_QUESTIONS = 10;
 
 function Quiz() {
+  const [index, setIndex] = useState(0);
   const [loading, setLoading] = useState(false);
   const [questions, setQuestions] = useState<QuestionsState[]>([]);
   const [number, setNumber] = useState(0);
@@ -38,9 +40,10 @@ function Quiz() {
     setNumber(0);
     setLoading(false);
     setTimeLeft(MINUTES_IN_MS + 10 * 1000);
+    setIndex(index + 1);
   };
 
-  // 퀴즈 풀이시간 카운트 다운
+  // 퀴즈 풀이시간 카운트 다운s
   const second = String(Math.floor((timeLeft / 1000) % 60)).padStart(2, '0');
   useEffect(() => {
     const timer = setInterval(() => {
@@ -74,6 +77,9 @@ function Quiz() {
       };
       setUserAnswers((prev) => [...prev, answerObject]);
     }
+    setTimeLeft(0);
+    setIndex(index + 1);
+    console.log('imindex', index);
   };
 
   // 다음 문제로
@@ -94,45 +100,102 @@ function Quiz() {
     navigate('/');
   };
 
-  return (
-    <Wrapper>
-      {/* 게임 시작전 */}
-      {gameOver || userAnswers.length === TOTAL_QUESTIONS ? (
-        <quizStyle.FullArea>
-          <quizStyle.LeftArea>
-            <quizStyle.CharacterDialog>오늘도 완주를 향해 화이팅!</quizStyle.CharacterDialog>
-            {/* 아래 onNext는 백엔드 서버에서 시간 받으면 자동으로 실행되게끔 구현해두어여함 */}
-            <quizStyle.CharacterArea onClick={startQuiz}>일단 누르면 다음 문제로</quizStyle.CharacterArea>
-          </quizStyle.LeftArea>
-          <quizStyle.RightArea>
-            <quizStyle.TimerArea>존야</quizStyle.TimerArea>
-            <quizStyle.PeopleArea>인구수가 꽉 찼습니다.</quizStyle.PeopleArea>
-          </quizStyle.RightArea>
-        </quizStyle.FullArea>
-      ) : null}
+  // div 영역
+  if (index === 0) {
+    return (
+      <quizStyle.FullArea>
+        <quizStyle.LeftArea>
+          <quizStyle.CharacterDialog>오늘도 완주를 향해 화이팅!</quizStyle.CharacterDialog>
+          {/* 아래 onNext는 백엔드 서버에서 시간 받으면 자동으로 실행되게끔 구현해두어여함 */}
+          <quizStyle.CharacterArea onClick={startQuiz}>일단 누르면 다음 문제로</quizStyle.CharacterArea>
+        </quizStyle.LeftArea>
+        <quizStyle.RightArea>
+          <quizStyle.TimerArea>존야</quizStyle.TimerArea>
+          <quizStyle.PeopleArea>인구수가 꽉 찼습니다.</quizStyle.PeopleArea>
+        </quizStyle.RightArea>
+      </quizStyle.FullArea>
+    );
+  }
+  if (index >= 1 && index <= 9) {
+    if (timeLeft !== 0) {
+      return (
+        <div>
+          {!loading && !gameOver && (
+            <QuestionCard
+              questionNr={number + 1}
+              totalQuestions={TOTAL_QUESTIONS}
+              timeCount={second}
+              question={questions[number].question}
+              answers={questions[number].answers}
+              userAnswer={userAnswers ? userAnswers[number] : undefined}
+              callback={checkAnswer}
+            />
+          )}
+        </div>
+      );
+    }
+    return (
+      <quizStyle.FullArea>
+        {loading ? <p>Loading Questions...</p> : null}
+        <quizStyle.LeftArea>
+          <quizStyle.CharacterDialog>
+            {!gameOver ? <p className="score">Score: {score}</p> : null}
+          </quizStyle.CharacterDialog>
+          <quizStyle.CharacterArea onClick={nextQuestion}>일단 누르면 다음 문제로</quizStyle.CharacterArea>
+        </quizStyle.LeftArea>
+        <quizStyle.RightArea>
+          <quizStyle.TimerArea>존야</quizStyle.TimerArea>
+          <quizStyle.PeopleArea>인구수가 꽉 찼습니다.</quizStyle.PeopleArea>
+        </quizStyle.RightArea>
+      </quizStyle.FullArea>
+    );
+  }
+  if (index === 10) {
+    if (timeLeft !== 0) {
+      return (
+        <div>
+          {!loading && !gameOver && (
+            <QuestionCard
+              questionNr={number + 1}
+              totalQuestions={TOTAL_QUESTIONS}
+              timeCount={second}
+              question={questions[number].question}
+              answers={questions[number].answers}
+              userAnswer={userAnswers ? userAnswers[number] : undefined}
+              callback={checkAnswer}
+            />
+          )}
+        </div>
+      );
+    }
+    return (
+      <quizStyle.FullArea>
+        <quizStyle.LeftArea>
+          <quizStyle.CharacterDialog>오늘도 완주를 향해 화이팅! {index}</quizStyle.CharacterDialog>
+          <quizStyle.CharacterArea onClick={showModal}>
+            여기가 마지막 페이지
+            {modalOpen ? (
+              <common.ModalBackdrop>
+                <common.QuizModal onClick={(e) => e.stopPropagation()}>
+                  토큰 받았으면 집에가 얼른
+                  <common.ToHomeBtn onClick={goHome}>
+                    메인으로 <br />
+                    돌아가기
+                  </common.ToHomeBtn>
+                </common.QuizModal>
+              </common.ModalBackdrop>
+            ) : null}
+          </quizStyle.CharacterArea>
+        </quizStyle.LeftArea>
+        <quizStyle.RightArea>
+          <quizStyle.TimerArea>존야</quizStyle.TimerArea>
+          <quizStyle.PeopleArea>인구수가 꽉 찼습니다.</quizStyle.PeopleArea>
+        </quizStyle.RightArea>
+      </quizStyle.FullArea>
+    );
+  }
 
-      {/* 퀴즈 진행중 */}
-      {!gameOver ? <p className="score">Score: {score}</p> : null}
-      {loading ? <p>Loading Questions...</p> : null}
-      {!loading && !gameOver && (
-        <QuestionCard
-          questionNr={number + 1}
-          totalQuestions={TOTAL_QUESTIONS}
-          question={questions[number].question}
-          answers={questions[number].answers}
-          userAnswer={userAnswers ? userAnswers[number] : undefined}
-          callback={checkAnswer}
-        />
-      )}
-
-      {/* 퀴즈 종료 */}
-      {!gameOver && !loading && userAnswers.length === number + 1 && number !== TOTAL_QUESTIONS - 1 ? (
-        <QuizButton className="next" onClick={nextQuestion}>
-          Next Question
-        </QuizButton>
-      ) : null}
-    </Wrapper>
-  );
+  return null;
 }
 
 export default Quiz;
