@@ -30,6 +30,7 @@ export const InstantConversations = {
 
 export const CelticDetails = () => {
   const { tarotList, fortune } = useFortuneStore();
+  const { lucky, luckyMent } = useLuckyStore();
   console.log(tarotList);
 
   const CeticDetail = {
@@ -38,7 +39,7 @@ export const CelticDetails = () => {
     page3: `5번 카드는 ${tarotList[4].card.name}의 의미는 ${fortune[4]}\n6번 카드는 ${tarotList[5].card.name}의 의미는 ${fortune[5]}`,
     page4: `7번 카드는 ${tarotList[6].card.name}의 의미는 ${fortune[6]}\n8번 카드는 ${tarotList[7].card.name}의 의미는 ${fortune[7]}`,
     page5: `9번 카드는 ${tarotList[8].card.name}의 의미는 ${fortune[8]}\n10번 카드는 ${tarotList[9].card.name}의 의미는 ${fortune[9]}`,
-    page6: `럭키 카드는 ${tarotList[9].card.name}이 나왔어!!`,
+    page6: `럭키 카드는 ${lucky.card.name}이 나왔어!!`,
   };
 
   return CeticDetail;
@@ -46,7 +47,7 @@ export const CelticDetails = () => {
 
 export const YearDetails = () => {
   const { tarotList, summary } = useFortuneStore();
-  // const { lucky, luckyMent } = useLuckyStore();
+  const { lucky, luckyMent } = useLuckyStore();
   // console.log(tarotList);
 
   const YearDetail = {
@@ -55,7 +56,7 @@ export const YearDetails = () => {
     page3: `7월 ${tarotList[6].card.name}의 의미는 ${tarotList[6].ment}\n8월 ${tarotList[7].card.name}의 의미는 ${tarotList[7].ment}\n9월 ${tarotList[8].card.name}의 의미는 ${tarotList[8].ment}`,
     page4: `10월 ${tarotList[9].card.name}의 의미는 ${tarotList[9].ment}\n11월 ${tarotList[10].card.name}의 의미는 ${tarotList[10].ment}\n12월 ${tarotList[11].card.name}의 의미는 ${tarotList[11].ment}`,
     page5: `올 한 해 운세를 요약하자면 ${summary}`,
-    // page6: `럭키 카드는 ${lucky}이 나왔어!!`,
+    page6: `럭키 카드는 ${lucky.card.name}이 나왔어!!`,
   };
 
   return YearDetail;
@@ -63,14 +64,14 @@ export const YearDetails = () => {
 
 export const MonthDetails = () => {
   const { tarotList, summary } = useFortuneStore();
-  // const { lucky, luckyMent } = useLuckyStore();
+  const { lucky, luckyMent } = useLuckyStore();
   console.log(tarotList);
 
   const MonthDetail = {
     page1: `이번 달 운세를 해석해주겠네\n1~5일 ${tarotList[0].card.name}의 의미는 ${tarotList[0].ment}\n6~10일 ${tarotList[1].card.name}의 의미는 ${tarotList[1].ment}\n11~15일 ${tarotList[2].card.name}의 의미는 ${tarotList[2].ment}`,
     page2: `16~20일 ${tarotList[3].card.name}의 의미는 ${tarotList[3].ment}\n21~25일 ${tarotList[4].card.name}의 의미는 ${tarotList[4].ment}\n25일~ ${tarotList[5].card.name}의 의미는 ${tarotList[5].ment}`,
     page3: `이번 달 운세를 요약하자면 ${summary}`,
-    page4: `럭키 카드는 이 나왔어!!`,
+    page4: `럭키 카드는 ${lucky.card.name}이 나왔어!!`,
   };
 
   return MonthDetail;

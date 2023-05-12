@@ -25,7 +25,7 @@ function MonthSpread() {
     setModalOpen(!modalOpen);
   };
 
-  const { setLuckyNum, setLuckyName, setLuckyMent } = useLuckyStore();
+  const { lucky, setLuckyMent, setLucky } = useLuckyStore();
   const MoveLucky = async () => {
     // 럭키카드 api
     await API.get(`/api/v1/tarot/lucky/`).then((res: any) => {
@@ -33,7 +33,10 @@ function MonthSpread() {
       // setLuckyNum(res.data.card.idx);
       // setLuckyName(res.data.card.name);
       console.log('lucky api 결과 : ', res.data);
-      // setLucky(res.data);
+      setLucky({
+        card: res.data.card,
+        ment: res.data.luckyment,
+      });
       setLuckyMent(res.data.luckyment);
     });
     await navigate('/lucky');
