@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { fetchQuizQuestions, QuestionsState } from './api';
-// Components
+import * as quizStyle from './quiz_style';
 import QuestionCard from './question_card';
-// Styles
 import { QuizButton, Wrapper } from './quiz_style';
 
 export type AnswerObject = {
@@ -22,7 +22,13 @@ function Quiz() {
   const [score, setScore] = useState(0);
   const [gameOver, setGameOver] = useState(true);
 
-  const startTrivia = async () => {
+  const navigate = useNavigate();
+  const MINUTES_IN_MS = 0;
+  const INTERVAL = 1000;
+  const [timeLeft, setTimeLeft] = useState<number>(MINUTES_IN_MS);
+
+  // 퀴즈 시작
+  const startQuiz = async () => {
     setLoading(true);
     setGameOver(false);
     const newQuestions = await fetchQuizQuestions(TOTAL_QUESTIONS);
@@ -31,8 +37,26 @@ function Quiz() {
     setUserAnswers([]);
     setNumber(0);
     setLoading(false);
+    setTimeLeft(MINUTES_IN_MS + 10 * 1000);
   };
 
+  // 퀴즈 풀이시간 카운트 다운
+  const second = String(Math.floor((timeLeft / 1000) % 60)).padStart(2, '0');
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTimeLeft((prevTime) => prevTime - INTERVAL);
+    }, INTERVAL);
+
+    if (timeLeft <= 0) {
+      clearInterval(timer);
+      console.log('타이머가 종료되었습니다.');
+    }
+    return () => {
+      clearInterval(timer);
+    };
+  }, [timeLeft]);
+
+  // 퀴즈 정답 확인
   const checkAnswer = (e: any) => {
     if (!gameOver) {
       // User's answer
@@ -52,25 +76,42 @@ function Quiz() {
     }
   };
 
+  // 다음 문제로
   const nextQuestion = () => {
-    // Move on to the next question if not the last question
-    const nextQ = number + 1;
+    return [setNumber(number + 1), setTimeLeft(MINUTES_IN_MS + 10 * 1000)];
+  };
+  console.log('question', number + 1);
+  console.log(second);
 
-    if (nextQ === TOTAL_QUESTIONS) {
-      setGameOver(true);
-    } else {
-      setNumber(nextQ);
-    }
+  // 끝내기 모달
+  const [modalOpen, setModalOpen] = useState(false);
+  const showModal = () => {
+    setModalOpen(!modalOpen);
+  };
+
+  // 메인으로 보내기
+  const goHome = () => {
+    navigate('/');
   };
 
   return (
     <Wrapper>
-      <h1>REACT QUIZ</h1>
+      {/* 게임 시작전 */}
       {gameOver || userAnswers.length === TOTAL_QUESTIONS ? (
-        <QuizButton className="start" onClick={startTrivia}>
-          Start
-        </QuizButton>
+        <quizStyle.FullArea>
+          <quizStyle.LeftArea>
+            <quizStyle.CharacterDialog>오늘도 완주를 향해 화이팅!</quizStyle.CharacterDialog>
+            {/* 아래 onNext는 백엔드 서버에서 시간 받으면 자동으로 실행되게끔 구현해두어여함 */}
+            <quizStyle.CharacterArea onClick={startQuiz}>일단 누르면 다음 문제로</quizStyle.CharacterArea>
+          </quizStyle.LeftArea>
+          <quizStyle.RightArea>
+            <quizStyle.TimerArea>존야</quizStyle.TimerArea>
+            <quizStyle.PeopleArea>인구수가 꽉 찼습니다.</quizStyle.PeopleArea>
+          </quizStyle.RightArea>
+        </quizStyle.FullArea>
       ) : null}
+
+      {/* 퀴즈 진행중 */}
       {!gameOver ? <p className="score">Score: {score}</p> : null}
       {loading ? <p>Loading Questions...</p> : null}
       {!loading && !gameOver && (
@@ -83,6 +124,8 @@ function Quiz() {
           callback={checkAnswer}
         />
       )}
+
+      {/* 퀴즈 종료 */}
       {!gameOver && !loading && userAnswers.length === number + 1 && number !== TOTAL_QUESTIONS - 1 ? (
         <QuizButton className="next" onClick={nextQuestion}>
           Next Question
