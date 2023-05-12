@@ -37,7 +37,7 @@ function Time() {
       const resData = res.data;
       for (let i = 0; i < cardNum; i += 1) {
         delete res.data[i].idx;
-        timements += res.data[i].timement;
+        timements += res.data[i].ment;
       }
       console.log(resData);
       IndexList = resData.map((tarot: any) => {
@@ -59,7 +59,7 @@ function Time() {
     // await setTarotList(ans.data);
     // await navigate(`/time/${f}`);
     // await navigate(`/time/${f}`);
-    API.post(`/api/v2/summary`, {
+    await API.post(`/api/v2/summary`, {
       text: timements,
     }).then((res: any) => {
       console.log(res.data.summary);

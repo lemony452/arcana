@@ -9,7 +9,7 @@ import { userInfoStore } from '../../Store/User/info';
 
 function SideBar() {
   const outside = useRef<any>();
-  const { setUser, setIsLogin, isSide, setIsSide } = userInfoStore();
+  const { user, setIsLogin, isSide, setIsSide } = userInfoStore();
   const navigate = useNavigate();
 
   const toggleSide = () => {
@@ -24,7 +24,10 @@ function SideBar() {
   };
 
   const logout = () => {
-    signOut(auth);
+    // logout 시 구글인지 카카오인지 구분해주기
+    if (user.providerId === 'google.com') {
+      signOut(auth);
+    }
     setIsLogin(false);
     setIsSide(false);
     console.log('로그아웃');
@@ -35,7 +38,7 @@ function SideBar() {
     return () => {
       document.removeEventListener('mousedown', handleClose);
     };
-  });
+  }, [isSide]);
 
   return (
     <Side ref={outside} className={isSide ? 'open' : ''}>
