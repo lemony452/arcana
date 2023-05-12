@@ -102,15 +102,17 @@ public class TarotController {
 
         try {
             List<Report> reports = tarotService.viewReport(uid);
+            logger.info(reports.toString());
             List<ReportResponse> results = new ArrayList<>();
 
             for (Report report: reports) {
                 ReportResponse result = new ReportResponse();
+                result.setReportIdx(report.getReportIdx());
                 result.setUid(report.getUid());
-                result.setDatetime(result.getDatetime());
-                result.setCardIdx(result.getCardIdx());
-                result.setName(result.getName());
-                result.setMent(result.getMent());
+                result.setDatetime(report.getDatetime());
+                result.setCardIdx(report.getCardIdx());
+                result.setName(report.getCard().getName());
+                result.setMent(report.getMent());
 
                 results.add(result);
             }
