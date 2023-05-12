@@ -14,7 +14,7 @@ export const openai = new OpenAIApi(configuration);
 
 // celtic-cross 방식 운세
 export const CelticGPT = async (tarotNameList: string, option: string, inputValue: string, position: string) => {
-  const prompt = `[카드목록][${tarotNameList}] 카드가 있다. [방식] celtic-cross. ${option}과 관련된 점을 보고싶다. ${position}번째 카드의 결과만 응답한다. [질문] ${inputValue}`;
+  const prompt = `넌 타로카드 전문가야.\n[카드목록][${tarotNameList}] 카드가 있어.\n[방식] celtic-cross.\n${option}과 관련된 점을 보고싶어. ${position}번째 카드의 결과만 응답해줘.\n[질문] ${inputValue}\n카드 설명은 반드시 1 문장으로 해줘. 그리고 말투는 반드시 구어체로 하고 ~거야 라고 해줘.\n응답에 카드 이름이 들어갈 필요없어. 응답은 반드시 [응답]의 형태처럼 '|' 기호로 구분해줘.\n[응답] {카드설명} | {카드설명}`;
   console.log('tarotNameList : ', tarotNameList); // 카드 이름 나열 데이터
   console.log('option : ', option); // 상세 옵션
   console.log('inputValue : ', inputValue); // 고민입력
@@ -63,18 +63,19 @@ export const CelticGPT = async (tarotNameList: string, option: string, inputValu
 // gpt 출력 처리하기
 const slicingText = (text: string) => {
   const reg = /[`~!@#$%^&*()_|+\-=?;:'",.<>\\{\\}\\[\]\\\\/]/gim;
-  let temp;
-  let temp2;
-  let card1Fortune;
-  let card2Fortune;
-  if (text.search(/[|]/g) === -1) {
-    [, temp2, card2Fortune] = text.split(':');
-    [card1Fortune] = temp2.split('.');
-  } else {
-    temp = text.split(' | ');
-    card1Fortune = temp[0].split(': ')[1].replace(reg, '');
-    card2Fortune = temp[1].split(': ')[1].replace(reg, '');
-  }
+  const temp = text.split('[응답]');
+  let [card1Fortune, card2Fortune] = temp[1].split('|');
+  // let temp2;
+  // let card1Fortune;
+  // let card2Fortune;
+  // if (text.search(/[|]/g) === -1) {
+  //   [, temp2, card2Fortune] = text.split(':');
+  //   [card1Fortune] = temp2.split('.');
+  // } else {
+  //   temp = text.split(' | ');
+  //   card1Fortune = temp[0].split(': ')[1].replace(reg, '');
+  //   card2Fortune = temp[1].split(': ')[1].replace(reg, '');
+  // }
   card1Fortune = card1Fortune.trim();
   card2Fortune = card2Fortune.trim();
   return [card1Fortune, card2Fortune];
@@ -84,7 +85,7 @@ const slicingText = (text: string) => {
 // [카드목록][{카드배열}] 카드가 있다. [방식] celtic-cross. {운세종류} 관련된 점을 보고 싶다. {해석요청} [질문] {질문내용} 응답은 [응답]처럼 한다. 카드 설명은 1 문장으로 한다. 말투는 구어체로 하고 ~거야 라고 한다. [응답] {카드이름} : {카드설명} | {카드이름} : {카드설명}
 let slicingAns: string[];
 export const createCompletion = async (tarotNameList: string, option: string, inputValue: string, position: string) => {
-  const prompt = `[카드목록][${tarotNameList}] 카드가 있다. [방식] celtic-cross. ${option} 관련된 점을 보고 싶다. ${position}번째 카드의 결과만 응답한다. [질문] ${inputValue} 응답은 [응답]처럼 한다. 카드 설명은 1 문장으로 한다. 말투는 구어체로 하고 ~거야 라고 한다. [응답] {카드이름} : {카드설명} | {카드이름} : {카드설명}`;
+  const prompt = `넌 타로카드 전문가야.\n[카드목록][${tarotNameList}] 카드가 있어.\n[방식] celtic-cross.\n${option}과 관련된 점을 보고싶어. ${position}번째 카드의 결과만 응답해줘.\n[질문] ${inputValue}\n카드 설명은 반드시 1 문장으로 해줘. 그리고 말투는 반드시 구어체로 하고 ~거야 라고 해줘.\n응답에 카드 이름이 들어갈 필요없어. 응답은 반드시 [응답]의 형태처럼 '|' 기호로 구분해줘.\n[응답] {카드설명} | {카드설명}`;
   console.log(prompt);
   let ans;
   try {
@@ -96,7 +97,7 @@ export const createCompletion = async (tarotNameList: string, option: string, in
           content: prompt,
         },
       ],
-      temperature: 0.7,
+      temperature: 0.5,
     });
     if (response.data) {
       ans = response.data.choices[0].message!.content;
