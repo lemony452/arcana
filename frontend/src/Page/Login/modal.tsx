@@ -4,14 +4,17 @@ import LoginBgImg from '../../Assets/etc/loginBg.png';
 import { GoogleLogin, KakaoLogin } from './login';
 import { userInfoStore } from '../../Store/User/info';
 
-function LoginModal({ goLogin, setGoLogin }: { goLogin: any; setGoLogin: any }) {
-  const outside = useRef<any>(null);
-  const { isLogin, isSide, setIsSide } = userInfoStore();
+function LoginModal() {
+  const outsideLogin = useRef<any>();
+  const { isLogin, goLogin, setGoLogin } = userInfoStore();
+
+  const toggleLogin = () => {
+    setGoLogin(false);
+  };
 
   const handleClose = (event: any) => {
-    if (!outside.current.contains(event.target)) {
-      setGoLogin(false);
-      console.log('로그인 모달 사라져라!');
+    if (!outsideLogin.current.contains(event.target)) {
+      toggleLogin();
     }
   };
 
@@ -20,10 +23,10 @@ function LoginModal({ goLogin, setGoLogin }: { goLogin: any; setGoLogin: any }) 
     return () => {
       document.removeEventListener('mousedown', handleClose);
     };
-  });
+  }, [goLogin]);
 
   return (
-    <LoginModalStyle ref={outside} className={goLogin && !isLogin ? 'gologin' : ''}>
+    <LoginModalStyle ref={outsideLogin} className={goLogin && !isLogin ? 'gologin' : ''}>
       <LoginBg src={LoginBgImg} />
       <KakaoLogin />
       <GoogleLogin />

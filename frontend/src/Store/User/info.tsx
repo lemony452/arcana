@@ -12,11 +12,13 @@ interface InfoState {
   tarotToken: number;
   isLogin: boolean;
   isSide: boolean;
+  goLogin: boolean;
   setUser: (user: any) => void;
   setNickname: (name: string) => void;
   setTarotToken: (t: number) => void;
   setIsLogin: (login: boolean) => void;
   setIsSide: (side: boolean) => void;
+  setGoLogin: (go: boolean) => void;
 }
 
 export const userInfoStore = create<InfoState>((set) => ({
@@ -29,6 +31,7 @@ export const userInfoStore = create<InfoState>((set) => ({
   tarotToken: 0,
   isLogin: false,
   isSide: false,
+  goLogin: false,
   setUser: (u) => {
     set(() => ({ user: u }));
   },
@@ -43,5 +46,8 @@ export const userInfoStore = create<InfoState>((set) => ({
   },
   setIsSide: (side) => {
     set(() => ({ isSide: side }));
+  },
+  setGoLogin: (go) => {
+    set(() => ({ goLogin: go }));
   },
 }));
