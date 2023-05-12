@@ -1,11 +1,14 @@
 package com.jumzip.arcana.api.serviceImpl;
 
+import com.jumzip.arcana.api.request.CardReportRequest;
+import com.jumzip.arcana.api.request.ReportRequest;
 import com.jumzip.arcana.api.service.TarotService;
-import com.jumzip.arcana.db.entity.Card;
 import com.jumzip.arcana.db.entity.InstantCard;
 import com.jumzip.arcana.db.entity.LuckyCard;
+import com.jumzip.arcana.db.entity.Report;
 import com.jumzip.arcana.db.entity.TimeCard;
 import com.jumzip.arcana.db.repository.CardRepository;
+import com.jumzip.arcana.db.repository.ReportRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +23,8 @@ import java.util.Random;
 public class TarotServiceImpl implements TarotService {
 
     private final CardRepository cardRepo;
+
+    private final ReportRepository reportRepo;
 
     /* 뽑는 Card 수 cardNum, 메이저/풀덱 총 카드 수 Deck */
     /* 정방향 카드 idx 리스트 */
@@ -119,6 +124,34 @@ public class TarotServiceImpl implements TarotService {
 
         LuckyCard lc = cardRepo.findLuckyByCardId(card_idx);
         return lc;
+    }
+
+    @Transactional
+    @Override
+    public Boolean saveReport(ReportRequest reportRequest) {
+        String uid = reportRequest.getUid();
+        List<CardReportRequest> cardReportRequestList = reportRequest.getReports();
+        
+        try {
+            for (CardReportRequest reports : cardReportRequestList) {
+                Report report = new Report();
+                report.setUid(uid);
+                report.setCardIdx(reports.getCardIdx());
+                report.setMent(reports.getMent());
+
+                reportRepo.saveReport(report);
+            }
+            
+            return true;
+        }
+        catch (Exception e) {
+            return false;
+        }
+    }
+
+    @Override
+    public List<Report> viewReport(String uid) {
+        return reportRepo.findAllByUid(uid);
     }
 
 
