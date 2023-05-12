@@ -21,7 +21,7 @@ function App() {
   useEffect(() => {
     // 연속 호출 방지(init 연속 호출되면 오류)
     if (!window.Kakao.isInitialized()) {
-      window.Kakao.init('38fe1e786f0a6c21d5af6b06ad0e9bc5'); // 카카오 api 키
+      window.Kakao.init('2f9898e2ecf3bb1d0f75ea9871cee156'); // 카카오 api 키
     }
   }, []);
   return (
