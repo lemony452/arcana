@@ -3,6 +3,8 @@ import styled from 'styled-components';
 
 export const LoginModalStyle = styled.div`
   position: absolute;
+  width: 30vw;
+  height: calc(30vw * 1.5);
   left: -50vw;
   top: 50vh;
   transform: translate(-50%, -50%);

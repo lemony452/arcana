@@ -1,8 +1,10 @@
 import React, { useEffect } from 'react';
 import axios from 'axios';
 import { useCookies } from 'react-cookie';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { setCookie } from './cookie';
+import { API } from '../../API';
+// import { API } from '../../API';
 
 // export function GoogleRedirect() {
 //   // 쿼리 스트링 형태의 인가코드를 백으로 전달해줘야함
@@ -31,25 +33,24 @@ import { setCookie } from './cookie';
 // }
 
 export function KakaoRedirect() {
-  const code = new URL(window.location.href).searchParams.get('code');
+  // const code = new URL(window.location.href).searchParams.get('code');
+  const location = useLocation();
+  const URLcode = location.search.split('=')[1];
+  console.log(URLcode);
   const navigate = useNavigate();
 
   useEffect(() => {
-    async function KakaoLogin() {
-      const res = await axios.post(`${process.env.REACT_APP_API}/api/user/login/kakao?code=${code}`);
-      const ACCESS_TOKEN = res.headers.authorization;
-      // const REFRESH_TOKEN = res.headers['refresh-token'];
-      setCookie('token', ACCESS_TOKEN, {
-        path: '/',
+    const login = async () => {
+      console.log('카카오 로그인 중');
+      // await window.open(KAKAO_URI);
+      // const URLcode = new URL(document.location).searchParams.get('code');
+      API.get(`/api/v1/user/kakao?code=${URLcode}`).then((res) => {
+        console.log(res);
       });
-      // setCookie('refreshToken', REFRESH_TOKEN, {
-      //   path: '/',
-      // });
-      // 로그인 완료되면 메인으로 이동
       navigate('/', { replace: true });
-    }
-    KakaoLogin();
+    };
+    login();
   }, []);
 
-  return <div>로그인중입니다.</div>;
+  return <div>로그인중입니다</div>;
 }

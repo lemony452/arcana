@@ -1,5 +1,6 @@
 import React, { useEffect, useState, createContext } from 'react';
 import { Cookies } from 'react-cookie';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from 'firebase/auth';
 import { auth } from '../../firebase';
 import { GoogleBtn, KakaoBtn } from './login_style';
@@ -42,8 +43,25 @@ export function GoogleLogin() {
 export function KakaoLogin() {
   // 카카오 인가 코드 요청
   const KAKAO_CLIENT_ID = '49505a61dc30b027fd8d12856836c7fb';
-  const KAKAO_REDIRECT_URI = `https://k8d107.p.ssafy.io/api/v1/user/kakao`;
-  const KAKAO_URI = `https://kauth.kakao.com/oauth/authorize?client_id=${KAKAO_CLIENT_ID}&redirect_uri=${KAKAO_REDIRECT_URI}&response_type=code`;
+  // const KAKAO_REDIRECT_URI = `https://k8d107.p.ssafy.io/api/v1/user/kakao`;
+  const KAKAO_REDIRECT_URI = `https://k8d107.p.ssafy.io`;
+  const KAKAO_URI = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${KAKAO_CLIENT_ID}&redirect_uri=${KAKAO_REDIRECT_URI}`;
+  const navigate = useNavigate();
+
+  // const location = useLocation();
+  // useEffect(() => {
+  //   const login = async () => {
+  //     console.log('카카오 로그인 중');
+  //     // await window.open(KAKAO_URI);
+  //     // const URLcode = new URL(document.location).searchParams.get('code');
+  //     const URLcode = location.search.split('=')[1];
+  //     console.log(URLcode);
+  //     API.get(`/api/v1/user/kakao?code=${URLcode}`).then((res) => {
+  //       console.log(res);
+  //     });
+  //     navigate('/', { replace: true });
+  //   };
+  // }, []);
 
   return (
     <a href={KAKAO_URI}>
