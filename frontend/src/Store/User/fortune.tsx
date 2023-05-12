@@ -104,8 +104,8 @@ export const useFortuneStore = create<FortuneState>((set) => ({
     // 스토어에 저장하는 형식 변경 필요,,
     set((state) => ({ fortune: state.fortune.concat(ans) }));
   },
-  setFortune: () => {
-    set(() => ({ fortune: [] }));
+  setFortune: (f) => {
+    set(() => ({ fortune: f }));
   },
   setTarotList: (t) => {
     set(() => ({ tarotList: t }));

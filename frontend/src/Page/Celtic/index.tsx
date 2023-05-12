@@ -5,7 +5,7 @@ import { OptionBtn, InputText, SubmitBtn, DialogNPC } from '../../Common/common_
 import { CelticConversations } from '../../Common/conversations';
 import Dialog from '../../Common/dialog';
 import { CelticGPT, createCompletion } from '../../Store/FortuneTelling/gpt';
-import { useFortuneStore } from '../../Store/User/fortune';
+import { useFortuneStore, CardState } from '../../Store/User/fortune';
 import charDialog0 from '../../Assets/characters/charDialog0.png';
 
 function Celtic() {
@@ -13,25 +13,39 @@ function Celtic() {
   const [next, SetNext] = useState(false);
   const [option, SetOption] = useState('');
   const inputValueRef = useRef<HTMLInputElement>(null);
-  const { setTarotNameList, setOption, setInputValue, addFortune, setTarotList, tarotNameList } = useFortuneStore();
+  const { setTarotNameList, setOption, setInputValue, setFortune, setTarotList, tarotNameList } = useFortuneStore();
   const navigate = useNavigate();
   // 특수 문자 처리
   const reg = /[`~!@#$%^&*()_|+\-=?;:'",.<>\\{\\}\\[\]\\\\/ ]/gim;
 
+  let CardList: CardState[];
+
   // celtic 옵션 선택 함수
-  const OptionClick = (fortune: keyof typeof CelticConversations.c2): void => {
-    SetcelticText(CelticConversations.c2[fortune]);
-    console.log(CelticConversations.c2[fortune]);
-    // 타로카드 10장 + 럭키카드 1장 뽑기
+  const OptionClick = (f: keyof typeof CelticConversations.c2): void => {
+    SetcelticText(CelticConversations.c2[f]);
+    console.log(CelticConversations.c2[f]);
+    // 타로카드 10장 뽑기
     const tarots = getTarot(10);
     console.log(tarots); // {id: 8, name: 'Strength', class: 'major', number: 8, reverse: false}
-    setTarotList(tarots);
+    CardList = tarots.map((tarot) => {
+      const ListData = {
+        card: {
+          idx: tarot.id,
+          name: tarot.name,
+        },
+        ment: '',
+      };
+      return ListData;
+    });
+    console.log(CardList);
+    setTarotList(CardList);
+
     // 10장의 카드이름 목록 리스트
     const TarotList = getTarotNames(tarots);
     setTarotNameList(TarotList);
     console.log(TarotList);
     // 고민 입력 플로우로 진행
-    SetOption(fortune);
+    SetOption(f);
     SetNext(!next);
   };
 
@@ -54,7 +68,8 @@ function Celtic() {
       console.log(inputValue);
       // const prompt = `[카드목록][${tarotList}] 카드가 있다. [방식] celtic-cross. ${opt}과 관련된 점을 보고싶다. ${position}번째 카드의 결과만 응답한다. [질문] ${inputValue}`;
       // celtic 2장씩 총 10장의 운세 풀이 요청
-      let ans;
+      let ans: string[];
+      let fortunList: string[];
       const cards = ['1, 2', '3, 4', '5, 6', '7, 8', '9, 10'];
       const getAns = async (t: string, o: string, i: string) => {
         // 타로 운세 풀이를 스토어에 저장
@@ -72,21 +87,27 @@ function Celtic() {
 
         ans = await createCompletion(t, o, i, cards[0]); // 배열에 카드 2장 풀이 담겨서 출력
         console.log(ans);
-        addFortune(ans![0] + ans![1]);
+        fortunList = ans;
         ans = await createCompletion(t, o, i, cards[1]); // 배열에 카드 2장 풀이 담겨서 출력
         console.log(ans);
-        addFortune(ans![0] + ans![1]);
+        fortunList = [...fortunList, ...ans];
         ans = await createCompletion(t, o, i, cards[2]); // 배열에 카드 2장 풀이 담겨서 출력
         console.log(ans);
-        addFortune(ans![0] + ans![1]);
+        fortunList = [...fortunList, ...ans];
         ans = await createCompletion(t, o, i, cards[3]); // 배열에 카드 2장 풀이 담겨서 출력
         console.log(ans);
-        addFortune(ans![0] + ans![1]);
+        fortunList = [...fortunList, ...ans];
         ans = await createCompletion(t, o, i, cards[4]); // 배열에 카드 2장 풀이 담겨서 출력
-        console.log(ans);
-        addFortune(ans![0] + ans![1]);
+        fortunList = [...fortunList, ...ans];
+        // console.log(fortunList);
+
+        return fortunList;
       };
-      getAns(tarotNameList, option, inputValue!);
+      getAns(tarotNameList, option, inputValue!).then((res) => {
+        fortunList = res;
+        console.log(fortunList);
+        setFortune(fortunList);
+      });
       // gpt api 호출하고 spread 페이지로 바로 이동됨
       navigate('/celtic/spread');
     } else {
