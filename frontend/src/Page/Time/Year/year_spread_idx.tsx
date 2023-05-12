@@ -11,7 +11,6 @@ import { YearDetails } from '../../../Common/conversations';
 import { useLuckyStore } from '../../../Store/User/lucky';
 import { getLuckyCard } from '../../../Common/tarotSelect';
 import { API } from '../../../API';
-import { useFortuneStore } from '../../../Store/User/fortune';
 
 function YearSpread() {
   const navigate = useNavigate();
@@ -20,8 +19,6 @@ function YearSpread() {
     return setIndex(index + 1);
   };
   console.log(index);
-  const { fortune } = useFortuneStore();
-  console.log(fortune);
   const [modalOpen, setModalOpen] = useState(false); // modal
   const showModal = () => {
     setModalOpen(!modalOpen);
@@ -31,15 +28,17 @@ function YearSpread() {
     // 럭키카드 api
     await API.get(`/api/v1/tarot/lucky/`).then((res: any) => {
       console.log(res);
-      setLuckyNum(res.data.card.idx);
-      setLuckyName(res.data.card.name);
+      // setLuckyNum(res.data.card.idx);
+      // setLuckyName(res.data.card.name);
+      console.log('lucky api 결과 : ', res.data);
+      // setLucky(res.data);
       setLuckyMent(res.data.luckyment);
     });
     await navigate('/lucky');
   };
 
   const text = YearDetails();
-  console.log(text);
+  // console.log(text);
 
   if (index === 0) {
     return (
