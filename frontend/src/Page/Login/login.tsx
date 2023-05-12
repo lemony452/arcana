@@ -6,6 +6,7 @@ import { GoogleBtn, KakaoBtn } from './login_style';
 import googleBtnImg from '../../Assets/etc/googleBtn.png';
 import kakaoBtnImg from '../../Assets/etc/kakaoBtn.png';
 import { userInfoStore } from '../../Store/User/info';
+import { API } from '../../API';
 
 export function GoogleLogin() {
   // 구글 인가 코드 요청
@@ -15,9 +16,9 @@ export function GoogleLogin() {
   // const [userData, setUserData] = useState<any>();
   const { setUser, setIsLogin, setNickname } = userInfoStore();
 
-  const login = () => {
+  const login = async () => {
     const provider = new GoogleAuthProvider();
-    signInWithPopup(auth, provider)
+    await signInWithPopup(auth, provider)
       .then((data) => {
         const userData = data.user;
         // setUserData(data.user);
