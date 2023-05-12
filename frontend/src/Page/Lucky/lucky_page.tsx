@@ -28,31 +28,31 @@ function LuckyPage() {
   const [selectCard, setSelectCard] = useState(-1); // 선택한 카드
   const [resultPage, setResultPage] = useState(false);
   const [checkSelectState, setCheckSelectState] = useState(false); // 마지막 선택 질문
-  const { luckyNum, luckyName, luckyMent } = useLuckyStore();
+  const { luckyMent, lucky } = useLuckyStore();
 
   const cardList = [
     {
       index: 0,
       front: F0,
-      num: luckyNum,
-      title: luckyName,
-      content: `너의 행운 카드는 ${luckyName} 이야! 아마 너에게 특별한 행운을 가져다 줄걸?`,
+      num: lucky.card.idx,
+      title: lucky.card.name,
+      content: `너의 행운 카드는 ${lucky.card.name} 이야! 아마 너에게 특별한 행운을 가져다 줄걸?`,
       result: luckyMent,
     },
     {
       index: 1,
       front: F0,
-      num: luckyNum,
-      title: luckyName,
-      content: `너의 행운 카드는 ${luckyName} 이야! 아마 너에게 특별한 행운을 가져다 줄걸?`,
+      num: lucky.card.idx,
+      title: lucky.card.name,
+      content: `너의 행운 카드는 ${lucky.card.name} 이야! 아마 너에게 특별한 행운을 가져다 줄걸?`,
       result: luckyMent,
     },
     {
       index: 2,
       front: F14,
-      num: luckyNum,
-      title: luckyName,
-      content: `너의 행운 카드는 ${luckyName} 이야! 아마 너에게 특별한 행운을 가져다 줄걸?`,
+      num: lucky.card.idx,
+      title: lucky.card.name,
+      content: `너의 행운 카드는 ${lucky.card.name} 이야! 아마 너에게 특별한 행운을 가져다 줄걸?`,
       result: luckyMent,
     },
   ];
