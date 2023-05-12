@@ -1,5 +1,10 @@
 import { create } from 'zustand';
 
+interface CardIndexListState {
+  indexList: number[];
+  setIndexList: (indexList: number[]) => void;
+}
+
 export interface CardState {
   card: {
     idx: number;
@@ -51,6 +56,13 @@ interface FortuneState {
   setFortune: (fortune: string[]) => void;
   setSummary: (s: string) => void;
 }
+
+export const saveIndexStore = create<CardIndexListState>((set) => ({
+  indexList: [],
+  setIndexList: (sd: number[]) => {
+    set(() => ({ indexList: sd }));
+  },
+}));
 
 export const saveDataStore = create<SaveDataState>((set) => ({
   saveData: {

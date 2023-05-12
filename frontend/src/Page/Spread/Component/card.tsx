@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import * as CardStyle from './card_style';
 import CardBack from '../../../Assets/cards/cardb.svg';
+import { saveIndexStore } from '../../../Store/User/fortune';
 // import CardFront from '../../../Assets/cards/F0.svg';
 
 interface SelectedCardType {
@@ -82,6 +83,9 @@ interface FilppedCardType {
 
 export function FilppedCard({ card, size, setTime }: FilppedCardType) {
   const [flipped, setFlipped] = useState(false);
+  const { indexList } = saveIndexStore();
+
+  const imgSrc = `https://k8d107.p.ssafy.io/api/v1/images/${indexList[card - 1]}.png`;
 
   useEffect(() => {
     setTimeout(() => {
@@ -93,9 +97,11 @@ export function FilppedCard({ card, size, setTime }: FilppedCardType) {
     <CardStyle.FilppedBody size={size}>
       <CardStyle.FilppedCardBody style={{ transform: flipped ? 'rotateY(180deg)' : 'none' }}>
         <CardStyle.FilppedBack size={size}>
-          <img src={CardBack} alt="Cardback" />
+          <img src={CardBack} alt="CardBack" />
         </CardStyle.FilppedBack>
-        <CardStyle.FilppedFront size={size}>{card}</CardStyle.FilppedFront>
+        <CardStyle.FilppedFront size={size}>
+          <img src={imgSrc} alt="CardFront" />
+        </CardStyle.FilppedFront>
       </CardStyle.FilppedCardBody>
     </CardStyle.FilppedBody>
   );

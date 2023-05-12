@@ -41,5 +41,8 @@ export const SelectCard = styled.div`
   margin-right: 5%;
   height: 90%;
   aspect-ratio: 3 / 5;
-  background-color: gold;
+  > img {
+    width: 100%;
+    height: 100%;
+  }
 `;

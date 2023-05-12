@@ -1,24 +1,51 @@
 import React from 'react';
 import * as layer from '../time_style';
+import { saveIndexStore } from '../../../Store/User/fortune';
 
 function YearSpread() {
+  const { indexList } = saveIndexStore();
+  const imgSrc = (num: number) => `https://k8d107.p.ssafy.io/api/v1/images/${indexList[num - 1]}.png`;
   return (
     <layer.TimeBox>
       <layer.TimePartOne>
-        <layer.YearCard>1</layer.YearCard>
-        <layer.YearCard>2</layer.YearCard>
-        <layer.YearCard>3</layer.YearCard>
-        <layer.YearCard>4</layer.YearCard>
-        <layer.YearCard>5</layer.YearCard>
-        <layer.YearCard>6</layer.YearCard>
+        <layer.YearCard>
+          <img src={imgSrc(1)} alt="CardFront" />
+        </layer.YearCard>
+        <layer.YearCard>
+          <img src={imgSrc(2)} alt="CardFront" />
+        </layer.YearCard>
+        <layer.YearCard>
+          <img src={imgSrc(3)} alt="CardFront" />
+        </layer.YearCard>
+        <layer.YearCard>
+          <img src={imgSrc(4)} alt="CardFront" />
+        </layer.YearCard>
+        <layer.YearCard>
+          <img src={imgSrc(5)} alt="CardFront" />
+        </layer.YearCard>
+        <layer.YearCard>
+          <img src={imgSrc(6)} alt="CardFront" />
+        </layer.YearCard>
       </layer.TimePartOne>
       <layer.TimePartTwo>
-        <layer.YearCard>7</layer.YearCard>
-        <layer.YearCard>8</layer.YearCard>
-        <layer.YearCard>9</layer.YearCard>
-        <layer.YearCard>10</layer.YearCard>
-        <layer.YearCard>11</layer.YearCard>
-        <layer.YearCard>12</layer.YearCard>
+        <layer.YearCard>
+          <img src={imgSrc(7)} alt="CardFront" />
+        </layer.YearCard>
+        <layer.YearCard>
+          <img src={imgSrc(8)} alt="CardFront" />
+        </layer.YearCard>
+        <layer.YearCard>
+          <img src={imgSrc(9)} alt="CardFront" />
+        </layer.YearCard>
+        <layer.YearCard>
+          <img src={imgSrc(10)} alt="CardFront" />
+        </layer.YearCard>
+        <layer.YearCard>
+          <img src={imgSrc(11)} alt="CardFront" />
+        </layer.YearCard>
+        <layer.YearCard>
+          <img src={imgSrc(12)} alt="CardFront" />
+        </layer.YearCard>
       </layer.TimePartTwo>
     </layer.TimeBox>
   );

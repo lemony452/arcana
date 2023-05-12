@@ -6,7 +6,7 @@ import { TimeConversations } from '../../Common/conversations';
 import Dialog from '../../Common/dialog';
 import Npc from '../../Common/npc';
 // import { TimeGPT } from '../../Store/FortuneTelling/gpt';
-import { useFortuneStore, CardState } from '../../Store/User/fortune';
+import { useFortuneStore, CardState, saveIndexStore } from '../../Store/User/fortune';
 import charDialog0 from '../../Assets/characters/charDialog0.png';
 import { SpreadBtn } from '../Common/common_style';
 import { API, API2 } from '../../API';
@@ -18,10 +18,12 @@ function Time() {
   const inputValueRef = useRef<HTMLInputElement>(null);
   const { fortune, setOption, addFortune, setTarotList, setSummary, tarotList } = useFortuneStore();
   const navigate = useNavigate();
+  const { setIndexList } = saveIndexStore(); // 카드 인덱스
 
   // time 옵션 선택 함수
   // let TarotList: CardState[];
   let timements = '';
+  let IndexList: number[];
   const OptionClick = async (f: keyof typeof TimeConversations.t2) => {
     // time api request 보내기
     let cardNum: number;
@@ -38,6 +40,11 @@ function Time() {
         timements += res.data[i].timement;
       }
       console.log(resData);
+      IndexList = resData.map((tarot: any) => {
+        const indexData = tarot.card.idx;
+        return indexData;
+      });
+      setIndexList(IndexList);
       setTarotList(resData);
       console.log(timements);
       // addFortune(timements);
@@ -51,7 +58,6 @@ function Time() {
     // });
     // await setTarotList(ans.data);
     // await navigate(`/time/${f}`);
-    navigate('/spread', { state: `${f}` });
     // await navigate(`/time/${f}`);
     API2.post(`/api/v2/summary`, {
       text: timements,
@@ -63,6 +69,7 @@ function Time() {
 
     SetcelticText(TimeConversations.t2[f]);
     setOption(f);
+    navigate('/spread', { state: `${f}` });
   };
 
   return (

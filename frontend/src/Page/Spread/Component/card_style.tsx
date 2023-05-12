@@ -80,6 +80,10 @@ export const FilppedFront = styled(motion.div)<{ size: string }>`
   line-height: 8vw;
   font-size: 2vw;
   backface-visibility: hidden;
+  > img {
+    width: ${(props) => props.size};
+    aspect-ratio: 3 / 5;
+  }
   // 앞면은 사전에 미리 뒤집기
   transform: rotateY(180deg);
   border-radius: 10px;

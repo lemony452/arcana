@@ -5,7 +5,7 @@ import Dialog from '../../Common/dialog';
 import Npc from '../../Common/npc';
 import { SpreadBtn } from '../Common/common_style';
 import charDialog0 from '../../Assets/characters/charDialog0.png';
-import { useFortuneStore } from '../../Store/User/fortune';
+import { saveIndexStore, useFortuneStore } from '../../Store/User/fortune';
 import { InstantConversations } from '../../Common/conversations';
 import { API } from '../../API';
 
@@ -16,6 +16,7 @@ function Instant() {
   const inputValueRef = useRef<HTMLInputElement>(null);
   const { setOption, setCelticFortune } = useFortuneStore();
   const navigate = useNavigate();
+  const { setIndexList } = saveIndexStore(); // 카드 인덱스
 
   const OptionClick = (fortune: keyof typeof InstantConversations.i2) => {
     SetInstantText(InstantConversations.i2[fortune]);
@@ -24,14 +25,21 @@ function Instant() {
     SetNext(!next);
   };
 
+  let IndexList: number[];
+
   const saveInput = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     const InstantAPI = async (optionParams: number) => {
       const ans = await API.get(`/api/v1/tarot/instant/${optionParams}`);
       console.log(ans); // 배열에 담겨옴. 인덱스 0번이 question 나머지는 advice
+      IndexList = ans.data.map((tarot: any) => {
+        const indexData = tarot.card.idx;
+        return indexData;
+      });
+      setIndexList(IndexList);
       await setCelticFortune(ans.data);
-      navigate(`/instant/${option}`);
+      navigate('/spread', { state: `${option}` });
     };
     if (option === 'two') {
       InstantAPI(3);

@@ -9,7 +9,7 @@ import { DialogNPC, OptionBtn } from '../../../Common/common_styled';
 import Dialog from '../../../Common/dialog';
 import charDialog0 from '../../../Assets/characters/charDialog0.png';
 import { InstantDetails } from '../../../Common/conversations';
-import { useFortuneStore } from '../../../Store/User/fortune';
+import { saveIndexStore, useFortuneStore } from '../../../Store/User/fortune';
 
 function TwoSpread() {
   const navigate = useNavigate();
@@ -21,6 +21,8 @@ function TwoSpread() {
     navigate('/');
   };
   console.log(index);
+  const { indexList } = saveIndexStore();
+  const imgSrc = (num: number) => `https://k8d107.p.ssafy.io/api/v1/images/${indexList[num - 1]}.png`;
 
   const text = InstantDetails(3);
   console.log(text);
@@ -45,7 +47,9 @@ function TwoSpread() {
         <common.CardArea>
           <common.SideBlock />
           <common.CardBox>
-            <common.DefaultCard>1</common.DefaultCard>
+            <common.DefaultCard>
+              <img src={imgSrc(1)} alt="CardFront" />
+            </common.DefaultCard>
           </common.CardBox>
           <common.SideBlock>
             <common.SpreadModal>
@@ -70,8 +74,12 @@ function TwoSpread() {
         <common.CardArea>
           <common.SideBlock />
           <common.CardBox>
-            <common.DefaultCard>2</common.DefaultCard>
-            <common.DefaultCard>3</common.DefaultCard>
+            <common.DefaultCard>
+              <img src={imgSrc(2)} alt="CardFront" />
+            </common.DefaultCard>
+            <common.DefaultCard>
+              <img src={imgSrc(3)} alt="CardFront" />
+            </common.DefaultCard>
           </common.CardBox>
           <common.SideBlock>
             <common.SpreadModal>
