@@ -14,7 +14,7 @@ interface InfoState {
   isSide: boolean;
   goLogin: boolean;
   ticket: number;
-  weekly_count: number;
+  weeklyCount: number;
   token: number;
   setUser: (user: any) => void;
   setNickname: (name: string) => void;
@@ -39,7 +39,7 @@ export const userInfoStore = create<InfoState>((set) => ({
   isSide: false,
   goLogin: false,
   ticket: 0,
-  weekly_count: 0,
+  weeklyCount: 0,
   token: 0,
   setUser: (u) => {
     set(() => ({ user: u }));
@@ -63,7 +63,7 @@ export const userInfoStore = create<InfoState>((set) => ({
     set(() => ({ ticket: t }));
   },
   setWeekly: (w) => {
-    set(() => ({ weekly_count: w }));
+    set(() => ({ weeklyCount: w }));
   },
   setToken: (t) => {
     set(() => ({ token: t }));

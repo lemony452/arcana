@@ -9,7 +9,7 @@ import { userInfoStore } from '../../../Store/User/info';
 function UserInfo() {
   const [edit, setEdit] = useState(false);
   const editRef = useRef<HTMLInputElement>(null);
-  const { nickname, setNickname } = userInfoStore();
+  const { nickname, setNickname, weeklyCount } = userInfoStore();
   const editNickname = () => {
     setEdit(true);
   };
@@ -43,7 +43,7 @@ function UserInfo() {
           <img style={{ width: '30%', marginRight: '0.3em' }} src={tockenIcon} alt="" />
           <div>타로 토큰</div>
         </div>
-        <div>3 개</div>
+        <div>{weeklyCount} 개</div>
       </TarotToken>
     </UserContent>
   );
