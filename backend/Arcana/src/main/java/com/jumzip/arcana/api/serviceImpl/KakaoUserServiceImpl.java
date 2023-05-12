@@ -3,15 +3,12 @@ package com.jumzip.arcana.api.serviceImpl;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.jumzip.arcana.api.controller.UserController;
 import com.jumzip.arcana.api.service.KakaoUserService;
 import com.jumzip.arcana.db.entity.User;
 import com.jumzip.arcana.db.repository.UserRepository;
-import java.util.UUID;
 import javax.servlet.http.HttpServletResponse;
 import javax.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -70,7 +67,7 @@ public class KakaoUserServiceImpl implements KakaoUserService {
         MultiValueMap<String, String> body = new LinkedMultiValueMap<>();
         body.add("grant_type", "authorization_code");
         body.add("client_id", CLIENT_ID);
-        body.add("redirect_uri", "https://k8d107.p.ssafy.io/api/v1/user/kakao");
+        body.add("redirect_uri", "https://k8d107.p.ssafy.io/kakaologin");
         body.add("code", code);
 
         // HTTP 요청 보내기
