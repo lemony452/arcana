@@ -46,8 +46,8 @@ export function KakaoRedirect() {
       // const URLcode = new URL(document.location).searchParams.get('code');
       API.get(`/api/v1/user/kakao?code=${URLcode}`).then((res) => {
         console.log(res);
+        navigate('/', { replace: true });
       });
-      navigate('/', { replace: true });
     };
     login();
   }, []);
