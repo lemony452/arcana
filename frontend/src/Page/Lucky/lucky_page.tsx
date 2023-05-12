@@ -12,9 +12,6 @@ import html2canvas from 'html2canvas';
 import * as luckyPage from './lucky_page_style';
 import LuckyKarmaSelect from './Component/lucky_karma_select';
 import LuckyKarmaResult from './Component/lucky_karma_result';
-import F0 from '../../Assets/cards/F0.svg';
-import F9 from '../../Assets/cards/F9.svg';
-import F14 from '../../Assets/cards/F14.svg';
 import Dialog from '../../Common/dialog';
 import charDialog0 from '../../Assets/characters/charDialog0.png';
 import { DialogNPC, OptionBtn } from '../../Common/common_styled';
@@ -101,17 +98,16 @@ function LuckyPage() {
       content: {
         title: '내 럭키카드는 결과는?', // 공유 타이틀
         description: cardList[selectCard].result, // 공유 내용
-        imageUrl:
-          'https://png.pngtree.com/png-vector/20210326/ourmid/pngtree-sing-moon-tarot-symbol-png-image_3139433.jpg', // 공유 이미지
+        imageUrl: `https://k8d107.p.ssafy.io/api/v1/images/${lucky.card.idx}.png`, // 공유 이미지
         link: {
-          webUrl: 'http://localhost:3000', // 공유 링크
+          webUrl: 'https://k8d107.p.ssafy.io', // 공유 링크
         },
       },
       buttons: [
         {
           title: '내 운세 점치러 가기', // 공유 초대 링크 타이틀
           link: {
-            webUrl: 'http://localhost:3000', // 공유 초대 링크
+            webUrl: 'https://k8d107.p.ssafy.io', // 공유 초대 링크
           },
         },
       ],
@@ -148,14 +144,14 @@ function LuckyPage() {
               <TwitterShareButton
                 style={{ marginInline: '10px' }}
                 title={cardList[selectCard].result}
-                url="http://localhost:3000"
+                url="https://k8d107.p.ssafy.io"
               >
                 <TwitterIcon size={32} round borderRadius={24} />
               </TwitterShareButton>
               <TelegramShareButton
                 style={{ marginInline: '10px' }}
                 title={cardList[selectCard].result}
-                url="http://localhost:3000"
+                url="https://k8d107.p.ssafy.io"
               >
                 <TelegramIcon size={32} round borderRadius={24} />
               </TelegramShareButton>
