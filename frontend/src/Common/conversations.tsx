@@ -64,7 +64,7 @@ export const YearDetails = () => {
 export const MonthDetails = () => {
   const { tarotList, summary } = useFortuneStore();
   const { lucky, luckyMent } = useLuckyStore();
-  // console.log(tarotList);
+  console.log(tarotList);
 
   const MonthDetail = {
     page1: `이번 달 운세를 해석해주겠네\n1~5일 ${tarotList[0].card.name}의 의미는 ${tarotList[0].ment}\n6~10일 ${tarotList[1].card.name}의 의미는 ${tarotList[1].ment}\n11~15일 ${tarotList[2].card.name}의 의미는 ${tarotList[2].ment}`,
@@ -77,15 +77,17 @@ export const MonthDetails = () => {
 };
 
 export const InstantDetails = (option: number) => {
-  const { tarotList, question } = useFortuneStore();
-  console.log(tarotList);
+  const { celticFortune, question } = useFortuneStore();
+  console.log(celticFortune);
 
   const InstantDetail = {
-    page1: `카드 해석을 해드리겠습니다!\n질문자 카드 ${tarotList[0].card.name}는 ${tarotList[0].ment} 라는 의미의 카드입니다`,
-    page2: `왼쪽 카드 ${tarotList[1].card.name}는 ${tarotList[1].ment}\n오른쪽 카드 ${tarotList[2].card.name}는 ${tarotList[2].ment}`,
-    page3: `왼쪽 카드 ${tarotList[1].card.name}는 ${tarotList[1].ment}\n중앙 카드 ${tarotList[2].card.name}는 ${
-      tarotList[2].ment
-    }\n오른쪽 카드 ${tarotList[option - 1].card.name}는 ${tarotList[option - 1].ment}`,
+    page1: `카드를 해석해드리겠습니다!\n질문자 카드 ${celticFortune[0].card.name}은(는) ${celticFortune[0].question}`,
+    page2: `왼쪽 카드 ${celticFortune[1].card.name}은(는) ${celticFortune[1].advice}\n오른쪽 카드 ${celticFortune[2].card.name}(은)는 ${celticFortune[2].advice}`,
+    page3: `왼쪽 카드 ${celticFortune[1].card.name}은(는) ${celticFortune[1].advice}\n중앙 카드 ${
+      celticFortune[2].card.name
+    }은(는) ${celticFortune[2].advice}\n오른쪽 카드 ${celticFortune[option - 1].card.name}은(는) ${
+      celticFortune[option - 1].advice
+    }`,
   };
 
   return InstantDetail;

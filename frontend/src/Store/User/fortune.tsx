@@ -20,7 +20,18 @@ interface SaveDataState {
   setSaveData: (savedata: SaveDataType) => void;
 }
 
+interface CelticType {
+  idx: number;
+  question: string;
+  advice: string;
+  card: {
+    idx: number;
+    name: string;
+  };
+}
+
 interface FortuneState {
+  celticFortune: CelticType[];
   fortune: string[];
   tarotList: CardState[];
   tarotNameList: string;
@@ -29,6 +40,7 @@ interface FortuneState {
   spread: string;
   summary: string;
   question: string;
+  setCelticFortune: (cf: []) => void;
   setQuestion: (qusetion: string) => void;
   setSpread: (spread: string) => void;
   setInputValue: (v: string) => void;
@@ -61,6 +73,7 @@ export const saveDataStore = create<SaveDataState>((set) => ({
 }));
 
 export const useFortuneStore = create<FortuneState>((set) => ({
+  celticFortune: [],
   fortune: [],
   tarotList: [],
   tarotNameList: '',
@@ -69,6 +82,9 @@ export const useFortuneStore = create<FortuneState>((set) => ({
   spread: '',
   summary: '',
   question: '',
+  setCelticFortune: (cf) => {
+    set(() => ({ celticFortune: cf }));
+  },
   setQuestion: (q) => {
     set(() => ({ question: q }));
   },
