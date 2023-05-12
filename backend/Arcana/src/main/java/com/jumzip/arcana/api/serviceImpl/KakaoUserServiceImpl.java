@@ -67,7 +67,7 @@ public class KakaoUserServiceImpl implements KakaoUserService {
         MultiValueMap<String, String> body = new LinkedMultiValueMap<>();
         body.add("grant_type", "authorization_code");
         body.add("client_id", CLIENT_ID);
-        body.add("redirect_uri", "https://k8d107.p.ssafy.io/kakaologin");
+        body.add("redirect_uri", "https://k8d107.p.ssafy.io");
         body.add("code", code);
 
         // HTTP 요청 보내기
