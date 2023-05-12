@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
@@ -32,4 +34,7 @@ public class Report {
 
     private String ment;
 
+    @OneToOne
+    @JoinColumn(name = "card_idx", insertable = false, updatable = false)
+    private Card card;
 }
