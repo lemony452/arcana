@@ -80,7 +80,14 @@
           "packageDir": "./"
         }
       ],
-      "react-hooks/rules-of-hooks": "error"
+      "react-hooks/rules-of-hooks": "error",
+      "react/function-component-definition":[
+        2, 
+        { "namedComponents": [
+          "arrow-function", 
+          "function-declaration"
+        ] }
+      ]
     },
     // "import/no-unresolved": "off",
     // import/no-unresolved 종류의 에러가 났을때 아래 사용 하니 없어짐
