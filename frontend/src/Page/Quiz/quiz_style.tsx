@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const FullArea = styled.div`
   width: 100vw;
   height: 100vh;
-  background-color: #5438a9;
+  background-color: #00490d;
   display: flex;
 `;
 
@@ -28,10 +28,17 @@ export const RightArea = styled.div`
 export const CharacterDialog = styled.div`
   width: 100%;
   height: 25%;
+  color: coral;
+  font-size: 3em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   /* background-color: pink; */
 `;
 
 export const CharacterArea = styled.div`
+  display: flex;
+  justify-content: center;
   width: 100%;
   height: 75%;
   /* background-color: magenta; */
@@ -40,12 +47,20 @@ export const CharacterArea = styled.div`
 export const TimerArea = styled.div`
   width: 100%;
   height: 50%;
+  color: ivory;
+  font-size: 3em;
+  display: flex;
+  justify-content: center;
   /* background-color: skyblue; */
 `;
 
 export const PeopleArea = styled.div`
   width: 100%;
   height: 50%;
+  color: ivory;
+  font-size: 3em;
+  display: flex;
+  justify-content: center;
   /* background-color: navy; */
 `;
 
@@ -77,7 +92,7 @@ export const QuestBox = styled.div<QuestBoxProps>`
     cursor: pointer;
     user-select: none;
     font-size: 0.8rem;
-    height: 45%;
+    height: 100px;
     width: 45%;
     /* margin: 5px 0; */
     background-color: blue;
@@ -98,6 +113,10 @@ export const QuestArea = styled.div`
 export const TimerDivide = styled.div`
   width: 100%;
   height: 25%;
+  color: ivory;
+  font-size: 3em;
+  display: flex;
+  justify-content: center;
   /* background-color: skyblue; */
 `;
 
