@@ -44,9 +44,9 @@ const QuestionCard: React.FC<Props> = ({
             correct={userAnswer?.correctAnswer === answer}
             userClicked={userAnswer?.answer === answer}
           >
-            <QuestionButton disabled={!!userAnswer} value={answer} onClick={callback}>
+            <quizStyle.QuizButton disabled={!!userAnswer} value={answer} onClick={callback}>
               <span dangerouslySetInnerHTML={{ __html: answer }} />
-            </QuestionButton>
+            </quizStyle.QuizButton>
           </quizStyle.QuestBox>
         ))}
       </div>

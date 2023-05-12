@@ -4,7 +4,6 @@ import { fetchQuizQuestions, QuestionsState } from './api';
 import * as quizStyle from './quiz_style';
 import * as common from '../Common/common_style';
 import QuestionCard from './question_card';
-import { QuizButton, Wrapper } from './quiz_style';
 
 export type AnswerObject = {
   question: string;

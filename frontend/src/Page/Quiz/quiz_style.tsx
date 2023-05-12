@@ -80,7 +80,7 @@ export const QuestBox = styled.div<QuestBoxProps>`
     height: 45%;
     width: 45%;
     /* margin: 5px 0; */
-    background-color: teal;
+    background-color: blue;
     border: 3px solid #ffffff;
     box-shadow: 1px 2px 0px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
