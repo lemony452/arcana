@@ -2,6 +2,7 @@ package com.jumzip.arcana.api.controller;
 
 import com.jumzip.arcana.api.request.ReportRequest;
 import com.jumzip.arcana.api.response.ReportResponse;
+import com.jumzip.arcana.api.service.ReportService;
 import com.jumzip.arcana.api.service.TarotService;
 import com.jumzip.arcana.db.entity.InstantCard;
 import com.jumzip.arcana.db.entity.LuckyCard;
@@ -9,20 +10,15 @@ import com.jumzip.arcana.db.entity.Report;
 import com.jumzip.arcana.db.entity.TimeCard;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import java.util.ArrayList;
-import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Tag(description = "타로카드 API", name = "TAROT")
 @RestController
@@ -32,6 +28,8 @@ public class TarotController {
     private final Logger logger = LoggerFactory.getLogger(TarotController.class);
 
     private final TarotService tarotService;
+
+    private final ReportService reportService;
 
     //ResEntity로 변경, try/catch 적용
     @Operation(summary = "instant ALL", description = "인스턴트 스프레드로 읽을 카드를 선택하고, 카드 정보를 반환한다.")
@@ -79,17 +77,17 @@ public class TarotController {
         + " \n reports 내부에 배열형태로 값을 넣어 보내주세요")
     @PostMapping("log")
     public ResponseEntity<?> saveReport(@RequestBody ReportRequest reportRequest) {
-        logger.info("start saveTarotLog");
+        logger.info("start saveReport");
 
         try {
-            if (tarotService.saveReport(reportRequest)) {
+            if (reportService.saveReport(reportRequest)) {
                 return new ResponseEntity<>("SUCCESS", HttpStatus.OK);
             }
             else {
                 return new ResponseEntity<>("FAIL", HttpStatus.NOT_FOUND);
             }
         } catch (Exception e) {
-            logger.info("save TarotLog error - " + e.getMessage(), e);
+            logger.info("save Report error - " + e.getMessage(), e);
 
             return new ResponseEntity<>("FAIL", HttpStatus.BAD_REQUEST);
         }
@@ -101,7 +99,7 @@ public class TarotController {
         logger.info("start viewReport");
 
         try {
-            List<Report> reports = tarotService.viewReport(uid);
+            List<Report> reports = reportService.viewReport(uid);
             logger.info(reports.toString());
             List<ReportResponse> results = new ArrayList<>();
 
