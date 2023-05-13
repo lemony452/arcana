@@ -4,15 +4,17 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.jumzip.arcana.api.request.UserRegisterRequest;
 import com.jumzip.arcana.api.service.KakaoUserService;
 import com.jumzip.arcana.api.service.UserService;
-import com.jumzip.arcana.db.entity.TimeCard;
 import com.jumzip.arcana.db.entity.User;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import javax.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletResponse;
 
 @Tag(description = "USER API", name = "USER")
 @RestController
@@ -96,6 +98,21 @@ public class UserController {
         logger.info("start kakaoLogin");
 
         return kakaoUserService.kakaoLogin(code, response);
+    }
+
+    @Operation(summary = "유저 가입 유무 조회", description = "반환값 true == 미가입 유저 " +
+            " \n false == 가입 유저")
+    @GetMapping("search")
+    public ResponseEntity<?> searchUser(@RequestParam String email) {
+        logger.info("start searchUser");
+
+        try {
+            return new ResponseEntity<>(userService.searchUser(email), HttpStatus.OK);
+        } catch (Exception e) {
+            logger.info("search User error - " + e.getMessage(), e);
+
+            return new ResponseEntity<>("FAIL", HttpStatus.BAD_REQUEST);
+        }
     }
 
 }
