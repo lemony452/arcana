@@ -34,4 +34,8 @@ public class Report {
     @Column(name = "report_question_idx")
     private int reportQuestionIdx;
 
+    @OneToOne
+    @JoinColumn(name = "report_question_idx", insertable = false, updatable = false)
+    private ReportQuestion reportQuestion;
+
 }

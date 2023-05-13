@@ -1,12 +1,13 @@
 package com.jumzip.arcana.db.repository;
 
 import com.jumzip.arcana.db.entity.Report;
-import java.util.List;
+import org.springframework.context.annotation.Primary;
+import org.springframework.stereotype.Repository;
+
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
-import org.springframework.context.annotation.Primary;
-import org.springframework.stereotype.Repository;
+import java.util.List;
 
 @Repository @Primary
 @Transactional
@@ -23,8 +24,8 @@ public class ReportRepositorySupport implements ReportRepository {
     }
 
     @Override
-    public List<Report> findAllByUid(String uid) {
-        TypedQuery<Report> query = em.createQuery("SELECT r FROM Report r WHERE r.uid = :uid", Report.class);
+    public List<Report> findAllByUidOrderByReportIdxDesc(String uid) {
+        TypedQuery<Report> query = em.createQuery("SELECT r FROM Report r WHERE r.uid = :uid ORDER BY reportIdx DESC", Report.class);
         query.setParameter("uid", uid);
         return query.getResultList();
     }
