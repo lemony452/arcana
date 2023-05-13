@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;*/
 
+/*
 @Controller
 @Log4j2
 //@RequestMapping("api/v1/chat/")
@@ -21,4 +22,4 @@ public class ChatController {
 
         return "chat";
     }
-}
+}*/
