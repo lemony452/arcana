@@ -66,7 +66,11 @@ public class UserController {
     @Operation(summary = "User DB에 등록", description = "사용자의 정보를 리턴한다")
     @PostMapping("register")
     public User registerUser(@RequestBody UserRegisterRequest userReq) {
+        logger.info("start registerUser");
+        logger.info("userReq - " + userReq.toString());
+
         User user = userService.registerUser(userReq);
+
         return user;
     }
 
