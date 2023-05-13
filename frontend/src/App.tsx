@@ -16,6 +16,7 @@ import SpreadCard from './Page/Spread/spread_card';
 import Quiz from './Page/Quiz';
 import { KakaoRedirect } from './Page/Login/redirect';
 import TarotListDetail from './Page/Mypage/Component/detail';
+import EditUserInfo from './Page/Mypage/Component/editUser';
 
 function App() {
   useEffect(() => {
@@ -43,6 +44,7 @@ function App() {
         {/* <Route path="/authgoogle" element={<GoogleRedirect />} /> */}
         <Route path="/authkakao" element={<KakaoRedirect />} />
         <Route path="/detail" element={<TarotListDetail />} />
+        <Route path="/editUserInfo" element={<EditUserInfo />} />
       </Routes>
     </div>
   );

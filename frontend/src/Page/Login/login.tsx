@@ -19,11 +19,10 @@ export function GoogleLogin() {
     await signInWithPopup(auth, provider)
       .then((data) => {
         const userData = data.user;
-        // setUserData(data.user);
         console.log(userData);
         setNickname(userData.displayName!);
         setIsLogin(true);
-        setUser({ uid: userData.uid, email: userData.email, providerId: userData.providerId });
+        setUser({ uid: userData.uid, email: userData.email, providerId: 'Google' });
       })
       .catch((err) => {
         console.log(err);
@@ -37,6 +36,7 @@ export function GoogleLogin() {
         console.log(res);
         setWeekly(res.data.weekly_count);
         setTicket(res.data.ticket);
+        setNickname(res.data.nickname);
       })
       .catch((err) => {
         console.log(err);
