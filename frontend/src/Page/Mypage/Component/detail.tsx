@@ -13,8 +13,12 @@ import {
   DetailFortune,
   ReplayLucky,
   ReplayTarots,
+  MoveBtn,
+  MoveBtnImg,
+  ListContent,
+  ListIcon,
 } from '../mypage_style';
-import TarotList from './TarotList';
+// import TarotList from './TarotList';
 import { userInfoStore } from '../../../Store/User/info';
 import cardIcon from '../../../Assets/etc/cardIcon.png';
 import homeBtnImg from '../../../Assets/etc/homBtn.png';
@@ -80,20 +84,16 @@ function TarotListDetail() {
     <div style={{ position: 'relative' }}>
       <Side className="open detail">
         <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-          <button
-            type="button"
-            onClick={MoveMain}
-            style={{ border: 0, backgroundColor: 'transparent', cursor: 'pointer' }}
-          >
-            <img src={homeBtnImg} alt="" style={{ width: '2.5em' }} />
-          </button>
+          <MoveBtn type="button" onClick={MoveMain}>
+            <MoveBtnImg className="home" src={homeBtnImg} alt="" />
+          </MoveBtn>
         </div>
         <TarotListContent className="detail">
           <TarotToken className="detail">
-            <div style={{ display: 'flex', textAlign: 'center', alignItems: 'center' }}>
-              <img style={{ width: '5vw', marginRight: '0.5em' }} src={cardIcon} alt="" />
-              <div>타로 운세 목록</div>
-            </div>
+            {/* <ListContent>
+            </ListContent> */}
+            <ListIcon src={cardIcon} alt="" />
+            <div>타로 운세 기록</div>
           </TarotToken>
           <div>option</div>
           {cardList}
