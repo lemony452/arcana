@@ -1,17 +1,11 @@
 package com.jumzip.arcana.db.entity;
 
-import java.time.LocalDateTime;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.DynamicInsert;
+
+import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Data
 @Entity
@@ -25,7 +19,6 @@ public class Report {
 
     private String uid;
 
-
     @CreationTimestamp
     private LocalDateTime datetime;
 
@@ -37,4 +30,8 @@ public class Report {
     @OneToOne
     @JoinColumn(name = "card_idx", insertable = false, updatable = false)
     private Card card;
+
+    @Column(name = "report_question_idx")
+    private int reportQuestionIdx;
+
 }
