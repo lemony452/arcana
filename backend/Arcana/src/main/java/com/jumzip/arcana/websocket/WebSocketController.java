@@ -8,6 +8,8 @@ import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.socket.WebSocketSession;
+import org.springframework.web.socket.adapter.jetty.JettyWebSocketSession;
 
 @Controller
 public class WebSocketController {
