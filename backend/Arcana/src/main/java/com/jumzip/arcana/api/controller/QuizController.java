@@ -17,8 +17,11 @@ public class QuizController {
     // SERVERTIME 20:58부터 커넥션 객체 생성
     // 페이지 입장 시 uid를 들고 들어온다 -> 메세지타입 Enter, user uid 필요
 
-    // 서버타임 21시에 FE는 알림창을 닫고 게임 시작
-    // BE에서 QuizSet 메세지타입으로 10문제 보내고 파싱해서 FE에서 출제
+    // 그러면 Entity가 필요하다 MessageType, uid, userCount(인원수) 필수
+    // userCount default = 0, 타입이 ENTER일때마다 +1 QUIT일때마다 -1
+
+    // 서버타임 21시에 FE는 알림창을 닫고 게임 시작 메세지 보냄(GAMESTART) -> 이거 받으면 10문제 중복없이 뽑아두기
+    // BE에서 QUIZ 메세지타입으로 1문제씩 보냄
     // FE에서 틀린 사람 처리/페이지 나간사람 처리 -> Quit 메세지타입, uid 필요
 
     // 10문제 모두 끝나면 reward API 호출 > 티켓 제공 요청 받아서 uid 별로 테이블에 +1
