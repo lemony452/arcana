@@ -14,7 +14,8 @@ function Celtic() {
   const [next, SetNext] = useState(false);
   const [option, SetOption] = useState('');
   const inputValueRef = useRef<HTMLInputElement>(null);
-  const { setTarotNameList, setOption, setInputValue, setFortune, setTarotList, tarotNameList } = useFortuneStore();
+  const { addFortune, setTarotNameList, setOption, setInputValue, setFortune, setTarotList, tarotNameList } =
+    useFortuneStore();
   const navigate = useNavigate();
   const { setIndexList } = saveIndexStore(); // 카드 인덱스 가져오기
   // 특수 문자 처리
@@ -96,17 +97,22 @@ function Celtic() {
 
         ans = await createCompletion(t, o, i, cards[0]); // 배열에 카드 2장 풀이 담겨서 출력
         console.log(ans);
+        addFortune(ans);
         fortunList = ans;
         ans = await createCompletion(t, o, i, cards[1]); // 배열에 카드 2장 풀이 담겨서 출력
         console.log(ans);
+        addFortune(ans);
         fortunList = [...fortunList, ...ans];
         ans = await createCompletion(t, o, i, cards[2]); // 배열에 카드 2장 풀이 담겨서 출력
         console.log(ans);
+        addFortune(ans);
         fortunList = [...fortunList, ...ans];
         ans = await createCompletion(t, o, i, cards[3]); // 배열에 카드 2장 풀이 담겨서 출력
         console.log(ans);
+        addFortune(ans);
         fortunList = [...fortunList, ...ans];
         ans = await createCompletion(t, o, i, cards[4]); // 배열에 카드 2장 풀이 담겨서 출력
+        addFortune(ans);
         fortunList = [...fortunList, ...ans];
         // console.log(fortunList);
 
