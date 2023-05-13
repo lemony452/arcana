@@ -63,6 +63,6 @@ public class ReportServiceImpl implements ReportService {
 
     @Override
     public List<Report> viewReport(String uid) {
-        return reportRepo.findAllByUid(uid);
+        return reportRepo.findAllByUidOrderByReportIdxDesc(uid);
     }
 }

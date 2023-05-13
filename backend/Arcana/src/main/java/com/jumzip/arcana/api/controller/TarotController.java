@@ -1,7 +1,6 @@
 package com.jumzip.arcana.api.controller;
 
 import com.jumzip.arcana.api.request.ReportRequest;
-import com.jumzip.arcana.api.response.ReportResponse;
 import com.jumzip.arcana.api.service.ReportService;
 import com.jumzip.arcana.api.service.TarotService;
 import com.jumzip.arcana.db.entity.InstantCard;
@@ -17,7 +16,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Tag(description = "타로카드 API", name = "TAROT")
@@ -101,27 +99,13 @@ public class TarotController {
         try {
             List<Report> reports = reportService.viewReport(uid);
             logger.info(reports.toString());
-            List<ReportResponse> results = new ArrayList<>();
 
-            for (Report report: reports) {
-                ReportResponse result = new ReportResponse();
-                result.setReportIdx(report.getReportIdx());
-                result.setUid(report.getUid());
-                result.setDatetime(report.getDatetime());
-                result.setCardIdx(report.getCardIdx());
-                result.setName(report.getCard().getName());
-                result.setMent(report.getMent());
-
-                results.add(result);
-            }
-
-            return new ResponseEntity<>(results, HttpStatus.OK);
+            return new ResponseEntity<>(reports, HttpStatus.OK);
         } catch (Exception e) {
             logger.info("view Report error - " + e.getMessage(), e);
 
             return new ResponseEntity<>("FAIL", HttpStatus.BAD_REQUEST);
         }
     }
-
 
 }

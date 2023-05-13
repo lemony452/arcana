@@ -6,5 +6,5 @@ import java.util.List;
 public interface ReportRepository {
     void saveReport(Report report);
 
-    List<Report> findAllByUid(String uid);
+    List<Report> findAllByUidOrderByReportIdxDesc(String uid);
 }
