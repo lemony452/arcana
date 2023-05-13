@@ -6,8 +6,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jumzip.arcana.api.service.KakaoUserService;
 import com.jumzip.arcana.db.entity.User;
 import com.jumzip.arcana.db.repository.UserRepository;
-import javax.servlet.http.HttpServletResponse;
-import javax.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,11 +19,16 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
+import javax.servlet.http.HttpServletResponse;
+import javax.transaction.Transactional;
+
 @Service
 @Transactional
 @RequiredArgsConstructor
 public class KakaoUserServiceImpl implements KakaoUserService {
     private final Logger logger = LoggerFactory.getLogger(KakaoUserServiceImpl.class);
+
+    private final int WEEKLY_COUNT = 5;
 
     @Value("${kakao.client}")
     String CLIENT_ID;
@@ -122,6 +125,7 @@ public class KakaoUserServiceImpl implements KakaoUserService {
         newUser.setNickname(nickname);
         newUser.setEmail(email);
         newUser.setProvider("kakao");
+        newUser.setWeekly_count(WEEKLY_COUNT);
 
         return newUser;
     }
