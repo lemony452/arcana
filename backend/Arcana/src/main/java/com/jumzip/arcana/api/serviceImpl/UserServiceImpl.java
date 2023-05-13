@@ -5,6 +5,8 @@ import com.jumzip.arcana.api.service.UserService;
 import com.jumzip.arcana.db.entity.User;
 import com.jumzip.arcana.db.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -13,6 +15,7 @@ import javax.transaction.Transactional;
 @Transactional
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
+    private final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
 
     private final int WEEKLY_COUNT = 5;
 
@@ -26,6 +29,8 @@ public class UserServiceImpl implements UserService {
         user.setNickname(userReq.getEmail());
         user.setProvider(userReq.getProvider());
         user.setWeekly_count(WEEKLY_COUNT);
+
+        logger.info("insert user - " + user.toString());
 
         userRepo.saveUser(user);
 
