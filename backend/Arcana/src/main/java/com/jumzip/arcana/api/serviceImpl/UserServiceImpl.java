@@ -14,6 +14,8 @@ import javax.transaction.Transactional;
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
+    private final int WEEKLY_COUNT = 5;
+
     private final UserRepository userRepo;
 
     @Override
@@ -21,7 +23,11 @@ public class UserServiceImpl implements UserService {
         User user = new User();
         user.setUid(userReq.getUid());
         user.setEmail(userReq.getEmail());
+        user.setProvider(userReq.getProvider());
+        user.setWeekly_count(WEEKLY_COUNT);
+
         userRepo.saveUser(user);
+
         return user;
     }
 
