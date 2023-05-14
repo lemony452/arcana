@@ -2,6 +2,8 @@ package com.jumzip.arcana.api.serviceImpl;
 
 import com.jumzip.arcana.api.request.CardReportRequest;
 import com.jumzip.arcana.api.request.ReportRequest;
+import com.jumzip.arcana.api.response.CardsResponse;
+import com.jumzip.arcana.api.response.ReportResponse;
 import com.jumzip.arcana.api.service.ReportService;
 import com.jumzip.arcana.db.entity.Report;
 import com.jumzip.arcana.db.entity.ReportQuestion;
@@ -13,6 +15,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -62,7 +65,56 @@ public class ReportServiceImpl implements ReportService {
     }
 
     @Override
-    public List<Report> viewReport(String uid) {
-        return reportRepo.findAllByUidOrderByReportIdxDesc(uid);
+    public List<ReportResponse> viewReport(String uid) {
+        List<Report> reportList = reportRepo.findAllByUidOrderByReportIdxDesc(uid);
+        List<ReportResponse> reportResponseList = new ArrayList<>();
+        Report report = reportList.get(0);
+        ReportResponse reportResponse = makeReportResponse(reportList.get(0));
+        int beforeReportQuestionIdx = report.getReportQuestionIdx();
+        List<CardsResponse> cardsResponseList = new ArrayList<>();
+
+        for (Report nowReport: reportList) {
+            int nowReportQuestionIdx = nowReport.getReportQuestionIdx();
+
+            if (beforeReportQuestionIdx == nowReportQuestionIdx) {
+                cardsResponseList.add(makeCardsResponse(nowReport));
+            }
+            else {
+                reportResponse.setCardsResponse(cardsResponseList);
+                reportResponseList.add(reportResponse);
+                reportResponse = makeReportResponse(nowReport);
+                cardsResponseList = new ArrayList<>();
+                cardsResponseList.add(makeCardsResponse(nowReport));
+            }
+
+            beforeReportQuestionIdx = nowReportQuestionIdx;
+        }
+
+        reportResponse.setCardsResponse(cardsResponseList);
+        reportResponseList.add(reportResponse);
+
+        return reportResponseList;
+    }
+
+    private ReportResponse makeReportResponse(Report report) {
+        ReportResponse reportResponse = new ReportResponse();
+
+        reportResponse.setReportQuestionIdx(report.getReportQuestionIdx());
+        reportResponse.setUid(report.getUid());
+        reportResponse.setDatetime(report.getDatetime());
+        reportResponse.setOptions(report.getReportQuestion().getOptions());
+        reportResponse.setSummary(report.getReportQuestion().getSummary());
+        reportResponse.setQuestion(report.getReportQuestion().getQuestion());
+
+        return reportResponse;
+    }
+
+    private CardsResponse makeCardsResponse(Report report) {
+        CardsResponse cardsResponse = new CardsResponse();
+        cardsResponse.setCardIdx(report.getCardIdx());
+        cardsResponse.setName(report.getCard().getName());
+        cardsResponse.setMent(report.getMent());
+
+        return cardsResponse;
     }
 }
