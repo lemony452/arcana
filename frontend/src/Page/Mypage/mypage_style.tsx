@@ -219,3 +219,20 @@ export const EditUserContent = styled.div`
   /* text-underline-position: under; */
   font-size: 1.5em;
 `;
+
+export const PaginationContent = styled.div`
+  /* position: absolute; */
+  display: flex;
+  flex-direction: row;
+  margin-top: 2em;
+  /* top: 85vh; */
+`;
+
+export const PaginationBtn = styled.button`
+  border: 0;
+  border-right: 3px solid gray;
+  border-left: 3px solid gray;
+  font-size: 1.5em;
+  cursor: pointer;
+  /* margin-right: 0.5em; */
+`;

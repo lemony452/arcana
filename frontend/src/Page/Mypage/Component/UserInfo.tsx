@@ -63,9 +63,9 @@ function UserInfo() {
       <TarotToken>
         <ListContent>
           <ListIcon src={ticketIcon} alt="" />
-          <div>이벤트 참여 횟수</div>
+          <div>이벤트 참여권</div>
         </ListContent>
-        <div style={{ width: '50%' }}>{ticket} 회</div>
+        <div style={{ width: '50%' }}>{ticket} / 2</div>
       </TarotToken>
       <TarotToken>
         <ListContent>
