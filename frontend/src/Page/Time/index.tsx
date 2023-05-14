@@ -10,6 +10,7 @@ import { useFortuneStore, CardState, saveIndexStore } from '../../Store/User/for
 import charDialog0 from '../../Assets/characters/charDialog0.png';
 import { SpreadBtn } from '../Common/common_style';
 import { API } from '../../API';
+import { userInfoStore } from '../../Store/User/info';
 
 function Time() {
   const [celticText, SetcelticText] = useState(TimeConversations.t1);
@@ -19,17 +20,21 @@ function Time() {
   const { setOption, setTarotList, setSummary, setQuestion } = useFortuneStore();
   const navigate = useNavigate();
   const { setIndexList } = saveIndexStore(); // 카드 인덱스
+  const { user, setWeekly } = userInfoStore();
 
   // time 옵션 선택 함수
   // let TarotList: CardState[];
   let timements = '';
   let IndexList: number[];
+  let spreadOption;
   const OptionClick = async (f: keyof typeof TimeConversations.t2) => {
     // time api request 보내기
     let cardNum: number;
     if (f === '신년운세') {
+      spreadOption = 'year';
       cardNum = 12;
     } else {
+      spreadOption = 'month';
       cardNum = 6;
     }
     await API.get(`/api/v1/tarot/time/${cardNum}`).then((res) => {
@@ -62,7 +67,7 @@ function Time() {
     SetcelticText(TimeConversations.t2[f]);
     setOption(f);
     setQuestion(''); // 기간운세는 질문X
-    navigate('/spread', { state: `${f}` });
+    navigate('/spread', { state: `${spreadOption}` });
 
     API.post(`/api/v2/summary`, {
       text: timements,
@@ -70,7 +75,17 @@ function Time() {
       console.log(res.data.summary);
       setSummary(res.data.summary);
     });
-    // await setTarotList(ans.data);
+
+    // weekly count 1개 차감
+    API.put(`/api/v1/user/count`, {
+      type: 'Weekly',
+      uid: user.uid,
+    })
+      .then((res) => {
+        console.log(res.data);
+        setWeekly(res.data.nowValue);
+      })
+      .catch((err) => console.log(err));
   };
 
   return (
