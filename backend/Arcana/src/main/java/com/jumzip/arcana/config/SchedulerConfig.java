@@ -28,4 +28,16 @@ public class SchedulerConfig {
         }
     }
 
+    // Cron (초, 분, 시, 일, 월, 요일)
+//    @Scheduled(cron = "*/5 * * * * *")
+//    public void resetWeeklyCountTest() {
+//        logger.info("start resetWeeklyCount - " + new Date());
+//
+//        try {
+//            userService.resetWeeklyCount();
+//        } catch (Exception e) {
+//            logger.info("reset WeeklyCount Error - " + e);
+//        }
+//    }
+
 }
