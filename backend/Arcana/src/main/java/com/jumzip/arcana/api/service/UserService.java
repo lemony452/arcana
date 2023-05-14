@@ -8,6 +8,5 @@ public interface UserService {
     public User getUserData(String uid);
     public User registerUser(UserRegisterRequest userReq);
     public void deleteUser(String uid);
-
-
+    public int rewardUser(String uid, int ticket);
 }

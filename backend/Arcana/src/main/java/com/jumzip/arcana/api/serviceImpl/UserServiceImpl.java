@@ -35,4 +35,11 @@ public class UserServiceImpl implements UserService {
     public void deleteUser(String uid) {
         userRepo.removeUser(uid);
     }
+
+    @Override
+    public int rewardUser(String uid, int ticket) {
+        User user = userRepo.findUserByUid(uid);
+        user.setTicket(user.getTicket() + ticket);
+        return user.getTicket();
+    }
 }
