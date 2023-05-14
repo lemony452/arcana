@@ -11,6 +11,6 @@ public interface UserService {
     public boolean searchUser(String email);
     public int useWeeklyCount(String uid);
     public int useTicket(String uid);
-
+    public User updateUserNickname(String uid, String nickname);
     
 }

@@ -12,5 +12,6 @@ public interface UserRepository {
     User findByEmail(String email);
     int updateWeeklyCount(String uid);
     int updateTicket(String uid);
+    User updateUserNicknameByUid(String uid, String nickname);
 
 }
