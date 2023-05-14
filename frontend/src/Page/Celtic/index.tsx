@@ -8,6 +8,8 @@ import Npc from '../../Common/npc';
 import { createCompletion } from '../../Store/FortuneTelling/gpt';
 import { useFortuneStore, CardState, saveIndexStore } from '../../Store/User/fortune';
 import charDialog0 from '../../Assets/characters/charDialog0.png';
+import { API } from '../../API';
+import { userInfoStore } from '../../Store/User/info';
 
 function Celtic() {
   const [celticText, SetcelticText] = useState(CelticConversations.c1);
@@ -16,6 +18,7 @@ function Celtic() {
   const inputValueRef = useRef<HTMLInputElement>(null);
   const { addFortune, setTarotNameList, setOption, setInputValue, setFortune, setTarotList, tarotNameList } =
     useFortuneStore();
+  const { user, setWeekly } = userInfoStore();
   const navigate = useNavigate();
   const { setIndexList } = saveIndexStore(); // 카드 인덱스 가져오기
   // 특수 문자 처리
@@ -125,6 +128,16 @@ function Celtic() {
       });
       // gpt api 호출하고 spread 페이지로 바로 이동됨
       navigate('/spread', { state: 'celtic' });
+      // weekly count 1개 차감
+      API.put(`/api/v1/user/count`, {
+        type: 'Weekly',
+        uid: user.uid,
+      })
+        .then((res) => {
+          console.log(res.data);
+          setWeekly(res.data);
+        })
+        .catch((err) => console.log(err));
     } else {
       SetcelticText('나한테 장난치지 말구!! 고민을 다시 입력해줘!');
     }
