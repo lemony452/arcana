@@ -10,4 +10,5 @@ public interface UserRepository {
     void removeUser(String uid);
     User findUserByUid(String uid);
     User findByEmail(String email);
+    void updateUserWeeklyCount(int weeklyCount);
 }
