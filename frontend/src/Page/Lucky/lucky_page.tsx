@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   FacebookShareButton,
   FacebookIcon,
@@ -49,18 +49,6 @@ function LuckyPage() {
     question: inputValue,
     reports: [],
   };
-  // 배열에 타로 운세 결과 저장
-  tarotList.forEach((value, idx) => {
-    SaveData.reports.push({
-      cardIdx: value.card.idx,
-      ment: fortune[idx],
-    });
-  });
-  // 럭키 카드 배열 마지막 요소로 저장
-  SaveData.reports.push({
-    cardIdx: lucky.card.idx,
-    ment: luckyMent,
-  });
 
   const cardList = [
     {
@@ -91,6 +79,42 @@ function LuckyPage() {
 
   const resultPageHandler = () => {
     setResultPage(true);
+    // 배열에 타로 운세 결과 저장
+    if (option === 'year' || option === 'month') {
+      tarotList.forEach((value) => {
+        SaveData.reports.push({
+          cardIdx: value.card.idx,
+          ment: value.ment,
+        });
+      });
+    } else {
+      tarotList.forEach((value, idx) => {
+        SaveData.reports.push({
+          cardIdx: value.card.idx,
+          ment: fortune[idx],
+        });
+      });
+    }
+    // 럭키 카드 배열 마지막 요소로 저장
+    SaveData.reports.push({
+      cardIdx: lucky.card.idx,
+      ment: luckyMent,
+    });
+    // 럭키카드 공유하기 버튼 누르면 운세기록 저장 api 요청보내기
+    console.log('운세 저장하는 api');
+    API.post(`/api/v1/tarot/log`, {
+      uid: SaveData.uid,
+      options: SaveData.options,
+      summary: SaveData.summary,
+      question: SaveData.question,
+      reports: SaveData.reports,
+    })
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   const cardSelect = checkSelectState ? cardList[selectCard].content : '이 카드를 선택하시겟습니까?';
@@ -149,21 +173,7 @@ function LuckyPage() {
     });
   };
 
-  // 럭키카드 공유 후 메인으로 이동하면서 운세기록 저장 api 요청보내기
   const goMain = () => {
-    API.post(`/api/v1/tarot/log`, {
-      uid: SaveData.uid,
-      options: SaveData.options,
-      summary: SaveData.summary,
-      question: SaveData.question,
-      reports: SaveData.reports,
-    })
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
     navigate('/');
   };
 
