@@ -1,14 +1,18 @@
 package com.jumzip.arcana.api.response;
 
-import java.time.LocalDateTime;
 import lombok.Data;
+
+import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 public class ReportResponse {
-    private int reportIdx;
+    private int reportQuestionIdx;
     private String uid;
     private LocalDateTime datetime;
-    private int cardIdx;
-    private String ment;
-    private String name;
+    private String options;
+    private String summary;
+    private String question;
+    private List<CardsResponse> cardsResponse;
+
 }
