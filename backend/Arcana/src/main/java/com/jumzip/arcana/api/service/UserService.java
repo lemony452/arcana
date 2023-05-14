@@ -13,5 +13,5 @@ public interface UserService {
     public int useWeeklyCount(String uid);
     public int useTicket(String uid);
     public User updateUserNickname(String uid, String nickname);
-    
+    public int rewardUser(String uid, int ticket);
 }
