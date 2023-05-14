@@ -60,4 +60,7 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    @Override
+    public void resetWeeklyCount() { userRepo.updateUserWeeklyCount(WEEKLY_COUNT); }
+
 }
