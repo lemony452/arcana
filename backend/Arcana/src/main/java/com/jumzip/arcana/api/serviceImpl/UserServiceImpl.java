@@ -62,5 +62,20 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void resetWeeklyCount() { userRepo.updateUserWeeklyCount(WEEKLY_COUNT); }
+    
+    @Override
+    public int useWeeklyCount(String uid) {
+        return userRepo.updateWeeklyCount(uid);
+    }
+
+    @Override
+    public int useTicket(String uid) {
+        return userRepo.updateTicket(uid);
+    }
+
+    @Override
+    public User updateUserNickname(String uid, String nickname) {
+        return userRepo.updateUserNicknameByUid(uid, nickname);
+    }
 
 }
