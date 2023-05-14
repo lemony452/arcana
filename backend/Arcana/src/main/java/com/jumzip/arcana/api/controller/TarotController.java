@@ -8,6 +8,7 @@ import com.jumzip.arcana.db.entity.LuckyCard;
 import com.jumzip.arcana.db.entity.Report;
 import com.jumzip.arcana.db.entity.TimeCard;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -92,6 +93,7 @@ public class TarotController {
     }
 
     @Operation(summary = "Log View", description = "운세 기록을 조회 ")
+    @Parameter(name = "uid", example = "2785092517")
     @GetMapping("log")
     public ResponseEntity<?> viewReport(@RequestParam String uid) {
         logger.info("start viewReport");
