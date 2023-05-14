@@ -16,6 +16,7 @@ interface InfoState {
   ticket: number;
   weeklyCount: number;
   token: number;
+  tarotLog: any;
   setUser: (user: any) => void;
   setNickname: (name: string) => void;
   setTarotToken: (t: number) => void;
@@ -25,6 +26,7 @@ interface InfoState {
   setTicket: (t: number) => void;
   setWeekly: (w: number) => void;
   setToken: (t: number) => void;
+  setTarotLog: (tarot: any) => void;
 }
 
 export const userInfoStore = create<InfoState>((set) => ({
@@ -41,6 +43,7 @@ export const userInfoStore = create<InfoState>((set) => ({
   ticket: 0,
   weeklyCount: 0,
   token: 0,
+  tarotLog: [],
   setUser: (u) => {
     set(() => ({ user: u }));
   },
@@ -67,5 +70,8 @@ export const userInfoStore = create<InfoState>((set) => ({
   },
   setToken: (t) => {
     set(() => ({ token: t }));
+  },
+  setTarotLog: (tarot) => {
+    set(() => ({ tarotLog: tarot }));
   },
 }));

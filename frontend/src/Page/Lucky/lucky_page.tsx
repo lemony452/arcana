@@ -80,7 +80,7 @@ function LuckyPage() {
   const resultPageHandler = () => {
     setResultPage(true);
     // 배열에 타로 운세 결과 저장
-    if (option === 'year' || option === 'month') {
+    if (option === '신년운세' || option === '월별운세') {
       tarotList.forEach((value) => {
         SaveData.reports.push({
           cardIdx: value.card.idx,
