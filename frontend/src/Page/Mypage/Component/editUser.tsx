@@ -42,13 +42,17 @@ function EditUserInfo() {
   const saveNickName = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const name = editRef.current?.value;
-    setNickname(name!);
+    // setNickname(name!);
     setEdit(false);
-    API.put(`api/v1/user/nickname?nickname=${name}`, {
-      headers: {
-        uid: user.uid,
-      },
-    });
+    API.put(`/api/v1/user/nickname`, {
+      uid: user.uid,
+      nickname: name,
+    })
+      .then((res) => {
+        console.log(res);
+        setNickname(res.data.nickname);
+      })
+      .catch((err) => console.log(err));
   };
 
   const removeUser = async () => {
