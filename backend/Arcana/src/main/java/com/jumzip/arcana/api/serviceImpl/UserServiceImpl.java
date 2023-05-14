@@ -60,4 +60,14 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    @Override
+    public int useWeeklyCount(String uid) {
+        return userRepo.updateWeeklyCount(uid);
+    }
+
+    @Override
+    public int useTicket(String uid) {
+        return userRepo.updateTicket(uid);
+    }
+
 }

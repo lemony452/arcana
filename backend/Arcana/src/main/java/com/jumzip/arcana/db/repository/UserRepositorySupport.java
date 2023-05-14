@@ -1,13 +1,13 @@
 package com.jumzip.arcana.db.repository;
 
 import com.jumzip.arcana.db.entity.User;
-import java.util.List;
-import javax.persistence.TypedQuery;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Repository @Primary
 @Transactional
@@ -33,4 +33,33 @@ public class UserRepositorySupport implements UserRepository {
         List<User> users = query.getResultList();
         return users.isEmpty() ? null : users.get(0);
     }
+
+    @Override
+    public int updateWeeklyCount(String uid) {
+        User user = em.find(User.class, uid);
+
+        int nowValue = user.getWeekly_count();
+
+        if (nowValue > 0) {
+            nowValue -= 1;
+            user.setWeekly_count(nowValue);
+        }
+
+        return nowValue;
+    }
+
+    @Override
+    public int updateTicket(String uid) {
+        User user = em.find(User.class, uid);
+
+        int nowValue = user.getTicket();
+
+        if (nowValue > 0) {
+            nowValue -= 1;
+            user.setTicket(nowValue);
+        }
+
+        return nowValue;
+    }
+    
 }

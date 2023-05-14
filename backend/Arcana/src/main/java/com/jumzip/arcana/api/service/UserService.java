@@ -9,5 +9,8 @@ public interface UserService {
     public User registerUser(UserRegisterRequest userReq);
     public void deleteUser(String uid);
     public boolean searchUser(String email);
+    public int useWeeklyCount(String uid);
+    public int useTicket(String uid);
+
     
 }
