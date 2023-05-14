@@ -35,7 +35,6 @@ function TarotListDetail() {
   const [detailQuestion, setQuestion] = useState('내 올해 연애운 봐줘');
   const [detailOption, setOption] = useState('사랑운💘');
   const [detailDate, setDate] = useState('23.05.01');
-
   const temp = [
     {
       option: '사랑운',
