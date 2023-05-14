@@ -97,4 +97,11 @@ public class UserController {
         return kakaoUserService.kakaoLogin(code, response);
     }
 
+    @Operation(summary = "quiz 후 reward 제공")
+    @PutMapping("reward")
+    public String getReward(@RequestParam String uid, @RequestParam int ticket) {
+        int nowTicket = userService.rewardUser(uid, ticket);
+        return "YOUR TICKET : " + nowTicket;
+    }
+
 }
