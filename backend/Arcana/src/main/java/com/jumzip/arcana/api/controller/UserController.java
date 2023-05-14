@@ -2,6 +2,7 @@ package com.jumzip.arcana.api.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.jumzip.arcana.api.request.CountAndTicketRequest;
+import com.jumzip.arcana.api.request.UpdateNicknameRequest;
 import com.jumzip.arcana.api.request.UserRegisterRequest;
 import com.jumzip.arcana.api.service.KakaoUserService;
 import com.jumzip.arcana.api.service.UserService;
@@ -86,9 +87,20 @@ public class UserController {
 
     @Operation(summary = "User 닉네임 변경", description = "변경된 닉네임을 리턴한다")
     @PutMapping("nickname")
-    public String UpdateUserNickname(@RequestHeader String uid, @RequestParam String nickname) {
-        String newName = userService.getUserData(uid).getNickname();
-        return nickname + " Changed " + newName;
+    public ResponseEntity<?> UpdateUserNickname(@RequestBody UpdateNicknameRequest updateNicknameRequest) {
+        logger.info("start UpdateUserNickname uid - " + updateNicknameRequest.getUid() +
+                ", nickname - " + updateNicknameRequest.getNickname());
+
+        try {
+            User user = userService.updateUserNickname(updateNicknameRequest.getUid(), updateNicknameRequest.getNickname());
+            logger.info("result - " + user.toString());
+
+            return new ResponseEntity<>(user, HttpStatus.OK);
+        } catch (Exception e) {
+            logger.info("update UserNickname error - " + e.getMessage(), e);
+
+            return new ResponseEntity<>("FAIL", HttpStatus.BAD_REQUEST);
+        }
     }
 
     @Operation(summary = "User 탈퇴")
