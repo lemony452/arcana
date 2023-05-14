@@ -10,4 +10,7 @@ public interface UserRepository {
     void removeUser(String uid);
     User findUserByUid(String uid);
     User findByEmail(String email);
+    int updateWeeklyCount(String uid);
+    int updateTicket(String uid);
+
 }
