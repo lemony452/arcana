@@ -16,7 +16,7 @@ function Time() {
   const [next, SetNext] = useState(false);
   // const [option, SetOption] = useState('');
   const inputValueRef = useRef<HTMLInputElement>(null);
-  const { fortune, setOption, addFortune, setTarotList, setSummary, tarotList } = useFortuneStore();
+  const { setOption, setTarotList, setSummary, setQuestion } = useFortuneStore();
   const navigate = useNavigate();
   const { setIndexList } = saveIndexStore(); // 카드 인덱스
 
@@ -27,7 +27,7 @@ function Time() {
   const OptionClick = async (f: keyof typeof TimeConversations.t2) => {
     // time api request 보내기
     let cardNum: number;
-    if (f === 'year') {
+    if (f === '신년운세') {
       cardNum = 12;
     } else {
       cardNum = 6;
@@ -59,17 +59,18 @@ function Time() {
     // await setTarotList(ans.data);
     // await navigate(`/time/${f}`);
     // await navigate(`/time/${f}`);
-    await API.post(`/api/v2/summary`, {
+    SetcelticText(TimeConversations.t2[f]);
+    setOption(f);
+    setQuestion(''); // 기간운세는 질문X
+    navigate('/spread', { state: `${f}` });
+
+    API.post(`/api/v2/summary`, {
       text: timements,
     }).then((res: any) => {
       console.log(res.data.summary);
       setSummary(res.data.summary);
     });
     // await setTarotList(ans.data);
-
-    SetcelticText(TimeConversations.t2[f]);
-    setOption(f);
-    navigate('/spread', { state: `${f}` });
   };
 
   return (
@@ -78,8 +79,8 @@ function Time() {
       {/* <DialogNPC src={charDialog0} /> */}
       <Dialog content={celticText} next={next}>
         <>
-          <OptionBtn onClick={() => OptionClick('year')}>신년 운세 봐줘 🐰</OptionBtn>
-          <OptionBtn onClick={() => OptionClick('month')}>월별 운세 봐줘 👻</OptionBtn>
+          <OptionBtn onClick={() => OptionClick('신년운세')}>신년 운세 봐줘 🐰</OptionBtn>
+          <OptionBtn onClick={() => OptionClick('월별운세')}>월별 운세 봐줘 👻</OptionBtn>
         </>
       </Dialog>
     </div>
