@@ -10,5 +10,8 @@ public interface UserService {
     public void deleteUser(String uid);
     public boolean searchUser(String email);
     public void resetWeeklyCount();
+    public int useWeeklyCount(String uid);
+    public int useTicket(String uid);
+    public User updateUserNickname(String uid, String nickname);
     
 }
