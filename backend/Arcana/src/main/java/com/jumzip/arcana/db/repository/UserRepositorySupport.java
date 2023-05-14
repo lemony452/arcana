@@ -61,5 +61,13 @@ public class UserRepositorySupport implements UserRepository {
 
         return nowValue;
     }
-    
+
+    @Override
+    public User updateUserNicknameByUid(String uid, String nickname) {
+        User user = em.find(User.class, uid);
+        user.setNickname(nickname);
+
+        return user;
+    }
+
 }

@@ -70,4 +70,9 @@ public class UserServiceImpl implements UserService {
         return userRepo.updateTicket(uid);
     }
 
+    @Override
+    public User updateUserNickname(String uid, String nickname) {
+        return userRepo.updateUserNicknameByUid(uid, nickname);
+    }
+
 }
