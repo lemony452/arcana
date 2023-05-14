@@ -1,6 +1,7 @@
 package com.jumzip.arcana.api.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.jumzip.arcana.api.request.CountAndTicketRequest;
 import com.jumzip.arcana.api.request.UserRegisterRequest;
 import com.jumzip.arcana.api.service.KakaoUserService;
 import com.jumzip.arcana.api.service.UserService;
@@ -15,6 +16,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
+import java.util.HashMap;
+import java.util.Map;
 
 @Tag(description = "USER API", name = "USER")
 @RestController
@@ -112,6 +115,37 @@ public class UserController {
 
         try {
             return new ResponseEntity<>(userService.searchUser(email), HttpStatus.OK);
+        } catch (Exception e) {
+            logger.info("search User error - " + e.getMessage(), e);
+
+            return new ResponseEntity<>("FAIL", HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @Operation(summary = "유저 위클리카운트 및 티켓 소모", description = "uid 및 " +
+            " \n 소모할 자원 종류를 'Weekly' or 'Ticket'으로 보내주세요 ")
+    @PutMapping("count")
+    public ResponseEntity<?> useCountAndTicket(@RequestBody CountAndTicketRequest countAndTicketRequest) {
+        logger.info("start useCountAndTicket");
+
+        try {
+            Map<String, Object> result = new HashMap<>();
+            int nowValue = 0;
+            String tokenType = countAndTicketRequest.getType();
+
+            if (tokenType.equals("Weekly")) {
+                nowValue = userService.useWeeklyCount(countAndTicketRequest.getUid());
+            }
+            else {
+                nowValue = userService.useTicket(countAndTicketRequest.getUid());
+            }
+
+            logger.info("uid - " + countAndTicketRequest.getUid() + ", nowValue - " + nowValue);
+
+            result.put("type", tokenType);
+            result.put("nowValue", nowValue);
+
+            return new ResponseEntity<>(result, HttpStatus.OK);
         } catch (Exception e) {
             logger.info("search User error - " + e.getMessage(), e);
 
