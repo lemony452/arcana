@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   Side,
@@ -25,6 +25,7 @@ import homeBtnImg from '../../../Assets/etc/homBtn.png';
 import LoveCoverImg from '../../../Assets/etc/cover1.png';
 import Tarots from '../../../Assets/etc/tarots.png';
 import Lucky from '../../../Assets/etc/lucky.png';
+import Pagination from './pagination';
 
 function TarotListDetail() {
   const navigate = useNavigate();
@@ -32,9 +33,6 @@ function TarotListDetail() {
     navigate('/');
   };
   const { nickname } = userInfoStore();
-  const [detailQuestion, setQuestion] = useState('내 올해 연애운 봐줘');
-  const [detailOption, setOption] = useState('사랑운💘');
-  const [detailDate, setDate] = useState('23.05.01');
   const temp = [
     {
       option: '사랑운',
@@ -52,7 +50,7 @@ function TarotListDetail() {
       question: '',
     },
     {
-      option: '취업운',
+      option: '성공운',
       date: '23.02.01',
       question: '이번 면접에 합격할 수 있을까?',
     },
@@ -61,10 +59,28 @@ function TarotListDetail() {
       date: '23.01.01',
       question: '',
     },
+    {
+      option: '신년운세',
+      date: '23.01.01',
+      question: '',
+    },
+    {
+      option: '신년운세',
+      date: '23.01.01',
+      question: '',
+    },
   ];
+
+  const [detailQuestion, setQuestion] = useState(temp[0].question);
+  const [detailOption, setOption] = useState(temp[0].option);
+  const [detailDate, setDate] = useState(temp[0].date);
   const res = temp.length % 5 ? Math.floor(temp.length / 5) + 1 : Math.floor(temp.length / 5);
-  const [pageNum, setPageNum] = useState(res);
-  const cardList = temp.map((t, idx) => {
+  const [pageNum, setPageNum] = useState(1);
+  const limit = 5;
+  const offset = (pageNum - 1) * limit;
+  const SliceTemp = temp.slice(offset, limit + offset);
+
+  const cardList = SliceTemp.map((t) => {
     const ShowDetail = () => {
       setDate(t.date);
       setOption(t.option);
@@ -77,7 +93,6 @@ function TarotListDetail() {
       </TitleBox>
     );
   });
-  // setPageNum(res);
 
   return (
     <div style={{ position: 'relative' }}>
@@ -96,7 +111,7 @@ function TarotListDetail() {
           </TarotToken>
           <div>option</div>
           {cardList}
-          <div>{pageNum}</div>
+          <Pagination totalPage={res} pageNum={pageNum} setPage={setPageNum} />
         </TarotListContent>
       </Side>
       <DetailContent>
