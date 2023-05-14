@@ -35,6 +35,20 @@ public class UserRepositorySupport implements UserRepository {
     }
 
     @Override
+    public void resetUserWeeklyCount(int weeklyCount) {
+        List<User> userList = em.createQuery("select m from User m", User.class)
+                .getResultList();
+
+        try {
+            for (User user : userList) {
+                user.setWeekly_count(weeklyCount);
+            }
+        } catch (Exception e) {
+            // pass
+        }
+    }
+
+    @Override
     public int updateWeeklyCount(String uid) {
         User user = em.find(User.class, uid);
 
