@@ -1,7 +1,6 @@
 package com.jumzip.arcana.api.controller;
 
 import com.jumzip.arcana.api.service.QuizService;
-import com.jumzip.arcana.api.service.TarotService;
 import com.jumzip.arcana.db.entity.Message;
 import com.jumzip.arcana.db.entity.Quiz;
 import io.swagger.v3.oas.annotations.tags.Tag;
