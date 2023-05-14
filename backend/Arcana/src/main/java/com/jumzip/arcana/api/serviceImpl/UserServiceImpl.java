@@ -78,4 +78,11 @@ public class UserServiceImpl implements UserService {
         return userRepo.updateUserNicknameByUid(uid, nickname);
     }
 
+    @Override
+    public int rewardUser(String uid, int ticket) {
+        User user = userRepo.findUserByUid(uid);
+        user.setTicket(user.getTicket() + ticket);
+        return user.getTicket();
+    }
+
 }
