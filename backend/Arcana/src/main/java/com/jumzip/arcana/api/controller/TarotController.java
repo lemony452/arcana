@@ -1,11 +1,11 @@
 package com.jumzip.arcana.api.controller;
 
 import com.jumzip.arcana.api.request.ReportRequest;
+import com.jumzip.arcana.api.response.ReportResponse;
 import com.jumzip.arcana.api.service.ReportService;
 import com.jumzip.arcana.api.service.TarotService;
 import com.jumzip.arcana.db.entity.InstantCard;
 import com.jumzip.arcana.db.entity.LuckyCard;
-import com.jumzip.arcana.db.entity.Report;
 import com.jumzip.arcana.db.entity.TimeCard;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -99,8 +99,8 @@ public class TarotController {
         logger.info("start viewReport");
 
         try {
-            List<Report> reports = reportService.viewReport(uid);
-            logger.info(reports.toString());
+            List<ReportResponse> reports = reportService.viewReport(uid);
+//            logger.info(reports.toString());
 
             return new ResponseEntity<>(reports, HttpStatus.OK);
         } catch (Exception e) {
