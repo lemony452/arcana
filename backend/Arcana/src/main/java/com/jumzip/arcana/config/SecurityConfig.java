@@ -14,6 +14,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-        http.headers().frameOptions().sameOrigin();
+        http.headers().frameOptions().sameOrigin()
+            .and()
+            .httpBasic().disable() // REST API는 UI를 사용하지 않으므로 기본설정을 비활성화
+            .csrf().disable();; // REST API는 csrf 보안이 필요 없으므로 비활성화
     }
+
 }
