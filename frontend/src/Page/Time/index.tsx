@@ -69,7 +69,7 @@ function Time() {
 
     SetcelticText(TimeConversations.t2[f]);
     setOption(f);
-    navigate('/spread', { state: `${f}` });
+    await navigate('/spread', { state: `${f}` });
   };
 
   return (

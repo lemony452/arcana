@@ -14,7 +14,13 @@ import { saveIndexStore, useFortuneStore } from '../../../Store/User/fortune';
 function TwoSpread() {
   const navigate = useNavigate();
   const [index, setIndex] = useState(0); // indexpage변화
+  const [nextBtn, setNextBtn] = useState(true);
+
   const onNext = () => {
+    setNextBtn(false);
+    setTimeout(() => {
+      setNextBtn(true);
+    }, 4000);
     return setIndex(index + 1);
   };
   const toHome = () => {
@@ -62,7 +68,7 @@ function TwoSpread() {
         </common.ChatArea> */}
         <DialogNPC src={charDialog0} />
         <Dialog content={text.page1} next={false}>
-          <OptionBtn onClick={onNext}>다음</OptionBtn>
+          {nextBtn && <OptionBtn onClick={onNext}>다음</OptionBtn>}
         </Dialog>
       </>
     );
@@ -92,7 +98,7 @@ function TwoSpread() {
         </common.ChatArea> */}
         <DialogNPC src={charDialog0} />
         <Dialog content={text.page2} next={false}>
-          <OptionBtn onClick={toHome}>메인으로</OptionBtn>
+          {nextBtn && <OptionBtn onClick={toHome}>메인으로</OptionBtn>}
         </Dialog>
       </>
     );
