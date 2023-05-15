@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jumzip.arcana.api.service.KakaoUserService;
+import com.jumzip.arcana.api.service.UserService;
 import com.jumzip.arcana.db.entity.User;
 import com.jumzip.arcana.db.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -34,6 +35,8 @@ public class KakaoUserServiceImpl implements KakaoUserService {
     String CLIENT_ID;
 
     private final UserRepository userRepository;
+
+    private final UserService userService;
 
 
     @Override
@@ -122,7 +125,7 @@ public class KakaoUserServiceImpl implements KakaoUserService {
 
         User newUser = new User();
         newUser.setUid(uid);
-        newUser.setNickname(nickname);
+        newUser.setNickname(userService.makeAnimalNickname());
         newUser.setEmail(email);
         newUser.setProvider("kakao");
         newUser.setWeekly_count(WEEKLY_COUNT);
