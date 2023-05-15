@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   FacebookShareButton,
   FacebookIcon,
@@ -19,6 +19,17 @@ import KakaoIcon from '../../Assets/etc/icon-kakao.png';
 import Camera from '../../Assets/etc/camera.png';
 import Home from '../../Assets/etc/home.png';
 import { useLuckyStore } from '../../Store/User/lucky';
+import { API } from '../../API';
+import { userInfoStore } from '../../Store/User/info';
+import { useFortuneStore } from '../../Store/User/fortune';
+
+interface SaveDataType {
+  uid: string;
+  options: string;
+  summary: string;
+  question: string;
+  reports: { cardIdx: number; ment: string }[];
+}
 
 function LuckyPage() {
   const navigate = useNavigate();
@@ -26,6 +37,18 @@ function LuckyPage() {
   const [resultPage, setResultPage] = useState(false);
   const [checkSelectState, setCheckSelectState] = useState(false); // 마지막 선택 질문
   const { luckyMent, lucky } = useLuckyStore();
+  const { user } = userInfoStore();
+  const { option, summary, tarotList, fortune, inputValue } = useFortuneStore();
+  const userSummary = summary;
+
+  // 운세 결과 저장 요청 보낼 변수
+  const SaveData: SaveDataType = {
+    uid: user.uid,
+    options: option,
+    summary: userSummary,
+    question: inputValue,
+    reports: [],
+  };
 
   const cardList = [
     {
@@ -56,6 +79,42 @@ function LuckyPage() {
 
   const resultPageHandler = () => {
     setResultPage(true);
+    // 배열에 타로 운세 결과 저장
+    if (option === '신년운세' || option === '월별운세') {
+      tarotList.forEach((value) => {
+        SaveData.reports.push({
+          cardIdx: value.card.idx,
+          ment: value.ment,
+        });
+      });
+    } else {
+      tarotList.forEach((value, idx) => {
+        SaveData.reports.push({
+          cardIdx: value.card.idx,
+          ment: fortune[idx],
+        });
+      });
+    }
+    // 럭키 카드 배열 마지막 요소로 저장
+    SaveData.reports.push({
+      cardIdx: lucky.card.idx,
+      ment: luckyMent,
+    });
+    // 럭키카드 공유하기 버튼 누르면 운세기록 저장 api 요청보내기
+    console.log('운세 저장하는 api');
+    API.post(`/api/v1/tarot/log`, {
+      uid: SaveData.uid,
+      options: SaveData.options,
+      summary: SaveData.summary,
+      question: SaveData.question,
+      reports: SaveData.reports,
+    })
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   const cardSelect = checkSelectState ? cardList[selectCard].content : '이 카드를 선택하시겟습니까?';

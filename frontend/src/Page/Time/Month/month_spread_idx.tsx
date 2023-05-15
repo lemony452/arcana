@@ -81,11 +81,11 @@ function MonthSpread() {
           </common.CardBox>
           <common.SideBlock>
             <common.SpreadModal onClick={showModal}>
-              <Month />
+              <Month spreadList={indexList} />
               {modalOpen ? (
                 <common.ModalBackdrop onClick={showModal}>
                   <common.ModalView onClick={(e) => e.stopPropagation()}>
-                    <Month />
+                    <Month spreadList={indexList} />
                     <OptionBtn onClick={showModal}>닫기</OptionBtn>
                   </common.ModalView>
                 </common.ModalBackdrop>
@@ -118,11 +118,11 @@ function MonthSpread() {
           </common.CardBox>
           <common.SideBlock>
             <common.SpreadModal onClick={showModal}>
-              <Month />
+              <Month spreadList={indexList} />
               {modalOpen ? (
                 <common.ModalBackdrop onClick={showModal}>
                   <common.ModalView onClick={(e) => e.stopPropagation()}>
-                    <Month />
+                    <Month spreadList={indexList} />
                     <OptionBtn onClick={showModal}>닫기</OptionBtn>
                   </common.ModalView>
                 </common.ModalBackdrop>
@@ -155,11 +155,11 @@ function MonthSpread() {
           </common.CardBox>
           <common.SideBlock>
             <common.SpreadModal onClick={showModal}>
-              <Month />
+              <Month spreadList={indexList} />
               {modalOpen ? (
                 <common.ModalBackdrop onClick={showModal}>
                   <common.ModalView onClick={(e) => e.stopPropagation()}>
-                    <Month />
+                    <Month spreadList={indexList} />
                     <OptionBtn onClick={showModal}>닫기</OptionBtn>
                   </common.ModalView>
                 </common.ModalBackdrop>
@@ -189,11 +189,11 @@ function MonthSpread() {
           </common.CardBox>
           <common.SideBlock>
             <common.SpreadModal onClick={showModal}>
-              <Month />
+              <Month spreadList={indexList} />
               {modalOpen ? (
                 <common.ModalBackdrop onClick={showModal}>
                   <common.ModalView onClick={(e) => e.stopPropagation()}>
-                    <Month />
+                    <Month spreadList={indexList} />
                     <OptionBtn onClick={showModal}>닫기</OptionBtn>
                   </common.ModalView>
                 </common.ModalBackdrop>
