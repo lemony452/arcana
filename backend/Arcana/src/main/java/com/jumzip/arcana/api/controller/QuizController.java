@@ -73,16 +73,18 @@ public class QuizController {
 
     // 페이지 입장 시 uid를 들고 들어온다 -> 메세지타입 Enter, user uid 필요
     @MessageMapping(value = "/enter") // /pub/enter
-    public void quizEnter(Message message) {
+    public String quizEnter(Message message) {
         operations.convertAndSend("/sub/channel/" + message.getChannel(), message);
         message.setUserCount(message.getUserCount()+1);
+        return "ENTER Complete";
     }
 
     // FE에서 틀린 사람 처리/페이지 나간사람 처리 -> Quit 메세지타입, uid 필요
     @MessageMapping(value = "/quit") // /pub/quit
-    public void quizQuit(Message message) {
+    public String quizQuit(Message message) {
         operations.convertAndSend("/sub/channel/" + message.getChannel(), message);
         message.setUserCount(message.getUserCount()-1);
+        return "QUIT Complete";
     }
 
     // quizQuit API Success 들어오면 커넥션 객체를 destroy 한다 << Response로 바꿔주기
