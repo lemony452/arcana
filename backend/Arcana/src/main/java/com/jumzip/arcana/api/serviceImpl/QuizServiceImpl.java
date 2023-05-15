@@ -1,6 +1,7 @@
 package com.jumzip.arcana.api.serviceImpl;
 
 import com.jumzip.arcana.api.service.QuizService;
+import com.jumzip.arcana.db.entity.Quiz;
 import com.jumzip.arcana.db.entity.QuizList;
 import com.jumzip.arcana.db.repository.QuizListRepository;
 import com.jumzip.arcana.db.repository.QuizRepository;
@@ -18,6 +19,11 @@ public class QuizServiceImpl implements QuizService {
     private final QuizRepository quizRepo;
 
     private final QuizListRepository quizListRepository;
+
+    @Override
+    public Quiz getQuiz(int quizNum) {
+        return quizRepo.findQuizById(quizNum);
+    }
 
     @Override
     public QuizList getQuizList() {
