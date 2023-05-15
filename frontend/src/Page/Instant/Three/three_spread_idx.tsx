@@ -14,7 +14,13 @@ import { saveIndexStore, useFortuneStore } from '../../../Store/User/fortune';
 function ThreeSpread() {
   const navigate = useNavigate();
   const [index, setIndex] = useState(0); // indexpage변화
+  const [nextBtn, setNextBtn] = useState(true);
+
   const onNext = () => {
+    setNextBtn(false);
+    setTimeout(() => {
+      setNextBtn(true);
+    }, 4000);
     return setIndex(index + 1);
   };
   console.log(index);
@@ -63,7 +69,7 @@ function ThreeSpread() {
         </common.ChatArea> */}
         <DialogNPC src={charDialog0} />
         <Dialog content={text.page1} next={false}>
-          <OptionBtn onClick={onNext}>다음</OptionBtn>
+          {nextBtn && <OptionBtn onClick={onNext}>다음</OptionBtn>}
         </Dialog>
       </>
     );
@@ -96,7 +102,7 @@ function ThreeSpread() {
         </common.ChatArea> */}
         <DialogNPC src={charDialog0} />
         <Dialog content={text.page3} next={false}>
-          <OptionBtn onClick={toHome}>메인으로</OptionBtn>
+          {nextBtn && <OptionBtn onClick={toHome}>메인으로</OptionBtn>}
         </Dialog>
       </>
     );
