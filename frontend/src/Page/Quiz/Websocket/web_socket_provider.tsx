@@ -4,8 +4,8 @@ const WebSocketContext = React.createContext<any>(null);
 export { WebSocketContext };
 
 export default function ({ children }: { children: React.ReactNode }) {
-  // const webSocketUrl = `ws://k8d107.p.ssafy.io:18081/ws`; // local
-  const webSocketUrl = `wss://k8d107.p.ssafy.io:18081/ws`; // main
+  const webSocketUrl = `ws://k8d107.p.ssafy.io:18081/ws`; // local
+  // const webSocketUrl = `wss://k8d107.p.ssafy.io:18081/ws`; // main
   const ws = useRef<WebSocket | null>(null);
 
   if (!ws.current) {
