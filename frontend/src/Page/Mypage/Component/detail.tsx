@@ -32,67 +32,51 @@ function TarotListDetail() {
   const MoveMain = () => {
     navigate('/');
   };
-  const { nickname } = userInfoStore();
-  const temp = [
-    {
-      option: '사랑운',
-      date: '23.05.10',
-      question: '내 올해 연애운 봐줘',
-    },
-    {
-      option: '재물운',
-      date: '23.04.01',
-      question: '이번에 산 주식이 오를까?',
-    },
-    {
-      option: '월별운세',
-      date: '23.03.02',
-      question: '',
-    },
-    {
-      option: '성공운',
-      date: '23.02.01',
-      question: '이번 면접에 합격할 수 있을까?',
-    },
-    {
-      option: '신년운세',
-      date: '23.01.01',
-      question: '',
-    },
-    {
-      option: '신년운세',
-      date: '23.01.01',
-      question: '',
-    },
-    {
-      option: '신년운세',
-      date: '23.01.01',
-      question: '',
-    },
-  ];
+  const { nickname, tarotLog } = userInfoStore();
+  const [temp, setTemp] = useState(tarotLog);
+  const reverseTemp = tarotLog.reverse();
+
+  const handleChange = (event: any) => {
+    console.log(event.target.value);
+    if (event.target.value === '과거순') {
+      setTemp(reverseTemp);
+    } else {
+      setTemp(tarotLog);
+    }
+  };
 
   const [detailQuestion, setQuestion] = useState(temp[0].question);
-  const [detailOption, setOption] = useState(temp[0].option);
-  const [detailDate, setDate] = useState(temp[0].date);
-  const res = temp.length % 5 ? Math.floor(temp.length / 5) + 1 : Math.floor(temp.length / 5);
-  const [pageNum, setPageNum] = useState(1);
+  const [detailOption, setOption] = useState(temp[0].options);
+  const [detailDate, setDate] = useState(`${temp[0].datetime[0]}.${temp[0].datetime[1]}.${temp[0].datetime[2]}`);
+  const [cardRes, setCardRes] = useState(temp[0].cardsResponse);
+  // const res = temp.length % 5 ? Math.floor(temp.length / 5) + 1 : Math.floor(temp.length / 5);
   const limit = 5;
+  const totalPage = Math.ceil(temp.length / limit);
+  const [pageNum, setPageNum] = useState(1);
   const offset = (pageNum - 1) * limit;
   const SliceTemp = temp.slice(offset, limit + offset);
+  const arr = Array(5)
+    .fill(1)
+    .map((x, y) => x + y);
 
-  const cardList = SliceTemp.map((t) => {
+  const cardList = SliceTemp.map((value: any, idx: number) => {
     const ShowDetail = () => {
-      setDate(t.date);
-      setOption(t.option);
-      setQuestion(t.question);
+      setDate(`${value.datetime[0]}.${value.datetime[1]}.${value.datetime[2]}`);
+      setOption(value.options);
+      setQuestion(value.question);
+      setCardRes(value.cardsResponse);
     };
     return (
-      <TitleBox onClick={ShowDetail}>
-        <div>{t.option}</div>
-        <div>{t.date}</div>
+      <TitleBox key={arr[idx]} onClick={ShowDetail}>
+        <div>{value.options}</div>
+        <div>{`${value.datetime[0]}.${value.datetime[1]}.${value.datetime[2]}`}</div>
       </TitleBox>
     );
   });
+
+  useEffect(() => {
+    console.log('옵션변경');
+  }, [SliceTemp]);
 
   return (
     <div style={{ position: 'relative' }}>
@@ -109,9 +93,12 @@ function TarotListDetail() {
             <ListIcon src={cardIcon} alt="" />
             <div>타로 운세 기록</div>
           </TarotToken>
-          <div>option</div>
+          <select onChange={handleChange}>
+            <option>최신순</option>
+            <option>과거순</option>
+          </select>
           {cardList}
-          <Pagination totalPage={res} pageNum={pageNum} setPage={setPageNum} />
+          <Pagination totalPage={totalPage} pageNum={pageNum} setPage={setPageNum} />
         </TarotListContent>
       </Side>
       <DetailContent>
@@ -122,12 +109,12 @@ function TarotListDetail() {
         <DetailDate>{detailDate}</DetailDate>
         <DetailQuestion>{detailQuestion ? `❝ ${detailQuestion} ❞` : null}</DetailQuestion>
         <DetailFortune>
-          너를 지지해줄 사람들이 많다는 것을 의미해 너 자신의 마음을 잘 이해하고 받아들이는 것이 중요해 신중하게
-          고민하고 균형 있게 선택하는 것이 좋아 너의 감정에 귀 기울이면, 너는 사랑에 대한 더욱 깊은 이해와 인연을 만들어
-          갈 수 있을 거야 극복하기 위해서 먼저 너 자신의 감정에 집중하고, 이를 이해하려 노력해야 해 목표를 달성하고
-          성공을 이루기 위해 마지막으로 남은 노력을 기울이는 것이 중요해 네가 분명한 목표를 세우고 미래에 대한 계획을
-          세워야 한다는 것을 상기시키는 카드야 창조적인 아이디어와 새로운 가능성들이 너를 둘러싸고 있음을 보여줘 너
-          자신을 보호하며 안정된 삶을 되찾기 위해 노력해야 해 좋은 운을 누리고, 기회와 행운이 너의 삶에 찾아올 거야
+          {cardRes.map((value: any, idx: number) => (
+            <>
+              <div>{value.ment}</div>
+              <br />
+            </>
+          ))}
         </DetailFortune>
         <ReplayTarots>
           <img src={Tarots} alt="" style={{ width: '20%' }} />

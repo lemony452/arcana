@@ -15,7 +15,7 @@ function Main() {
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   // const [goLogin, setGoLogin] = useState(false);
-  const { isLogin, isSide, setIsSide, setGoLogin, user, tarotLog, setTarotLog } = userInfoStore();
+  const { isLogin, isSide, setIsSide, setGoLogin, user, setTarotLog } = userInfoStore();
   // const cookie = getCookie('token');
   const toggleSide = () => {
     // if (cookie) {
@@ -27,11 +27,12 @@ function Main() {
     if (isLogin) {
       // setIsOpen(true);
       setIsSide(true);
-      // API.get(`/api/v1/tarot/log?uid=${user.uid}`)
-      // .then((res) => {
-      //   console.log(res);
-
-      // })
+      API.get(`/api/v1/tarot/log?uid=${user.uid}`)
+        .then((res) => {
+          console.log(res);
+          setTarotLog(res.data);
+        })
+        .catch((err) => console.log(err));
     } else {
       setGoLogin(true);
     }
