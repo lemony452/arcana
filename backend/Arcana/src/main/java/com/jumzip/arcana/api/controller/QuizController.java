@@ -4,6 +4,7 @@ import com.jumzip.arcana.api.service.QuizService;
 import com.jumzip.arcana.db.entity.Message;
 import com.jumzip.arcana.db.entity.Quiz;
 import com.jumzip.arcana.db.entity.QuizList;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -33,6 +34,7 @@ public class QuizController {
         return System.currentTimeMillis();
     }
 
+    @Operation(summary = "퀴즈 조회", description = "idx에 해당하는 Quiz 내용을 조회하는 기능")
     @GetMapping("")
     public ResponseEntity<?> getQuiz(@RequestParam int quizNum) {
         logger.info("start getQuiz");
@@ -49,6 +51,7 @@ public class QuizController {
         }
     }
 
+    @Operation(summary = "퀴즈 리스트 조회", description = "최신 퀴즈 리스트를 조회하는 기능")
     @GetMapping("quizlist")
     public ResponseEntity<?> getQuizList() {
         logger.info("start getQuizList");
