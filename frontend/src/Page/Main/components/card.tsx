@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { Swiper, SwiperSlide, useSwiper } from 'swiper/react';
@@ -27,7 +27,6 @@ function Card({ isOpen }: { isOpen: boolean }) {
   // 캐러셀 이동
   const [prevEl, setPrevEl] = useState<HTMLElement | null>(null);
   const [nextEl, setNextEl] = useState<HTMLElement | null>(null);
-
   // spread 방식 store에 저장
   const { setSpread } = useFortuneStore();
 
@@ -43,28 +42,28 @@ function Card({ isOpen }: { isOpen: boolean }) {
   // celtic, instant, time 카드 순서 변수
   const { cardOrder, setCardOrder } = useCardStore();
 
-  let temp = cardOrder;
-  const NextClick = () => {
-    if (temp === 'instant') {
-      temp = 'celtic';
-    } else if (temp === 'time') {
-      temp = 'instant';
-    } else {
-      temp = 'time';
-    }
-    setCardOrder(temp);
-  };
+  // let temp = cardOrder;
+  // const NextClick = () => {
+  //   if (temp === 'instant') {
+  //     temp = 'celtic';
+  //   } else if (temp === 'time') {
+  //     temp = 'instant';
+  //   } else {
+  //     temp = 'time';
+  //   }
+  //   setCardOrder(temp);
+  // };
 
-  const PrevClick = () => {
-    if (temp === 'instant') {
-      temp = 'time';
-    } else if (temp === 'time') {
-      temp = 'celtic';
-    } else {
-      temp = 'instant';
-    }
-    setCardOrder(temp);
-  };
+  // const PrevClick = () => {
+  //   if (temp === 'instant') {
+  //     temp = 'time';
+  //   } else if (temp === 'time') {
+  //     temp = 'celtic';
+  //   } else {
+  //     temp = 'instant';
+  //   }
+  //   setCardOrder(temp);
+  // };
 
   // celtic 페이지로 이동
   const MoveCeltic = () => {
@@ -97,15 +96,28 @@ function Card({ isOpen }: { isOpen: boolean }) {
     }
   };
 
+  // 활성화된 스와이프 페이지의 인덱스를 가져와서 CardOrder 스토어에 저장
+  const setImg = (index: number) => {
+    if (index === 0) {
+      setCardOrder('celtic');
+    } else if (index === 1) {
+      setCardOrder('time');
+    } else if (index === 2) {
+      setCardOrder('instant');
+    }
+  };
+
   return (
     <Swiper
       modules={[Navigation, Pagination, Scrollbar, A11y]}
       navigation={{ nextEl, prevEl }}
       pagination={{ clickable: true }}
+      // onSlideChange={(ddd) => console.log(geSlideDataIndex(ddd))}
+      onActiveIndexChange={(page) => setImg(page.realIndex)}
       loop
     >
-      <NextBtn src={NextBtnImg} ref={(node) => setNextEl(node)} onClick={NextClick} />
-      <PrevBtn src={NextBtnImg} ref={(node) => setPrevEl(node)} onClick={PrevClick} />
+      <NextBtn src={NextBtnImg} ref={(node) => setNextEl(node)} />
+      <PrevBtn src={NextBtnImg} ref={(node) => setPrevEl(node)} />
       {/* <button type="button" ref={(node) => setNextEl(node)} onClick={NextClick}>
         Slide Next
       </button> */}
