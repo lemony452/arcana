@@ -2,9 +2,9 @@ import React from 'react';
 import * as layer from '../time_style';
 import { saveIndexStore } from '../../../Store/User/fortune';
 
-function MonthSpread() {
-  const { indexList } = saveIndexStore();
-  const imgSrc = (num: number) => `https://k8d107.p.ssafy.io/api/v1/images/${indexList[num - 1]}.png`;
+function MonthSpread({ spreadList }: { spreadList: number[] }) {
+  // const { indexList } = saveIndexStore();
+  const imgSrc = (num: number) => `https://k8d107.p.ssafy.io/api/v1/images/${spreadList[num - 1]}.png`;
   return (
     <layer.TimeBox>
       <layer.TimePartOne>
