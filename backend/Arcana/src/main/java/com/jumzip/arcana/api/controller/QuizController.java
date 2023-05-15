@@ -2,6 +2,7 @@ package com.jumzip.arcana.api.controller;
 
 import com.jumzip.arcana.api.service.QuizService;
 import com.jumzip.arcana.db.entity.Message;
+import com.jumzip.arcana.db.entity.Quiz;
 import com.jumzip.arcana.db.entity.QuizList;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -13,6 +14,7 @@ import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessageSendingOperations;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @Tag(description = "Quiz API", name = "QUIZ")
@@ -31,7 +33,22 @@ public class QuizController {
         return System.currentTimeMillis();
     }
 
-    // SERVERTIME 21시 10문제 중복없이 뽑아두기 <<<<<< 스케줄러 등록!!
+    @GetMapping("")
+    public ResponseEntity<?> getQuiz(@RequestParam int quizNum) {
+        logger.info("start getQuiz");
+
+        try {
+            Quiz quiz = quizService.getQuiz(quizNum);;
+            logger.info("quiz is " + quiz);
+
+            return new ResponseEntity<>(quiz, HttpStatus.OK);
+        } catch (Exception e) {
+            logger.info("get Quiz error - " + e.getMessage(), e);
+
+            return new ResponseEntity<>("FAIL", HttpStatus.BAD_REQUEST);
+        }
+    }
+
     @GetMapping("quizlist")
     public ResponseEntity<?> getQuizList() {
         logger.info("start getQuizList");
