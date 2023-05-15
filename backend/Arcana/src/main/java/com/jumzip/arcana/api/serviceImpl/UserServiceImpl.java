@@ -3,7 +3,9 @@ package com.jumzip.arcana.api.serviceImpl;
 import com.jumzip.arcana.api.request.UserRegisterRequest;
 import com.jumzip.arcana.api.service.UserService;
 import com.jumzip.arcana.db.entity.User;
+import com.jumzip.arcana.db.repository.AnimalNicknameRepository;
 import com.jumzip.arcana.db.repository.UserRepository;
+import java.util.Random;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,12 +23,14 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepo;
 
+    private final AnimalNicknameRepository animalNicknameRepository;
+
     @Override
     public User registerUser(UserRegisterRequest userReq) {
         User user = new User();
         user.setUid(userReq.getUid());
         user.setEmail(userReq.getEmail());
-        user.setNickname(userReq.getEmail());
+        user.setNickname(makeAnimalNickname());
         user.setProvider(userReq.getProvider());
         user.setWeekly_count(WEEKLY_COUNT);
 
@@ -83,6 +87,20 @@ public class UserServiceImpl implements UserService {
         User user = userRepo.findUserByUid(uid);
         user.setTicket(user.getTicket() + ticket);
         return user.getTicket();
+    }
+
+    @Override
+    public String makeAnimalNickname() {
+        // 1 ~ 48 관형사
+        // 49 ~ 94 동물
+        Random r = new Random();
+        StringBuilder sb = new StringBuilder();
+
+        String leftName = animalNicknameRepository.findByAnimalNicknameIdx(r.nextInt(48) + 1).getAnimalNickname();
+        String rightName = animalNicknameRepository.findByAnimalNicknameIdx(r.nextInt(45) + 49).getAnimalNickname();
+        sb.append(leftName).append(" ").append(rightName);
+
+        return sb.toString();
     }
 
 }
