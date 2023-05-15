@@ -15,5 +15,5 @@ public interface UserService {
     public User updateUserNickname(String uid, String nickname);
     public int rewardUser(String uid, int ticket);
     public String makeAnimalNickname();
-    
+
 }
