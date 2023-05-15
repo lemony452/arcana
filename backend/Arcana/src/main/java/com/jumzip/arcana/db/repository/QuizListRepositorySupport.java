@@ -19,7 +19,8 @@ public class QuizListRepositorySupport implements QuizListRepository {
 
     @Override
     public QuizList findTopQuizListOrderByQuizListIdxDesc() {
-        TypedQuery<QuizList> query = em.createQuery("SELECT q FROM QuizList q", QuizList.class);
+        TypedQuery<QuizList> query = em.createQuery("SELECT q FROM QuizList q ORDER BY quizListIdx DESC", QuizList.class);
+        query.setMaxResults(1);
         return query.getSingleResult();
     }
 
