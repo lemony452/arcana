@@ -6,6 +6,8 @@ LUCKYJSON = "./lucky.json"
 RESULTFILE = "result.txt"
 INSTANTRESULT = "instant.txt"
 LUCKYRESULTFILE = "lucky.txt"
+QUIZJSON = "./quiz.json"
+QUIZRESULT = "quiz.txt"
 
 
 def read_json():
@@ -62,7 +64,26 @@ def lucky_json():
 
     return 0
 
+def quiz_json():
+    print('start read json')
+
+    with open(QUIZJSON, 'r', encoding='UTF8') as f:
+        json_data = json.load(f)
+
+    with open(QUIZRESULT, 'w', encoding='utf-8', newline='') as f:
+        sql = ""
+
+        for index, j_data in enumerate(json_data):
+            sql += f'INSERT INTO quiz VALUE ({j_data["idx"]}, \"{j_data["answer"]}\", \"{j_data["content"]}\", \"{j_data["wrong1"]}\", \"{j_data["wrong2"]}\", \"{j_data["wrong3"]}\", {j_data["card_idx"]});\n'
+
+        f.write(sql)
+
+    print(f'\nend read json')
+
+    return 0
+
 if __name__ == "__main__":
     # read_json()
     # instance_json()
-    lucky_json()
+    # lucky_json()
+    quiz_json()
