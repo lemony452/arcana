@@ -7,6 +7,7 @@ import * as common from '../Common/common_style';
 import { DialogNPC } from '../../Common/common_styled';
 import charDialog0 from '../../Assets/characters/charDialog0.png';
 import QuestionCard from './question_card';
+import { API } from '../../API';
 
 export type AnswerObject = {
   question: string;
@@ -33,21 +34,6 @@ function Quiz() {
   const INTERVAL = 1000;
   const [timeLeft, setTimeLeft] = useState<number>(MINUTES_IN_MS);
 
-  // 날짜를 내 맘대로 바꿔놓고 확인해보기
-  const currentTime = () => {
-    const date = new Date();
-    const hours = String(date.getHours()).padStart(2, '0');
-    const minutes = String(date.getMinutes()).padStart(2, '0');
-    const seconds = String(date.getSeconds()).padStart(2, '0');
-    setRealTime(`${hours}:${minutes}:${seconds}`);
-  };
-
-  const startTimer = () => {
-    setInterval(currentTime);
-  };
-
-  startTimer();
-
   // 퀴즈 시작
   const startQuiz = async () => {
     setLoading(true);
@@ -61,6 +47,39 @@ function Quiz() {
     setTimeLeft(MINUTES_IN_MS + 10 * 1000);
     setIndex(index + 1);
   };
+
+  // 날짜를 내 맘대로 바꿔놓고 확인해보기
+  useEffect(() => {
+    const serverTime = async () => {
+      // console.log('서버시간은 밀리초가 있는 유닉스');
+      await API.get(`/api/v1/quiz/servertime`).then((res) => {
+        // console.log(res.data);
+        // console.log(typeof res.data);
+        const serverDate = new Date(Math.floor(res.data / 1000) * 1000);
+        console.log(serverDate.getHours(), serverDate.getMinutes(), serverDate.getSeconds());
+        // console.log(typeof serverDate.getHours());
+        if (serverDate.getHours() < 6) {
+          const hours = String(5 - serverDate.getHours()).padStart(2, '0');
+          const minutes = String(59 - serverDate.getMinutes()).padStart(2, '0');
+          const seconds = String(59 - serverDate.getSeconds()).padStart(2, '0');
+          setRealTime(`${hours}:${minutes}:${seconds}`);
+        } else if (serverDate.getHours() === 6 && serverDate.getMinutes() === 15 && serverDate.getSeconds() === 0) {
+          startQuiz();
+        } else {
+          const hours = String(29 - serverDate.getHours()).padStart(2, '0');
+          const minutes = String(59 - serverDate.getMinutes()).padStart(2, '0');
+          const seconds = String(59 - serverDate.getSeconds()).padStart(2, '0');
+          setRealTime(`${hours}:${minutes}:${seconds}`);
+        }
+      });
+      // const date = new Date();
+    };
+    const startTimer = () => {
+      setInterval(() => serverTime(), 1000);
+    };
+
+    startTimer();
+  });
 
   // 퀴즈 풀이시간 카운트 다운s
   const second = String(Math.floor((timeLeft / 1000) % 60)).padStart(2, '0');
