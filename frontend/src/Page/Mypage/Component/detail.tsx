@@ -64,6 +64,7 @@ function TarotListDetail() {
     .map((x, y) => x + y);
 
   const cardlistIdx = [cardRes[1].cardIdx];
+  const luckycardIdx = cardRes[0].cardIdx;
   const cardList = SliceTemp.map((value: any, idx: number) => {
     const ShowDetail = () => {
       setDate(`${value.datetime[0]}.${value.datetime[1]}.${value.datetime[2]}`);
@@ -101,9 +102,14 @@ function TarotListDetail() {
   // };
 
   const [modalOpen, setModalOpen] = useState(false); // modal
+  const [luckyModalOpen, setLuckyModalOpen] = useState(false); // modal
   const showModal = () => {
     setModalOpen(!modalOpen);
     console.log(cardlistIdx);
+  };
+
+  const showLuckyCard = () => {
+    setLuckyModalOpen(!luckyModalOpen);
   };
 
   return (
@@ -161,6 +167,14 @@ function TarotListDetail() {
             </common.ModalView>
           </common.ModalBackdrop>
         ) : null}
+        {luckyModalOpen ? (
+          <common.ModalBackdrop onClick={showLuckyCard}>
+            <common.ModalView className="replay" onClick={(e) => e.stopPropagation()}>
+              <img src={`https://k8d107.p.ssafy.io/api/v1/images/${luckycardIdx}.png`} alt="" />
+              <OptionBtn onClick={showLuckyCard}>닫기</OptionBtn>
+            </common.ModalView>
+          </common.ModalBackdrop>
+        ) : null}
         <ReplayTarots>
           <img src={Tarots} alt="" style={{ width: '20%' }} />
           <button type="button" onClick={showModal}>
@@ -169,7 +183,9 @@ function TarotListDetail() {
         </ReplayTarots>
         <ReplayLucky>
           <img src={Lucky} alt="" style={{ width: '20%' }} />
-          <div>럭키카드 다시보기</div>
+          <button type="button" onClick={showLuckyCard}>
+            럭키카드 다시보기
+          </button>
         </ReplayLucky>
       </DetailContent>
     </div>
