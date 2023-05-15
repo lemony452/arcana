@@ -1,9 +1,8 @@
 package com.jumzip.arcana.api.service;
 
-import com.jumzip.arcana.db.entity.Quiz;
-
-import java.util.List;
+import com.jumzip.arcana.db.entity.QuizList;
 
 public interface QuizService {
-    List<Quiz> getQuizList(int quiznum);
+    QuizList getQuizList();
+    QuizList resetQuizList(int quizNum);
 }
