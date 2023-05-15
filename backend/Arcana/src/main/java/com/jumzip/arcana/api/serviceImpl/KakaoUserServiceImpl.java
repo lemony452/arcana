@@ -58,7 +58,7 @@ public class KakaoUserServiceImpl implements KakaoUserService {
         // 5. response Header에 JWT 토큰 추가
         // kakaoUsersAuthorizationInput(authentication, response);
 
-        return kakaoUserInfo;
+        return kakaoUser;
     }
 
     @Override
@@ -143,12 +143,14 @@ public class KakaoUserServiceImpl implements KakaoUserService {
 
         if (kakaoUser == null) {
             userRepository.saveUser(kakaoUserInfo);
+
+            return kakaoUserInfo;
         }
         else {
             logger.info("kakao user is " + kakaoUser.getEmail());
-        }
 
-        return kakaoUser;
+            return kakaoUser;
+        }
     }
 
 }
