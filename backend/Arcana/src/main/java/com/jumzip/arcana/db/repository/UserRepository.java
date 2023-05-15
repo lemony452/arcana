@@ -14,6 +14,5 @@ public interface UserRepository {
     int updateWeeklyCount(String uid);
     int updateTicket(String uid);
     User updateUserNicknameByUid(String uid, String nickname);
-    User updateUserTicket(String uid);
 
 }
