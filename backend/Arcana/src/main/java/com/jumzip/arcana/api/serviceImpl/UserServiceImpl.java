@@ -30,7 +30,7 @@ public class UserServiceImpl implements UserService {
         User user = new User();
         user.setUid(userReq.getUid());
         user.setEmail(userReq.getEmail());
-        user.setNickname(userReq.getEmail());
+        user.setNickname(makeAnimalNickname());
         user.setProvider(userReq.getProvider());
         user.setWeekly_count(WEEKLY_COUNT);
 
