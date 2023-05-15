@@ -1,11 +1,9 @@
 package com.jumzip.arcana.api.controller;
 
-import com.jumzip.arcana.api.request.QuizRequest;
 import com.jumzip.arcana.api.service.QuizService;
 import com.jumzip.arcana.db.entity.Message;
 import com.jumzip.arcana.db.entity.Quiz;
 import com.jumzip.arcana.db.entity.QuizList;
-import com.jumzip.arcana.db.entity.User;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -16,8 +14,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessageSendingOperations;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -67,23 +63,6 @@ public class QuizController {
             return new ResponseEntity<>(quizList, HttpStatus.OK);
         } catch (Exception e) {
             logger.info("get QuizList error - " + e.getMessage(), e);
-
-            return new ResponseEntity<>("FAIL", HttpStatus.BAD_REQUEST);
-        }
-    }
-
-    @Operation(summary = "퀴즈 보상 지급", description = "uid에 해당하는 유저에게 ticket +1 하는 기능")
-    @PostMapping("rewards")
-    public ResponseEntity<?> updateUserTicket(@RequestBody QuizRequest quizRequest) {
-        logger.info("start updateUserTicket");
-
-        try {
-            User user = quizService.updateUserTicket(quizRequest);
-            logger.info("user is " + user);
-
-            return new ResponseEntity<>(user, HttpStatus.OK);
-        } catch (Exception e) {
-            logger.info("update UserTicket error - " + e.getMessage(), e);
 
             return new ResponseEntity<>("FAIL", HttpStatus.BAD_REQUEST);
         }
