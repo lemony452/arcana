@@ -26,6 +26,10 @@ import LoveCoverImg from '../../../Assets/etc/cover1.png';
 import Tarots from '../../../Assets/etc/tarots.png';
 import Lucky from '../../../Assets/etc/lucky.png';
 import Pagination from './pagination';
+import MonthSpread from '../../Time/Month/month_spread';
+import CelticSpread from '../../Celtic/celtic_spread';
+import * as common from '../../Common/common_style';
+import { OptionBtn } from '../../../Common/common_styled';
 
 function TarotListDetail() {
   const navigate = useNavigate();
@@ -44,7 +48,7 @@ function TarotListDetail() {
       setTemp(tarotLog);
     }
   };
-
+  const [replay, setReplay] = useState('');
   const [detailQuestion, setQuestion] = useState(temp[0].question);
   const [detailOption, setOption] = useState(temp[0].options);
   const [detailDate, setDate] = useState(`${temp[0].datetime[0]}.${temp[0].datetime[1]}.${temp[0].datetime[2]}`);
@@ -59,13 +63,22 @@ function TarotListDetail() {
     .fill(1)
     .map((x, y) => x + y);
 
+  const cardlistIdx = [cardRes[1].cardIdx];
   const cardList = SliceTemp.map((value: any, idx: number) => {
     const ShowDetail = () => {
       setDate(`${value.datetime[0]}.${value.datetime[1]}.${value.datetime[2]}`);
       setOption(value.options);
       setQuestion(value.question);
       setCardRes(value.cardsResponse);
+      if (value.options === '신년운세' || value.options === '월별운세') {
+        setReplay('time');
+      } else {
+        setReplay('celtic');
+      }
     };
+    for (let i = 2; i < cardRes.length; i += 1) {
+      cardlistIdx[i - 1] = cardRes[i].cardIdx;
+    }
     return (
       <TitleBox key={arr[idx]} onClick={ShowDetail}>
         <div>{value.options}</div>
@@ -74,9 +87,24 @@ function TarotListDetail() {
     );
   });
 
-  useEffect(() => {
-    console.log('옵션변경');
-  }, [SliceTemp]);
+  // const ReplayTarotCard = (option: string) => {
+  //   console.log(cardRes);
+  //   for (let i = 2; i < cardRes.length; i += 1) {
+  //     cardlistIdx[i - 1] = cardRes[i].cardIdx;
+  //   }
+  //   console.log(cardlistIdx);
+  //   if (option === '신년운세' || option === '월별운세') {
+  //     setReplay('time');
+  //   } else {
+  //     setReplay('celtic');
+  //   }
+  // };
+
+  const [modalOpen, setModalOpen] = useState(false); // modal
+  const showModal = () => {
+    setModalOpen(!modalOpen);
+    console.log(cardlistIdx);
+  };
 
   return (
     <div style={{ position: 'relative' }}>
@@ -116,9 +144,28 @@ function TarotListDetail() {
             </>
           ))}
         </DetailFortune>
+        {/* {replay === 'time' ? <MonthSpread spreadList={cardlistIdx!} /> : null} */}
+        {replay === 'time' && modalOpen ? (
+          <common.ModalBackdrop onClick={showModal}>
+            <common.ModalView className="replay" onClick={(e) => e.stopPropagation()}>
+              <MonthSpread spreadList={cardlistIdx!} />
+              <OptionBtn onClick={showModal}>닫기</OptionBtn>
+            </common.ModalView>
+          </common.ModalBackdrop>
+        ) : null}
+        {replay === 'celtic' && modalOpen ? (
+          <common.ModalBackdrop onClick={showModal}>
+            <common.ModalView className="replay" onClick={(e) => e.stopPropagation()}>
+              <CelticSpread spreadList={cardlistIdx!} />
+              <OptionBtn onClick={showModal}>닫기</OptionBtn>
+            </common.ModalView>
+          </common.ModalBackdrop>
+        ) : null}
         <ReplayTarots>
           <img src={Tarots} alt="" style={{ width: '20%' }} />
-          <div>타로카드 다시보기</div>
+          <button type="button" onClick={showModal}>
+            타로카드 다시보기
+          </button>
         </ReplayTarots>
         <ReplayLucky>
           <img src={Lucky} alt="" style={{ width: '20%' }} />
