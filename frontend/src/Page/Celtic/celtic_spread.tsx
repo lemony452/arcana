@@ -2,9 +2,9 @@ import React from 'react';
 import * as layer from './celtic_spread_style';
 import { saveIndexStore } from '../../Store/User/fortune';
 
-function CelticSpread() {
-  const { indexList } = saveIndexStore();
-  const imgSrc = (num: number) => `https://k8d107.p.ssafy.io/api/v1/images/${indexList[num - 1]}.png`;
+function CelticSpread({ spreadList }: { spreadList: number[] }) {
+  // const { indexList } = saveIndexStore();
+  const imgSrc = (num: number) => `https://k8d107.p.ssafy.io/api/v1/images/${spreadList[num - 1]}.png`;
   return (
     <layer.CelticBox>
       <layer.CelticPartOne>

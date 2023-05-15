@@ -15,8 +15,8 @@ export const CelticConversations = {
 export const TimeConversations = {
   t1: '반갑네, 신년운세랑 월별운세 궁금해서 왔구려. \n어떤 운세를 보고싶은가?',
   t2: {
-    year: '신년운세를 바로 시작해보겠네',
-    month: '월별운세를 바로 시작해보겠네',
+    신년운세: '신년운세를 바로 시작해보겠네',
+    월별운세: '월별운세를 바로 시작해보겠네',
   },
 };
 
