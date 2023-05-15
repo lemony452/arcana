@@ -3,24 +3,29 @@ package com.jumzip.arcana.api.controller;
 import com.jumzip.arcana.api.service.QuizService;
 import com.jumzip.arcana.db.entity.Message;
 import com.jumzip.arcana.db.entity.Quiz;
+import com.jumzip.arcana.db.entity.QuizList;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessageSendingOperations;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 @Tag(description = "Quiz API", name = "QUIZ")
 @RestController
 @RequestMapping("api/v1/quiz/")
 @RequiredArgsConstructor
 public class QuizController {
+    private final Logger logger = LoggerFactory.getLogger(QuizController.class);
 
     private final SimpMessageSendingOperations operations;
-    private QuizService quizService;
+    private final QuizService quizService;
 
     // 서버 시간 보내는 API
     @GetMapping("servertime")
@@ -28,11 +33,36 @@ public class QuizController {
         return System.currentTimeMillis();
     }
 
-    // SERVERTIME 21시 10문제 중복없이 뽑아두기 <<<<<< 스케줄러 등록!!
+    @GetMapping("")
+    public ResponseEntity<?> getQuiz(@RequestParam int quizNum) {
+        logger.info("start getQuiz");
+
+        try {
+            Quiz quiz = quizService.getQuiz(quizNum);;
+            logger.info("quiz is " + quiz);
+
+            return new ResponseEntity<>(quiz, HttpStatus.OK);
+        } catch (Exception e) {
+            logger.info("get Quiz error - " + e.getMessage(), e);
+
+            return new ResponseEntity<>("FAIL", HttpStatus.BAD_REQUEST);
+        }
+    }
+
     @GetMapping("quizlist")
-    public List<Quiz> getQuizSet(int quiznum) {
-        List<Quiz> quizList = quizService.getQuizList(quiznum);
-        return quizList;
+    public ResponseEntity<?> getQuizList() {
+        logger.info("start getQuizList");
+
+        try {
+            QuizList quizList = quizService.getQuizList();
+            logger.info("quizlist is " + quizList);
+
+            return new ResponseEntity<>(quizList, HttpStatus.OK);
+        } catch (Exception e) {
+            logger.info("get QuizList error - " + e.getMessage(), e);
+
+            return new ResponseEntity<>("FAIL", HttpStatus.BAD_REQUEST);
+        }
     }
 
     // SERVERTIME 20:58부터 커넥션 객체 생성 가능 <<<<<< 스케줄러!!
