@@ -6,9 +6,17 @@ export const Body = styled(motion.div)`
   width: 100%;
 `;
 
-export const NumBody = styled(motion.div)``;
+export const NumBody = styled(motion.div)`
+  position: absolute;
+  display: flex;
+  align-items: end;
+  left: 50vw;
+  bottom: calc(100vh / 3 + 3vh);
+`;
 
-export const Num = styled(motion.div)``;
+export const Num = styled(motion.div)`
+  font-size: 11vh;
+`;
 
 export const CardBody = styled(motion.div)`
   margin-top: 10vh;
