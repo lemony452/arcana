@@ -135,7 +135,7 @@ function Celtic() {
       })
         .then((res) => {
           console.log(res.data);
-          setWeekly(res.data);
+          setWeekly(res.data.nowValue);
         })
         .catch((err) => console.log(err));
     } else {
