@@ -89,6 +89,7 @@ function LuckyKarmaSelect({
         // 초기 카드 3장 슬라이드 인
         <luckySelect.CardBackIn
           whileHover={{ scale: [null, 1.2, 1.1] }}
+          whileTap={{ scale: 0.9 }}
           transition={{ duration: 0.4 }}
           initial={{ scale: 1 }}
           src={CardB}
@@ -106,6 +107,7 @@ function LuckyKarmaSelect({
         // 선택한 카드를 제외한 나머지 카드는 작아짐
         <luckySelect.CardBackNormal
           whileHover={{ scale: [null, 1.2, 1.1] }}
+          whileTap={{ scale: 0.9 }}
           transition={{ duration: 0.4 }}
           initial={{ scale: 1 }}
           animate={{ scale: 0.75 }}
@@ -123,6 +125,7 @@ function LuckyKarmaSelect({
     return (
       <luckySelect.CardBackNormal
         whileHover={{ scale: [null, 1.2, 1.1] }}
+        whileTap={{ scale: 0.9 }}
         transition={{ duration: 0.4 }}
         initial={{ scale: 1 }}
         src={CardB}
@@ -151,6 +154,7 @@ function LuckyKarmaSelect({
         return (
           <luckySelect.SelectCardFront
             animate={{ transform: 'translateX(19.85vw)' }} // 선택한 카드를 중앙으로
+            whileTap={{ scale: 0.9 }}
             transition={{ duration: 0.8 }}
             src={cardList[index].front}
             alt="CardB"
@@ -163,6 +167,7 @@ function LuckyKarmaSelect({
           <luckySelect.SelectCardFront
             initial={{ scale: 1.1 }}
             animate={{ scale: [1.1, 1.0] }}
+            whileTap={{ scale: 0.9 }}
             exit={{ scale: 1.1 }}
             transition={{ delay: 0.8 }}
             src={cardList[index].front}
@@ -175,6 +180,7 @@ function LuckyKarmaSelect({
         <luckySelect.SelectCardFront
           animate={{ transform: 'translateX(-19.85vw)' }} // 선택한 카드를 중앙으로
           transition={{ duration: 0.8 }}
+          whileTap={{ scale: 0.9 }}
           src={cardList[index].front}
           alt="CardB"
           $cardselectanistate={cardSelectAniState} // styled component에서 boolean 속성 경고 제거를 위한 '$'
@@ -186,6 +192,7 @@ function LuckyKarmaSelect({
         // 선택 확정시 나머지 카드는 슬라이드 아웃
         <luckySelect.CardBackNormal
           whileHover={{ scale: [null, 1.2, 1.1] }}
+          whileTap={{ scale: 0.9 }}
           transition={{ duration: 0.4 }}
           initial={{ scale: 1 }}
           animate={{ scale: 0.75 }}
@@ -203,6 +210,7 @@ function LuckyKarmaSelect({
     return (
       <luckySelect.SelectCardBack
         whileHover={{ scale: [null, 1.2, 1.1] }}
+        whileTap={{ scale: 0.9 }}
         transition={{ duration: 0.4 }}
         initial={{ scale: 1 }}
         src={CardB}
