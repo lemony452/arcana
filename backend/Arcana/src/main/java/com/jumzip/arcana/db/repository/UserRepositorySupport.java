@@ -83,13 +83,5 @@ public class UserRepositorySupport implements UserRepository {
 
         return user;
     }
-
-    @Override
-    public User updateUserTicket(String uid) {
-        User user = em.find(User.class, uid);
-        user.setTicket(user.getTicket() + 1);
-
-        return user;
-    }
-
+    
 }

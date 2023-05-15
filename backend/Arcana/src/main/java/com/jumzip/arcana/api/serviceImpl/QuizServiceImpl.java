@@ -1,13 +1,10 @@
 package com.jumzip.arcana.api.serviceImpl;
 
-import com.jumzip.arcana.api.request.QuizRequest;
 import com.jumzip.arcana.api.service.QuizService;
 import com.jumzip.arcana.db.entity.Quiz;
 import com.jumzip.arcana.db.entity.QuizList;
-import com.jumzip.arcana.db.entity.User;
 import com.jumzip.arcana.db.repository.QuizListRepository;
 import com.jumzip.arcana.db.repository.QuizRepository;
-import com.jumzip.arcana.db.repository.UserRepository;
 import java.util.Random;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -22,8 +19,6 @@ public class QuizServiceImpl implements QuizService {
     private final QuizRepository quizRepo;
 
     private final QuizListRepository quizListRepository;
-
-    private final UserRepository userRepository;
 
     @Override
     public Quiz getQuiz(int quizNum) {
@@ -74,13 +69,6 @@ public class QuizServiceImpl implements QuizService {
         quizListRepository.saveQuizList(quizList);
 
         return quizList;
-    }
-
-    @Override
-    public User updateUserTicket(QuizRequest quizRequest) {
-        String uid = quizRequest.getUid();
-
-        return userRepository.updateUserTicket(uid);
     }
 
 }
