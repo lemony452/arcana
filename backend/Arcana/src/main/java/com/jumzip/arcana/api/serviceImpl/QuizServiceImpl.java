@@ -2,22 +2,41 @@ package com.jumzip.arcana.api.serviceImpl;
 
 import com.jumzip.arcana.api.service.QuizService;
 import com.jumzip.arcana.db.entity.Quiz;
+import com.jumzip.arcana.db.entity.QuizList;
+import com.jumzip.arcana.db.repository.QuizListRepository;
 import com.jumzip.arcana.db.repository.QuizRepository;
-
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
+import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
 
+@Service
+@RequiredArgsConstructor
 public class QuizServiceImpl implements QuizService {
+    private final Logger logger = LoggerFactory.getLogger(QuizServiceImpl.class);
 
-    private QuizRepository quizRepo;
+    private final QuizRepository quizRepo;
+
+    private final QuizListRepository quizListRepository;
 
     @Override
-    public List<Quiz> getQuizList(int quizNum) {
+    public Quiz getQuiz(int quizNum) {
+        return quizRepo.findQuizById(quizNum);
+    }
 
-        List<Quiz> quizList = new ArrayList<>();
+    @Override
+    public QuizList getQuizList() {
+        return quizListRepository.findTopQuizListOrderByQuizListIdxDesc();
+    }
+
+    @Override
+    public QuizList resetQuizList(int quizNum) {
+        logger.info("start resetQuizList");
 
         int allQuizNum = quizRepo.findQuizNum().size();
+        logger.info("allQuizNum size is " + allQuizNum);
+
         int[] idxList = new int[quizNum];
         Random r = new Random();
 
@@ -35,11 +54,21 @@ public class QuizServiceImpl implements QuizService {
             idxList[i] = newIdx;
         }
 
-        for(int i=0; i<quizNum; i++) {
-            Quiz quiz = quizRepo.findQuizById(idxList[i]);
-            quizList.add(i, quiz);
-        }
+        QuizList quizList = new QuizList();
+        quizList.setQuiz0Idx(idxList[0]);
+        quizList.setQuiz1Idx(idxList[1]);
+        quizList.setQuiz2Idx(idxList[2]);
+        quizList.setQuiz3Idx(idxList[3]);
+        quizList.setQuiz4Idx(idxList[4]);
+        quizList.setQuiz5Idx(idxList[5]);
+        quizList.setQuiz6Idx(idxList[6]);
+        quizList.setQuiz7Idx(idxList[7]);
+        quizList.setQuiz8Idx(idxList[8]);
+        quizList.setQuiz9Idx(idxList[9]);
+
+        quizListRepository.saveQuizList(quizList);
 
         return quizList;
     }
+
 }
