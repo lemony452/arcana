@@ -59,7 +59,7 @@ function Socket() {
       () => {
         stompClient.subscribe(`/sub/channel/quiz}`, (data: any) => {
           const newMessage = JSON.parse(data.body);
-          addMessage(newMessage);
+          // addMessage(newMessage);
         });
       },
       (err: any) => {
