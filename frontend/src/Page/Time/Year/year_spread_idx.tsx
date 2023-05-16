@@ -5,7 +5,7 @@ import Year from './year_spread';
 import YearStart from './year_spread_animation';
 import * as common from '../../Common/common_style';
 import Dialog from '../../../Common/dialog';
-import charDialog1 from '../../../Assets/characters/charDialog1.png';
+import charDialog1 from '../../../Assets/characters/toast.png';
 import { DialogNPC, OptionBtn } from '../../../Common/common_styled';
 import { YearDetails } from '../../../Common/conversations';
 import { useLuckyStore } from '../../../Store/User/lucky';

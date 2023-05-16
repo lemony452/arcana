@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
 
@@ -53,7 +54,7 @@ export const SubTitle = styled.div`
   margin-top: -1em;
 `;
 
-export const StyledCircle = styled.div`
+export const StyledCircle = styled(motion.div)`
   position: absolute;
   left: calc(calc(100vw / 3) - 30vh);
   top: 5vh;
@@ -66,7 +67,7 @@ export const StyledCircle = styled.div`
   background: white;
 `;
 
-export const Circle2 = styled.div`
+export const Circle2 = styled(motion.div)`
   position: absolute;
   left: calc(calc(100vw / 3) - 4.5vh);
   top: 30.5vh;
@@ -87,7 +88,7 @@ export const Circle2 = styled.div`
   }
 `;
 
-export const Circle3 = styled.div`
+export const Circle3 = styled(motion.div)`
   position: absolute;
   left: calc(calc(100vw / 3) - 5vw);
   top: 15vh;
@@ -108,7 +109,7 @@ export const Circle3 = styled.div`
   }
 `;
 
-export const Circle4 = styled.div`
+export const Circle4 = styled(motion.div)`
   position: absolute;
   left: 5vw;
   top: 28vh;
@@ -129,7 +130,7 @@ export const Circle4 = styled.div`
   }
 `;
 
-export const Circle5 = styled.div`
+export const Circle5 = styled(motion.div)`
   position: absolute;
   left: 2vw;
   top: 48vh;

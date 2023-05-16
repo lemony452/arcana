@@ -70,11 +70,24 @@ function Main() {
         <Title>ARCANA</Title>
         <SubTitle>당신의 마음을 듣고 읽어주는 타로 프렌즈</SubTitle>
       </TitleBox>
-      <StyledCircle className={cardOrder} />
-      <Circle2 className={cardOrder} />
+      <StyledCircle
+        animate={{ scale: [1, 1.05, 1] }}
+        transition={{ duration: 5, repeat: Infinity }}
+        className={cardOrder}
+      />
+      <Circle2
+        animate={{ x: [0, 50, 0], y: [0, -30, 0, -30, 0, -30, 0, -30, 0] }}
+        transition={{ duration: 10, repeat: Infinity }}
+        className={cardOrder}
+      />
       <Circle3 className={cardOrder} />
       <Circle4 className={cardOrder} />
-      <Circle5 className={cardOrder} />
+      <Circle5
+        animate={{ rotate: 360 }}
+        transition={{ duration: 10, repeat: Infinity, ease: 'linear' }}
+        style={{ originX: 1.2, originY: 0 }}
+        className={cardOrder}
+      />
       <Character />
       <CardBox>
         <Card isOpen={isSide} />
