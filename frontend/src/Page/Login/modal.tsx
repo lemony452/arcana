@@ -7,7 +7,7 @@ import { userInfoStore } from '../../Store/User/info';
 function LoginModal() {
   const outsideLogin = useRef<any>();
   const { isLogin, goLogin, setGoLogin } = userInfoStore();
-
+  console.log(goLogin);
   const toggleLogin = () => {
     setGoLogin(false);
   };
