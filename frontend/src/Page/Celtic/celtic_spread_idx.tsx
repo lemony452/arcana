@@ -48,7 +48,7 @@ function CelticSpread() {
       });
       setLuckyMent(res.data.luckyment);
     });
-    await navigate('/lucky');
+    await navigate('/lucky', { state: 'celtic' });
   };
 
   const text = CelticDetails();
@@ -81,11 +81,11 @@ function CelticSpread() {
           </common.CardBox>
           <common.SideBlock>
             <common.SpreadModal onClick={showModal}>
-              <Celtic />
+              <Celtic spreadList={indexList} />
               {modalOpen ? (
                 <common.ModalBackdrop onClick={showModal}>
                   <common.ModalView onClick={(e) => e.stopPropagation()}>
-                    <Celtic />
+                    <Celtic spreadList={indexList} />
                     <OptionBtn onClick={showModal}>닫기</OptionBtn>
                   </common.ModalView>
                 </common.ModalBackdrop>
@@ -119,11 +119,11 @@ function CelticSpread() {
           </common.CardBox>
           <common.SideBlock>
             <common.SpreadModal onClick={showModal}>
-              <Celtic />
+              <Celtic spreadList={indexList} />
               {modalOpen ? (
                 <common.ModalBackdrop onClick={showModal}>
                   <common.ModalView onClick={(e) => e.stopPropagation()}>
-                    <Celtic />
+                    <Celtic spreadList={indexList} />
                     <OptionBtn onClick={showModal}>닫기</OptionBtn>
                   </common.ModalView>
                 </common.ModalBackdrop>
@@ -156,11 +156,11 @@ function CelticSpread() {
           </common.CardBox>
           <common.SideBlock>
             <common.SpreadModal onClick={showModal}>
-              <Celtic />
+              <Celtic spreadList={indexList} />
               {modalOpen ? (
                 <common.ModalBackdrop onClick={showModal}>
                   <common.ModalView onClick={(e) => e.stopPropagation()}>
-                    <Celtic />
+                    <Celtic spreadList={indexList} />
                     <OptionBtn onClick={showModal}>닫기</OptionBtn>
                   </common.ModalView>
                 </common.ModalBackdrop>
@@ -193,11 +193,11 @@ function CelticSpread() {
           </common.CardBox>
           <common.SideBlock>
             <common.SpreadModal onClick={showModal}>
-              <Celtic />
+              <Celtic spreadList={indexList} />
               {modalOpen ? (
                 <common.ModalBackdrop onClick={showModal}>
                   <common.ModalView onClick={(e) => e.stopPropagation()}>
-                    <Celtic />
+                    <Celtic spreadList={indexList} />
                     <OptionBtn onClick={showModal}>닫기</OptionBtn>
                   </common.ModalView>
                 </common.ModalBackdrop>
@@ -230,11 +230,11 @@ function CelticSpread() {
           </common.CardBox>
           <common.SideBlock>
             <common.SpreadModal onClick={showModal}>
-              <Celtic />
+              <Celtic spreadList={indexList} />
               {modalOpen ? (
                 <common.ModalBackdrop onClick={showModal}>
                   <common.ModalView onClick={(e) => e.stopPropagation()}>
-                    <Celtic />
+                    <Celtic spreadList={indexList} />
                     <OptionBtn onClick={showModal}>닫기</OptionBtn>
                   </common.ModalView>
                 </common.ModalBackdrop>

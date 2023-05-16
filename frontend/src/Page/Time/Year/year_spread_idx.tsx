@@ -5,7 +5,7 @@ import Year from './year_spread';
 import YearStart from './year_spread_animation';
 import * as common from '../../Common/common_style';
 import Dialog from '../../../Common/dialog';
-import charDialog0 from '../../../Assets/characters/charDialog0.png';
+import charDialog1 from '../../../Assets/characters/charDialog1.png';
 import { DialogNPC, OptionBtn } from '../../../Common/common_styled';
 import { YearDetails } from '../../../Common/conversations';
 import { useLuckyStore } from '../../../Store/User/lucky';
@@ -46,7 +46,7 @@ function YearSpread() {
       });
       setLuckyMent(res.data.luckyment);
     });
-    await navigate('/lucky');
+    await navigate('/lucky', { state: 'time' });
   };
 
   const text = YearDetails();
@@ -97,7 +97,7 @@ function YearSpread() {
         {/* <common.ChatArea>
           <common.SpreadBtn onClick={onNext}>다음</common.SpreadBtn>
         </common.ChatArea> */}
-        <DialogNPC src={charDialog0} />
+        <DialogNPC src={charDialog1} />
         <Dialog content={text.page1} next={false}>
           {nextBtn && <OptionBtn onClick={onNext}>다음</OptionBtn>}
         </Dialog>
@@ -137,7 +137,7 @@ function YearSpread() {
         {/* <common.ChatArea>
           <common.SpreadBtn onClick={onNext}>다음</common.SpreadBtn>
         </common.ChatArea> */}
-        <DialogNPC src={charDialog0} />
+        <DialogNPC src={charDialog1} />
         <Dialog content={text.page2} next={false}>
           {nextBtn && <OptionBtn onClick={onNext}>다음</OptionBtn>}
         </Dialog>
@@ -177,7 +177,7 @@ function YearSpread() {
         {/* <common.ChatArea>
           <common.SpreadBtn onClick={onNext}>다음</common.SpreadBtn>
         </common.ChatArea> */}
-        <DialogNPC src={charDialog0} />
+        <DialogNPC src={charDialog1} />
         <Dialog content={text.page3} next={false}>
           {nextBtn && <OptionBtn onClick={onNext}>다음</OptionBtn>}
         </Dialog>
@@ -217,7 +217,7 @@ function YearSpread() {
         {/* <common.ChatArea>
           <common.SpreadBtn onClick={onNext}>다음</common.SpreadBtn>
         </common.ChatArea> */}
-        <DialogNPC src={charDialog0} />
+        <DialogNPC src={charDialog1} />
         <Dialog content={text.page4} next={false}>
           {nextBtn && <OptionBtn onClick={onNext}>다음</OptionBtn>}
         </Dialog>
@@ -249,7 +249,7 @@ function YearSpread() {
         {/* <common.ChatArea>
           <common.SpreadBtn onClick={MoveLucky}>럭키!</common.SpreadBtn>
         </common.ChatArea> */}
-        <DialogNPC src={charDialog0} />
+        <DialogNPC src={charDialog1} />
         <Dialog content={text.page5} next={false}>
           {nextBtn && <OptionBtn onClick={MoveLucky}>럭키!</OptionBtn>}
         </Dialog>
