@@ -1,6 +1,19 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { TitleBox, Title, SubTitle, StyledCircle, CardBox, SideBtn } from './main_style';
+import {
+  Circle2,
+  Circle3,
+  Circle4,
+  Circle5,
+  TitleBox,
+  Title,
+  SubTitle,
+  StyledCircle,
+  CardBox,
+  SideBtn,
+  MainBg,
+  LoginBtn,
+} from './main_style';
 import Card from './components/card';
 import Character from './components/character';
 import { useCardStore, useHoverStore } from '../../Store/Main/main';
@@ -42,27 +55,31 @@ function Main() {
   const { hover } = useHoverStore();
 
   return (
-    <div style={{ position: 'relative' }}>
+    <MainBg className={cardOrder}>
       {isLogin ? (
         <SideBtn src={SideBtnImg} onClick={toggleSide} />
       ) : (
-        <button style={{ position: 'absolute' }} type="button" onClick={toggleSide}>
-          Login
-        </button>
+        <LoginBtn type="button" onClick={toggleSide}>
+          LOGIN
+        </LoginBtn>
       )}
       {/* <SideBtn src={SideBtnImg} onClick={toggleSide} /> */}
       <SideBar />
       <LoginModal />
       <TitleBox>
         <Title>ARCANA</Title>
-        <SubTitle>동물 친구들의 타로 서비스 아르카나</SubTitle>
+        <SubTitle>당신의 마음을 듣고 읽어주는 타로 프렌즈</SubTitle>
       </TitleBox>
       <StyledCircle className={cardOrder} />
+      <Circle2 className={cardOrder} />
+      <Circle3 className={cardOrder} />
+      <Circle4 className={cardOrder} />
+      <Circle5 className={cardOrder} />
       <Character />
       <CardBox>
         <Card isOpen={isSide} />
       </CardBox>
-    </div>
+    </MainBg>
   );
 }
 
