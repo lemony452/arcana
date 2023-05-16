@@ -8,7 +8,7 @@ export default function ConnectAndSub() {
 
   const connectWs = () => {
     client.current = Stomp.over(() => {
-      const sock = new SockJS(`https://k8d107.p.ssafy.io:18081/ws/websocket`);
+      const sock = new SockJS(`wss://k8d107.p.ssafy.io:18081/ws/websocket`);
       console.log(sock);
       return sock;
     });
