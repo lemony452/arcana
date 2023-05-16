@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from 'react';
-import { LoginBg, LoginModalStyle } from './login_style';
+import { LoginBg, LoginModalStyle, LoginMent } from './login_style';
 import LoginBgImg from '../../Assets/etc/loginBg.png';
 import { GoogleLogin, KakaoLogin } from './login';
 import { userInfoStore } from '../../Store/User/info';
@@ -27,9 +27,13 @@ function LoginModal() {
 
   return (
     <LoginModalStyle ref={outsideLogin} className={goLogin && !isLogin ? 'gologin' : ''}>
-      <LoginBg src={LoginBgImg} />
-      <KakaoLogin />
-      <GoogleLogin />
+      <LoginBg>
+        <LoginMent>SNS 계정으로 로그인</LoginMent>
+        <LoginMent className="sub">기존에 사용하시는 계정으로</LoginMent>
+        <LoginMent className="sub">간편하게 로그인하세요</LoginMent>
+        <KakaoLogin />
+        <GoogleLogin />
+      </LoginBg>
     </LoginModalStyle>
   );
 }

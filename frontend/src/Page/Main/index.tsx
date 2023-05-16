@@ -23,12 +23,13 @@ import { getCookie } from '../Login/cookie';
 import LoginModal from '../Login/modal';
 import { userInfoStore } from '../../Store/User/info';
 import { API } from '../../API';
+import { ModalBackdrop } from '../Common/common_style';
 
 function Main() {
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   // const [goLogin, setGoLogin] = useState(false);
-  const { isLogin, isSide, setIsSide, setGoLogin, user, setTarotLog } = userInfoStore();
+  const { isLogin, isSide, setIsSide, setGoLogin, user, setTarotLog, goLogin } = userInfoStore();
   // const cookie = getCookie('token');
   const toggleSide = () => {
     // if (cookie) {
@@ -56,6 +57,7 @@ function Main() {
 
   return (
     <MainBg className={cardOrder}>
+      {goLogin ? <ModalBackdrop /> : null}
       {isLogin ? (
         <SideBtn src={SideBtnImg} onClick={toggleSide} />
       ) : (

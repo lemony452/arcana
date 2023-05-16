@@ -3,37 +3,53 @@ import styled from 'styled-components';
 
 export const LoginModalStyle = styled.div`
   position: absolute;
-  width: 30vw;
-  height: calc(30vw * 1.5);
+  width: 18vw;
+  height: 17.9vw;
   left: -50vw;
   top: 0;
   /* left: -50vw;
   top: 50vh; */
-  transform: translate(50%, 50%);
-  z-index: 3;
+  transform: translate(-50%, -50%);
+  z-index: 2;
   /* visibility: hidden; */
   &.gologin {
-    left: 0vw;
+    left: 50vw;
+    top: 50vh;
   }
 `;
 
 export const GoogleBtn = styled.img`
-  position: absolute;
-  width: calc(100vw / 5);
-  left: 50%;
-  top: 74%;
-  transform: translate(-50%, -50%);
+  width: 18vw;
+  margin-top: 0.5em;
+  cursor: pointer;
 `;
 
 export const KakaoBtn = styled.img`
-  position: absolute;
-  width: calc(100vw / 5);
-  left: 50%;
-  top: 62%;
-  transform: translate(-50%, -50%);
+  width: 18vw;
+  margin-top: 1.5em;
 `;
 
-export const LoginBg = styled.img`
-  width: 30vw;
-  height: calc(30vw * 1.5);
+export const LoginBg = styled.div`
+  width: 18vw;
+  height: 19.9vw;
+  border: 3px solid #aaaaaa;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  background: white;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 0 2em 0 2em;
+`;
+
+export const LoginMent = styled.div`
+  font-family: Poppins;
+  font-size: 1.8em;
+  color: #717171;
+  margin: 0 0 0.5em 0;
+  &.sub {
+    font-size: 1em;
+    margin-bottom: 0;
+  }
 `;
