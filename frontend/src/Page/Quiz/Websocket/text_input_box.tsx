@@ -3,6 +3,7 @@
 import React, { useState, useContext } from 'react';
 import { WebSocketContext } from './web_socket_provider';
 import { userInfoStore } from '../../../Store/User/info';
+import Stomp from 'stompjs';
 
 function TextInputBox() {
   const [message, setMessage] = useState('');

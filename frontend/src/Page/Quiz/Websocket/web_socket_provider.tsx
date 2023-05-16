@@ -12,7 +12,19 @@ export default function ({ children }: { children: React.ReactNode }) {
     ws.current = new WebSocket(webSocketUrl);
     ws.current.onopen = () => {
       console.log(`connected to ${webSocketUrl}`);
+      const msg = {
+        type: 'enter',
+        channel: 'quiz',
+        uid: '2790870786',
+        data: 'entrance message',
+      };
+      ws.current?.send(JSON.stringify(msg));
     };
+
+    ws.current.onmessage = (event) => {
+      console.log(event.data);
+    };
+
     ws.current.onclose = (error) => {
       console.log(`disconnect from ${webSocketUrl}`);
       console.log(error);

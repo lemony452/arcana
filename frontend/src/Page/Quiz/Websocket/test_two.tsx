@@ -54,16 +54,18 @@ function Socket() {
     sockJS = new SockJS('https://k8d107.p.ssafy.io:18081/ws');
     stompClient = Stomp.over(sockJS);
     stompClient.debug = null;
-    // stompClient.connect(
-    //   {},
-    //   () => {
-    //     stompClient.subscribe(`/sub/channel/quiz}`, (data) => {
-    //       const newMessage = JSON.parse(data.body);
-    //       addMessage(newMessage);
-    //     });
-    //   },
-    //   (err) => {},
-    // );
+    stompClient.connect(
+      {},
+      () => {
+        stompClient.subscribe(`/sub/channel/quiz}`, (data: any) => {
+          const newMessage = JSON.parse(data.body);
+          addMessage(newMessage);
+        });
+      },
+      (err: any) => {
+        console.log(err);
+      },
+    );
     return function cleanup() {
       stompClient.disconnect();
     };
