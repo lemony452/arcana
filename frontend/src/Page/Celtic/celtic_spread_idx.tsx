@@ -48,7 +48,7 @@ function CelticSpread() {
       });
       setLuckyMent(res.data.luckyment);
     });
-    await navigate('/lucky');
+    await navigate('/lucky', { state: 'celtic' });
   };
 
   const text = CelticDetails();

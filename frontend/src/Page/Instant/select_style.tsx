@@ -42,7 +42,10 @@ export const SelectCard = styled.div`
   height: 90%;
   aspect-ratio: 3 / 5;
   > img {
+    border-radius: 3px;
     width: 100%;
     height: 100%;
+    object-fit: cover;
+    box-shadow: 1px 1px 3px gray;
   }
 `;
