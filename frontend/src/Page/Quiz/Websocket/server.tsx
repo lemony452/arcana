@@ -1,17 +1,15 @@
-import React from 'react';
-import WebSocketProvider from './web_socket_provider';
-import Chatting from './chatting';
-import TextInputBox from './text_input_box';
+import { Client } from '@stomp/stompjs';
 
-function Socket() {
-  return (
-    <div className="Socket">
-      <WebSocketProvider>
-        <Chatting />
-        <TextInputBox />
-      </WebSocketProvider>
-    </div>
-  );
-}
+import { WebSocket } from 'ws';
 
-export default Socket;
+Object.assign(global, { WebSocket });
+
+const client = new Client({
+  brokerURL: 'ws://localhost:15674/ws',
+  onConnect: () => {
+    client.subscribe('/topic/test01', (message) => console.log(`Received: ${message.body}`));
+    client.publish({ destination: '/topic/test01', body: 'First Message' });
+  },
+});
+
+client.activate();

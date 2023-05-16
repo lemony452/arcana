@@ -16,7 +16,7 @@ export type AnswerObject = {
   correctAnswer: string;
 };
 
-const TOTAL_QUESTIONS = 2;
+const TOTAL_QUESTIONS = 1;
 
 function Quiz() {
   const [index, setIndex] = useState(0);
@@ -38,8 +38,8 @@ function Quiz() {
   const startQuiz = async () => {
     setLoading(true);
     setGameOver(false);
-    const newQuestions = await fetchQuizQuestions(TOTAL_QUESTIONS);
-    setQuestions(newQuestions);
+    const newQuestions = await fetchQuizQuestions();
+    // setQuestions(newQuestions);
     setScore(0);
     setUserAnswers([]);
     setNumber(0);
