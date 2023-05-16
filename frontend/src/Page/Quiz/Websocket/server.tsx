@@ -1,97 +1,30 @@
-import React, { Component } from 'react';
-import SockJsClient from 'react-stomp';
+import React, { useState, useEffect, useRef } from 'react';
+import SockJS from 'sockjs-client';
+import { Stomp } from '@stomp/stompjs';
+import { userInfoStore } from '../../../Store/User/info';
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      loggedIn: false,
-      messageText: '',
-      userName: null,
-      messages: [],
-      loginFormInvalid: true,
-    };
-  }
+function Socket() {
+  const sock = new SockJS(`https://k8d107.p.ssafy.io/ws/websocket`);
+  const stomp = Stomp.over(sock);
 
-  handleLogin = () => {
-    if (this.state.userName) {
-      this.setState({ loggedIn: true });
-      this.clientRef.sendMessage('/app/chat.addUser', JSON.stringify({ sender: this.state.userName, type: 'JOIN' }));
-    } else {
-      this.setState({ loginFormInvalid: true });
-    }
+  stomp.onConnect = function (frame) {
+    // Do something, all subscribes must be done is this callback
+    // This is needed because this will be executed after a (re)connect
+    console.log(frame);
   };
 
-  handleLogout = () => {
-    this.setState({
-      loggedIn: false,
-      messages: [],
-    });
-    this.clientRef.disconnect();
-    this.clientRef.connect();
+  stomp.onStompError = function (frame) {
+    // Will be invoked in case of error encountered at Broker
+    // Bad login/passcode typically will cause an error
+    // Complaint brokers will set `message` header with a brief message. Body may contain details.
+    // Compliant brokers will terminate the connection after any error
+    console.log(`Broker reported error: ${frame.headers.message}`);
+    console.log(`Additional details: ${frame.body}`);
   };
 
-  handleMessageSend = () => {
-    if (this.state.userName) {
-      this.clientRef.sendMessage(
-        '/app/chat.sendMessage',
-        JSON.stringify({ sender: this.state.userName, content: this.state.messageText, type: 'CHAT' }),
-      );
-      this.setState({ messageText: '' });
-    }
-  };
+  stomp.activate();
 
-  handleChange = (name) => (event) => {
-    this.setState({
-      [name]: event.target.value,
-    });
-  };
-
-  handleChangeUserName = () => (event) => {
-    this.setState({
-      userName: event.target.value,
-      loginFormInvalid: event.target.value.length < 3,
-    });
-  };
-
-  handleMessageReceived = (msg) => {
-    this.setState({ messages: this.state.messages.concat(msg) });
-  };
-
-  render() {
-    const visibleLoginForm = !this.state.loggedIn;
-    const visibleLogout = this.state.loggedIn;
-
-    return (
-      <>
-        <CssBaseline />
-        <SockJsClient
-          url="http://localhost:3000/ws"
-          topics={['/topic/public']}
-          onMessage={(msg) => this.handleMessageReceived(msg)}
-          ref={(client) => {
-            this.clientRef = client;
-          }}
-        />
-        <Header onLogout={() => this.handleLogout()} showLogout={visibleLogout} />
-        <LoginForm
-          visible={visibleLoginForm}
-          loginFornInvalid={this.state.loginFormInvalid}
-          onLogin={() => this.handleLogin()}
-          onChange={() => this.handleChangeUserName()}
-        >
-          {' '}
-        </LoginForm>
-        <Chat
-          visible={!visibleLoginForm}
-          messages={this.state.messages}
-          messageText={this.state.messageText}
-          onChange={() => this.handleChange('messageText')}
-          onSendMessage={() => this.handleMessageSend()}
-        />
-      </>
-    );
-  }
+  return <h1>communication</h1>;
 }
 
-export default App;
+export default Socket;

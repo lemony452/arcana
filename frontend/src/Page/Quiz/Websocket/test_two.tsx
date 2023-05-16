@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import SockJS from 'sockjs-client';
-import Stomp from 'stompjs';
+// import Stomp from 'stompjs';
 import { userInfoStore } from '../../../Store/User/info';
 
 // class App extends React.Component {
@@ -52,7 +52,7 @@ function Socket() {
 
   useEffect(() => {
     sockJS = new SockJS('https://k8d107.p.ssafy.io:18081/ws');
-    stompClient = Stomp.over(sockJS);
+    // stompClient = Stomp.over(sockJS);
     stompClient.debug = null;
     stompClient.connect(
       {},
