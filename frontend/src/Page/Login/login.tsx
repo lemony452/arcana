@@ -12,18 +12,60 @@ import { API } from '../../API';
 
 export function GoogleLogin() {
   // 구글 인가 코드 요청
-  const { setUser, setIsLogin, setNickname } = userInfoStore();
-
+  const { setUser, setIsLogin, setNickname, user, setWeekly, setTicket } = userInfoStore();
+  let isUser = false;
+  let userData: any;
   const login = async () => {
     const provider = new GoogleAuthProvider();
     await signInWithPopup(auth, provider)
       .then((data) => {
-        const userData = data.user;
-        // setUserData(data.user);
+        userData = data.user;
         console.log(userData);
         setNickname(userData.displayName!);
         setIsLogin(true);
-        setUser({ uid: userData.uid, email: userData.email, providerId: userData.providerId });
+        setUser({ uid: userData.uid, email: userData.email, providerId: 'Google' });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    // 유저가 DB에 있는지 확인
+    await API.get(`/api/v1/user/search?email=${userData.email}`).then((res) => {
+      console.log(res);
+      isUser = res.data;
+    });
+
+    const RegisterUser = () => {
+      // console.log('-----------------');
+      // console.log('isUser', isUser);
+      // console.log(userData);
+      // console.log(userData.uid);
+      // console.log(userData.email);
+      if (isUser) {
+        API.post(`/api/v1/user/register`, {
+          uid: userData.uid,
+          email: userData.email,
+          provider: 'Google',
+        })
+          .then((res) => {
+            console.log(res.data);
+          })
+          .catch((err) => console.log(err));
+      }
+    };
+
+    await RegisterUser();
+
+    await API.get(`/api/v1/user/info`, {
+      headers: {
+        uid: userData.uid,
+      },
+    })
+      .then((res) => {
+        console.log(res);
+        setWeekly(res.data.weekly_count);
+        setTicket(res.data.ticket);
+        setNickname(res.data.nickname);
       })
       .catch((err) => {
         console.log(err);

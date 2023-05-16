@@ -13,18 +13,6 @@ export interface CardState {
   ment: string;
 }
 
-interface SaveDataType {
-  option: string;
-  summary: string;
-  question: string;
-  cards: CardState[];
-}
-
-interface SaveDataState {
-  saveData: SaveDataType;
-  setSaveData: (savedata: SaveDataType) => void;
-}
-
 interface CelticType {
   idx: number;
   question: string;
@@ -61,26 +49,6 @@ export const saveIndexStore = create<CardIndexListState>((set) => ({
   indexList: [],
   setIndexList: (sd: number[]) => {
     set(() => ({ indexList: sd }));
-  },
-}));
-
-export const saveDataStore = create<SaveDataState>((set) => ({
-  saveData: {
-    option: '',
-    summary: '',
-    question: '',
-    cards: [
-      {
-        card: {
-          idx: 0,
-          name: '',
-        },
-        ment: '',
-      },
-    ],
-  },
-  setSaveData: (sd: SaveDataType) => {
-    set(() => ({ saveData: sd }));
   },
 }));
 

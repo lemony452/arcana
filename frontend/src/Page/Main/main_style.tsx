@@ -5,22 +5,38 @@ import styled, { keyframes } from 'styled-components';
 //   display: flex;
 // `;
 
+export const MainBg = styled.div`
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  background: #fff6a3;
+  &.time {
+    background: #ffe2bf;
+  }
+  &.instant {
+    background: #ffd8dc;
+  }
+`;
+
 export const TitleBox = styled.div`
   align-content: center;
   flex-direction: column;
   position: absolute;
-  top: 26vh;
-  left: 3vw;
+  top: 38vh;
+  left: 6vw;
   text-align: center;
   z-index: 1;
 `;
 
 export const Title = styled.div`
+  /* font-size: 6.7em; */
   font-size: 7.5vw;
+  font-family: DaysOne;
   font-weight: bolder;
-  color: #09203f;
-  text-shadow: 0 1px 1px #c0c0c0, 0 2px 0 #a8a7a6, 0 3px 0 #8b8a89, 0 4px 0px #7d7b7a, 0 5px 0px #686766,
-    0 6px 3px #5f5e5d;
+  color: white;
+  /* text-shadow: -5px 0px black, 0px 5px black, 5px 0px black, 0px -5px black; */
+  -webkit-text-stroke: 3px black;
+  letter-spacing: -0.07em;
 `;
 
 const blink = keyframes`
@@ -30,35 +46,107 @@ const blink = keyframes`
 `;
 
 export const SubTitle = styled.div`
-  font-size: 1.7vw;
-  font-weight: 600;
+  font-size: 1.8vw;
+  font-weight: bolder;
   color: black;
   /* animation: ${blink} 3s infinite; */
-`;
-
-export const spin = keyframes`
-  from { background-position: 0 0; }
-  to { background-position: 100% 100%; }
+  margin-top: -1em;
 `;
 
 export const StyledCircle = styled.div`
   position: absolute;
-  right: calc(100vw / 3);
-  /* right: 0; */
-  width: 50vh;
-  /* width: 90vh; */
-  height: 100vh;
+  left: calc(calc(100vw / 3) - 30vh);
+  top: 5vh;
+  width: 86vh;
+  height: 86vh;
   /* border-radius: 100vh; */
-  border-radius: 100vh 0 0 100vh;
-  /* animation: ${spin} 1s linear infinite; */
+  border-radius: 100%;
   /* transform-origin: 50% 50%; */
-  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5);
-  background: linear-gradient(45deg, #ffecd2 0%, #fcb69f 100%);
+  /* box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5); */
+  background: white;
+`;
+
+export const Circle2 = styled.div`
+  position: absolute;
+  left: calc(calc(100vw / 3) - 4.5vh);
+  top: 30.5vh;
+  width: 35vh;
+  height: 35vh;
+  /* border-radius: 100vh; */
+  border-radius: 100%;
+  /* transform-origin: 50% 50%; */
+  /* box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5); */
+  &.celtic {
+    background: #cba1ff;
+  }
   &.time {
-    background: linear-gradient(to right, #fff1eb 0%, #ace0f9 100%);
+    background: #ff945e;
   }
   &.instant {
-    background-image: linear-gradient(-225deg, #e3fdf5 0%, #ffe6fa 100%);
+    background: #ff74b6;
+  }
+`;
+
+export const Circle3 = styled.div`
+  position: absolute;
+  left: calc(calc(100vw / 3) - 5vw);
+  top: 15vh;
+  width: 15vh;
+  height: 15vh;
+  /* border-radius: 100vh; */
+  border-radius: 100%;
+  /* transform-origin: 50% 50%; */
+  /* box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5); */
+  &.celtic {
+    background: #cba1ff;
+  }
+  &.time {
+    background: #ff945e;
+  }
+  &.instant {
+    background: #ff74b6;
+  }
+`;
+
+export const Circle4 = styled.div`
+  position: absolute;
+  left: 5vw;
+  top: 28vh;
+  width: 40vh;
+  height: 40vh;
+  /* border-radius: 100vh; */
+  border-radius: 100%;
+  /* transform-origin: 50% 50%; */
+  /* box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5); */
+  &.celtic {
+    background: #cba1ff;
+  }
+  &.time {
+    background: #ff945e;
+  }
+  &.instant {
+    background: #ff74b6;
+  }
+`;
+
+export const Circle5 = styled.div`
+  position: absolute;
+  left: 2vw;
+  top: 48vh;
+  width: 20vh;
+  height: 20vh;
+  /* border-radius: 100vh; */
+  border-radius: 100%;
+  /* transform-origin: 50% 50%; */
+  /* box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5); */
+  &.celtic {
+    background: #cba1ff;
+  }
+  &.time {
+    background: #ff945e;
+  }
+  &.instant {
+    background: #ff74b6;
   }
 `;
 
@@ -80,7 +168,8 @@ export const StyledCard = styled.img`
 export const CharBox = styled.div`
   position: absolute;
   right: 0;
-  width: calc(50vh + calc(100vw / 3));
+  width: 100vw;
+  /* width: calc(50vh + calc(100vw / 3)); */
   height: 100vh;
   overflow: hidden;
 `;
@@ -90,22 +179,54 @@ const MoveChar = keyframes`
     translate: 0;
   }
   100% {
-    translate: -30%;
+    translate: -28%;
+    transform: rotate(-28deg);
+  }
+`;
+
+const MoveKitty = keyframes`
+  0% {
+    /* translate: 0; */
+  }
+  100% {
+    left: calc(calc(200vw / 3) - 52vh);
   }
 `;
 
 export const StyledChar = styled.img`
   position: absolute;
-  left: 50vh;
-  top: 50vh;
-  transform: translate(-20%, -50%);
-  height: 70vh;
-  width: auto;
-
+  left: calc(calc(200vw / 3) - 25vh);
+  top: 0;
+  /* transform: translate(-100%, -50%); */
+  transform: rotate(-15deg);
+  /* height: 70vh;
+  width: auto; */
   &.hover {
-    animation: ${MoveChar} 3s;
+    animation: ${MoveChar} 2s;
     animation-fill-mode: both;
     /* animation: name duration timing-function delay iteration-count direction fill-mode; */
+  }
+  &.kittyHover {
+    animation: ${MoveKitty} 1s;
+    animation-fill-mode: both;
+  }
+  &#draco {
+    top: 50vh;
+    left: 90vw;
+    width: 60vh;
+    height: 45vh;
+    /* z-index: 5; */
+    transform: rotate(0deg);
+  }
+  &#toast {
+    top: 15vh;
+    width: 64vh;
+    height: 80vh;
+  }
+  &#kitty {
+    top: 15vh;
+    width: 64vh;
+    height: 80vh;
   }
 `;
 
@@ -144,4 +265,17 @@ export const SideBtn = styled.img`
   cursor: pointer;
   position: fixed;
   transition: 0.4s ease;
+  z-index: 1;
+`;
+
+export const LoginBtn = styled.button`
+  position: absolute;
+  top: 0.3em;
+  left: 0.3em;
+  font-size: 1.5em;
+  font-weight: bold;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  z-index: 1;
 `;

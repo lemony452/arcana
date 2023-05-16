@@ -8,13 +8,17 @@ import Npc from '../../Common/npc';
 import { createCompletion } from '../../Store/FortuneTelling/gpt';
 import { useFortuneStore, CardState, saveIndexStore } from '../../Store/User/fortune';
 import charDialog0 from '../../Assets/characters/charDialog0.png';
+import { API } from '../../API';
+import { userInfoStore } from '../../Store/User/info';
 
 function Celtic() {
   const [celticText, SetcelticText] = useState(CelticConversations.c1);
   const [next, SetNext] = useState(false);
   const [option, SetOption] = useState('');
   const inputValueRef = useRef<HTMLInputElement>(null);
-  const { setTarotNameList, setOption, setInputValue, setFortune, setTarotList, tarotNameList } = useFortuneStore();
+  const { addFortune, setTarotNameList, setOption, setInputValue, setFortune, setTarotList, tarotNameList } =
+    useFortuneStore();
+  const { user, setWeekly } = userInfoStore();
   const navigate = useNavigate();
   const { setIndexList } = saveIndexStore(); // 카드 인덱스 가져오기
   // 특수 문자 처리
@@ -96,17 +100,22 @@ function Celtic() {
 
         ans = await createCompletion(t, o, i, cards[0]); // 배열에 카드 2장 풀이 담겨서 출력
         console.log(ans);
+        addFortune(ans);
         fortunList = ans;
         ans = await createCompletion(t, o, i, cards[1]); // 배열에 카드 2장 풀이 담겨서 출력
         console.log(ans);
+        addFortune(ans);
         fortunList = [...fortunList, ...ans];
         ans = await createCompletion(t, o, i, cards[2]); // 배열에 카드 2장 풀이 담겨서 출력
         console.log(ans);
+        addFortune(ans);
         fortunList = [...fortunList, ...ans];
         ans = await createCompletion(t, o, i, cards[3]); // 배열에 카드 2장 풀이 담겨서 출력
         console.log(ans);
+        addFortune(ans);
         fortunList = [...fortunList, ...ans];
         ans = await createCompletion(t, o, i, cards[4]); // 배열에 카드 2장 풀이 담겨서 출력
+        addFortune(ans);
         fortunList = [...fortunList, ...ans];
         // console.log(fortunList);
 
@@ -119,6 +128,16 @@ function Celtic() {
       });
       // gpt api 호출하고 spread 페이지로 바로 이동됨
       navigate('/spread', { state: 'celtic' });
+      // weekly count 1개 차감
+      API.put(`/api/v1/user/count`, {
+        type: 'Weekly',
+        uid: user.uid,
+      })
+        .then((res) => {
+          console.log(res.data);
+          setWeekly(res.data.nowValue);
+        })
+        .catch((err) => console.log(err));
     } else {
       SetcelticText('나한테 장난치지 말구!! 고민을 다시 입력해줘!');
     }
