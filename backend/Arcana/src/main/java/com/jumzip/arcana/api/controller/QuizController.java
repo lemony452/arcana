@@ -74,6 +74,7 @@ public class QuizController {
     // 페이지 입장 시 uid를 들고 들어온다 -> 메세지타입 Enter, user uid 필요
     @MessageMapping(value = "/enter") // /pub/enter
     public String quizEnter(Message message) {
+        //logger.info();
         operations.convertAndSend("/sub/channel/" + message.getChannel(), message);
         message.setUserCount(message.getUserCount()+1);
         return "ENTER Complete";
