@@ -33,8 +33,11 @@ export const DefaultCard = styled.div`
   margin: 0 2%;
   position: flex;
   > img {
+    border-radius: 10px;
     height: 100%;
     width: 100%;
+    object-fit: cover;
+    box-shadow: 1px 1px 3px gray;
   }
 `;
 

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import * as CardStyle from './card_style';
-import CardBack from '../../../Assets/cards/cardb.svg';
+import CardBack from '../../../Assets/cards/cardB.png';
 import { saveIndexStore } from '../../../Store/User/fortune';
 // import CardFront from '../../../Assets/cards/F0.svg';
 
