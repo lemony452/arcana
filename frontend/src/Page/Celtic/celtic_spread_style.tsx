@@ -68,8 +68,11 @@ export const CelticOne = styled(motion.div)`
   aspect-ratio: 3 / 5;
   position: relative;
   > img {
+    border-radius: 3px;
     width: 100%;
     height: 100%;
+    object-fit: cover;
+    box-shadow: 1px 1px 3px gray;
   }
 `;
 
@@ -80,8 +83,11 @@ export const CelticTwo = styled(motion.div)`
   left: 35.5%;
   bottom: 27.5%;
   > img {
+    border-radius: 3px;
     width: 100%;
     height: 100%;
+    object-fit: cover;
+    box-shadow: 1px 1px 3px gray;
   }
 `;
 
@@ -89,15 +95,21 @@ export const CelticThree = styled(motion.div)`
   width: 64.08%;
   aspect-ratio: 3 / 5;
   > img {
+    border-radius: 3px;
     width: 100%;
     height: 100%;
+    object-fit: cover;
+    box-shadow: 1px 1px 3px gray;
   }
 `;
 
 export const CelticFour = styled(CelticThree)`
   > img {
+    border-radius: 3px;
     width: 100%;
     height: 100%;
+    object-fit: cover;
+    box-shadow: 1px 1px 3px gray;
   }
 `;
 
@@ -105,8 +117,11 @@ export const CelticFive = styled(motion.div)`
   width: 100%;
   aspect-ratio: 3 / 5;
   > img {
+    border-radius: 3px;
     width: 100%;
     height: 100%;
+    object-fit: cover;
+    box-shadow: 1px 1px 3px gray;
   }
 `;
 

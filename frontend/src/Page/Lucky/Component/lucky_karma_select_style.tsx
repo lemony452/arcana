@@ -64,6 +64,11 @@ const CardSelectAnimationE = keyframes`
 
 export const Card = styled(motion.div)`
   padding: 3vw;
+  > img {
+    border-radius: 10px;
+    object-fit: cover;
+    box-shadow: 1px 1px 3px gray;
+  }
 `;
 
 export const CardBackIn = styled(motion.img)<{ cardanistate: number }>`
@@ -74,6 +79,11 @@ export const CardBackIn = styled(motion.img)<{ cardanistate: number }>`
   animation-name: ${(props) => (props.cardanistate === 1 ? CardSlideInAnimation : null)};
   animation-duration: 1s;
   animation-timing-function: ease-in-out;
+  > img {
+    border-radius: 10px;
+    object-fit: cover;
+    box-shadow: 1px 1px 3px gray;
+  }
 `;
 
 export const CardBackNormal = styled(motion.img)<{ cardanistate: number }>`
@@ -83,6 +93,11 @@ export const CardBackNormal = styled(motion.img)<{ cardanistate: number }>`
   animation-name: ${(props) => (props.cardanistate === 0 ? CardSlideOutAnimation : null)};
   animation-duration: 1s;
   animation-timing-function: ease-in-out;
+  > img {
+    border-radius: 10px;
+    object-fit: cover;
+    box-shadow: 1px 1px 3px gray;
+  }
 `;
 
 export const CardBackOut = styled(motion.img)<{ cardanistate: number }>`
@@ -93,6 +108,11 @@ export const CardBackOut = styled(motion.img)<{ cardanistate: number }>`
   animation-name: ${(props) => (props.cardanistate === 2 ? null : CardSlideOutAnimation)};
   animation-duration: 1s;
   animation-timing-function: ease-in-out;
+  > img {
+    border-radius: 10px;
+    object-fit: cover;
+    box-shadow: 1px 1px 3px gray;
+  }
 `;
 
 export const SelectCardBack = styled(motion.img)<{ $cardselectanistate: boolean }>`
@@ -101,6 +121,11 @@ export const SelectCardBack = styled(motion.img)<{ $cardselectanistate: boolean 
   animation-name: ${(props) => (props.$cardselectanistate ? CardSelectAnimationE : null)};
   animation-duration: 1s;
   cursor: pointer;
+  > img {
+    border-radius: 10px;
+    object-fit: cover;
+    box-shadow: 1px 1px 3px gray;
+  }
 `;
 
 export const SelectCardFront = styled(motion.img)<{ $cardselectanistate: boolean }>`
@@ -108,6 +133,11 @@ export const SelectCardFront = styled(motion.img)<{ $cardselectanistate: boolean
   aspect-ratio: 3 / 5;
   animation-name: ${(props) => (props.$cardselectanistate ? CardSelectAnimationS : null)};
   animation-duration: 0.8s;
+  > img {
+    border-radius: 10px;
+    object-fit: cover;
+    box-shadow: 1px 1px 3px gray;
+  }
 `;
 
 export const NullCard = styled.div`
