@@ -265,6 +265,7 @@ export const SideBtn = styled.img`
   cursor: pointer;
   position: fixed;
   transition: 0.4s ease;
+  z-index: 1;
 `;
 
 export const LoginBtn = styled.button`
@@ -276,5 +277,5 @@ export const LoginBtn = styled.button`
   border: 0;
   background: transparent;
   cursor: pointer;
-  z-index: 3;
+  z-index: 1;
 `;
