@@ -18,6 +18,7 @@ import { KakaoRedirect } from './Page/Login/redirect';
 import TarotListDetail from './Page/Mypage/Component/detail';
 import Socket from './Page/Quiz/Websocket/server';
 import EditUserInfo from './Page/Mypage/Component/editUser';
+import Test from './Page/Quiz/test';
 
 function App() {
   useEffect(() => {
@@ -42,6 +43,7 @@ function App() {
         <Route path="/celtic/detail" element={<CelticDetail />} />
         <Route path="/spread" element={<SpreadCard />} />
         <Route path="/quiz" element={<Quiz />} />
+        <Route path="/test" element={<Test />} />
         <Route path="/server" element={<Socket />} />
         {/* <Route path="/authgoogle" element={<GoogleRedirect />} /> */}
         <Route path="/authkakao" element={<KakaoRedirect />} />
