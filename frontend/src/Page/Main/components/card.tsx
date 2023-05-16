@@ -37,10 +37,9 @@ function Card({ isOpen }: { isOpen: boolean }) {
   const { hover, setHover } = useHoverStore();
 
   const Hovering = () => {
-    if (!isOpen) {
+    if (!hover) {
       setHover(true);
-    }
-    if (hover) {
+    } else {
       setHover(false);
     }
   };

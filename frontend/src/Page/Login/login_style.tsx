@@ -3,13 +3,10 @@ import styled from 'styled-components';
 
 export const LoginModalStyle = styled.div`
   position: absolute;
-  width: 18vw;
-  height: 17.9vw;
+  width: 20vw;
+  height: 19.9vw;
   left: -50vw;
   top: 0;
-  /* left: -50vw;
-  top: 50vh; */
-  transform: translate(-50%, -50%);
   z-index: 2;
   /* visibility: hidden; */
   &.gologin {
@@ -30,8 +27,8 @@ export const KakaoBtn = styled.img`
 `;
 
 export const LoginBg = styled.div`
-  width: 18vw;
-  height: 19.9vw;
+  width: 100%;
+  height: 100%;
   border: 3px solid #aaaaaa;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   background: white;
@@ -41,6 +38,7 @@ export const LoginBg = styled.div`
   align-items: center;
   flex-direction: column;
   padding: 0 2em 0 2em;
+  transform: translate(-50%, -50%);
 `;
 
 export const LoginMent = styled.div`
