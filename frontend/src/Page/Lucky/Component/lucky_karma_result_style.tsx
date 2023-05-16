@@ -23,6 +23,9 @@ export const CardFront = styled(motion.img)`
   width: 12.59vw;
   aspect-ratio: 3 / 5;
   z-index: 3;
+  border-radius: 10px;
+  object-fit: cover;
+  box-shadow: 1px 1px 3px gray;
 `;
 
 export const Card = styled(motion.div)`

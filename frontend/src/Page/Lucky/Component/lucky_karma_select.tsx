@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import * as luckySelect from './lucky_karma_select_style';
-import CardB from '../../../Assets/cards/cardb.svg';
+import CardB from '../../../Assets/cards/cardB.png';
 
 interface LuckyKarmaSelectType {
   selectCard: number; // 고른 카드 인덱스
@@ -10,7 +10,8 @@ interface LuckyKarmaSelectType {
   cardList: {
     index: number;
     front: string;
-    content: string;
+    contentCeltic: string;
+    contentTime: string;
     result: string;
   }[];
 }
