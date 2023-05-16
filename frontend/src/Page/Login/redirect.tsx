@@ -38,7 +38,7 @@ export function KakaoRedirect() {
   const URLcode = location.search.split('=')[1];
   console.log(URLcode);
   const navigate = useNavigate();
-  const { setUser, setNickname, setTicket, setToken, setWeekly, setIsLogin } = userInfoStore();
+  const { setUser, setNickname, setTicket, setWeekly, setIsLogin, user } = userInfoStore();
 
   useEffect(() => {
     const login = async () => {
@@ -57,6 +57,21 @@ export function KakaoRedirect() {
         navigate('/');
         setIsLogin(true);
       });
+
+      await API.get(`/api/v1/user/info`, {
+        headers: {
+          uid: user.uid,
+        },
+      })
+        .then((res) => {
+          console.log(res);
+          setWeekly(res.data.weekly_count);
+          setTicket(res.data.ticket);
+          setNickname(res.data.nickname);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     };
     login();
   }, []);

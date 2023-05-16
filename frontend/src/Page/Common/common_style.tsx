@@ -93,6 +93,9 @@ export const ModalView = styled.div`
   width: 80vw;
   height: 80vh;
   /* background-color: #ffffff; */
+  &.replay {
+    margin-left: 20vw;
+  }
 `;
 
 export const ToHomeBtn = styled.button`
