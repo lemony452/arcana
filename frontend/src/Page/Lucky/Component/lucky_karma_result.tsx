@@ -9,7 +9,8 @@ interface LuckyKarmaResultType {
     front: string;
     num: number;
     title: string;
-    content: string;
+    contentCeltic: string;
+    contentTime: string;
     result: string;
   }[];
 }

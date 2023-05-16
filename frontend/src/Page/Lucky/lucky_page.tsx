@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   FacebookShareButton,
   FacebookIcon,
@@ -7,13 +7,14 @@ import {
   TwitterShareButton,
   TwitterIcon,
 } from 'react-share';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import html2canvas from 'html2canvas';
 import * as luckyPage from './lucky_page_style';
 import LuckyKarmaSelect from './Component/lucky_karma_select';
 import LuckyKarmaResult from './Component/lucky_karma_result';
 import Dialog from '../../Common/dialog';
 import charDialog0 from '../../Assets/characters/charDialog0.png';
+import charDialog1 from '../../Assets/characters/charDialog1.png';
 import { DialogNPC, OptionBtn } from '../../Common/common_styled';
 import KakaoIcon from '../../Assets/etc/icon-kakao.png';
 import Camera from '../../Assets/etc/camera.png';
@@ -22,10 +23,12 @@ import { useLuckyStore } from '../../Store/User/lucky';
 
 function LuckyPage() {
   const navigate = useNavigate();
-  const [selectCard, setSelectCard] = useState(-1); // 선택한 카드
-  const [resultPage, setResultPage] = useState(false);
-  const [checkSelectState, setCheckSelectState] = useState(false); // 마지막 선택 질문
+  const [selectCard, setSelectCard] = useState<number>(-1); // 선택한 카드
+  const [resultPage, setResultPage] = useState<boolean>(false);
+  const [checkSelectState, setCheckSelectState] = useState<boolean>(false); // 마지막 선택 질문
+  const [npc, setNpc] = useState<number>(0);
   const { luckyMent, lucky } = useLuckyStore();
+  const location = useLocation();
 
   const cardList = [
     {
@@ -33,7 +36,8 @@ function LuckyPage() {
       front: `https://k8d107.p.ssafy.io/api/v1/images/${lucky.card.idx}.png`,
       num: lucky.card.idx,
       title: lucky.card.name,
-      content: `행운 카드는 ${lucky.card.name} 이 나왔습니다!\n${lucky.ment}`,
+      contentCeltic: `행운카드는 ${lucky.card.name} 이 나왔어!\n${lucky.ment}`,
+      contentTime: `행운카드는 ${lucky.card.name} 이 나왔군!\n${lucky.ment}`,
       result: luckyMent,
     },
     {
@@ -41,7 +45,8 @@ function LuckyPage() {
       front: `https://k8d107.p.ssafy.io/api/v1/images/${lucky.card.idx}.png`,
       num: lucky.card.idx,
       title: lucky.card.name,
-      content: `행운 카드는 ${lucky.card.name} 이 나왔습니다!\n${lucky.ment}`,
+      contentCeltic: `행운카드는 ${lucky.card.name} 이 나왔어!\n${lucky.ment}`,
+      contentTime: `행운카드는 ${lucky.card.name} 이 나왔군!\n${lucky.ment}`,
       result: luckyMent,
     },
     {
@@ -49,7 +54,8 @@ function LuckyPage() {
       front: `https://k8d107.p.ssafy.io/api/v1/images/${lucky.card.idx}.png`,
       num: lucky.card.idx,
       title: lucky.card.name,
-      content: `행운 카드는 ${lucky.card.name} 이 나왔습니다!\n${lucky.ment}`,
+      contentCeltic: `행운카드는 ${lucky.card.name} 이 나왔어!\n${lucky.ment}`,
+      contentTime: `행운카드는 ${lucky.card.name} 이 나왔군!\n${lucky.ment}`,
       result: luckyMent,
     },
   ];
@@ -58,8 +64,23 @@ function LuckyPage() {
     setResultPage(true);
   };
 
-  const cardSelect = checkSelectState ? cardList[selectCard].content : '이 카드를 선택하시겟습니까?';
-  const cardContent = selectCard === -1 ? '카드를 골라주세요' : cardSelect;
+  const cardSelectCeltic = checkSelectState ? cardList[selectCard].contentCeltic : '이 카드를 선택할까?';
+  const cardContentCeltic = selectCard === -1 ? '너의 행운카드를 골라줘' : cardSelectCeltic;
+
+  const cardSelectTime = checkSelectState ? cardList[selectCard].contentTime : '이 카드를 선택하겠나?';
+  const cardContentTime = selectCard === -1 ? '자네의 행운카드를 골라보게' : cardSelectTime;
+
+  const cardContent = npc === 0 ? cardContentCeltic : cardContentTime;
+  const dialogImg = npc === 0 ? charDialog0 : charDialog1;
+
+  useEffect(() => {
+    if (location.state === 'celtic') {
+      setNpc(0);
+    }
+    if (location.state === 'time') {
+      setNpc(1);
+    }
+  }, []);
 
   // const accessToken =
   //   'IGQVJVaG56V0FpdXNoaVFrcG5YcGp3ZAHEySUo4ZAkhIeTN2NjBtNUdRWEh1dl8tVTBIUHJiRmQ3MmFTNVZAWcVJFLW43eGc4Y3dWLWhESGFMU0FJRUNpSjF6b2kzU2RPd09GSzUzQVZAQTnFsX1c4S2RXRQZDZD';
@@ -96,7 +117,7 @@ function LuckyPage() {
     window.Kakao.Link.sendDefault({
       objectType: 'feed',
       content: {
-        title: '내 럭키카드는 결과는?', // 공유 타이틀
+        title: '내 행운카드는 결과는?', // 공유 타이틀
         description: cardList[selectCard].result, // 공유 내용
         imageUrl: `https://k8d107.p.ssafy.io/api/v1/images/${lucky.card.idx}.png`, // 공유 이미지
         link: {
@@ -120,7 +141,7 @@ function LuckyPage() {
 
   return (
     <luckyPage.Body>
-      <DialogNPC src={charDialog0} />
+      <DialogNPC src={dialogImg} />
       {resultPage ? (
         <LuckyKarmaResult selectCard={selectCard} cardList={cardList} />
       ) : (
