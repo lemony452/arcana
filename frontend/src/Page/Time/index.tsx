@@ -55,15 +55,6 @@ function Time() {
       // addFortune(timements);
     });
 
-    // await API.post(`/api/v2/summary`, {
-    //   text: fortune,
-    // }).then((res: any) => {
-    //   console.log(res);
-    //   setSummary(res);
-    // });
-    // await setTarotList(ans.data);
-    // await navigate(`/time/${f}`);
-    // await navigate(`/time/${f}`);
     SetcelticText(TimeConversations.t2[f]);
     setOption(f);
     setQuestion(''); // 기간운세는 질문X
@@ -76,9 +67,6 @@ function Time() {
       setSummary(res.data.summary);
     });
 
-    SetcelticText(TimeConversations.t2[f]);
-    setOption(f);
-    await navigate('/spread', { state: `${f}` });
     // weekly count 1개 차감
     API.put(`/api/v1/user/count`, {
       type: 'Weekly',
