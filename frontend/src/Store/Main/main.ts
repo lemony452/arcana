@@ -21,7 +21,7 @@ export const useCardStore = create<CardOrderState>((set) => ({
 
 export const useHoverStore = create<HoverState>((set) => ({
   hover: false,
-  setHover: (hover) => {
-    set(() => ({ hover: !hover }));
+  setHover: (h) => {
+    set(() => ({ hover: h }));
   },
 }));

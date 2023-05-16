@@ -1,8 +1,8 @@
 import React from 'react';
 import { StyledChar, CharBox } from '../main_style';
-import Char0 from '../../../Assets/characters/char0.png';
-import Char1 from '../../../Assets/characters/char1.png';
-import Char2 from '../../../Assets/characters/char2.png';
+import kitty from '../../../Assets/characters/kitty.png';
+import toast from '../../../Assets/characters/toast.png';
+import draco from '../../../Assets/characters/draco.png';
 import { useCardStore, useHoverStore } from '../../../Store/Main/main';
 
 function Character() {
@@ -11,9 +11,9 @@ function Character() {
 
   return (
     <CharBox>
-      {cardOrder === 'celtic' ? <StyledChar className={hover ? 'hover' : ''} src={Char0} /> : null}
-      {cardOrder === 'time' ? <StyledChar className={hover ? 'hover' : ''} src={Char1} /> : null}
-      {cardOrder === 'instant' ? <StyledChar className={hover ? 'hover' : ''} src={Char2} /> : null}
+      {cardOrder === 'celtic' ? <StyledChar id="kitty" className={hover ? 'hover' : ''} src={draco} /> : null}
+      {cardOrder === 'time' ? <StyledChar id="toast" className={hover ? 'hover' : ''} src={toast} /> : null}
+      {cardOrder === 'instant' ? <StyledChar id="draco" className={hover ? 'kittyHover' : ''} src={kitty} /> : null}
     </CharBox>
   );
 }

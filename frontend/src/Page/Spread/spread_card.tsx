@@ -75,10 +75,7 @@ function SpreadCard() {
     move: { opacity: [1], y: [0, 40, -500], transition: { delay: 2, duration: 0.7, ease: 'easeIn' } },
   };
 
-  const spreadContent =
-    selectedCardList.length === 0
-      ? `카드를 ${needCardNum}장 선택해주세요`
-      : `${selectedCardList.length} / ${needCardNum} 장을 선택하셨습니다`;
+  const spreadContent = `카드를 ${needCardNum}장 선택해주세요`;
 
   return (
     <spreadCard.Body>
@@ -101,6 +98,16 @@ function SpreadCard() {
           />
         ))}
       </spreadCard.CardBody>
+      <spreadCard.NumBody>
+        <spreadCard.Num
+          key={selectedCardList.length}
+          initial={{ rotateY: -180 }}
+          animate={{ rotateY: 0 }}
+          transition={{ duration: 0.2 }}
+        >
+          {selectedCardList.length}
+        </spreadCard.Num>
+      </spreadCard.NumBody>
       <Dialog content={spreadContent} next={false}>
         {!confirmedCard && selectedCardList.length === needCardNum && (
           <OptionBtn onClick={confirmedHandler}>선택 완료</OptionBtn>

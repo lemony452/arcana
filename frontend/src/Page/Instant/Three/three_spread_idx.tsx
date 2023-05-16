@@ -7,7 +7,7 @@ import ThreeNum from './three_spread_num';
 import * as common from '../../Common/common_style';
 import { DialogNPC, OptionBtn } from '../../../Common/common_styled';
 import Dialog from '../../../Common/dialog';
-import charDialog0 from '../../../Assets/characters/charDialog0.png';
+import charDialog2 from '../../../Assets/characters/charDialog2.png';
 import { InstantDetails } from '../../../Common/conversations';
 import { saveIndexStore, useFortuneStore } from '../../../Store/User/fortune';
 
@@ -20,7 +20,7 @@ function ThreeSpread() {
     setNextBtn(false);
     setTimeout(() => {
       setNextBtn(true);
-    }, 4000);
+    }, 3000);
     return setIndex(index + 1);
   };
   console.log(index);
@@ -67,7 +67,7 @@ function ThreeSpread() {
         {/* <common.ChatArea>
           <common.SpreadBtn onClick={onNext}>다음</common.SpreadBtn>
         </common.ChatArea> */}
-        <DialogNPC src={charDialog0} />
+        <DialogNPC src={charDialog2} />
         <Dialog content={text.page1} next={false}>
           {nextBtn && <OptionBtn onClick={onNext}>다음</OptionBtn>}
         </Dialog>
@@ -100,7 +100,7 @@ function ThreeSpread() {
         {/* <common.ChatArea>
           <common.SpreadBtn onClick={toHome}>홈으로</common.SpreadBtn>
         </common.ChatArea> */}
-        <DialogNPC src={charDialog0} />
+        <DialogNPC src={charDialog2} />
         <Dialog content={text.page3} next={false}>
           {nextBtn && <OptionBtn onClick={toHome}>메인으로</OptionBtn>}
         </Dialog>

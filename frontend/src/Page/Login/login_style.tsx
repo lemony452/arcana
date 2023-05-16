@@ -6,11 +6,14 @@ export const LoginModalStyle = styled.div`
   width: 30vw;
   height: calc(30vw * 1.5);
   left: -50vw;
-  top: 50vh;
-  transform: translate(-50%, -50%);
+  top: 0;
+  /* left: -50vw;
+  top: 50vh; */
+  transform: translate(50%, 50%);
   z-index: 3;
+  /* visibility: hidden; */
   &.gologin {
-    left: 50vw;
+    left: 0vw;
   }
 `;
 

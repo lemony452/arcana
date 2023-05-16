@@ -11,8 +11,8 @@ export const TimeBox = styled(motion.div)`
 export const YearCard = styled(motion.div)`
   /* background-color: gold; */
   position: absolute;
-  width: 21.6vh;
-  height: calc(21.6vh * 5 / 3);
+  width: 16vh;
+  height: calc(16vh * 5 / 3);
   background-position: center;
   background-size: cover;
   text-align: center;

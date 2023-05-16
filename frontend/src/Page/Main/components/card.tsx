@@ -16,6 +16,7 @@ import celticImg from '../../../Assets/etc/celtic.png';
 import timeImg from '../../../Assets/etc/time.png';
 import instantImg from '../../../Assets/etc/instant.png';
 import { useFortuneStore } from '../../../Store/User/fortune';
+import { userInfoStore } from '../../../Store/User/info';
 
 function Card({ isOpen }: { isOpen: boolean }) {
   // navigate hook
@@ -23,6 +24,8 @@ function Card({ isOpen }: { isOpen: boolean }) {
   // const swiper = useSwiper();
   // console.log('swiper', swiper);
   const navigate = useNavigate();
+
+  const { weeklyCount, setWeekly, isLogin } = userInfoStore();
 
   // 캐러셀 이동
   const [prevEl, setPrevEl] = useState<HTMLElement | null>(null);
@@ -35,7 +38,10 @@ function Card({ isOpen }: { isOpen: boolean }) {
 
   const Hovering = () => {
     if (!isOpen) {
-      setHover(hover);
+      setHover(true);
+    }
+    if (hover) {
+      setHover(false);
     }
   };
 
@@ -71,8 +77,11 @@ function Card({ isOpen }: { isOpen: boolean }) {
       setSpread('celtic');
       // 메인 페이지로 이동 했을때 값을 초기화해줌
       setCardOrder('celtic');
-      setHover(hover);
-      navigate('/celtic');
+      // setHover(hover);
+      if (isLogin) {
+        navigate('/celtic');
+        setWeekly(weeklyCount - 1);
+      }
     }
   };
   // time 페이지로 이동
@@ -80,9 +89,12 @@ function Card({ isOpen }: { isOpen: boolean }) {
     if (!isOpen) {
       setSpread('time');
       // 메인 페이지로 이동 했을때 값을 초기화해줌
-      setCardOrder('celtic');
-      setHover(hover);
-      navigate('/time');
+      setCardOrder('time');
+      // setHover(hover);
+      if (isLogin) {
+        navigate('/time');
+        setWeekly(weeklyCount - 1);
+      }
     }
   };
   // instant 페이지로 이동
@@ -90,8 +102,8 @@ function Card({ isOpen }: { isOpen: boolean }) {
     if (!isOpen) {
       setSpread('instant');
       // 메인 페이지로 이동 했을때 값을 초기화해줌
-      setCardOrder('celtic');
-      setHover(hover);
+      setCardOrder('instant');
+      // setHover(hover);
       navigate('/instant');
     }
   };
