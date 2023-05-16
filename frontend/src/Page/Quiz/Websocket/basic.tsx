@@ -14,6 +14,11 @@ class App extends React.Component {
   sendMessage = () => {
     // 화살표함수로 만들것!!
     this.ws.send('hello this is client Message'); // 서버로 메세지 보내는건 send
+
+    this.ws.onmessage = (evt: MessageEvent) => {
+      console.log(evt);
+      console.log(evt.data);
+    };
   };
 
   render() {
