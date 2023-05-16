@@ -18,9 +18,13 @@ import {
   ListIcon,
   MoveBtn,
   MoveBtnImg,
+  ProfileImg,
+  HelpIcon,
+  Container,
 } from '../mypage_style';
 import { userInfoStore } from '../../../Store/User/info';
 import nextBtn from '../../../Assets/etc/nextButton.png';
+import helpBtn from '../../../Assets/etc/help.png';
 
 function UserInfo() {
   const { nickname, weeklyCount, setIsLogin, setIsSide, user, ticket } = userInfoStore();
@@ -45,25 +49,39 @@ function UserInfo() {
     navigate('/');
   };
 
-  // const TarotTokenCnt = api
+  const WeeklyMessage = `매주 월요일 9시에 이용권이 충전됩니다`;
+  const TicketMessage = `매일 정각에 타로 퀴즈 이벤트 참여권이 충전됩니다`;
 
   return (
     <UserContent>
-      <img style={{ width: '10vw' }} src={profile} alt="" />
+      <ProfileImg>🐭</ProfileImg>
+      {/* <img style={{ width: '10vw' }} src={profile} alt="" /> */}
       <Nickname>
         <div>{nickname} 님</div>
       </Nickname>
       <TarotToken>
         <ListContent>
           <ListIcon src={tockenIcon} alt="" />
-          <div>주간 이용권</div>
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            주간 이용권
+            <Container>
+              <HelpIcon src={helpBtn} />
+              <div className="tooltip">{WeeklyMessage}</div>
+            </Container>
+          </div>
         </ListContent>
         <div style={{ width: '50%' }}>{weeklyCount} / 5</div>
       </TarotToken>
       <TarotToken>
         <ListContent>
           <ListIcon src={ticketIcon} alt="" />
-          <div>이벤트 참여권</div>
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            이벤트 참여권
+            <Container>
+              <HelpIcon src={helpBtn} />
+              <div className="tooltip">{TicketMessage}</div>
+            </Container>
+          </div>
         </ListContent>
         <div style={{ width: '50%' }}>{ticket} / 2</div>
       </TarotToken>
