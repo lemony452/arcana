@@ -11,11 +11,13 @@ type Props = {
   questionNr: number;
   totalQuestions: number;
   timeCount: string;
+  cardIdx: number;
 };
 
 const QuestionCard: React.FC<Props> = ({
   question,
   answers,
+  cardIdx,
   callback,
   userAnswer,
   questionNr,
@@ -25,7 +27,9 @@ const QuestionCard: React.FC<Props> = ({
   <quizStyle.FullArea>
     <quizStyle.LeftCard>
       Question: {questionNr} / {totalQuestions}
-      <quizStyle.CardArea />
+      <quizStyle.CardArea>
+        <img src={`https://k8d107.p.ssafy.io/api/v1/images/${cardIdx}.png`} alt="questCard" />
+      </quizStyle.CardArea>
     </quizStyle.LeftCard>
     <quizStyle.RightArea>
       <quizStyle.TimerDivide>
