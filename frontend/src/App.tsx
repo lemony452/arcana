@@ -16,9 +16,9 @@ import SpreadCard from './Page/Spread/spread_card';
 import Quiz from './Page/Quiz';
 import { KakaoRedirect } from './Page/Login/redirect';
 import TarotListDetail from './Page/Mypage/Component/detail';
-import Socket from './Page/Quiz/Websocket/server';
+import Socket from './Page/Quiz/Websocket/NA/server';
 import Sock from './Page/Quiz/Websocket/server_none';
-import Ws from './Page/Quiz/Websocket/server_ws';
+import Ws from './Page/Quiz/Websocket/NA/server_ws';
 import EditUserInfo from './Page/Mypage/Component/editUser';
 import Test from './Page/Quiz/test';
 
