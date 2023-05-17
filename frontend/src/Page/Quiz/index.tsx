@@ -16,7 +16,7 @@ export type AnswerObject = {
   correctAnswer: string;
 };
 
-const TOTAL_QUESTIONS = 10;
+const TOTAL_QUESTIONS = 5;
 
 function Quiz() {
   const [index, setIndex] = useState(0);
