@@ -20,6 +20,7 @@ import Socket from './Page/Quiz/Websocket/server';
 import Sock from './Page/Quiz/Websocket/server_none';
 import Ws from './Page/Quiz/Websocket/server_ws';
 import EditUserInfo from './Page/Mypage/Component/editUser';
+import Test from './Page/Quiz/test';
 
 function App() {
   useEffect(() => {
@@ -44,7 +45,8 @@ function App() {
         <Route path="/celtic/detail" element={<CelticDetail />} />
         <Route path="/spread" element={<SpreadCard />} />
         <Route path="/quiz" element={<Quiz />} />
-        {/* 아래 세개는 소켓연결을 위한 임시 링크들 입니다 */}
+        {/* 아래 4개는 소켓연결을 위한 임시 링크들 입니다 */}
+        <Route path="/test" element={<Test />} />
         <Route path="/server" element={<Socket />} />
         <Route path="/sock" element={<Sock />} />
         <Route path="/ws" element={<Ws />} />
