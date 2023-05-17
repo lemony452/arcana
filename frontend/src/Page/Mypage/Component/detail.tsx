@@ -26,6 +26,7 @@ import Lucky from '../../../Assets/etc/lucky.png';
 import ReplayTarotBtn from '../../../Assets/etc/replayTarotBtn.png';
 import ReplayLuckyBtn from '../../../Assets/etc/replayLuckyBtn.png';
 import Pagination from './pagination';
+import YearSpread from '../../Time/Year/year_spread';
 import MonthSpread from '../../Time/Month/month_spread';
 import CelticSpread from '../../Celtic/celtic_spread';
 import * as common from '../../Common/common_style';
@@ -50,14 +51,22 @@ function TarotListDetail() {
     }
   };
 
-  // useEffect(() => {
-  //   console.log('옵션변경');
-  //   console.log(temp);
-  // }, [temp, setTemp]);
+  let initialOption = temp[0].options;
+  if (initialOption === '사랑운') {
+    initialOption += '💘';
+  } else if (initialOption === '재물운') {
+    initialOption += '💸';
+  } else if (initialOption === '성공운') {
+    initialOption += '👨‍💼‍‍';
+  } else if (initialOption === '신년운세') {
+    initialOption += '🐰';
+  } else {
+    initialOption += '✨';
+  }
 
   const [replay, setReplay] = useState('');
   const [detailQuestion, setQuestion] = useState(temp[0].question);
-  const [detailOption, setOption] = useState(temp[0].options);
+  const [detailOption, setOption] = useState(initialOption);
   const [detailDate, setDate] = useState(`${temp[0].datetime[0]}.${temp[0].datetime[1]}.${temp[0].datetime[2]}`);
   const [cardRes, setCardRes] = useState(temp[0].cardsResponse);
   // const res = temp.length % 5 ? Math.floor(temp.length / 5) + 1 : Math.floor(temp.length / 5);
@@ -73,13 +82,27 @@ function TarotListDetail() {
   const cardlistIdx = [cardRes[1].cardIdx];
   const luckycardIdx = cardRes[0].cardIdx;
   const cardList = SliceTemp.map((value: any, idx: number) => {
+    let valueOption = value.options;
+    if (valueOption === '사랑운') {
+      valueOption += '💘';
+    } else if (valueOption === '재물운') {
+      valueOption += '💸';
+    } else if (valueOption === '성공운') {
+      valueOption += '👨‍💼‍‍';
+    } else if (valueOption === '신년운세') {
+      valueOption += '🐰';
+    } else {
+      valueOption += '✨';
+    }
     const ShowDetail = () => {
       setDate(`${value.datetime[0]}.${value.datetime[1]}.${value.datetime[2]}`);
-      setOption(value.options);
+      setOption(valueOption);
       setQuestion(value.question);
       setCardRes(value.cardsResponse);
-      if (value.options === '신년운세' || value.options === '월별운세') {
-        setReplay('time');
+      if (valueOption === '신년운세🐰') {
+        setReplay('year');
+      } else if (valueOption === '월별운세✨') {
+        setReplay('month');
       } else {
         setReplay('celtic');
       }
@@ -89,7 +112,7 @@ function TarotListDetail() {
     }
     return (
       <TitleBox key={arr[idx]} onClick={ShowDetail}>
-        <div>{value.options}</div>
+        <div>{valueOption}</div>
         <div>{`${value.datetime[0]}.${value.datetime[1]}.${value.datetime[2]}`}</div>
       </TitleBox>
     );
@@ -158,18 +181,26 @@ function TarotListDetail() {
           </div>
         </DetailTitle>
         <DetailBox>
-          <DetailQuestion>{detailQuestion ? `▶ ${detailQuestion}` : null}</DetailQuestion>
-          <DetailFortune>
+          <DetailQuestion>▶ {detailQuestion ? `${detailQuestion}` : `당신의 운세 결과`}</DetailQuestion>
+          <DetailFortune className="detail">
             {cardRes.map((value: any, idx: number) => (
               <div style={{ marginBottom: '0.3em' }}>{value.ment}</div>
             ))}
           </DetailFortune>
         </DetailBox>
         {/* {replay === 'time' ? <MonthSpread spreadList={cardlistIdx!} /> : null} */}
-        {replay === 'time' && modalOpen ? (
+        {replay === 'month' && modalOpen ? (
           <common.ModalBackdrop onClick={showModal}>
             <common.ModalView className="replay" onClick={(e) => e.stopPropagation()}>
               <MonthSpread spreadList={cardlistIdx!} />
+              <OptionBtn onClick={showModal}>닫기</OptionBtn>
+            </common.ModalView>
+          </common.ModalBackdrop>
+        ) : null}
+        {replay === 'year' && modalOpen ? (
+          <common.ModalBackdrop onClick={showModal}>
+            <common.ModalView className="replay" onClick={(e) => e.stopPropagation()}>
+              <YearSpread spreadList={cardlistIdx!} />
               <OptionBtn onClick={showModal}>닫기</OptionBtn>
             </common.ModalView>
           </common.ModalBackdrop>
