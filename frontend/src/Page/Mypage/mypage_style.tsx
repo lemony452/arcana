@@ -43,7 +43,6 @@ export const ProfileImg = styled.div`
   width: 10vw;
   height: 10vw;
   border-radius: 100%;
-  background: beige;
   justify-content: center;
   align-items: center;
   font-size: 3em;
