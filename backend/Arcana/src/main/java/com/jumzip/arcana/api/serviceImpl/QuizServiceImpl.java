@@ -128,4 +128,9 @@ public class QuizServiceImpl implements QuizService {
         return quizAnswerResponsesList;
     }
 
+    @Override
+    public List<QuizAnswer> resetQuizAnswer() {
+        return quizAnswerRepository.resetQuizAnswer();
+    }
+
 }
