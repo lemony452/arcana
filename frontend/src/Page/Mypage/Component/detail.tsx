@@ -69,7 +69,6 @@ function TarotListDetail() {
   const arr = Array(5)
     .fill(1)
     .map((x, y) => x + y);
-
   const cardlistIdx = [cardRes[1].cardIdx];
   const luckycardIdx = cardRes[0].cardIdx;
   const cardList = SliceTemp.map((value: any, idx: number) => {
@@ -112,9 +111,9 @@ function TarotListDetail() {
   const [luckyModalOpen, setLuckyModalOpen] = useState(false); // modal
   const showModal = () => {
     setModalOpen(!modalOpen);
+    console.log(cardRes);
     console.log(cardlistIdx);
   };
-
   const showLuckyCard = () => {
     setLuckyModalOpen(!luckyModalOpen);
   };
