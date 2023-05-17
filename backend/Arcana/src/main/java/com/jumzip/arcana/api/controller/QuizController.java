@@ -3,9 +3,9 @@ package com.jumzip.arcana.api.controller;
 import com.jumzip.arcana.api.service.QuizService;
 import com.jumzip.arcana.db.entity.Message;
 import com.jumzip.arcana.db.entity.Quiz;
-import com.jumzip.arcana.db.entity.QuizList;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,8 +14,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessageSendingOperations;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @Tag(description = "Quiz API", name = "QUIZ")
@@ -34,30 +34,30 @@ public class QuizController {
         return System.currentTimeMillis();
     }
 
-    @Operation(summary = "퀴즈 조회", description = "idx에 해당하는 Quiz 내용을 조회하는 기능")
-    @GetMapping("")
-    public ResponseEntity<?> getQuiz(@RequestParam int quizNum) {
-        logger.info("start getQuiz");
-
-        try {
-            Quiz quiz = quizService.getQuiz(quizNum);;
-            logger.info("quiz is " + quiz);
-
-            return new ResponseEntity<>(quiz, HttpStatus.OK);
-        } catch (Exception e) {
-            logger.info("get Quiz error - " + e.getMessage(), e);
-
-            return new ResponseEntity<>("FAIL", HttpStatus.BAD_REQUEST);
-        }
-    }
-
     @Operation(summary = "퀴즈 리스트 조회", description = "최신 퀴즈 리스트를 조회하는 기능")
     @GetMapping("quizlist")
     public ResponseEntity<?> getQuizList() {
         logger.info("start getQuizList");
 
         try {
-            QuizList quizList = quizService.getQuizList();
+            List<Quiz> quizList = quizService.getQuizList();
+            logger.info("quizlist is " + quizList);
+
+            return new ResponseEntity<>(quizList, HttpStatus.OK);
+        } catch (Exception e) {
+            logger.info("get QuizList error - " + e.getMessage(), e);
+
+            return new ResponseEntity<>("FAIL", HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @Operation(summary = "퀴즈 결과 전송", description = "유저가 선택한 정답을 1~4 숫자로 보내주세요")
+    @PostMapping()
+    public ResponseEntity<?> sendQuizAnswer() {
+        logger.info("start sendQuizAnswer");
+
+        try {
+            List<Quiz> quizList = quizService.getQuizList();
             logger.info("quizlist is " + quizList);
 
             return new ResponseEntity<>(quizList, HttpStatus.OK);
