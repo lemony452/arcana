@@ -1,8 +1,10 @@
 package com.jumzip.arcana.api.controller;
 
+import com.jumzip.arcana.api.request.QuizAnswerRequest;
 import com.jumzip.arcana.api.service.QuizService;
 import com.jumzip.arcana.db.entity.Message;
 import com.jumzip.arcana.db.entity.Quiz;
+import com.jumzip.arcana.db.entity.QuizAnswer;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
@@ -15,6 +17,7 @@ import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessageSendingOperations;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -51,18 +54,20 @@ public class QuizController {
         }
     }
 
-    @Operation(summary = "퀴즈 결과 전송", description = "유저가 선택한 정답을 1~4 숫자로 보내주세요")
+    @Operation(summary = "퀴즈 결과 전송", description = "quizIdx에 1 ~ 10 퀴즈 순서 번호를 "
+        + " \n answerIdx에 유저가 선택한 정답을 1 ~ 4 숫자로 보내주세요")
     @PostMapping()
-    public ResponseEntity<?> sendQuizAnswer() {
+    public ResponseEntity<?> sendQuizAnswer(@RequestBody QuizAnswerRequest quizAnswerRequest) {
         logger.info("start sendQuizAnswer");
 
         try {
-            List<Quiz> quizList = quizService.getQuizList();
-            logger.info("quizlist is " + quizList);
+            logger.info("quizAnswerRequest is " + quizAnswerRequest.toString());
 
-            return new ResponseEntity<>(quizList, HttpStatus.OK);
+            QuizAnswer quizAnswer = quizService.updateQuizAnswer(quizAnswerRequest);
+
+            return new ResponseEntity<>(quizAnswer, HttpStatus.OK);
         } catch (Exception e) {
-            logger.info("get QuizList error - " + e.getMessage(), e);
+            logger.info("send QuizAnswer error - " + e.getMessage(), e);
 
             return new ResponseEntity<>("FAIL", HttpStatus.BAD_REQUEST);
         }
