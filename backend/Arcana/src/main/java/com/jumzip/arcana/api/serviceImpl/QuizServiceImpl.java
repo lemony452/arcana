@@ -1,8 +1,11 @@
 package com.jumzip.arcana.api.serviceImpl;
 
+import com.jumzip.arcana.api.request.QuizAnswerRequest;
 import com.jumzip.arcana.api.service.QuizService;
 import com.jumzip.arcana.db.entity.Quiz;
+import com.jumzip.arcana.db.entity.QuizAnswer;
 import com.jumzip.arcana.db.entity.QuizList;
+import com.jumzip.arcana.db.repository.QuizAnswerRepository;
 import com.jumzip.arcana.db.repository.QuizListRepository;
 import com.jumzip.arcana.db.repository.QuizRepository;
 import java.util.ArrayList;
@@ -21,6 +24,8 @@ public class QuizServiceImpl implements QuizService {
     private final QuizRepository quizRepo;
 
     private final QuizListRepository quizListRepository;
+
+    private final QuizAnswerRepository quizAnswerRepository;
 
     @Override
     public Quiz getQuiz(int quizNum) {
@@ -85,6 +90,14 @@ public class QuizServiceImpl implements QuizService {
         quizListRepository.saveQuizList(quizList);
 
         return quizList;
+    }
+
+    @Override
+    public QuizAnswer updateQuizAnswer(QuizAnswerRequest quizAnswerRequest) {
+        int quizIdx = quizAnswerRequest.getQuizIdx();
+        int answerIdx = quizAnswerRequest.getAnswerIdx();
+
+        return quizAnswerRepository.updateQuizAnswer(quizIdx, answerIdx);
     }
 
 }
