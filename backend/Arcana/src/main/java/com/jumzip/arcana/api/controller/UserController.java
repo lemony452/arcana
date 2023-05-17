@@ -159,7 +159,7 @@ public class UserController {
 
             return new ResponseEntity<>(result, HttpStatus.OK);
         } catch (Exception e) {
-            logger.info("search User error - " + e.getMessage(), e);
+            logger.info("use CountAndTicket error - " + e.getMessage(), e);
 
             return new ResponseEntity<>("FAIL", HttpStatus.BAD_REQUEST);
         }
