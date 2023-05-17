@@ -1,6 +1,7 @@
 package com.jumzip.arcana.api.service;
 
 import com.jumzip.arcana.api.request.QuizAnswerRequest;
+import com.jumzip.arcana.api.response.QuizAnswerResponse;
 import com.jumzip.arcana.db.entity.Quiz;
 import com.jumzip.arcana.db.entity.QuizAnswer;
 import com.jumzip.arcana.db.entity.QuizList;
@@ -12,5 +13,6 @@ public interface QuizService {
     List<Quiz> getQuizList();
     QuizList resetQuizList(int quizNum);
     QuizAnswer updateQuizAnswer(QuizAnswerRequest quizAnswerRequest);
+    List<QuizAnswerResponse> viewQuizAnswer ();
 
 }

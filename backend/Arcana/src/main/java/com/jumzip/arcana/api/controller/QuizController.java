@@ -1,6 +1,7 @@
 package com.jumzip.arcana.api.controller;
 
 import com.jumzip.arcana.api.request.QuizAnswerRequest;
+import com.jumzip.arcana.api.response.QuizAnswerResponse;
 import com.jumzip.arcana.api.service.QuizService;
 import com.jumzip.arcana.db.entity.Message;
 import com.jumzip.arcana.db.entity.Quiz;
@@ -56,7 +57,7 @@ public class QuizController {
 
     @Operation(summary = "퀴즈 결과 전송", description = "quizIdx에 1 ~ 10 퀴즈 순서 번호를 "
         + " \n answerIdx에 유저가 선택한 정답을 1 ~ 4 숫자로 보내주세요")
-    @PostMapping()
+    @PostMapping("/answer")
     public ResponseEntity<?> sendQuizAnswer(@RequestBody QuizAnswerRequest quizAnswerRequest) {
         logger.info("start sendQuizAnswer");
 
@@ -68,6 +69,24 @@ public class QuizController {
             return new ResponseEntity<>(quizAnswer, HttpStatus.OK);
         } catch (Exception e) {
             logger.info("send QuizAnswer error - " + e.getMessage(), e);
+
+            return new ResponseEntity<>("FAIL", HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @Operation(summary = "퀴즈 결과 조회", description = "퀴즈 결과 전체를 조회하는 기능 "
+        + " \n 1 ~ 10번째 퀴즈의 결과를 퀴즈 순서 번호와 배열로 출력합니다 " 
+        + " \n 배열의 0 ~ 3번째 값은 각각 해당 퀴즈의 1 ~ 4번 답을 선택한 사람의 수 입니다")
+    @GetMapping("/answer")
+    public ResponseEntity<?> viewQuizAnswer() {
+        logger.info("start viewQuizAnswer");
+
+        try {
+            List<QuizAnswerResponse> quizAnswerResponseList = quizService.viewQuizAnswer();
+
+            return new ResponseEntity<>(quizAnswerResponseList, HttpStatus.OK);
+        } catch (Exception e) {
+            logger.info("view QuizAnswer error - " + e.getMessage(), e);
 
             return new ResponseEntity<>("FAIL", HttpStatus.BAD_REQUEST);
         }
