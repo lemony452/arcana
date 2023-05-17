@@ -36,6 +36,7 @@ public class SchedulerConfig {
     }
 
     // Cron (초, 분, 시, 일, 월, 요일)
+    // 매일 오전 0시 0분 0초에 quiz_list 테이블의 모든 quiz_idx 속성을 랜덤 값으로 초기화하는 기능
     @Async
     @Scheduled(cron = "0 0 0 * * *")
     public void resetQuiz() {
