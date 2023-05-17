@@ -9,14 +9,13 @@ import com.jumzip.arcana.db.entity.Report;
 import com.jumzip.arcana.db.entity.ReportQuestion;
 import com.jumzip.arcana.db.repository.ReportQuestionRepository;
 import com.jumzip.arcana.db.repository.ReportRepository;
+import java.util.ArrayList;
+import java.util.List;
+import javax.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-
-import javax.transaction.Transactional;
-import java.util.ArrayList;
-import java.util.List;
 
 @Service
 @Transactional
@@ -67,6 +66,11 @@ public class ReportServiceImpl implements ReportService {
     @Override
     public List<ReportResponse> viewReport(String uid) {
         List<Report> reportList = reportRepo.findAllByUidOrderByReportIdxDesc(uid);
+
+        if (reportList == null || reportList.size() == 0) {
+            return null;
+        }
+
         List<ReportResponse> reportResponseList = new ArrayList<>();
         Report report = reportList.get(0);
         ReportResponse reportResponse = makeReportResponse(reportList.get(0));
