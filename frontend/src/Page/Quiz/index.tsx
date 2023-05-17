@@ -16,7 +16,7 @@ export type AnswerObject = {
   correctAnswer: string;
 };
 
-const TOTAL_QUESTIONS = 1;
+const TOTAL_QUESTIONS = 10;
 
 function Quiz() {
   const [index, setIndex] = useState(0);
@@ -38,8 +38,8 @@ function Quiz() {
   const startQuiz = async () => {
     setLoading(true);
     setGameOver(false);
-    const newQuestions = await fetchQuizQuestions();
-    // setQuestions(newQuestions);
+    const newQuestions = await fetchQuizQuestions(TOTAL_QUESTIONS);
+    setQuestions(newQuestions);
     setScore(0);
     setUserAnswers([]);
     setNumber(0);
@@ -104,16 +104,16 @@ function Quiz() {
       // User's answer
       const answer = e.currentTarget.value;
       // Check answer against correct answer
-      const correct = questions[number].correct_answer === answer;
+      const correct = questions[number].answer === answer;
       // Add score if answer is correct
       if (correct) setScore((prev) => prev + 1);
       if (!correct) setFail(true);
       // Save the answer in the array for user answers
       const answerObject = {
-        question: questions[number].question,
+        question: questions[number].content,
         answer,
         correct,
-        correctAnswer: questions[number].correct_answer,
+        correctAnswer: questions[number].answer,
       };
       setUserAnswers((prev) => [...prev, answerObject]);
     }
@@ -168,7 +168,8 @@ function Quiz() {
               questionNr={number + 1}
               totalQuestions={TOTAL_QUESTIONS}
               timeCount={second}
-              question={questions[number].question}
+              cardIdx={questions[number].cardIdx}
+              question={questions[number].content}
               answers={questions[number].answers}
               userAnswer={userAnswers ? userAnswers[number] : undefined}
               callback={checkAnswer}
@@ -217,7 +218,8 @@ function Quiz() {
               questionNr={number + 1}
               totalQuestions={TOTAL_QUESTIONS}
               timeCount={second}
-              question={questions[number].question}
+              cardIdx={questions[number].cardIdx}
+              question={questions[number].content}
               answers={questions[number].answers}
               userAnswer={userAnswers ? userAnswers[number] : undefined}
               callback={checkAnswer}
