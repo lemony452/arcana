@@ -71,6 +71,7 @@ function EditUserInfo() {
     setIsLogin(false);
     setIsSide(false);
     console.log('로그아웃');
+    navigate('/');
   };
 
   return (
