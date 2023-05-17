@@ -67,7 +67,7 @@ export function KakaoRedirect() {
           console.log(res);
           setWeekly(res.data.weekly_count);
           setTicket(res.data.ticket);
-          setNickname(res.data.nickname);
+          // setNickname(res.data.nickname);
         })
         .catch((err) => {
           console.log(err);
