@@ -12,7 +12,7 @@ import { API } from '../../API';
 
 export function GoogleLogin() {
   // 구글 인가 코드 요청
-  const { setUser, setIsLogin, setNickname, user, setWeekly, setTicket } = userInfoStore();
+  const { setUser, setIsLogin, setNickname, user, setWeekly, setTicket, setGoLogin } = userInfoStore();
   let isUser = false;
   let userData: any;
   const login = async () => {
@@ -54,6 +54,7 @@ export function GoogleLogin() {
       }
     };
 
+    setGoLogin(false);
     await RegisterUser();
 
     await API.get(`/api/v1/user/info`, {

@@ -1,11 +1,16 @@
 .App {
   /* text-align: center; */
-  /* font-family: Poppins; */
+  font-family: Poppins;
 }
 
 @font-face {
   font-family: 'DaysOne';
   src: url('./Assets/font/Days_One/DaysOne-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'Poppins';
+  src: url('./Assets/font/Poppins//Poppins-Regular.ttf');
 }
 
 .App-logo {

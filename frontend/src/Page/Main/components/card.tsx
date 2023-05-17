@@ -12,9 +12,9 @@ import { useCardStore, useHoverStore } from '../../../Store/Main/main';
 import { StyledCard, StyledCircle, NextBtn, PrevBtn } from '../main_style';
 import Character from './character';
 import NextBtnImg from '../../../Assets/etc/nextButton.png';
-import celticImg from '../../../Assets/etc/celtic.png';
-import timeImg from '../../../Assets/etc/time.png';
-import instantImg from '../../../Assets/etc/instant.png';
+import MainCeltic from '../../../Assets/etc/MainCeltic.png';
+import MainTime from '../../../Assets/etc/MainTime.png';
+import MainInstant from '../../../Assets/etc/MainInstant.png';
 import { useFortuneStore } from '../../../Store/User/fortune';
 import { userInfoStore } from '../../../Store/User/info';
 
@@ -37,10 +37,9 @@ function Card({ isOpen }: { isOpen: boolean }) {
   const { hover, setHover } = useHoverStore();
 
   const Hovering = () => {
-    if (!isOpen) {
+    if (!hover) {
       setHover(true);
-    }
-    if (hover) {
+    } else {
       setHover(false);
     }
   };
@@ -77,6 +76,7 @@ function Card({ isOpen }: { isOpen: boolean }) {
       setSpread('celtic');
       // 메인 페이지로 이동 했을때 값을 초기화해줌
       setCardOrder('celtic');
+      setHover(false);
       // setHover(hover);
       navigate('/celtic');
       if (isLogin) {
@@ -90,9 +90,12 @@ function Card({ isOpen }: { isOpen: boolean }) {
       setSpread('time');
       // 메인 페이지로 이동 했을때 값을 초기화해줌
       setCardOrder('time');
+      setHover(false);
       // setHover(hover);
       navigate('/time');
       if (isLogin) {
+        setCardOrder('celtic');
+        navigate('/time');
         setWeekly(weeklyCount - 1);
       }
     }
@@ -102,8 +105,8 @@ function Card({ isOpen }: { isOpen: boolean }) {
     if (!isOpen) {
       setSpread('instant');
       // 메인 페이지로 이동 했을때 값을 초기화해줌
-      setCardOrder('instant');
-      // setHover(hover);
+      setCardOrder('celtic');
+      setHover(false);
       navigate('/instant');
     }
   };
@@ -137,13 +140,13 @@ function Card({ isOpen }: { isOpen: boolean }) {
         Slide Prev
       </button> */}
       <SwiperSlide>
-        <StyledCard onClick={MoveCeltic} onMouseEnter={Hovering} onMouseLeave={Hovering} src={celticImg} />
+        <StyledCard onClick={MoveCeltic} onMouseEnter={Hovering} onMouseLeave={Hovering} src={MainCeltic} />
       </SwiperSlide>
       <SwiperSlide>
-        <StyledCard onClick={MoveTime} onMouseEnter={Hovering} onMouseLeave={Hovering} src={timeImg} />
+        <StyledCard onClick={MoveTime} onMouseEnter={Hovering} onMouseLeave={Hovering} src={MainTime} />
       </SwiperSlide>
       <SwiperSlide>
-        <StyledCard onClick={MoveInstant} onMouseEnter={Hovering} onMouseLeave={Hovering} src={instantImg} />
+        <StyledCard onClick={MoveInstant} onMouseEnter={Hovering} onMouseLeave={Hovering} src={MainInstant} />
       </SwiperSlide>
     </Swiper>
   );
