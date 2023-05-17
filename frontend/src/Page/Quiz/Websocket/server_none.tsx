@@ -4,7 +4,7 @@ import { Stomp } from '@stomp/stompjs';
 import { userInfoStore } from '../../../Store/User/info';
 
 function Socket() {
-  const sock = new SockJS(`https://k8d107.p.ssafy.io/ws/websocket`);
+  const sock = new SockJS(`https://k8d107.p.ssafy.io/ws`);
   const stomp = Stomp.over(sock);
 
   stomp.onConnect = function (frame) {
