@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { NpcBox, NpcCharacter } from './common_styled';
-import Gom from '../Assets/characters/charDialog0.png';
-import Tou from '../Assets/characters/charDialog1.png';
-import Yong from '../Assets/characters/charDialog2.png';
+import Draco from '../Assets/characters/draco.png';
+import Toast from '../Assets/characters/toast.png';
+import Kitty from '../Assets/characters/kitty.png';
 
 interface NpcType {
   num: number;
@@ -13,11 +13,11 @@ function Npc({ num }: NpcType) {
 
   useEffect(() => {
     if (num === 0) {
-      setCharacter(<img src={Gom} alt="" />);
+      setCharacter(<img src={Draco} alt="" />);
     } else if (num === 1) {
-      setCharacter(<img src={Tou} alt="" />);
+      setCharacter(<img src={Toast} alt="" />);
     } else {
-      setCharacter(<img src={Yong} alt="" />);
+      setCharacter(<img src={Kitty} alt="" />);
     }
   }, []);
 

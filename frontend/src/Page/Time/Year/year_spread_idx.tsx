@@ -5,7 +5,7 @@ import Year from './year_spread';
 import YearStart from './year_spread_animation';
 import * as common from '../../Common/common_style';
 import Dialog from '../../../Common/dialog';
-import charDialog1 from '../../../Assets/characters/charDialog1.png';
+import charDialog1 from '../../../Assets/characters/toast.png';
 import { DialogNPC, OptionBtn } from '../../../Common/common_styled';
 import { YearDetails } from '../../../Common/conversations';
 import { useLuckyStore } from '../../../Store/User/lucky';
@@ -230,7 +230,7 @@ function YearSpread() {
         <common.CardArea>
           <common.SideBlock />
           <common.CardBox>
-            <common.DefaultCard>13</common.DefaultCard>
+            <Year />
           </common.CardBox>
           <common.SideBlock>
             <common.SpreadModal onClick={showModal}>
@@ -238,7 +238,6 @@ function YearSpread() {
               {modalOpen ? (
                 <common.ModalBackdrop onClick={showModal}>
                   <common.ModalView onClick={(e) => e.stopPropagation()}>
-                    <Year />
                     <OptionBtn onClick={showModal}>닫기</OptionBtn>
                   </common.ModalView>
                 </common.ModalBackdrop>
