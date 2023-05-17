@@ -65,12 +65,12 @@ public class TarotController {
 
     @Operation(summary = "Lucky", description = "메이저 카드 중 한장을 뽑고, 카드 정보를 반환한다.")
     @GetMapping("lucky")
-    public LuckyCard GetLucky() {
+    public ResponseEntity<?> GetLucky() {
         logger.info("start GET LuckyCard");
 
         try {
             LuckyCard lucky = tarotService.getLuckyData();
-            return new ResponseEntity<>(lucky, HttpStatus.OK).getBody();
+            return new ResponseEntity<>(lucky, HttpStatus.OK);
         }
 
         catch (Exception e) {
