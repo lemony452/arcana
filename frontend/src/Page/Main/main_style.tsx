@@ -35,9 +35,16 @@ export const Title = styled.div`
   font-family: DaysOne;
   font-weight: bolder;
   color: white;
+  text-shadow: -5px 0 #3b3b3b, 0 5px #3b3b3b, 5px 0 #3b3b3b, 0 -5px #3b3b3b;
   /* text-shadow: -5px 0px black, 0px 5px black, 5px 0px black, 0px -5px black; */
-  -webkit-text-stroke: 3px black;
-  letter-spacing: -0.07em;
+  /* -webkit-text-stroke: 3px black; */
+  /* letter-spacing: -0.07em; */
+`;
+
+export const TitleImg = styled.div`
+  > img {
+    width: 38vw;
+  }
 `;
 
 const blink = keyframes`
@@ -50,8 +57,8 @@ export const SubTitle = styled.div`
   font-size: 1.8vw;
   font-weight: bolder;
   color: black;
+  letter-spacing: 0.1em;
   /* animation: ${blink} 3s infinite; */
-  margin-top: -1em;
 `;
 
 export const StyledCircle = styled(motion.div)`

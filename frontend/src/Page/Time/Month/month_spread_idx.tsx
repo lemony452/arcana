@@ -183,9 +183,7 @@ function MonthSpread() {
         <common.CardArea>
           <common.SideBlock />
           <common.CardBox>
-            <common.DefaultCard>
-              <img src={imgSrc(7)} alt="CardFront" />
-            </common.DefaultCard>
+            <Month spreadList={indexList} />
           </common.CardBox>
           <common.SideBlock>
             <common.SpreadModal onClick={showModal}>

@@ -230,7 +230,7 @@ function YearSpread() {
         <common.CardArea>
           <common.SideBlock />
           <common.CardBox>
-            <common.DefaultCard>13</common.DefaultCard>
+            <Year />
           </common.CardBox>
           <common.SideBlock>
             <common.SpreadModal onClick={showModal}>
@@ -238,7 +238,6 @@ function YearSpread() {
               {modalOpen ? (
                 <common.ModalBackdrop onClick={showModal}>
                   <common.ModalView onClick={(e) => e.stopPropagation()}>
-                    <Year />
                     <OptionBtn onClick={showModal}>닫기</OptionBtn>
                   </common.ModalView>
                 </common.ModalBackdrop>

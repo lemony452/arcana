@@ -15,20 +15,20 @@ function Dialog({ children, content, next }: CaseProps) {
   let charName;
   if (spread === 'celtic') {
     color = '#cba1ff';
-    charName = '농담곰';
+    charName = '드라코';
   } else if (spread === 'time') {
     color = '#ff945e';
-    charName = '토롱이';
+    charName = '토스트';
   } else {
     color = '#ff74b6';
-    charName = '용한용';
+    charName = '슈뢰딩거';
   }
 
   return (
     <DialogBox>
       <DialogName color={color}>{charName}</DialogName>
       <DialogContent color={color}>
-        <DialogContentStyle>
+        <DialogContentStyle color={color}>
           <Typewriter
             options={{
               strings: content, // 타이핑 효과를 줄 컨텐츠

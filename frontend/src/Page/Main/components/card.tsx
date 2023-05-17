@@ -78,8 +78,8 @@ function Card({ isOpen }: { isOpen: boolean }) {
       // 메인 페이지로 이동 했을때 값을 초기화해줌
       setCardOrder('celtic');
       // setHover(hover);
+      navigate('/celtic');
       if (isLogin) {
-        navigate('/celtic');
         setWeekly(weeklyCount - 1);
       }
     }
@@ -91,8 +91,8 @@ function Card({ isOpen }: { isOpen: boolean }) {
       // 메인 페이지로 이동 했을때 값을 초기화해줌
       setCardOrder('time');
       // setHover(hover);
+      navigate('/time');
       if (isLogin) {
-        navigate('/time');
         setWeekly(weeklyCount - 1);
       }
     }
