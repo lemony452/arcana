@@ -30,6 +30,7 @@ import MonthSpread from '../../Time/Month/month_spread';
 import CelticSpread from '../../Celtic/celtic_spread';
 import * as common from '../../Common/common_style';
 import { OptionBtn } from '../../../Common/common_styled';
+import LuckyCard from './lucky_card';
 
 function TarotListDetail() {
   const navigate = useNavigate();
@@ -184,7 +185,7 @@ function TarotListDetail() {
         {luckyModalOpen ? (
           <common.ModalBackdrop onClick={showLuckyCard}>
             <common.ModalView className="replay" onClick={(e) => e.stopPropagation()}>
-              <img src={`https://k8d107.p.ssafy.io/api/v1/images/${luckycardIdx}.png`} alt="" />
+              <LuckyCard npc={replay} cardIdx={cardRes[0].cardIdx} cardMent={cardRes[0].ment} />
               <OptionBtn onClick={showLuckyCard}>닫기</OptionBtn>
             </common.ModalView>
           </common.ModalBackdrop>
