@@ -76,7 +76,7 @@ function Card({ isOpen }: { isOpen: boolean }) {
       setSpread('celtic');
       // 메인 페이지로 이동 했을때 값을 초기화해줌
       setCardOrder('celtic');
-      // setHover(hover);
+      setHover(false);
       if (isLogin) {
         navigate('/celtic');
         setWeekly(weeklyCount - 1);
@@ -89,8 +89,9 @@ function Card({ isOpen }: { isOpen: boolean }) {
       setSpread('time');
       // 메인 페이지로 이동 했을때 값을 초기화해줌
       setCardOrder('time');
-      // setHover(hover);
+      setHover(false);
       if (isLogin) {
+        setCardOrder('celtic');
         navigate('/time');
         setWeekly(weeklyCount - 1);
       }
@@ -101,8 +102,8 @@ function Card({ isOpen }: { isOpen: boolean }) {
     if (!isOpen) {
       setSpread('instant');
       // 메인 페이지로 이동 했을때 값을 초기화해줌
-      setCardOrder('instant');
-      // setHover(hover);
+      setCardOrder('celtic');
+      setHover(false);
       navigate('/instant');
     }
   };
