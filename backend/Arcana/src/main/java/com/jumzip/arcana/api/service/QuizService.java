@@ -11,7 +11,7 @@ public interface QuizService {
 
     Quiz getQuiz(int quizNum);
     List<Quiz> getQuizList();
-    QuizList resetQuizList(int quizNum);
+    List<QuizList> resetQuizList(int quizNum);
     QuizResult updateQuizResult(QuizResultRequest quizResultRequest);
     List<QuizResultResponse> viewQuizResult();
     List<QuizResult> resetQuizResult();

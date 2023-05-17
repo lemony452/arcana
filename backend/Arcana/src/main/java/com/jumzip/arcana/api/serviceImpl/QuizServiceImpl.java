@@ -35,25 +35,18 @@ public class QuizServiceImpl implements QuizService {
 
     @Override
     public List<Quiz> getQuizList() {
-        QuizList quizList = quizListRepository.findTopQuizListOrderByQuizListIdxDesc();
         List<Quiz> quizzes = new ArrayList<>();
+        List<QuizList> quizLists = quizListRepository.findAllQuizList();
 
-        quizzes.add(quizRepo.findQuizById(quizList.getQuiz0Idx()));
-        quizzes.add(quizRepo.findQuizById(quizList.getQuiz1Idx()));
-        quizzes.add(quizRepo.findQuizById(quizList.getQuiz2Idx()));
-        quizzes.add(quizRepo.findQuizById(quizList.getQuiz3Idx()));
-        quizzes.add(quizRepo.findQuizById(quizList.getQuiz4Idx()));
-        quizzes.add(quizRepo.findQuizById(quizList.getQuiz5Idx()));
-        quizzes.add(quizRepo.findQuizById(quizList.getQuiz6Idx()));
-        quizzes.add(quizRepo.findQuizById(quizList.getQuiz7Idx()));
-        quizzes.add(quizRepo.findQuizById(quizList.getQuiz8Idx()));
-        quizzes.add(quizRepo.findQuizById(quizList.getQuiz9Idx()));
+        for (QuizList quizList: quizLists) {
+            quizzes.add(quizRepo.findQuizById(quizList.getQuizIdx()));
+        }
 
         return quizzes;
     }
 
     @Override
-    public QuizList resetQuizList(int quizNum) {
+    public List<QuizList> resetQuizList(int quizNum) {
         logger.info("start resetQuizList");
 
         int allQuizNum = quizRepo.findQuizNum().size();
@@ -76,21 +69,7 @@ public class QuizServiceImpl implements QuizService {
             idxList[i] = newIdx;
         }
 
-        QuizList quizList = new QuizList();
-        quizList.setQuiz0Idx(idxList[0]);
-        quizList.setQuiz1Idx(idxList[1]);
-        quizList.setQuiz2Idx(idxList[2]);
-        quizList.setQuiz3Idx(idxList[3]);
-        quizList.setQuiz4Idx(idxList[4]);
-        quizList.setQuiz5Idx(idxList[5]);
-        quizList.setQuiz6Idx(idxList[6]);
-        quizList.setQuiz7Idx(idxList[7]);
-        quizList.setQuiz8Idx(idxList[8]);
-        quizList.setQuiz9Idx(idxList[9]);
-
-        quizListRepository.saveQuizList(quizList);
-
-        return quizList;
+        return quizListRepository.saveQuizList(idxList);
     }
 
     @Override
