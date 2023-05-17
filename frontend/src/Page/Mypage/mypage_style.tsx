@@ -240,6 +240,18 @@ export const DetailFortune = styled.div`
   height: 70%;
   color: #3a3a3a;
   padding: 2em 2em 2em 2.5em;
+  overflow-y: auto;
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+  ::-webkit-scrollbar-thumb {
+    height: 30%; /* 스크롤바의 길이 */
+    background: rgb(172, 172, 172); /* 스크롤바의 색상 */
+    border-radius: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: white; /*스크롤바 뒷 배경 색상*/
+  }
   /* border-radius: 0.5em; */
 `;
 
