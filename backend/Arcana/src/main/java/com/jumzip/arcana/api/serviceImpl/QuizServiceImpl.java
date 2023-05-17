@@ -5,6 +5,8 @@ import com.jumzip.arcana.db.entity.Quiz;
 import com.jumzip.arcana.db.entity.QuizList;
 import com.jumzip.arcana.db.repository.QuizListRepository;
 import com.jumzip.arcana.db.repository.QuizRepository;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -26,8 +28,22 @@ public class QuizServiceImpl implements QuizService {
     }
 
     @Override
-    public QuizList getQuizList() {
-        return quizListRepository.findTopQuizListOrderByQuizListIdxDesc();
+    public List<Quiz> getQuizList() {
+        QuizList quizList = quizListRepository.findTopQuizListOrderByQuizListIdxDesc();
+        List<Quiz> quizzes = new ArrayList<>();
+
+        quizzes.add(quizRepo.findQuizById(quizList.getQuiz0Idx()));
+        quizzes.add(quizRepo.findQuizById(quizList.getQuiz1Idx()));
+        quizzes.add(quizRepo.findQuizById(quizList.getQuiz2Idx()));
+        quizzes.add(quizRepo.findQuizById(quizList.getQuiz3Idx()));
+        quizzes.add(quizRepo.findQuizById(quizList.getQuiz4Idx()));
+        quizzes.add(quizRepo.findQuizById(quizList.getQuiz5Idx()));
+        quizzes.add(quizRepo.findQuizById(quizList.getQuiz6Idx()));
+        quizzes.add(quizRepo.findQuizById(quizList.getQuiz7Idx()));
+        quizzes.add(quizRepo.findQuizById(quizList.getQuiz8Idx()));
+        quizzes.add(quizRepo.findQuizById(quizList.getQuiz9Idx()));
+
+        return quizzes;
     }
 
     @Override
