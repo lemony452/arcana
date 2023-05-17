@@ -1,6 +1,7 @@
 package com.jumzip.arcana.db.repository;
 
 import com.jumzip.arcana.db.entity.QuizAnswer;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
@@ -27,9 +28,9 @@ public class QuizAnswerRepositorySupport implements QuizAnswerRepository {
         return quizAnswer;
     }
 
-//    @Override
-//    public List<QuizAnswer> findAllQuizAnswer() {
-//        return em.createQuery("select q from QuizAnswer q", QuizAnswer.class).getResultList();
-//    }
+    @Override
+    public List<QuizAnswer> findAllQuizAnswer() {
+        return em.createQuery("select q from QuizAnswer q", QuizAnswer.class).getResultList();
+    }
 
 }

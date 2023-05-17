@@ -1,6 +1,7 @@
 package com.jumzip.arcana.api.serviceImpl;
 
 import com.jumzip.arcana.api.request.QuizAnswerRequest;
+import com.jumzip.arcana.api.response.QuizAnswerResponse;
 import com.jumzip.arcana.api.service.QuizService;
 import com.jumzip.arcana.db.entity.Quiz;
 import com.jumzip.arcana.db.entity.QuizAnswer;
@@ -98,6 +99,33 @@ public class QuizServiceImpl implements QuizService {
         int answerIdx = quizAnswerRequest.getAnswerIdx();
 
         return quizAnswerRepository.updateQuizAnswer(quizIdx, answerIdx);
+    }
+
+    @Override
+    public List<QuizAnswerResponse> viewQuizAnswer() {
+        List<QuizAnswer> quizAnswerList = quizAnswerRepository.findAllQuizAnswer();
+        List<QuizAnswerResponse> quizAnswerResponsesList = new ArrayList<>();
+        QuizAnswerResponse quizAnswerResponse = new QuizAnswerResponse();
+        List<Integer> answerList = new ArrayList<>();
+
+        for (int i = 1; i <= quizAnswerList.size(); i++) {
+            if (i % 4 == 1) {
+                quizAnswerResponse = new QuizAnswerResponse();
+                answerList = new ArrayList<>();
+
+                quizAnswerResponse.setQuizIdx(i / 4 + 1);
+                answerList.add(quizAnswerList.get(i -1).getSelector());
+            } else if (i % 4 == 0) {
+                answerList.add(quizAnswerList.get(i -1).getSelector());
+                quizAnswerResponse.setAnswerList(answerList);
+                quizAnswerResponsesList.add(quizAnswerResponse);
+            } else {
+                answerList.add(quizAnswerList.get(i - 1).getSelector());
+            }
+            
+        }
+        
+        return quizAnswerResponsesList;
     }
 
 }
