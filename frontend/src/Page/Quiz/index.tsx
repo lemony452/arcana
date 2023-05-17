@@ -44,7 +44,8 @@ function Quiz() {
     setUserAnswers([]);
     setNumber(0);
     setLoading(false);
-    setTimeLeft(MINUTES_IN_MS + 10 * 1000);
+    // 아래에 있는 걸로 퀴즈 시간 조절
+    setTimeLeft(MINUTES_IN_MS + 600 * 1000);
     setIndex(index + 1);
   };
 
@@ -123,7 +124,7 @@ function Quiz() {
 
   // 다음 문제로
   const nextQuestion = () => {
-    return [setNumber(number + 1), setTimeLeft(MINUTES_IN_MS + 10 * 1000)];
+    return [setNumber(number + 1), setTimeLeft(MINUTES_IN_MS + 600 * 1000)];
   };
   console.log('question', number + 1);
   console.log(second);
