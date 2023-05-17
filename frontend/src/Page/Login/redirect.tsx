@@ -38,10 +38,11 @@ export function KakaoRedirect() {
   const URLcode = location.search.split('=')[1];
   console.log(URLcode);
   const navigate = useNavigate();
-  const { setUser, setNickname, setTicket, setWeekly, setIsLogin, user } = userInfoStore();
+  const { setUser, setNickname, setTicket, setWeekly, setIsLogin, user, setProfileChar } = userInfoStore();
   let userData: any;
   useEffect(() => {
     const login = async () => {
+      const num = Math.floor(Math.random() * 3); // 0, 1, 2 난수
       console.log('카카오 로그인 중');
       // await window.open(KAKAO_URI);
       // const URLcode = new URL(document.location).searchParams.get('code');
@@ -58,6 +59,7 @@ export function KakaoRedirect() {
         setNickname(userData.nickname);
         navigate('/');
         setIsLogin(true);
+        setProfileChar(num);
       });
 
       await API.get(`/api/v1/user/info`, {
