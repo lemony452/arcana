@@ -4,7 +4,7 @@ import java.util.List;
 import lombok.Data;
 
 @Data
-public class QuizAnswerResponse {
+public class QuizResultResponse {
     private int quizIdx;
     private List<Integer> answerList;
 }
