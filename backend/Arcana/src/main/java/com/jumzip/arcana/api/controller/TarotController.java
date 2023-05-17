@@ -33,43 +33,50 @@ public class TarotController {
     //ResEntity로 변경, try/catch 적용
     @Operation(summary = "instant ALL", description = "인스턴트 스프레드로 읽을 카드를 선택하고, 카드 정보를 반환한다.")
     @GetMapping("instant/{cardNum}")
-    public List<InstantCard> GetInstant(@PathVariable int cardNum) {
-        List<InstantCard> cardlist = tarotService.getInstantList(cardNum);
+    public ResponseEntity<?> GetInstant(@PathVariable int cardNum) {
+        logger.info("start GET InstantCard List");
 
-        return cardlist;
+        try {
+            List<InstantCard> cardlist = tarotService.getInstantList(cardNum);
+            return new ResponseEntity<>(cardlist, HttpStatus.OK);
+        }
+
+        catch (Exception e) {
+            logger.info("Instant GET ERROR : " + e.getMessage(), e);
+            return new ResponseEntity<>("FAIL", HttpStatus.BAD_REQUEST);
+        }
     }
-
-//    @Operation(summary = "instant TEST")
-//    @GetMapping("instantone")
-//    public InstantCard GetInstantOne(@RequestParam int card_idx) {
-//        InstantCard ic = tarotService.getInstantData(card_idx);
-//
-//        return ic;
-//    }
 
     @Operation(summary = "Time ALL", description = "기간운 스프레드로 읽을 카드를 선택하고, 카드 정보를 반환한다.")
     @GetMapping("time/{cardNum}")
-    public List<TimeCard> GetTime(@PathVariable int cardNum) {
-        List<TimeCard> cardlist = tarotService.getTimeList(cardNum);
+    public ResponseEntity<?> GetTime(@PathVariable int cardNum) {
+        logger.info("start GET TimeCard List");
 
-        return cardlist;
+        try {
+            List<TimeCard> cardlist = tarotService.getTimeList(cardNum);
+            return new ResponseEntity<>(cardlist, HttpStatus.OK);
+        }
+
+        catch (Exception e) {
+            logger.info("Time GET ERROR : " + e.getMessage(), e);
+            return new ResponseEntity<>("FAIL", HttpStatus.BAD_REQUEST);
+        }
     }
-
-//    @Operation(summary = "Time TEST")
-//    @GetMapping("timeone")
-//    public TimeCard GetTimeOne(@RequestParam int card_idx) {
-//        TimeCard tc = tarotService.getTimeData(card_idx);
-//
-//        return tc;
-//    }
-
 
     @Operation(summary = "Lucky", description = "메이저 카드 중 한장을 뽑고, 카드 정보를 반환한다.")
     @GetMapping("lucky")
     public LuckyCard GetLucky() {
-        LuckyCard lucky = tarotService.getLuckyData();
+        logger.info("start GET LuckyCard");
 
-        return lucky;
+        try {
+            LuckyCard lucky = tarotService.getLuckyData();
+            return new ResponseEntity<>(lucky, HttpStatus.OK).getBody();
+        }
+
+        catch (Exception e) {
+            logger.info("Lucky GET ERROR : " + e.getMessage(), e);
+            return new ResponseEntity<>("FAIL", HttpStatus.BAD_REQUEST);
+        }
     }
 
     @Operation(summary = "Log Save", description = "운세 기록을 저장 " 
