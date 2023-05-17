@@ -2,7 +2,7 @@
 
 import React, { useContext, useState } from 'react';
 import { WebSocketContext } from './web_socket_provider';
-import { userInfoStore } from '../../../Store/User/info';
+import { userInfoStore } from '../../../../Store/User/info';
 
 function Chatting() {
   const ws = useContext(WebSocketContext);

@@ -49,7 +49,6 @@ function Quiz() {
     setIndex(index + 1);
   };
 
-  // 날짜를 내 맘대로 바꿔놓고 확인해보기
   useEffect(() => {
     const serverTime = async () => {
       // console.log('서버시간은 밀리초가 있는 유닉스');

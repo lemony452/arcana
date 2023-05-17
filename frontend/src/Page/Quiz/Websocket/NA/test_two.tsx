@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import SockJS from 'sockjs-client';
 // import Stomp from 'stompjs';
-import { userInfoStore } from '../../../Store/User/info';
+import { userInfoStore } from '../../../../Store/User/info';
 
 // class App extends React.Component {
 //   ws: any;
