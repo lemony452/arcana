@@ -7,7 +7,7 @@ import ThreeNum from './three_spread_num';
 import * as common from '../../Common/common_style';
 import { DialogNPC, OptionBtn } from '../../../Common/common_styled';
 import Dialog from '../../../Common/dialog';
-import charDialog2 from '../../../Assets/characters/charDialog2.png';
+import charDialog2 from '../../../Assets/characters/kitty.png';
 import { InstantDetails } from '../../../Common/conversations';
 import { saveIndexStore, useFortuneStore } from '../../../Store/User/fortune';
 

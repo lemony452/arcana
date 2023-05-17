@@ -1,6 +1,9 @@
 import React from 'react';
 import * as luckResult from './lucky_karma_result_style';
-import Gom from '../../../Assets/characters/charDialog0.png';
+import Draco from '../../../Assets/characters/draco.png';
+import Toast from '../../../Assets/characters/toast.png';
+import Back1 from '../../../Assets/etc/luckybackground1.svg';
+import Back2 from '../../../Assets/etc/luckybackground2.svg';
 
 interface LuckyKarmaResultType {
   selectCard: number;
@@ -13,9 +16,14 @@ interface LuckyKarmaResultType {
     contentTime: string;
     result: string;
   }[];
+  npc: number;
 }
 
-function LuckyKarmaResult({ selectCard, cardList }: LuckyKarmaResultType) {
+function LuckyKarmaResult({ selectCard, cardList, npc }: LuckyKarmaResultType) {
+  const srcImg = npc === 0 ? Draco : Toast;
+  const srcBack = npc === 0 ? Back1 : Back2;
+  const color = npc === 0 ? '#cba1ff' : '#ff945e';
+
   return (
     <luckResult.Body>
       <luckResult.CardBody id="capture">
@@ -27,7 +35,13 @@ function LuckyKarmaResult({ selectCard, cardList }: LuckyKarmaResultType) {
           src={cardList[selectCard].front}
           alt="CardF"
         />
-        <luckResult.Card initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5, duration: 0.3 }}>
+        <luckResult.Card
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.5, duration: 0.3 }}
+          back={srcBack}
+          color={color}
+        >
           <div>
             {/* <luckResult.CardTitle
             initial={{ opacity: 0, y: -10 }}
@@ -48,10 +62,10 @@ function LuckyKarmaResult({ selectCard, cardList }: LuckyKarmaResultType) {
               animate={{ opacity: 1, y: [10, 0] }}
               transition={{ delay: 1.5, duration: 0.5 }}
             >
-              <luckResult.MarkImg src={Gom} alt="Main" />
+              <luckResult.MarkImg src={srcImg} alt="Main" />
               <luckResult.MarkContent>
                 <luckResult.MarkContentTitle>ARCANA</luckResult.MarkContentTitle>
-                <luckResult.MarkContentSubTitle>동물 친구들의 타로 서비스 아르카나</luckResult.MarkContentSubTitle>
+                <luckResult.MarkContentSubTitle>당신의 마음을 듣고 읽어주는 타로 프렌즈</luckResult.MarkContentSubTitle>
               </luckResult.MarkContent>
             </luckResult.MarkBox>
           </div>
