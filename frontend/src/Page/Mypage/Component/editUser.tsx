@@ -98,7 +98,7 @@ function EditUserInfo() {
           <div>내 정보</div>
           <div className="sub">MY PAGE</div>
         </DetailTitle>
-        <DetailFortune>
+        <DetailFortune className="edit">
           <EditUser>
             <EditUserTitle>프로필</EditUserTitle>
             <EditUserContent>
