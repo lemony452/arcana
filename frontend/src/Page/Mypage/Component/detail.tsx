@@ -6,7 +6,6 @@ import {
   TarotToken,
   TarotListContent,
   TitleBox,
-  DetailCover,
   DetailTitle,
   DetailDate,
   DetailQuestion,
@@ -15,16 +14,17 @@ import {
   ReplayTarots,
   MoveBtn,
   MoveBtnImg,
-  ListContent,
   ListIcon,
+  DetailBox,
 } from '../mypage_style';
 // import TarotList from './TarotList';
 import { userInfoStore } from '../../../Store/User/info';
 import cardIcon from '../../../Assets/etc/cardIcon.png';
 import homeBtnImg from '../../../Assets/etc/homBtn.png';
-import LoveCoverImg from '../../../Assets/etc/cover1.png';
 import Tarots from '../../../Assets/etc/tarots.png';
 import Lucky from '../../../Assets/etc/lucky.png';
+import ReplayTarotBtn from '../../../Assets/etc/replayTarotBtn.png';
+import ReplayLuckyBtn from '../../../Assets/etc/replayLuckyBtn.png';
 import Pagination from './pagination';
 import MonthSpread from '../../Time/Month/month_spread';
 import CelticSpread from '../../Celtic/celtic_spread';
@@ -41,6 +41,7 @@ function TarotListDetail() {
   const reverseTemp = tarotLog.reverse();
 
   const handleChange = (event: any) => {
+    // event.preventDefault();
     console.log(event.target.value);
     if (event.target.value === '과거순') {
       setTemp(reverseTemp);
@@ -48,6 +49,12 @@ function TarotListDetail() {
       setTemp(tarotLog);
     }
   };
+
+  // useEffect(() => {
+  //   console.log('옵션변경');
+  //   console.log(temp);
+  // }, [temp, setTemp]);
+
   const [replay, setReplay] = useState('');
   const [detailQuestion, setQuestion] = useState(temp[0].question);
   const [detailOption, setOption] = useState(temp[0].options);
@@ -115,7 +122,7 @@ function TarotListDetail() {
   return (
     <div style={{ position: 'relative' }}>
       <Side className="open detail">
-        <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+        <div style={{ position: 'absolute', left: 'calc(25vw - 4.5em)' }}>
           <MoveBtn type="button" onClick={MoveMain}>
             <MoveBtnImg className="home" src={homeBtnImg} alt="" />
           </MoveBtn>
@@ -127,7 +134,7 @@ function TarotListDetail() {
             <ListIcon src={cardIcon} alt="" />
             <div>타로 운세 기록</div>
           </TarotToken>
-          <select onChange={handleChange}>
+          <select onChange={() => handleChange}>
             <option>최신순</option>
             <option>과거순</option>
           </select>
@@ -136,20 +143,28 @@ function TarotListDetail() {
         </TarotListContent>
       </Side>
       <DetailContent>
-        <DetailCover src={LoveCoverImg} />
         <DetailTitle>
-          {nickname}의 {detailOption}
+          <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'flex-end' }}>
+            {detailOption}
+            <DetailDate>{detailDate}</DetailDate>
+          </div>
+          <div>
+            <MoveBtn className="replay" type="button" onClick={showModal}>
+              <MoveBtnImg className="replay" src={ReplayTarotBtn} alt="" />
+            </MoveBtn>
+            <MoveBtn className="replay" type="button" onClick={showLuckyCard}>
+              <MoveBtnImg className="replay" src={ReplayLuckyBtn} alt="" />
+            </MoveBtn>
+          </div>
         </DetailTitle>
-        <DetailDate>{detailDate}</DetailDate>
-        <DetailQuestion>{detailQuestion ? `❝ ${detailQuestion} ❞` : null}</DetailQuestion>
-        <DetailFortune>
-          {cardRes.map((value: any, idx: number) => (
-            <>
-              <div>{value.ment}</div>
-              <br />
-            </>
-          ))}
-        </DetailFortune>
+        <DetailBox>
+          <DetailQuestion>{detailQuestion ? `▶ ${detailQuestion}` : null}</DetailQuestion>
+          <DetailFortune>
+            {cardRes.map((value: any, idx: number) => (
+              <div style={{ marginBottom: '0.3em' }}>{value.ment}</div>
+            ))}
+          </DetailFortune>
+        </DetailBox>
         {/* {replay === 'time' ? <MonthSpread spreadList={cardlistIdx!} /> : null} */}
         {replay === 'time' && modalOpen ? (
           <common.ModalBackdrop onClick={showModal}>
@@ -175,18 +190,6 @@ function TarotListDetail() {
             </common.ModalView>
           </common.ModalBackdrop>
         ) : null}
-        <ReplayTarots>
-          <img src={Tarots} alt="" style={{ width: '20%' }} />
-          <button type="button" onClick={showModal}>
-            타로카드 다시보기
-          </button>
-        </ReplayTarots>
-        <ReplayLucky>
-          <img src={Lucky} alt="" style={{ width: '20%' }} />
-          <button type="button" onClick={showLuckyCard}>
-            럭키카드 다시보기
-          </button>
-        </ReplayLucky>
       </DetailContent>
     </div>
   );
