@@ -33,15 +33,6 @@ export const Content = styled.div`
   width: 400px;
 `;
 
-export const Gom = styled.div`
-  > img {
-    height: 50vh;
-    position: fixed;
-    bottom: 0px;
-    left: 0px;
-  }
-`;
-
 export const Btn = styled(motion.button)`
   height: 2.4em;
   cursor: pointer;
@@ -57,26 +48,61 @@ export const ButtonBox = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: end;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100%;
+`;
+
+export const TopButtonBox = styled.div`
+  display: flex;
+  justify-content: space-around;
+  height: 50px;
+  width: 100%;
+`;
+
+export const TopButtonFont = styled.div`
+  font-family: Miwon;
+  font-size: 1.4em;
+  color: white;
+  -webkit-text-stroke: 1px black;
+`;
+
+export const BottonButtonBox = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
 `;
 
 export const Button = styled.button`
-  align-self: center;
+  align-items: center;
   cursor: pointer;
   border: 0;
   background-color: rgba(0, 0, 0, 0);
-  > img {
-    width: 32px;
-    height: 32px;
-  }
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-bottom: 8px;
+  padding: 0;
+  font-family: Miwon;
+  font-size: 1.2em;
+  text-align: center;
+  color: white;
+  -webkit-text-stroke: 1px black;
 `;
 
 export const HomeButton = styled.button`
-  align-self: end;
-  margin-top: 6vh;
-  margin-bottom: 1vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   cursor: pointer;
   border: 0;
+  text-align: center;
+  justify-content: center;
+  margin-bottom: 8px;
+  font-family: Miwon;
+  font-size: 1.2em;
+  color: white;
+  -webkit-text-stroke: 1px black;
   background-color: rgba(0, 0, 0, 0);
   > img {
     width: 32px;
