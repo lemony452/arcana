@@ -15,7 +15,7 @@ export const DialogContent = styled.div<{ color: string }>`
   left: 20vw;
   width: 60vw;
   bottom: 2vh;
-  height: calc(100vh / 3 - 11vh);
+  height: calc(100vh / 3 - 8vh);
   /* text-align: center; */
   filter: drop-shadow(0px 6px 10px rgba(0, 0, 0, 0.5));
   /* background: ${(props) => props.color}; */
@@ -53,14 +53,26 @@ export const DialogName = styled.div<{ color: string }>`
   z-index: 3;
 `;
 
-export const DialogContentStyle = styled.div`
+export const DialogContentStyle = styled.div<{ color: string }>`
   display: flex;
   width: 100%;
   height: auto;
   font-size: 1.2em;
   white-space: pre-wrap;
-  margin: 10px;
+  padding: 5px 20px;
+  margin: 20px 10px;
   overflow-y: auto;
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+  ::-webkit-scrollbar-thumb {
+    height: 30%; /* 스크롤바의 길이 */
+    background: ${(props) => props.color}; /* 스크롤바의 색상 */
+    border-radius: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: rgba(33, 122, 244, 0.1); /*스크롤바 뒷 배경 색상*/
+  }
   /* &.option {
     width: 30vw;
   } */
@@ -75,7 +87,7 @@ export const OptionGroup = styled.div`
   flex-direction: column;
   /* justify-content: space-evenly; */
   align-content: center;
-  justify-content: end;
+  justify-content: space-around;
   /* margin-right: 1vw; */
   /* &.option {
     width: 45vw;
@@ -86,13 +98,12 @@ export const OptionBtn = styled.button`
   background: #fffffe;
   box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 20px;
-  font-size: 1.2em;
+  font-size: 1em;
   padding: 10px 20px 10px 20px;
-  margin: 10px;
   cursor: pointer;
   &:hover {
     background-color: #f1daff;
-    transform: scale(1.03);
+    transform: scale(1.05);
   }
   transition: all 0.1s;
 `;

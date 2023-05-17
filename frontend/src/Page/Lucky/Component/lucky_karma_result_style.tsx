@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
-import BackGround from '../../../Assets/etc/luckybackground.svg';
+// import BackGround from '../../../Assets/etc/luckybackground.svg';
 
 export const Body = styled.div`
   display: flex;
@@ -28,14 +28,14 @@ export const CardFront = styled(motion.img)`
   box-shadow: 1px 1px 3px gray;
 `;
 
-export const Card = styled(motion.div)`
+export const Card = styled(motion.div)<{ back: string; color: string }>`
   display: flex;
   justify-content: end;
   width: 100%;
   height: 100%;
-  border: 5px #ffc1c1 solid;
+  border: 5px ${(props) => props.color} solid;
   border-radius: 30px;
-  background-image: url(${BackGround});
+  background-image: url(${(props) => props.back});
   background-position: center bottom;
   background-size: cover;
   align-items: end;
@@ -82,17 +82,17 @@ export const MarkContent = styled(motion.div)``;
 export const MarkContentTitle = styled(motion.div)`
   text-align: center;
   font-size: 2vw;
+  font-family: DaysOne;
   letter-spacing: 0.5vw;
   font-weight: bolder;
-  color: #09203f;
-  text-shadow: 0 1px 1px #c0c0c0, 0 2px 0 #a8a7a6, 0 3px 0 #8b8a89, 0 4px 0px #7d7b7a, 0 5px 0px #686766,
-    0 6px 3px #5f5e5d;
+  color: white;
+  -webkit-text-stroke: 1px black;
   z-index: 2;
 `;
 
 export const MarkContentSubTitle = styled(motion.div)`
   text-align: center;
   font-size: 0.7vw;
-  font-weight: bold;
+  font-weight: bolder;
   z-index: 2;
 `;
