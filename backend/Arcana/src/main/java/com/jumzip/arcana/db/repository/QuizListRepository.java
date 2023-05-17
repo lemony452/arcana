@@ -1,11 +1,12 @@
 package com.jumzip.arcana.db.repository;
 
 import com.jumzip.arcana.db.entity.QuizList;
+import java.util.List;
 
 public interface QuizListRepository {
 
-    QuizList findTopQuizListOrderByQuizListIdxDesc();
+    List<QuizList> findAllQuizList();
 
-    void saveQuizList(QuizList quizList);
+    List<QuizList> saveQuizList(int[] idxList);
 
 }
