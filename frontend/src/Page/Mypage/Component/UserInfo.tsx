@@ -27,7 +27,7 @@ import nextBtn from '../../../Assets/etc/nextButton.png';
 import helpBtn from '../../../Assets/etc/help.png';
 
 function UserInfo() {
-  const { nickname, weeklyCount, setIsLogin, setIsSide, user, ticket } = userInfoStore();
+  const { isTarotLog, nickname, weeklyCount, setIsLogin, setIsSide, user, ticket } = userInfoStore();
   const navigate = useNavigate();
 
   const MoveEditUser = () => {
@@ -35,7 +35,9 @@ function UserInfo() {
   };
 
   const openTarotList = () => {
-    navigate('/detail');
+    if (isTarotLog) {
+      navigate('/detail');
+    }
   };
 
   const logout = () => {

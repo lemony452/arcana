@@ -29,7 +29,8 @@ function Main() {
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   // const [goLogin, setGoLogin] = useState(false);
-  const { isLogin, isSide, setIsSide, setGoLogin, user, setTarotLog, goLogin } = userInfoStore();
+  const { isTarotLog, setIsTarotLog, isLogin, isSide, setIsSide, setGoLogin, user, setTarotLog, goLogin } =
+    userInfoStore();
   // const cookie = getCookie('token');
   const toggleSide = () => {
     // if (cookie) {
@@ -45,8 +46,16 @@ function Main() {
         .then((res) => {
           console.log(res);
           setTarotLog(res.data);
+          if (res.data === '') {
+            setIsTarotLog(false);
+          } else {
+            setIsTarotLog(true);
+          }
         })
-        .catch((err) => console.log(err));
+        .catch((err) => {
+          console.log(err);
+          setIsTarotLog(false);
+        });
     } else {
       setGoLogin(true);
     }
