@@ -53,6 +53,8 @@ export function KakaoRedirect() {
           email: userData.email,
           providerId: userData.provider,
         });
+        setWeekly(userData.weekly_count);
+        setTicket(userData.ticket);
         setNickname(userData.nickname);
         navigate('/');
         setIsLogin(true);
