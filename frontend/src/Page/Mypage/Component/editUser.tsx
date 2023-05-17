@@ -4,25 +4,28 @@ import { useNavigate } from 'react-router-dom';
 import { auth } from '../../../firebase';
 import { userInfoStore } from '../../../Store/User/info';
 import {
-  UserContent,
   Nickname,
-  TarotToken,
   EditNickName,
   EditInputBox,
   SideContent,
   Side,
   DetailContent,
-  DetailCover,
   DetailTitle,
   MoveBtn,
   DetailFortune,
   EditUserContent,
   EditUser,
   MoveBtnImg,
+  ListIcon,
+  EditUserTitle,
+  ProfileImg,
+  LogoSmallImg,
 } from '../mypage_style';
-import LoveCoverImg from '../../../Assets/etc/cover1.png';
 import editIcon from '../../../Assets/etc/editIcon.png';
 import homeBtnImg from '../../../Assets/etc/homBtn.png';
+import userIcon from '../../../Assets/etc/user.png';
+import googleSmall from '../../../Assets/etc/googleSmall.png';
+import kakaoSmall from '../../../Assets/etc/kakaoSmall.png';
 import { API } from '../../../API';
 import UserInfo from './UserInfo';
 
@@ -73,7 +76,7 @@ function EditUserInfo() {
   return (
     <div style={{ position: 'relative' }}>
       <Side className="open detail">
-        <div style={{ position: 'absolute', left: 'calc(27vw - 4.5em)' }}>
+        <div style={{ position: 'absolute', left: 'calc(25vw - 4.5em)' }}>
           <MoveBtn type="button" onClick={MoveMain}>
             <MoveBtnImg className="home" src={homeBtnImg} alt="" />
           </MoveBtn>
@@ -83,35 +86,57 @@ function EditUserInfo() {
         </SideContent>
       </Side>
       <DetailContent>
-        <DetailCover src={LoveCoverImg} />
-        <DetailTitle>내 정보 관리🙎‍♂️</DetailTitle>
+        {/* <DetailCover src={LoveCoverImg} /> */}
+        <DetailTitle className="edit">
+          <ListIcon
+            className="edit"
+            style={{ width: '1em', marginLeft: '0.3em', marginRight: '0.3em' }}
+            src={userIcon}
+            alt=""
+          />
+          <div>내 정보</div>
+          <div className="sub">MY PAGE</div>
+        </DetailTitle>
         <DetailFortune>
           <EditUser>
-            <Nickname className="edit">🆔 닉네임</Nickname>
-            {!edit ? (
-              <div style={{ width: '30vw', display: 'flex', justifyContent: 'space-between' }}>
-                <EditUserContent>{nickname}</EditUserContent>
-                <EditNickName onClick={editNickname} src={editIcon} alt="" />
+            <EditUserTitle>프로필</EditUserTitle>
+            <EditUserContent>
+              <ProfileImg className="edit">뀨</ProfileImg>
+              <div style={{ display: 'flex', flexDirection: 'column' }}>
+                <EditUserContent className="email">{user.email}</EditUserContent>
+                {!edit ? (
+                  <EditUserContent className="nickname">
+                    {nickname}
+                    <EditNickName onClick={editNickname} src={editIcon} alt="" />
+                  </EditUserContent>
+                ) : (
+                  <EditUserContent>
+                    <form onSubmit={saveNickName}>
+                      <EditInputBox type="text" ref={editRef} placeholder="닉네임을 수정해주세요" />
+                    </form>
+                  </EditUserContent>
+                )}
               </div>
-            ) : (
-              <EditUserContent>
-                <form onSubmit={saveNickName}>
-                  <EditInputBox type="text" ref={editRef} placeholder="닉네임을 수정해주세요" />
-                </form>
-              </EditUserContent>
-            )}
+            </EditUserContent>
           </EditUser>
-          <EditUser>
-            <Nickname className="edit">📧 Email</Nickname>
-            <EditUserContent>{user.email}</EditUserContent>
+          <EditUser className="email">
+            <EditUserTitle className="email">계정 연동</EditUserTitle>
+            <EditUserContent className="emails">
+              <div style={{ display: 'flex', flexDirection: 'row' }}>
+                {user.providerId === 'Google' ? (
+                  <LogoSmallImg src={googleSmall} alt="" />
+                ) : (
+                  <LogoSmallImg src={kakaoSmall} alt="" />
+                )}
+                <div style={{ display: 'flex', flexDirection: 'column' }}>
+                  <EditUserContent className="emails email">{user.email}</EditUserContent>
+                </div>
+              </div>
+              <MoveBtn className="edit" type="button" onClick={removeUser}>
+                회원탈퇴
+              </MoveBtn>
+            </EditUserContent>
           </EditUser>
-          <EditUser>
-            <Nickname className="edit">🎟️ Quiz 이벤트 참여 여부</Nickname>
-            <EditUserContent>참여{ticket}</EditUserContent>
-          </EditUser>
-          <MoveBtn className="edit" type="button" onClick={removeUser}>
-            회원탈퇴
-          </MoveBtn>
         </DetailFortune>
       </DetailContent>
     </div>

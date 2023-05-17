@@ -27,7 +27,7 @@ import nextBtn from '../../../Assets/etc/nextButton.png';
 import helpBtn from '../../../Assets/etc/help.png';
 
 function UserInfo() {
-  const { nickname, weeklyCount, setIsLogin, setIsSide, user, ticket } = userInfoStore();
+  const { isTarotLog, nickname, weeklyCount, setIsLogin, setIsSide, user, ticket } = userInfoStore();
   const navigate = useNavigate();
 
   const MoveEditUser = () => {
@@ -35,7 +35,9 @@ function UserInfo() {
   };
 
   const openTarotList = () => {
-    navigate('/detail');
+    if (isTarotLog) {
+      navigate('/detail');
+    }
   };
 
   const logout = () => {
@@ -63,7 +65,7 @@ function UserInfo() {
         <ListContent>
           <ListIcon src={tockenIcon} alt="" />
           <div style={{ display: 'flex', alignItems: 'center' }}>
-            주간 이용권
+            주간 티켓
             <Container>
               <HelpIcon src={helpBtn} />
               <div className="tooltip">{WeeklyMessage}</div>
@@ -76,7 +78,7 @@ function UserInfo() {
         <ListContent>
           <ListIcon src={ticketIcon} alt="" />
           <div style={{ display: 'flex', alignItems: 'center' }}>
-            이벤트 참여권
+            이벤트 티켓
             <Container>
               <HelpIcon src={helpBtn} />
               <div className="tooltip">{TicketMessage}</div>

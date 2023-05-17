@@ -39,7 +39,7 @@ export function KakaoRedirect() {
   console.log(URLcode);
   const navigate = useNavigate();
   const { setUser, setNickname, setTicket, setWeekly, setIsLogin, user } = userInfoStore();
-
+  let userData: any;
   useEffect(() => {
     const login = async () => {
       console.log('카카오 로그인 중');
@@ -47,7 +47,7 @@ export function KakaoRedirect() {
       // const URLcode = new URL(document.location).searchParams.get('code');
       await API.get(`/api/v1/user/kakao?code=${URLcode}`).then((res) => {
         console.log(res);
-        const userData = res.data;
+        userData = res.data;
         setUser({
           uid: userData.uid,
           email: userData.email,
@@ -60,14 +60,14 @@ export function KakaoRedirect() {
 
       await API.get(`/api/v1/user/info`, {
         headers: {
-          uid: user.uid,
+          uid: userData.uid,
         },
       })
         .then((res) => {
           console.log(res);
           setWeekly(res.data.weekly_count);
           setTicket(res.data.ticket);
-          setNickname(res.data.nickname);
+          // setNickname(res.data.nickname);
         })
         .catch((err) => {
           console.log(err);

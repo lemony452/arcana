@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
 
@@ -34,9 +35,16 @@ export const Title = styled.div`
   font-family: DaysOne;
   font-weight: bolder;
   color: white;
+  text-shadow: -5px 0 #3b3b3b, 0 5px #3b3b3b, 5px 0 #3b3b3b, 0 -5px #3b3b3b;
   /* text-shadow: -5px 0px black, 0px 5px black, 5px 0px black, 0px -5px black; */
-  -webkit-text-stroke: 3px black;
-  letter-spacing: -0.07em;
+  /* -webkit-text-stroke: 3px black; */
+  /* letter-spacing: -0.07em; */
+`;
+
+export const TitleImg = styled.div`
+  > img {
+    width: 38vw;
+  }
 `;
 
 const blink = keyframes`
@@ -49,11 +57,11 @@ export const SubTitle = styled.div`
   font-size: 1.8vw;
   font-weight: bolder;
   color: black;
+  letter-spacing: 0.1em;
   /* animation: ${blink} 3s infinite; */
-  margin-top: -1em;
 `;
 
-export const StyledCircle = styled.div`
+export const StyledCircle = styled(motion.div)`
   position: absolute;
   left: calc(calc(100vw / 3) - 30vh);
   top: 5vh;
@@ -66,7 +74,7 @@ export const StyledCircle = styled.div`
   background: white;
 `;
 
-export const Circle2 = styled.div`
+export const Circle2 = styled(motion.div)`
   position: absolute;
   left: calc(calc(100vw / 3) - 4.5vh);
   top: 30.5vh;
@@ -87,7 +95,7 @@ export const Circle2 = styled.div`
   }
 `;
 
-export const Circle3 = styled.div`
+export const Circle3 = styled(motion.div)`
   position: absolute;
   left: calc(calc(100vw / 3) - 5vw);
   top: 15vh;
@@ -108,7 +116,7 @@ export const Circle3 = styled.div`
   }
 `;
 
-export const Circle4 = styled.div`
+export const Circle4 = styled(motion.div)`
   position: absolute;
   left: 5vw;
   top: 28vh;
@@ -129,7 +137,7 @@ export const Circle4 = styled.div`
   }
 `;
 
-export const Circle5 = styled.div`
+export const Circle5 = styled(motion.div)`
   position: absolute;
   left: 2vw;
   top: 48vh;
