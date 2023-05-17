@@ -1,11 +1,11 @@
 package com.jumzip.arcana.api.controller;
 
-import com.jumzip.arcana.api.request.QuizAnswerRequest;
-import com.jumzip.arcana.api.response.QuizAnswerResponse;
+import com.jumzip.arcana.api.request.QuizResultRequest;
+import com.jumzip.arcana.api.response.QuizResultResponse;
 import com.jumzip.arcana.api.service.QuizService;
 import com.jumzip.arcana.db.entity.Message;
 import com.jumzip.arcana.db.entity.Quiz;
-import com.jumzip.arcana.db.entity.QuizAnswer;
+import com.jumzip.arcana.db.entity.QuizResult;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
@@ -58,13 +58,13 @@ public class QuizController {
     @Operation(summary = "퀴즈 결과 전송", description = "quizIdx에 1 ~ 10 퀴즈 순서 번호를 "
         + " \n answerIdx에 유저가 선택한 정답을 1 ~ 4 숫자로 보내주세요")
     @PostMapping("/answer")
-    public ResponseEntity<?> sendQuizAnswer(@RequestBody QuizAnswerRequest quizAnswerRequest) {
+    public ResponseEntity<?> sendQuizAnswer(@RequestBody QuizResultRequest quizAnswerRequest) {
         logger.info("start sendQuizAnswer");
 
         try {
             logger.info("quizAnswerRequest is " + quizAnswerRequest.toString());
 
-            QuizAnswer quizAnswer = quizService.updateQuizAnswer(quizAnswerRequest);
+            QuizResult quizAnswer = quizService.updateQuizResult(quizAnswerRequest);
 
             return new ResponseEntity<>(quizAnswer, HttpStatus.OK);
         } catch (Exception e) {
@@ -82,7 +82,7 @@ public class QuizController {
         logger.info("start viewQuizAnswer");
 
         try {
-            List<QuizAnswerResponse> quizAnswerResponseList = quizService.viewQuizAnswer();
+            List<QuizResultResponse> quizAnswerResponseList = quizService.viewQuizResult();
 
             return new ResponseEntity<>(quizAnswerResponseList, HttpStatus.OK);
         } catch (Exception e) {

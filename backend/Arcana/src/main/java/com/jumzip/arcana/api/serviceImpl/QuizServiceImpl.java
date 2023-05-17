@@ -1,12 +1,12 @@
 package com.jumzip.arcana.api.serviceImpl;
 
-import com.jumzip.arcana.api.request.QuizAnswerRequest;
-import com.jumzip.arcana.api.response.QuizAnswerResponse;
+import com.jumzip.arcana.api.request.QuizResultRequest;
+import com.jumzip.arcana.api.response.QuizResultResponse;
 import com.jumzip.arcana.api.service.QuizService;
 import com.jumzip.arcana.db.entity.Quiz;
-import com.jumzip.arcana.db.entity.QuizAnswer;
+import com.jumzip.arcana.db.entity.QuizResult;
 import com.jumzip.arcana.db.entity.QuizList;
-import com.jumzip.arcana.db.repository.QuizAnswerRepository;
+import com.jumzip.arcana.db.repository.QuizResultRepository;
 import com.jumzip.arcana.db.repository.QuizListRepository;
 import com.jumzip.arcana.db.repository.QuizRepository;
 import java.util.ArrayList;
@@ -26,7 +26,7 @@ public class QuizServiceImpl implements QuizService {
 
     private final QuizListRepository quizListRepository;
 
-    private final QuizAnswerRepository quizAnswerRepository;
+    private final QuizResultRepository quizResultRepository;
 
     @Override
     public Quiz getQuiz(int quizNum) {
@@ -94,43 +94,43 @@ public class QuizServiceImpl implements QuizService {
     }
 
     @Override
-    public QuizAnswer updateQuizAnswer(QuizAnswerRequest quizAnswerRequest) {
+    public QuizResult updateQuizResult(QuizResultRequest quizAnswerRequest) {
         int quizIdx = quizAnswerRequest.getQuizIdx();
         int answerIdx = quizAnswerRequest.getAnswerIdx();
 
-        return quizAnswerRepository.updateQuizAnswer(quizIdx, answerIdx);
+        return quizResultRepository.updateQuizResult(quizIdx, answerIdx);
     }
 
     @Override
-    public List<QuizAnswerResponse> viewQuizAnswer() {
-        List<QuizAnswer> quizAnswerList = quizAnswerRepository.findAllQuizAnswer();
-        List<QuizAnswerResponse> quizAnswerResponsesList = new ArrayList<>();
-        QuizAnswerResponse quizAnswerResponse = new QuizAnswerResponse();
+    public List<QuizResultResponse> viewQuizResult() {
+        List<QuizResult> quizResultList = quizResultRepository.findAllQuizResult();
+        List<QuizResultResponse> quizResultResponseList = new ArrayList<>();
+        QuizResultResponse quizResultResponse = new QuizResultResponse();
         List<Integer> answerList = new ArrayList<>();
 
-        for (int i = 1; i <= quizAnswerList.size(); i++) {
+        for (int i = 1; i <= quizResultList.size(); i++) {
             if (i % 4 == 1) {
-                quizAnswerResponse = new QuizAnswerResponse();
+                quizResultResponse = new QuizResultResponse();
                 answerList = new ArrayList<>();
 
-                quizAnswerResponse.setQuizIdx(i / 4 + 1);
-                answerList.add(quizAnswerList.get(i -1).getSelector());
+                quizResultResponse.setQuizIdx(i / 4 + 1);
+                answerList.add(quizResultList.get(i -1).getSelector());
             } else if (i % 4 == 0) {
-                answerList.add(quizAnswerList.get(i -1).getSelector());
-                quizAnswerResponse.setAnswerList(answerList);
-                quizAnswerResponsesList.add(quizAnswerResponse);
+                answerList.add(quizResultList.get(i -1).getSelector());
+                quizResultResponse.setAnswerList(answerList);
+                quizResultResponseList.add(quizResultResponse);
             } else {
-                answerList.add(quizAnswerList.get(i - 1).getSelector());
+                answerList.add(quizResultList.get(i - 1).getSelector());
             }
             
         }
         
-        return quizAnswerResponsesList;
+        return quizResultResponseList;
     }
 
     @Override
-    public List<QuizAnswer> resetQuizAnswer() {
-        return quizAnswerRepository.resetQuizAnswer();
+    public List<QuizResult> resetQuizResult() {
+        return quizResultRepository.resetQuizResult();
     }
 
 }

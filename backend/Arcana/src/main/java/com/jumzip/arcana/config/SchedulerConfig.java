@@ -52,13 +52,13 @@ public class SchedulerConfig {
     // 매일 오전 0시 0분 0초에 quiz_answer 테이블의 selector 속성을 0으로 초기화 하는 기능
     @Async
     @Scheduled(cron = "0 0 0 * * *")
-    public void resetQuizAnswer() {
-        logger.info("start resetQuizAnswer - " + new Date());
+    public void resetQuizResult() {
+        logger.info("start resetQuizResult - " + new Date());
 
         try {
-            logger.info(quizService.resetQuizAnswer().toString());
+            logger.info(quizService.resetQuizResult().toString());
         } catch (Exception e) {
-            logger.info("reset QuizAnswer Error - " + e);
+            logger.info("reset QuizResult Error - " + e);
         }
     }
 
