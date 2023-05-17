@@ -39,11 +39,10 @@ function TarotListDetail() {
   };
   const { nickname, tarotLog } = userInfoStore();
   const [temp, setTemp] = useState(tarotLog);
-  const reverseTemp = tarotLog.reverse();
+  const reverseTemp = [...tarotLog].reverse(); // 원본 배열은 남겨두고 배열을 복사한 값을 뒤집는다.
 
   const handleChange = (event: any) => {
     // event.preventDefault();
-    console.log(event.target.value);
     if (event.target.value === '과거순') {
       setTemp(reverseTemp);
     } else {
@@ -134,7 +133,8 @@ function TarotListDetail() {
             <ListIcon src={cardIcon} alt="" />
             <div>타로 운세 기록</div>
           </TarotToken>
-          <select onChange={() => handleChange}>
+          {/* e 변수 추가 */}
+          <select onChange={(e: React.ChangeEvent<HTMLSelectElement>) => handleChange(e)}>
             <option>최신순</option>
             <option>과거순</option>
           </select>
