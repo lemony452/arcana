@@ -24,13 +24,15 @@ import { getCookie } from '../Login/cookie';
 import LoginModal from '../Login/modal';
 import { userInfoStore } from '../../Store/User/info';
 import { API } from '../../API';
+import { ModalBackdrop } from '../Common/common_style';
 import Arcana from '../../Assets/etc/ARCANA.png';
 
 function Main() {
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   // const [goLogin, setGoLogin] = useState(false);
-  const { isLogin, isSide, setIsSide, setGoLogin, user, setTarotLog } = userInfoStore();
+  const { isTarotLog, setIsTarotLog, isLogin, isSide, setIsSide, setGoLogin, user, setTarotLog, goLogin } =
+    userInfoStore();
   // const cookie = getCookie('token');
   const toggleSide = () => {
     // if (cookie) {
@@ -46,8 +48,16 @@ function Main() {
         .then((res) => {
           console.log(res);
           setTarotLog(res.data);
+          if (res.data === '') {
+            setIsTarotLog(false);
+          } else {
+            setIsTarotLog(true);
+          }
         })
-        .catch((err) => console.log(err));
+        .catch((err) => {
+          console.log(err);
+          setIsTarotLog(false);
+        });
     } else {
       setGoLogin(true);
     }
@@ -58,6 +68,7 @@ function Main() {
 
   return (
     <MainBg className={cardOrder}>
+      {goLogin ? <ModalBackdrop /> : null}
       {isLogin ? (
         <SideBtn src={SideBtnImg} onClick={toggleSide} />
       ) : (
