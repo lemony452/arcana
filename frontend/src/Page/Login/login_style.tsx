@@ -7,7 +7,7 @@ export const LoginModalStyle = styled.div`
   height: 19.9vw;
   left: -50vw;
   top: 0;
-  z-index: 2;
+  z-index: 6;
   /* visibility: hidden; */
   &.gologin {
     left: 50vw;
