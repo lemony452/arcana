@@ -1,22 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import {
-  FacebookShareButton,
-  FacebookIcon,
-  TelegramShareButton,
-  TelegramIcon,
-  TwitterShareButton,
-  TwitterIcon,
-} from 'react-share';
+import { FacebookShareButton, TelegramShareButton, TwitterShareButton } from 'react-share';
 import { useLocation, useNavigate } from 'react-router-dom';
-import html2canvas from 'html2canvas';
+import html2canvas from 'html2canvas-cors';
+import { motion } from 'framer-motion';
 import * as luckyPage from './lucky_page_style';
 import LuckyKarmaSelect from './Component/lucky_karma_select';
 import LuckyKarmaResult from './Component/lucky_karma_result';
 import Dialog from '../../Common/dialog';
-import charDialog0 from '../../Assets/characters/charDialog0.png';
-import charDialog1 from '../../Assets/characters/charDialog1.png';
+import charDialog0 from '../../Assets/characters/draco.png';
+import charDialog1 from '../../Assets/characters/toast.png';
 import { DialogNPC, OptionBtn } from '../../Common/common_styled';
 import KakaoIcon from '../../Assets/etc/icon-kakao.png';
+import FackbookIcon from '../../Assets/etc/icon-fackbook.png';
+import TwitterIcon from '../../Assets/etc/icon-twitter.png';
+import TelegramIcon from '../../Assets/etc/icon-telegram.png';
 import Camera from '../../Assets/etc/camera.png';
 import Home from '../../Assets/etc/home.png';
 import { useLuckyStore } from '../../Store/User/lucky';
@@ -132,6 +129,7 @@ function LuckyPage() {
   const cardContent = npc === 0 ? cardContentCeltic : cardContentTime;
   const dialogImg = npc === 0 ? charDialog0 : charDialog1;
 
+  const shareImg = `https://k8d107.p.ssafy.io/api/v1/images/${lucky.card.idx}.png`;
   useEffect(() => {
     if (location.state === 'celtic') {
       setNpc(0);
@@ -157,7 +155,6 @@ function LuckyPage() {
   //     console.error('Error posting link:', error);
   //   }
   // };
-
   const capture = () => {
     const downloadImg = (url: string, imgName: string) => {
       const downImg = document.createElement('a');
@@ -178,7 +175,7 @@ function LuckyPage() {
       content: {
         title: '내 행운카드는 결과는?', // 공유 타이틀
         description: cardList[selectCard].result, // 공유 내용
-        imageUrl: `https://k8d107.p.ssafy.io/api/v1/images/${lucky.card.idx}.png`, // 공유 이미지
+        imageUrl: shareImg, // 공유 이미지
         link: {
           webUrl: 'https://k8d107.p.ssafy.io', // 공유 링크
         },
@@ -202,7 +199,7 @@ function LuckyPage() {
     <luckyPage.Body>
       <DialogNPC src={dialogImg} />
       {resultPage ? (
-        <LuckyKarmaResult selectCard={selectCard} cardList={cardList} />
+        <LuckyKarmaResult selectCard={selectCard} cardList={cardList} npc={npc} />
       ) : (
         <LuckyKarmaSelect
           selectCard={selectCard}
@@ -217,34 +214,49 @@ function LuckyPage() {
         {!resultPage && checkSelectState === true && <OptionBtn onClick={resultPageHandler}>공유하기</OptionBtn>}
         {resultPage && (
           <luckyPage.ButtonBox>
-            <div>
-              <FacebookShareButton style={{ marginInline: '10px' }} url={window.location.href}>
-                <FacebookIcon size={32} round borderRadius={24} />
+            <luckyPage.TopButtonFont>공유하기</luckyPage.TopButtonFont>
+            <luckyPage.TopButtonBox>
+              <FacebookShareButton url={shareImg}>
+                <motion.img
+                  whileHover={{ scale: 1.1 }}
+                  src={FackbookIcon}
+                  alt="facebookicon"
+                  width="32px"
+                  height="32px"
+                />
               </FacebookShareButton>
-              <TwitterShareButton
-                style={{ marginInline: '10px' }}
-                title={cardList[selectCard].result}
-                url="https://k8d107.p.ssafy.io"
-              >
-                <TwitterIcon size={32} round borderRadius={24} />
+              <TwitterShareButton title={cardList[selectCard].result} url="https://k8d107.p.ssafy.io">
+                <motion.img
+                  whileHover={{ scale: 1.1 }}
+                  src={TwitterIcon}
+                  alt="twittericon"
+                  width="32px"
+                  height="32px"
+                />
               </TwitterShareButton>
-              <TelegramShareButton
-                style={{ marginInline: '10px' }}
-                title={cardList[selectCard].result}
-                url="https://k8d107.p.ssafy.io"
-              >
-                <TelegramIcon size={32} round borderRadius={24} />
+              <TelegramShareButton title={cardList[selectCard].result} url="https://k8d107.p.ssafy.io">
+                <motion.img
+                  whileHover={{ scale: 1.1 }}
+                  src={TelegramIcon}
+                  alt="telegramicon"
+                  width="32px"
+                  height="32px"
+                />
               </TelegramShareButton>
-              <luckyPage.Button onClick={sendKakao} style={{ marginInline: '5px' }}>
-                <img src={KakaoIcon} alt="kakaoicon" />
+              <luckyPage.Button onClick={sendKakao}>
+                <motion.img whileHover={{ scale: 1.1 }} src={KakaoIcon} alt="kakaoicon" width="32px" height="32px" />
               </luckyPage.Button>
+            </luckyPage.TopButtonBox>
+            <luckyPage.BottonButtonBox>
               <luckyPage.Button onClick={capture} style={{ marginInline: '5px' }}>
-                <img src={Camera} alt="camera" />
+                캡처
+                <motion.img whileHover={{ scale: 1.1 }} src={Camera} alt="camera" width="32px" height="32px" />
               </luckyPage.Button>
-            </div>
-            <luckyPage.HomeButton onClick={goMain}>
-              <img src={Home} alt="home" />
-            </luckyPage.HomeButton>
+              <luckyPage.HomeButton onClick={goMain}>
+                메인
+                <motion.img whileHover={{ scale: 1.1 }} src={Home} alt="home" width="32px" height="32px" />
+              </luckyPage.HomeButton>
+            </luckyPage.BottonButtonBox>
           </luckyPage.ButtonBox>
         )}
       </Dialog>
