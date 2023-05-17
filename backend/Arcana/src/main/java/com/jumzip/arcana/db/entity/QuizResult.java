@@ -11,13 +11,13 @@ import org.hibernate.annotations.DynamicInsert;
 
 @Data
 @Entity
-@Table(name="quiz_answer")
+@Table(name="quiz_result")
 @DynamicInsert
-public class QuizAnswer {
+public class QuizResult {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "quiz_answer_idx")
-    private int quizAnswerIdx;
+    @Column(name = "quiz_result_idx")
+    private int quizResultIdx;
 
     @Column(name = "quiz_idx")
     private int quizIdx;
