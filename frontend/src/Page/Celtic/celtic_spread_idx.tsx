@@ -6,7 +6,7 @@ import CelticStart from './celtic_spread_animation';
 import * as common from '../Common/common_style';
 import Dialog from '../../Common/dialog';
 import { CelticDetails } from '../../Common/conversations';
-import charDialog0 from '../../Assets/characters/charDialog0.png';
+import charDialog0 from '../../Assets/characters/draco.png';
 import { DialogNPC, OptionBtn } from '../../Common/common_styled';
 import { API } from '../../API';
 import { getLuckyCard } from '../../Common/tarotSelect';

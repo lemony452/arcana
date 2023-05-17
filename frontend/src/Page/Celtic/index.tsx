@@ -155,8 +155,8 @@ function Celtic() {
           </form>
         ) : (
           <>
-            <OptionBtn onClick={() => OptionClick('사랑운')}>사랑운 💖</OptionBtn>
-            <OptionBtn onClick={() => OptionClick('성공운')}>성공운이 궁금해! 👨‍💼</OptionBtn>
+            <OptionBtn onClick={() => OptionClick('사랑운')}>사랑운 어떨까? 💖</OptionBtn>
+            <OptionBtn onClick={() => OptionClick('성공운')}>성공운 궁금해! 👨‍💼</OptionBtn>
             <OptionBtn onClick={() => OptionClick('재물운')}>재물운 봐줄래? 💸</OptionBtn>
           </>
         )}

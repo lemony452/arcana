@@ -2,17 +2,28 @@ import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import submitBtn from '../Assets/etc/submitBtn.png';
 
-export const DialogBox = styled.div<{ color: string }>`
+export const DialogBox = styled.div`
   position: absolute;
-  display: flex;
+  bottom: 0;
   width: 100vw;
   height: calc(100vh / 3);
+`;
+
+export const DialogContent = styled.div<{ color: string }>`
+  position: absolute;
+  display: flex;
+  left: 20vw;
+  width: 60vw;
+  bottom: 2vh;
+  height: calc(100vh / 3 - 8vh);
   /* text-align: center; */
-  filter: drop-shadow(0px -6px 10px rgba(0, 0, 0, 0.5));
-  background: ${(props) => props.color};
-  bottom: 0px;
+  filter: drop-shadow(0px 6px 10px rgba(0, 0, 0, 0.5));
+  /* background: ${(props) => props.color}; */
+  background-color: rgba(255, 255, 255, 0.7);
   flex-direction: row;
   justify-content: flex-end;
+  border-radius: 30px;
+  border: 7px solid ${(props) => props.color};
 `;
 
 export const DialogNPC = styled.img`
@@ -24,25 +35,44 @@ export const DialogNPC = styled.img`
   z-index: 1;
 `;
 
-export const DialogName = styled.div`
+export const DialogName = styled.div<{ color: string }>`
+  position: absolute;
+  left: 23vw;
+  width: 12vw;
   font-style: normal;
   font-weight: 700;
   font-size: 2em;
   line-height: 48px;
   display: flex;
+  justify-content: center;
   align-items: center;
   text-align: center;
   color: #ffffff;
-  margin-bottom: 1vh;
-  margin-top: 1vh;
+  background-color: ${(props) => props.color};
+  border-radius: 24px;
+  z-index: 3;
 `;
 
-export const DialogContentStyle = styled.div`
+export const DialogContentStyle = styled.div<{ color: string }>`
   display: flex;
-  width: 50vw;
+  width: 100%;
   height: auto;
   font-size: 1.2em;
   white-space: pre-wrap;
+  padding: 5px 20px;
+  margin: 20px 10px;
+  overflow-y: auto;
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+  ::-webkit-scrollbar-thumb {
+    height: 30%; /* 스크롤바의 길이 */
+    background: ${(props) => props.color}; /* 스크롤바의 색상 */
+    border-radius: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: rgba(33, 122, 244, 0.1); /*스크롤바 뒷 배경 색상*/
+  }
   /* &.option {
     width: 30vw;
   } */
@@ -50,14 +80,14 @@ export const DialogContentStyle = styled.div`
 
 export const OptionGroup = styled.div`
   right: 0;
-  width: 25vw;
+  width: 20vw;
   height: auto;
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
   /* justify-content: space-evenly; */
   align-content: center;
-  justify-content: center;
+  justify-content: space-around;
   /* margin-right: 1vw; */
   /* &.option {
     width: 45vw;
@@ -68,20 +98,19 @@ export const OptionBtn = styled.button`
   background: #fffffe;
   box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 20px;
-  font-size: 1.2em;
+  font-size: 1em;
   padding: 10px 20px 10px 20px;
-  margin: 10px;
   cursor: pointer;
   &:hover {
     background-color: #f1daff;
-    transform: scale(1.03);
+    transform: scale(1.05);
   }
   transition: all 0.1s;
 `;
 
 export const InputBox = styled.div`
   /* right: 0; */
-  width: 35vw;
+  width: 20vw;
   height: auto;
   display: flex;
   flex-wrap: wrap;
