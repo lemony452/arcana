@@ -9,4 +9,6 @@ public interface QuizAnswerRepository {
 
     List<QuizAnswer> findAllQuizAnswer();
 
+    List<QuizAnswer> resetQuizAnswer();
+
 }

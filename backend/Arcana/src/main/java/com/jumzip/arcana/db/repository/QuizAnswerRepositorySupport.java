@@ -33,4 +33,16 @@ public class QuizAnswerRepositorySupport implements QuizAnswerRepository {
         return em.createQuery("select q from QuizAnswer q", QuizAnswer.class).getResultList();
     }
 
+    @Override
+    public List<QuizAnswer> resetQuizAnswer() {
+        TypedQuery<QuizAnswer> query = em.createQuery("select q from QuizAnswer q", QuizAnswer.class);
+        List<QuizAnswer> quizAnswerList = query.getResultList();
+
+        for (QuizAnswer quizAnswer : quizAnswerList) {
+            quizAnswer.setSelector(0);
+        }
+
+        return quizAnswerList;
+    }
+
 }
