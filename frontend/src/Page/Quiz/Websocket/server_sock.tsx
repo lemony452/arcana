@@ -1,5 +1,6 @@
-import * as StompJs from '@stomp/stompjs';
 import React, { useState } from 'react';
+import * as StompJs from '@stomp/stompjs';
+import { userInfoStore } from '../../../Store/User/info';
 
 function Chat() {
   const [id, changeId] = useState('');
@@ -10,8 +11,11 @@ function Chat() {
   const [client, changeClient] = useState<any>();
   const [subscription, changeSubscription] = useState<any>();
 
+  const { user } = userInfoStore();
+  const token = user.uid;
+
   const connect = async () => {
-    if (id === '') {
+    if (token === '') {
       return;
     }
 
@@ -70,7 +74,7 @@ function Chat() {
       destination: '/pub/enter',
       body: JSON.stringify({
         type: 'ENTER',
-        uid: 'SAMPLE UID',
+        uid: token,
         channel: 'quiz',
         data: 'entrance message',
       }),
