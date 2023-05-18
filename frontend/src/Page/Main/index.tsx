@@ -34,6 +34,14 @@ function Main() {
   // const [goLogin, setGoLogin] = useState(false);
   const { setIsTarotLog, isLogin, isSide, setIsSide, setGoLogin, user, setTarotLog, goLogin } = userInfoStore();
   // const cookie = getCookie('token');
+
+  const goServer = () => {
+    navigate('/server');
+  };
+  const goQuiz = () => {
+    navigate('/quiz');
+  };
+
   const toggleSide = () => {
     // if (cookie) {
     //   setIsOpen(true);
@@ -87,6 +95,13 @@ function Main() {
           <img src={Arcana} alt="title" />
         </TitleImg>
         <SubTitle>당신의 마음을 듣고 읽어주는 타로 프렌즈</SubTitle>
+        {/* 임시버튼 */}
+        <button type="submit" onClick={goQuiz}>
+          quiz
+        </button>
+        <button type="submit" onClick={goServer}>
+          server
+        </button>
       </TitleBox>
       <StyledCircle
         // animate={{ scale: [1, 1.05, 1] }}
