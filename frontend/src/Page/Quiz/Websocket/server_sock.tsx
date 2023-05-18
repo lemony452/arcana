@@ -3,8 +3,8 @@ import * as StompJs from '@stomp/stompjs';
 import { userInfoStore } from '../../../Store/User/info';
 
 function Chat() {
-  const [id, changeId] = useState('');
-  const onChangeId = (event: any) => changeId(event.target.value);
+  // const [id, changeId] = useState('');
+  // const onChangeId = (event: any) => changeId(event.target.value);
   const [message, changeMessage] = useState('');
   const onChangeMessage = (event: any) => changeMessage(event.target.value);
 
@@ -15,7 +15,7 @@ function Chat() {
   const token = user.uid;
 
   const connect = async () => {
-    if (id === '') {
+    if (token === '') {
       return;
     }
 
@@ -76,7 +76,7 @@ function Chat() {
       destination: '/pub/enter',
       body: JSON.stringify({
         type: 'ENTER',
-        uid: 'token',
+        uid: token,
         channel: 'quiz',
         data: 'entrance message',
       }),
@@ -87,7 +87,7 @@ function Chat() {
   return (
     <div>
       <h1>Chat</h1>
-      <input type="text" placeholder="아이디" value={id} onChange={onChangeId} />
+      {/* <input type="text" placeholder="아이디" value={id} onChange={onChangeId} /> */}
       <button type="submit" onClick={connect}>
         접속
       </button>
