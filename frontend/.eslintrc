@@ -1,0 +1,104 @@
+{
+    // 전역변수 환경 설정
+    "env": {
+      "browser": true,
+      "es6": true,
+      "node": true
+    },
+  
+    // npm을 통해 설치한 외부 ESLint 설정 등록 (eslint-config-{name}으로 설치)
+    "extends": [
+      "eslint:recommended",
+      // "plugin:react/recommend",
+      "plugin:@typescript-eslint/recommended",
+      "airbnb", // or airbnb
+      "prettier",
+      "prettier/prettier"
+    ],
+  
+    // ESLint에 지원할 JavaScript 옵션 설정
+    "parserOptions": {
+      "ecmaFeatures": {
+        "jsx": true
+      },
+      "ecmaVersion": 6,
+      "sourceType": "module",
+      "project": "**/tsconfig.json"
+    },
+  
+    // parser 등록
+    "parser": "@typescript-eslint/parser",
+  
+    // 사용자 규칙 추가할 플러그인 (eslint-plugin-{name}으로 설치)
+    "plugins": ["react", "react-hooks", "@typescript-eslint", "prettier"],
+  
+    // 플러그인을 통해 설치한 것 외에 규칙 설정
+    "rules": {
+      "prefer-const": [
+        "error",
+        {
+          "destructuring": "all",
+          "ignoreReadBeforeAssign": false
+        }
+      ],
+      "prettier/prettier": [
+        "error",
+        {
+          "endOfLine": "auto"
+        }
+      ],
+      "react/jsx-filename-extension": ["warn", { "extensions": [".js", ".jsx", ".ts", ".tsx"] }], // 확장자로 js와 jsx ts tsx 허용하도록 수정
+      "no-unused-vars": "off", // 사용하지 않는 변수가 있을때 빌드에러가 나던 규칙 해제
+      "@typescript-eslint/no-unused-vars": "warn",
+      "no-console": ["off"], // 콘솔을 쓰면 에러가 나던 규칙 해제
+      "import/prefer-default-export": ["off"], // export const 문을 쓸때 에러를 내는 규칙 해제
+      "react-hooks/exhaustive-deps": ["warn"], // hooks의 의존성배열이 충분하지 않을때 강제로 의존성을 추가하는 규칙을 완화
+      "react/jsx-props-no-spreading": [1, { "custom": "ignore" }], // props spreading을 허용하지 않는 규칙 해제
+      "import/extensions": [
+        // import나 extensions할 때 확장자 명이 있다면 error로 표시(단, .js .jsx .ts .tsx는 제외)
+        "error",
+        "ignorePackages",
+        {
+          "js": "never",
+          "jsx": "never",
+          "ts": "never",
+          "tsx": "never"
+        }
+      ],
+      "import/no-unresolved": [
+        "error",
+        {
+          "ignore": ["axios"]
+        }
+      ],
+      "import/no-extraneous-dependencies": [
+        "error",
+        {
+          "devDependencies": true,
+          "optionalDependencies": false,
+          "peerDependencies": false,
+          "packageDir": "./"
+        }
+      ],
+      "react-hooks/rules-of-hooks": "error",
+      "react/function-component-definition":[
+        2, 
+        { "namedComponents": [
+          "arrow-function", 
+          "function-declaration"
+        ] }
+      ]
+    },
+    // "import/no-unresolved": "off",
+    // import/no-unresolved 종류의 에러가 났을때 아래 사용 하니 없어짐
+    "settings": {
+      "import/resolver": {
+        "node": {
+          "extensions": [".js", ".jsx", ".ts", ".tsx"]
+        },
+        "typescript": {
+          "alwaysTryTypes": true
+        }
+      }
+    }
+  }
