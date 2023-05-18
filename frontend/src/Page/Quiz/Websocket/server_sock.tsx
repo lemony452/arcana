@@ -15,7 +15,7 @@ function Chat() {
   const token = user.uid;
 
   const connect = async () => {
-    if (token === '') {
+    if (id === '') {
       return;
     }
 
@@ -74,7 +74,7 @@ function Chat() {
       destination: '/pub/enter',
       body: JSON.stringify({
         type: 'ENTER',
-        uid: 'SAMPLE UID',
+        uid: 'token',
         channel: 'quiz',
         data: 'entrance message',
       }),
