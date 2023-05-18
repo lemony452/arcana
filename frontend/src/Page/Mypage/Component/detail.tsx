@@ -10,8 +10,6 @@ import {
   DetailDate,
   DetailQuestion,
   DetailFortune,
-  ReplayLucky,
-  ReplayTarots,
   MoveBtn,
   MoveBtnImg,
   ListIcon,
@@ -21,8 +19,7 @@ import {
 import { userInfoStore } from '../../../Store/User/info';
 import cardIcon from '../../../Assets/etc/cardIcon.png';
 import homeBtnImg from '../../../Assets/etc/homBtn.png';
-import Tarots from '../../../Assets/etc/tarots.png';
-import Lucky from '../../../Assets/etc/lucky.png';
+import backBtn from '../../../Assets/etc/backBtn.png';
 import ReplayTarotBtn from '../../../Assets/etc/replayTarotBtn.png';
 import ReplayLuckyBtn from '../../../Assets/etc/replayLuckyBtn.png';
 import Pagination from './pagination';
@@ -37,6 +34,11 @@ function TarotListDetail() {
   const MoveMain = () => {
     navigate('/');
   };
+
+  const MoveBack = () => {
+    navigate(-1);
+  };
+
   const { nickname, tarotLog } = userInfoStore();
   const [temp, setTemp] = useState(tarotLog);
   const reverseTemp = tarotLog.reverse();
@@ -145,7 +147,10 @@ function TarotListDetail() {
   return (
     <div style={{ position: 'relative' }}>
       <Side className="open detail">
-        <div style={{ position: 'absolute', left: 'calc(25vw - 4.5em)' }}>
+        <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
+          <MoveBtn className="back" type="button" onClick={MoveBack}>
+            <MoveBtnImg className="back" src={backBtn} alt="" />
+          </MoveBtn>
           <MoveBtn type="button" onClick={MoveMain}>
             <MoveBtnImg className="home" src={homeBtnImg} alt="" />
           </MoveBtn>
