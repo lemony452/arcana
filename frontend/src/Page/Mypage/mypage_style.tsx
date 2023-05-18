@@ -63,7 +63,7 @@ export const Nickname = styled.div`
   margin-bottom: 4vh;
 `;
 
-export const TarotToken = styled.div`
+export const TarotToken = styled.div<{ click: boolean }>`
   display: flex;
   font-size: 1.2em;
   font-weight: bold;
@@ -78,6 +78,7 @@ export const TarotToken = styled.div`
     margin-bottom: 2em;
     justify-content: center;
   }
+  cursor: ${(props) => (props.click ? 'pointer' : 'default')};
 `;
 
 export const ListContent = styled.div`
@@ -114,7 +115,7 @@ export const MoveBtn = styled.button`
 `;
 
 export const MoveBtnImg = styled.img`
-  width: 60%;
+  width: 3vh;
   margin-left: 0.5em;
   &.home {
     width: 2.5em;
@@ -139,11 +140,11 @@ export const TarotListContent = styled.div`
   }
 `;
 
-export const TitleBox = styled.div`
+export const TitleBox = styled.div<{ thisId: number; onDetail: number }>`
   display: flex;
   width: 75%;
   height: 2.5em;
-  background: #f4f4f4;
+  background: ${(props) => (props.thisId === props.onDetail ? '#A4A4A4' : '#f4f4f4')};
   border: 1.5px solid #000000;
   box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
@@ -251,7 +252,7 @@ export const DetailFortune = styled.div`
     padding: 0 2em 0 2em;
     margin: 2em 0 2em 0;
     white-space: pre-wrap;
-    overflow-y: scroll;
+    overflow-y: auto;
     ::-webkit-scrollbar {
       width: 5px;
     }
@@ -362,6 +363,7 @@ export const PaginationBtn = styled.button`
 `;
 
 export const HelpIcon = styled.img`
+  margin: auto;
   width: 1em;
   height: 1em;
 `;
@@ -371,6 +373,7 @@ export const Container = styled.div`
   width: fit-content;
   height: fit-content;
   display: inline-block;
+  margin-left: 7px;
 
   &:hover > .tooltip,
   &:active > .tooltip {

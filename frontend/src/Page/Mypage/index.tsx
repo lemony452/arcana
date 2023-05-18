@@ -2,8 +2,9 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 // import TarotList from './Component/TarotList';
 import UserInfo from './Component/UserInfo';
-import { Side, SideContent, LogoutBtn } from './mypage_style';
+import { Side, SideContent, LogoutBtn, MoveBtn, MoveBtnImg } from './mypage_style';
 import { userInfoStore } from '../../Store/User/info';
+import next from '../../Assets/etc/nextButton(reverse).png';
 
 function SideBar() {
   const outside = useRef<any>();
@@ -30,6 +31,11 @@ function SideBar() {
 
   return (
     <Side ref={outside} className={isSide ? 'open' : ''}>
+      <div style={{ position: 'absolute', left: 'calc(25vw - 4.5em)' }}>
+        <MoveBtn type="button" onClick={toggleSide}>
+          <MoveBtnImg className="home" src={next} alt="" />
+        </MoveBtn>
+      </div>
       <SideContent>
         <UserInfo />
       </SideContent>

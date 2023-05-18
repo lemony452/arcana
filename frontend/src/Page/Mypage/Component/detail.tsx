@@ -63,9 +63,9 @@ function TarotListDetail() {
   } else {
     initialOption += '✨';
   }
-
   const [replay, setReplay] = useState('');
   const [detailQuestion, setQuestion] = useState(temp[0].question);
+  const [onDetail, setOnDetail] = useState(0);
   const [detailOption, setOption] = useState(initialOption);
   const [detailDate, setDate] = useState(`${temp[0].datetime[0]}.${temp[0].datetime[1]}.${temp[0].datetime[2]}`);
   const [cardRes, setCardRes] = useState(temp[0].cardsResponse);
@@ -79,7 +79,18 @@ function TarotListDetail() {
     .fill(1)
     .map((x, y) => x + y);
   const cardlistIdx = [cardRes[1].cardIdx];
-  const luckycardIdx = cardRes[0].cardIdx;
+  useEffect(() => {
+    for (let i = 2; i < cardRes.length; i += 1) {
+      cardlistIdx[i - 1] = cardRes[i].cardIdx;
+    }
+    if (detailOption === '신년운세🐰') {
+      setReplay('year');
+    } else if (detailOption === '월별운세✨') {
+      setReplay('month');
+    } else {
+      setReplay('celtic');
+    }
+  }, []);
   const cardList = SliceTemp.map((value: any, idx: number) => {
     let valueOption = value.options;
     if (valueOption === '사랑운') {
@@ -93,11 +104,12 @@ function TarotListDetail() {
     } else {
       valueOption += '✨';
     }
-    const ShowDetail = () => {
+    const ShowDetail = (detailIdx: number) => {
       setDate(`${value.datetime[0]}.${value.datetime[1]}.${value.datetime[2]}`);
       setOption(valueOption);
       setQuestion(value.question);
       setCardRes(value.cardsResponse);
+      setOnDetail(detailIdx);
       if (valueOption === '신년운세🐰') {
         setReplay('year');
       } else if (valueOption === '월별운세✨') {
@@ -110,7 +122,14 @@ function TarotListDetail() {
       cardlistIdx[i - 1] = cardRes[i].cardIdx;
     }
     return (
-      <TitleBox key={arr[idx]} onClick={ShowDetail}>
+      <TitleBox
+        key={arr[idx]}
+        onClick={() => {
+          ShowDetail(idx);
+        }}
+        thisId={idx}
+        onDetail={onDetail}
+      >
         <div>{valueOption}</div>
         <div>{`${value.datetime[0]}.${value.datetime[1]}.${value.datetime[2]}`}</div>
       </TitleBox>
@@ -134,8 +153,7 @@ function TarotListDetail() {
   const [luckyModalOpen, setLuckyModalOpen] = useState(false); // modal
   const showModal = () => {
     setModalOpen(!modalOpen);
-    console.log(cardRes);
-    console.log(cardlistIdx);
+    console.log(replay);
   };
   const showLuckyCard = () => {
     setLuckyModalOpen(!luckyModalOpen);
@@ -150,7 +168,7 @@ function TarotListDetail() {
           </MoveBtn>
         </div>
         <TarotListContent className="detail">
-          <TarotToken className="detail">
+          <TarotToken className="detail" click={false}>
             {/* <ListContent>
             </ListContent> */}
             <ListIcon src={cardIcon} alt="" />
@@ -192,7 +210,7 @@ function TarotListDetail() {
         {replay === 'month' && modalOpen ? (
           <common.ModalBackdrop onClick={showModal}>
             <common.ModalView className="replay" onClick={(e) => e.stopPropagation()}>
-              <MonthSpread spreadList={cardlistIdx!} />
+              <MonthSpread spreadList={cardlistIdx} />
               <OptionBtn onClick={showModal}>닫기</OptionBtn>
             </common.ModalView>
           </common.ModalBackdrop>
@@ -200,7 +218,7 @@ function TarotListDetail() {
         {replay === 'year' && modalOpen ? (
           <common.ModalBackdrop onClick={showModal}>
             <common.ModalView className="replay" onClick={(e) => e.stopPropagation()}>
-              <YearSpread spreadList={cardlistIdx!} />
+              <YearSpread spreadList={cardlistIdx} />
               <OptionBtn onClick={showModal}>닫기</OptionBtn>
             </common.ModalView>
           </common.ModalBackdrop>
@@ -208,7 +226,7 @@ function TarotListDetail() {
         {replay === 'celtic' && modalOpen ? (
           <common.ModalBackdrop onClick={showModal}>
             <common.ModalView className="replay" onClick={(e) => e.stopPropagation()}>
-              <CelticSpread spreadList={cardlistIdx!} />
+              <CelticSpread spreadList={cardlistIdx} />
               <OptionBtn onClick={showModal}>닫기</OptionBtn>
             </common.ModalView>
           </common.ModalBackdrop>
