@@ -152,7 +152,9 @@ function Celtic() {
         {next ? (
           <form style={{ display: 'flex', alignItems: 'center' }} onSubmit={saveInput}>
             <InputText ref={inputValueRef} type="text" placeholder="고민을 입력해주세요" />
-            <SubmitBtn />
+            <SubmitBtn>
+              <img src={submitBtn} alt="btn" />
+            </SubmitBtn>
           </form>
         ) : (
           <>
