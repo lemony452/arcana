@@ -82,7 +82,7 @@ function Quiz() {
   });
 
   // 퀴즈 풀이시간 카운트 다운s
-  const second = String(Math.floor((timeLeft / 1000) % 60)).padStart(2, '0');
+  const second = String(Math.floor((timeLeft / 1000) % 9999)).padStart(2, '0');
   useEffect(() => {
     const timer = setInterval(() => {
       setTimeLeft((prevTime) => prevTime - INTERVAL);
@@ -143,18 +143,20 @@ function Quiz() {
   if (index === 0) {
     return (
       <quizStyle.FullArea>
-        <quizStyle.LeftArea>
-          <quizStyle.CharacterDialog>오늘도 완주를 향해 화이팅!</quizStyle.CharacterDialog>
-          {/* 아래 onNext는 백엔드 서버에서 시간 받으면 자동으로 실행되게끔 구현해두어여함 */}
-          <quizStyle.CharacterArea onClick={startQuiz}>
-            <DialogNPC src={charDialog0} />
-          </quizStyle.CharacterArea>
-        </quizStyle.LeftArea>
+        <quizStyle.CharacterArea onClick={startQuiz}>
+          <DialogNPC src={charDialog0} />
+        </quizStyle.CharacterArea>
+        {/* <quizStyle.LeftArea>
+          <quizStyle.CharacterDialog>오늘도 완주를 향해 화이팅!</quizStyle.CharacterDialog> */}
+        {/* 아래 onNext는 백엔드 서버에서 시간 받으면 자동으로 실행되게끔 구현해두어여함 */}
+        {/* </quizStyle.LeftArea>
         <quizStyle.RightArea>
-          <quizStyle.TimerDivide>시작까지 남은 시간</quizStyle.TimerDivide>
-          <quizStyle.TimerDivide>{realTime}</quizStyle.TimerDivide>
-          <quizStyle.PeopleArea>현재 참여 인원</quizStyle.PeopleArea>
-        </quizStyle.RightArea>
+          <quizStyle.TimerArea>시작까지 남은 시간</quizStyle.TimerArea>
+        </quizStyle.RightArea> */}
+        <quizStyle.StartArea>
+          <quizStyle.TimerArea>{realTime}</quizStyle.TimerArea>
+          <quizStyle.PeopleArea>명 참여중</quizStyle.PeopleArea>
+        </quizStyle.StartArea>
       </quizStyle.FullArea>
     );
   }
@@ -180,7 +182,7 @@ function Quiz() {
     if (fail === true) {
       return (
         <quizStyle.FullArea>
-          {loading ? <p>Loading Questions...</p> : null}
+          {/* {loading ? <p>Loading Questions...</p> : null}
           <quizStyle.LeftArea>
             <quizStyle.CharacterDialog>앗 오답이었어요.</quizStyle.CharacterDialog>
             <quizStyle.CharacterArea onClick={goHome}>틀렸으니 다음기회에</quizStyle.CharacterArea>
@@ -188,13 +190,17 @@ function Quiz() {
           <quizStyle.RightArea>
             <quizStyle.TimerArea>정답자 수를 보여주는 자리 (생존자)</quizStyle.TimerArea>
             <quizStyle.PeopleArea>정답률 그래프가 들어갈 자리</quizStyle.PeopleArea>
-          </quizStyle.RightArea>
+          </quizStyle.RightArea> */}
+          <quizStyle.StartArea>
+            <quizStyle.TimerArea>탈락하셨습니다</quizStyle.TimerArea>
+            <quizStyle.PeopleArea onClick={goHome}>메인으로 돌아가기</quizStyle.PeopleArea>
+          </quizStyle.StartArea>
         </quizStyle.FullArea>
       );
     }
     return (
       <quizStyle.FullArea>
-        {loading ? <p>Loading Questions...</p> : null}
+        {/* {loading ? <p>Loading Questions...</p> : null}
         <quizStyle.LeftArea>
           <quizStyle.CharacterDialog>
             {!gameOver ? <p className="score">Score: {score}</p> : null}
@@ -204,7 +210,11 @@ function Quiz() {
         <quizStyle.RightArea>
           <quizStyle.TimerArea>정답자 수를 보여주는 자리 (생존자)</quizStyle.TimerArea>
           <quizStyle.PeopleArea>정답률 그래프가 들어갈 자리</quizStyle.PeopleArea>
-        </quizStyle.RightArea>
+        </quizStyle.RightArea> */}
+        <quizStyle.StartArea>
+          <quizStyle.TimerArea>정답입니다!</quizStyle.TimerArea>
+          <quizStyle.PeopleArea onClick={nextQuestion}>다음 문제로</quizStyle.PeopleArea>
+        </quizStyle.StartArea>
       </quizStyle.FullArea>
     );
   }
@@ -229,7 +239,7 @@ function Quiz() {
     }
     return (
       <quizStyle.FullArea>
-        <quizStyle.LeftArea>
+        {/* <quizStyle.LeftArea>
           <quizStyle.CharacterDialog>모든 문제를 다 풀었어요!</quizStyle.CharacterDialog>
           <quizStyle.CharacterArea onClick={showModal}>
             <DialogNPC src={charDialog0} />
@@ -249,7 +259,11 @@ function Quiz() {
         <quizStyle.RightArea>
           <quizStyle.TimerArea>정답자 수를 보여주는 자리 (생존자)</quizStyle.TimerArea>
           <quizStyle.PeopleArea>정답률 그래프가 들어갈 자리</quizStyle.PeopleArea>
-        </quizStyle.RightArea>
+        </quizStyle.RightArea> */}
+        <quizStyle.StartArea>
+          <quizStyle.TimerArea>모든 문제를 다 풀었어요!</quizStyle.TimerArea>
+          <quizStyle.PeopleArea onClick={goHome}>보상으로 토큰을 줄게요</quizStyle.PeopleArea>
+        </quizStyle.StartArea>
       </quizStyle.FullArea>
     );
   }
