@@ -31,17 +31,20 @@ import toastProfile from '../../../Assets/characters/toastProfile.png';
 import kittyProfile from '../../../Assets/characters/kittyProfile.png';
 import { API } from '../../../API';
 import UserInfo from './UserInfo';
+import { useCardStore } from '../../../Store/Main/main';
 
 function EditUserInfo() {
   const [edit, setEdit] = useState(false);
   const editRef = useRef<HTMLInputElement>(null);
   const { nickname, setNickname, user, setIsLogin, setIsSide, profileChar } = userInfoStore();
+  const { setCardOrder } = useCardStore();
   const editNickname = () => {
     setEdit(true);
   };
 
   const navigate = useNavigate();
   const MoveMain = () => {
+    setCardOrder('celtic');
     navigate('/');
   };
 
@@ -89,8 +92,8 @@ function EditUserInfo() {
 
   return (
     <div style={{ position: 'relative' }}>
-      <Side className="open detail">
-        <div style={{ position: 'absolute', left: 'calc(25vw - 4.5em)' }}>
+      <Side className="open detail edit">
+        <div style={{ position: 'absolute', left: 'calc(25vw - 4.5em)', top: 0 }}>
           <MoveBtn type="button" onClick={MoveMain}>
             <MoveBtnImg className="home" src={homeBtnImg} alt="" />
           </MoveBtn>

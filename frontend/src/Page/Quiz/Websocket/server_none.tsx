@@ -1,16 +1,32 @@
 import React, { useState, useEffect, useRef } from 'react';
 import SockJS from 'sockjs-client';
-import { Stomp } from '@stomp/stompjs';
+import { Client, Stomp } from '@stomp/stompjs';
 import { userInfoStore } from '../../../Store/User/info';
 
 function Socket() {
   const sock = new SockJS(`https://k8d107.p.ssafy.io/ws`);
   const stomp = Stomp.over(sock);
+  const { user } = userInfoStore();
+  const token = user.uid;
 
   stomp.onConnect = function (frame) {
     // Do something, all subscribes must be done is this callback
     // This is needed because this will be executed after a (re)connect
     console.log(frame);
+    const data = {
+      type: 'enter',
+      uid: token,
+      channel: 'quiz',
+      data: 'enterance message',
+    };
+    stomp.subscribe(
+      `/sub/channel/quiz`,
+      function (response) {
+        console.log(response);
+        console.log(JSON.parse(response.body));
+      },
+      // { id: token },
+    );
   };
 
   stomp.onStompError = function (frame) {

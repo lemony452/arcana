@@ -20,6 +20,11 @@ export const Side = styled.div`
   }
   &.detail {
     width: 25vw;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+  &.edit {
+    justify-content: center;
   }
 `;
 
@@ -74,7 +79,7 @@ export const TarotToken = styled.div<{ click: boolean }>`
   margin: 3vh 0 0 0;
   &.detail {
     font-size: 1.6em;
-    margin-top: 5em;
+    margin-top: 2em;
     margin-bottom: 2em;
     justify-content: center;
   }
@@ -112,6 +117,10 @@ export const MoveBtn = styled.button`
   &.replay {
     width: 10em;
   }
+  &.back {
+    margin: 0.5em 0 0 0.5em;
+    width: 37%;
+  }
 `;
 
 export const MoveBtnImg = styled.img`
@@ -123,6 +132,10 @@ export const MoveBtnImg = styled.img`
   }
   &.replay {
     margin-left: 0;
+    width: 100%;
+  }
+  &.back {
+    margin-left: -2em;
     width: 100%;
   }
 `;
