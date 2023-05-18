@@ -1,0 +1,266 @@
+[
+  {
+    "idx": 0,
+    "content": "다음 카드와 관련없는 키워드는?",
+    "answer": "죽음",
+    "wrong1": "출발",
+    "wrong2": "여행",
+    "wrong3": "도전",
+    "card": {
+      "idx": 0,
+      "name": "The Fool"
+    }
+  },
+  {
+    "idx": 1,
+    "content": "다음 카드와 관련있는 키워드는?",
+    "answer": "다재다능",
+    "wrong1": "실패",
+    "wrong2": "노력",
+    "wrong3": "무료함",
+    "card": {
+      "idx": 1,
+      "name": "The Magician"
+    }
+  },
+  {
+    "idx": 2,
+    "content": "다음 카드와 관련없는 키워드는?",
+    "answer": "모호함",
+    "wrong1": "조언",
+    "wrong2": "파괴",
+    "wrong3": "순수함",
+    "card": {
+      "idx": 2,
+      "name": "The High Priestess"
+    }
+  },
+  {
+    "idx": 3,
+    "content": "다음 카드와 관련있는 키워드는?",
+    "answer": "풍요",
+    "wrong1": "빈곤",
+    "wrong2": "다툼",
+    "wrong3": "불안감",
+    "card": {
+      "idx": 3,
+      "name": "The Empress"
+    }
+  },
+  {
+    "idx": 4,
+    "content": "다음 카드와 관련없는 키워드는?",
+    "answer": "지루함",
+    "wrong1": "고독함",
+    "wrong2": "성공",
+    "wrong3": "리더십",
+    "card": {
+      "idx": 4,
+      "name": "The Emperor"
+    }
+  },
+  {
+    "idx": 5,
+    "content": "다음 카드와 관련있는 키워드는?",
+    "answer": "도덕",
+    "wrong1": "의심",
+    "wrong2": "불신",
+    "wrong3": "혼돈",
+    "card": {
+      "idx": 5,
+      "name": "The Hierophant"
+    }
+  },
+  {
+    "idx": 6,
+    "content": "다음 카드와 관련없는 키워드는?",
+    "answer": "부끄러움",
+    "wrong1": "편안함",
+    "wrong2": "사랑",
+    "wrong3": "설렘",
+    "card": {
+      "idx": 6,
+      "name": "The Lovers"
+    }
+  },
+  {
+    "idx": 7,
+    "content": "다음 카드와 관련있는 키워드는?",
+    "answer": "용감함",
+    "wrong1": "무모함",
+    "wrong2": "피로",
+    "wrong3": "패배",
+    "card": {
+      "idx": 7,
+      "name": "The Chariot"
+    }
+  },
+  {
+    "idx": 8,
+    "content": "다음 카드와 관련없는 키워드는?",
+    "answer": "제압",
+    "wrong1": "유대감",
+    "wrong2": "신뢰",
+    "wrong3": "노력",
+    "card": {
+      "idx": 8,
+      "name": "Strength"
+    }
+  },
+  {
+    "idx": 9,
+    "content": "다음 카드와 관련있는 키워드는?",
+    "answer": "탐구",
+    "wrong1": "추위",
+    "wrong2": "피곤함",
+    "wrong3": "변화",
+    "card": {
+      "idx": 9,
+      "name": "The Hermit"
+    }
+  },
+  {
+    "idx": 10,
+    "content": "다음 카드와 관련없는 키워드는?",
+    "answer": "운명의 장난",
+    "wrong1": "순환",
+    "wrong2": "행운",
+    "wrong3": "숙명",
+    "card": {
+      "idx": 10,
+      "name": "Wheel of Fortune"
+    }
+  },
+  {
+    "idx": 11,
+    "content": "다음 카드와 관련있는 키워드는?",
+    "answer": "공정",
+    "wrong1": "사기",
+    "wrong2": "사랑",
+    "wrong3": "이별",
+    "card": {
+      "idx": 11,
+      "name": "Justice"
+    }
+  },
+  {
+    "idx": 12,
+    "content": "다음 카드와 관련없는 키워드는?",
+    "answer": "편안함",
+    "wrong1": "고민",
+    "wrong2": "희생",
+    "wrong3": "각오",
+    "card": {
+      "idx": 12,
+      "name": "The Hanged Man"
+    }
+  },
+  {
+    "idx": 13,
+    "content": "다음 카드와 관련있는 키워드는?",
+    "answer": "전환점",
+    "wrong1": "재도전",
+    "wrong2": "집착",
+    "wrong3": "평화",
+    "card": {
+      "idx": 13,
+      "name": "Death"
+    }
+  },
+  {
+    "idx": 14,
+    "content": "다음 카드와 관련없는 키워드는?",
+    "answer": "분리",
+    "wrong1": "조절",
+    "wrong2": "능수능란",
+    "wrong3": "거침없음",
+    "card": {
+      "idx": 14,
+      "name": "Temperance"
+    }
+  },
+  {
+    "idx": 15,
+    "content": "다음 카드와 관련있는 키워드는?",
+    "answer": "유혹",
+    "wrong1": "질서",
+    "wrong2": "안정",
+    "wrong3": "후회",
+    "card": {
+      "idx": 15,
+      "name": "The Devil"
+    }
+  },
+  {
+    "idx": 16,
+    "content": "다음 카드와 관련없는 키워드는?",
+    "answer": "흥미로움",
+    "wrong1": "파괴",
+    "wrong2": "변화",
+    "wrong3": "충격",
+    "card": {
+      "idx": 16,
+      "name": "The Tower"
+    }
+  },
+  {
+    "idx": 17,
+    "content": "다음 카드와 관련있는 키워드는?",
+    "answer": "포기",
+    "wrong1": "희망",
+    "wrong2": "순수함",
+    "wrong3": "이상향",
+    "card": {
+      "idx": 95,
+      "name" : "The Star (Reversed)"
+    }
+  },
+  {
+    "idx": 18,
+    "content": "다음 카드와 관련없는 키워드는?",
+    "answer": "애달픔",
+    "wrong1": "회피",
+    "wrong2": "고민해결",
+    "wrong3": "현실",
+    "card": {
+      "idx": 96,
+      "name" : "The Moon (Reversed)"
+    }
+  },
+  {
+    "idx": 19,
+    "content": "다음 카드와 관련있는 키워드는?",
+    "answer": "멍때림",
+    "wrong1": "일출",
+    "wrong2": "행복함",
+    "wrong3": "편안함",
+    "card": {
+      "idx": 97,
+      "name" : "The Sun (Reversed)"
+    }
+  },
+  {
+    "idx": 20,
+    "content": "다음 카드와 관련없는 키워드는?",
+    "answer": "회복",
+    "wrong1": "좌절",
+    "wrong2": "일을 미룸",
+    "wrong3": "심판",
+    "card": {
+      "idx": 98,
+      "name" : "Judgement (Reversed)"
+    }
+  },
+  {
+    "idx": 21,
+    "content": "다음 카드와 관련있는 키워드는?",
+    "answer": "쾌락",
+    "wrong1": "성공",
+    "wrong2": "깨달음",
+    "wrong3": "사랑",
+    "card": {
+      "idx": 99,
+      "name": "The World (Reversed)"
+    }
+  }
+]
