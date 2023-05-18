@@ -14,6 +14,7 @@ import CelticDetail from './Page/Celtic/detail';
 import Instant from './Page/Instant';
 import SpreadCard from './Page/Spread/spread_card';
 import Quiz from './Page/Quiz';
+import Pseudo from './Page/Quiz/pseudo_index';
 import { KakaoRedirect } from './Page/Login/redirect';
 import TarotListDetail from './Page/Mypage/Component/detail';
 // import Socket from './Page/Quiz/Websocket/NA/server';
@@ -45,6 +46,7 @@ function App() {
         <Route path="/celtic/detail" element={<CelticDetail />} />
         <Route path="/spread" element={<SpreadCard />} />
         <Route path="/quiz" element={<Quiz />} />
+        <Route path="/pseudo" element={<Pseudo />} />
         {/* 아래 4개는 소켓연결을 위한 임시 링크들 입니다 */}
         {/* <Route path="/test" element={<Test />} /> */}
         <Route path="/server" element={<Socket />} />
