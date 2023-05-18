@@ -26,7 +26,7 @@ function Chat() {
 
     try {
       const clientdata = await new StompJs.Client({
-        brokerURL: 'https://k8d107.p.ssafy.io/ws',
+        brokerURL: 'wss://k8d107.p.ssafy.io/ws/websocket',
         // connectHeaders: {
         //   login: id,
         //   passcode: 'password',
