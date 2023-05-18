@@ -31,17 +31,20 @@ import toastProfile from '../../../Assets/characters/toastProfile.png';
 import kittyProfile from '../../../Assets/characters/kittyProfile.png';
 import { API } from '../../../API';
 import UserInfo from './UserInfo';
+import { useCardStore } from '../../../Store/Main/main';
 
 function EditUserInfo() {
   const [edit, setEdit] = useState(false);
   const editRef = useRef<HTMLInputElement>(null);
   const { nickname, setNickname, user, setIsLogin, setIsSide, profileChar } = userInfoStore();
+  const { setCardOrder } = useCardStore();
   const editNickname = () => {
     setEdit(true);
   };
 
   const navigate = useNavigate();
   const MoveMain = () => {
+    setCardOrder('celtic');
     navigate('/');
   };
 

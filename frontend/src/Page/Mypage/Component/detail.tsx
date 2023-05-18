@@ -28,10 +28,13 @@ import MonthSpread from '../../Time/Month/month_spread';
 import CelticSpread from '../../Celtic/celtic_spread';
 import * as common from '../../Common/common_style';
 import { OptionBtn } from '../../../Common/common_styled';
+import { useCardStore } from '../../../Store/Main/main';
 
 function TarotListDetail() {
   const navigate = useNavigate();
+  const { setCardOrder } = useCardStore();
   const MoveMain = () => {
+    setCardOrder('celtic');
     navigate('/');
   };
 
