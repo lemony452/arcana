@@ -15,7 +15,7 @@ function Chat() {
   const token = user.uid;
 
   const connect = async () => {
-    if (token === '') {
+    if (id === '') {
       return;
     }
 
