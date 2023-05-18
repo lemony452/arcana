@@ -121,6 +121,14 @@ export const MoveBtn = styled.button`
     margin: 0.5em 0 0 0.5em;
     width: 37%;
   }
+  &.close {
+    margin-top: 15px;
+    display: flex;
+    align-items: center;
+    font-size: 1.5em;
+    width: 7em;
+    font-weight: bold;
+  }
 `;
 
 export const MoveBtnImg = styled.img`
@@ -137,6 +145,10 @@ export const MoveBtnImg = styled.img`
   &.back {
     margin-left: -2em;
     width: 100%;
+  }
+  &.close {
+    height: 1em;
+    margin-right: 4px;
   }
 `;
 
@@ -257,7 +269,7 @@ export const DetailFortune = styled.div`
   color: #3a3a3a;
   text-align: left;
   &.edit {
-    padding: 2em 2em 2em 2.5em;
+    padding: 0em 2em 2em 2.5em;
     justify-content: center;
     padding: 0, 0, 0, 0;
   }
@@ -323,7 +335,7 @@ export const EditUser = styled.div`
   /* margin: 0 4em 0 4em; */
   &.email {
     height: 25%;
-    margin-top: 3em;
+    margin-top: 2em;
   }
 `;
 
