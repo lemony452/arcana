@@ -12,10 +12,11 @@ import { API } from '../../API';
 
 export function GoogleLogin() {
   // 구글 인가 코드 요청
-  const { setUser, setIsLogin, setNickname, user, setWeekly, setTicket, setGoLogin } = userInfoStore();
+  const { setProfileChar, setUser, setIsLogin, setNickname, user, setWeekly, setTicket, setGoLogin } = userInfoStore();
   let isUser = false;
   let userData: any;
   const login = async () => {
+    const num = Math.floor(Math.random() * 3); // 0, 1, 2 난수
     const provider = new GoogleAuthProvider();
     await signInWithPopup(auth, provider)
       .then((data) => {
@@ -24,6 +25,7 @@ export function GoogleLogin() {
         setNickname(userData.displayName!);
         setIsLogin(true);
         setUser({ uid: userData.uid, email: userData.email, providerId: 'Google' });
+        setProfileChar(num);
       })
       .catch((err) => {
         console.log(err);

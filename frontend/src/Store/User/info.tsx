@@ -18,6 +18,7 @@ interface InfoState {
   token: number;
   tarotLog: any;
   isTarotLog: boolean;
+  profileChar: number;
   setUser: (user: any) => void;
   setNickname: (name: string) => void;
   setTarotToken: (t: number) => void;
@@ -29,6 +30,7 @@ interface InfoState {
   setToken: (t: number) => void;
   setTarotLog: (tarot: any) => void;
   setIsTarotLog: (t: boolean) => void;
+  setProfileChar: (c: number) => void;
 }
 
 export const userInfoStore = create<InfoState>((set) => ({
@@ -47,6 +49,7 @@ export const userInfoStore = create<InfoState>((set) => ({
   token: 0,
   tarotLog: [],
   isTarotLog: false,
+  profileChar: 0,
   setUser: (u) => {
     set(() => ({ user: u }));
   },
@@ -79,5 +82,8 @@ export const userInfoStore = create<InfoState>((set) => ({
   },
   setIsTarotLog: (t) => {
     set(() => ({ isTarotLog: t }));
+  },
+  setProfileChar: (c) => {
+    set(() => ({ profileChar: c }));
   },
 }));
