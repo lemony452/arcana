@@ -89,8 +89,8 @@ function EditUserInfo() {
 
   return (
     <div style={{ position: 'relative' }}>
-      <Side className="open detail">
-        <div style={{ position: 'absolute', left: 'calc(25vw - 4.5em)' }}>
+      <Side className="open detail edit">
+        <div style={{ position: 'absolute', left: 'calc(25vw - 4.5em)', top: 0 }}>
           <MoveBtn type="button" onClick={MoveMain}>
             <MoveBtnImg className="home" src={homeBtnImg} alt="" />
           </MoveBtn>
