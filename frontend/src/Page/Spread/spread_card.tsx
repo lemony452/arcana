@@ -12,23 +12,40 @@ function SpreadCard() {
   const [needCardNum, setNeedCardNum] = useState<number>(0);
   const [selectedCardList, setSelectedCardList] = useState<number[]>([]);
   const [confirmedCard, setConfirmedCard] = useState<boolean>(false);
+  const [spreadContent, setSpreadContent] = useState<string>('');
+
+  let color;
+  if (location.state === 'celtic') {
+    color = '#cba1ff';
+  } else if (location.state === 'year') {
+    color = '#ff945e';
+  } else if (location.state === 'month') {
+    color = '#ff945e';
+  } else {
+    color = '#ff74b6';
+  }
 
   // 필요한 카드 갯수
   useEffect(() => {
     if (location.state === 'celtic') {
       setNeedCardNum(10);
+      setSpreadContent('카드를 10장 선택해');
     }
     if (location.state === 'year') {
       setNeedCardNum(12);
+      setSpreadContent('카드를 12장 선택해보게');
     }
     if (location.state === 'month') {
       setNeedCardNum(6);
+      setSpreadContent('카드를 6장 선택해보게');
     }
     if (location.state === 'three') {
       setNeedCardNum(4);
+      setSpreadContent('카드를 4장 선택해주세요');
     }
     if (location.state === 'two') {
       setNeedCardNum(3);
+      setSpreadContent('카드를 3장 선택해주세요');
     }
   }, []);
 
@@ -75,8 +92,6 @@ function SpreadCard() {
     move: { opacity: [1], y: [0, 40, -500], transition: { delay: 2, duration: 0.7, ease: 'easeIn' } },
   };
 
-  const spreadContent = `카드를 ${needCardNum}장 선택해주세요`;
-
   return (
     <spreadCard.Body>
       {/* <spreadCard.NumBody>
@@ -98,7 +113,7 @@ function SpreadCard() {
           />
         ))}
       </spreadCard.CardBody>
-      <spreadCard.NumBody>
+      <spreadCard.NumBody color={color}>
         <spreadCard.Num
           key={selectedCardList.length}
           initial={{ rotateY: -180 }}
