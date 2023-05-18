@@ -24,23 +24,26 @@ const QuestionCard: React.FC<Props> = ({
   totalQuestions,
   timeCount,
 }) => (
-  <quizStyle.FullArea>
-    <quizStyle.LeftCard>
-      Question: {questionNr} / {totalQuestions}
-      <quizStyle.CardArea>
-        <img src={`https://k8d107.p.ssafy.io/api/v1/images/${cardIdx}.png`} alt="questCard" />
-      </quizStyle.CardArea>
-    </quizStyle.LeftCard>
+  <quizStyle.FullArea className="questionCard">
+    {/* <quizStyle.LeftCard> */}
+    {/* Question: {questionNr} / {totalQuestions} */}
+    <quizStyle.CardArea>
+      <img src={`https://k8d107.p.ssafy.io/api/v1/images/${cardIdx}.png`} alt="questCard" />
+    </quizStyle.CardArea>
+    {/* </quizStyle.LeftCard> */}
     <quizStyle.RightArea>
-      <quizStyle.TimerDivide>
-        <p>{timeCount}</p>
-      </quizStyle.TimerDivide>
-      <quizStyle.TimerDivide>
-        <p dangerouslySetInnerHTML={{ __html: question }} />
-      </quizStyle.TimerDivide>
-      <div>
-        {answers.map((answer) => (
+      <div style={{ display: 'flex', alignItems: 'center' }}>
+        <quizStyle.Question>
+          <p dangerouslySetInnerHTML={{ __html: question }} />
+        </quizStyle.Question>
+        <quizStyle.TimerDivide>
+          <p>{timeCount}</p>
+        </quizStyle.TimerDivide>
+      </div>
+      <quizStyle.QuestBoxDiv>
+        {answers.map((answer, idx) => (
           <quizStyle.QuestBox
+            num={idx}
             key={answer}
             correct={userAnswer?.correctAnswer === answer}
             userClicked={userAnswer?.answer === answer}
@@ -50,7 +53,7 @@ const QuestionCard: React.FC<Props> = ({
             </button>
           </quizStyle.QuestBox>
         ))}
-      </div>
+      </quizStyle.QuestBoxDiv>
     </quizStyle.RightArea>
   </quizStyle.FullArea>
 );

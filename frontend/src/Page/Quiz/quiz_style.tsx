@@ -1,10 +1,71 @@
 import styled from 'styled-components';
+import quizBgImg from '../../Assets/quiz/quizBgImg.png';
 
 export const FullArea = styled.div`
   width: 100vw;
   height: 100vh;
   background-color: #00490d;
   display: flex;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: url(${quizBgImg});
+  &.waiting {
+    position: relative;
+  }
+  &.quizNumber {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* opacity: 0.4; */
+    /* background: rgba(0, 0, 0, 0.5); */
+  }
+  &.questionCard {
+    justify-content: space-around;
+    align-items: center;
+  }
+`;
+
+export const TimeLeftStyle = styled.div`
+  font-weight: bold;
+  &.count {
+    margin-top: 0.4em;
+    font-size: 4.5em;
+  }
+  &.realtime {
+    font-family: Digital;
+    font-size: 8em;
+  }
+`;
+
+export const QuizNumber = styled.div`
+  display: flex;
+  width: 80vh;
+  height: 80vh;
+  background: #f4f4f4;
+  border-radius: 100%;
+  font-size: 20em;
+  font-weight: 800;
+  color: #ffc700;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const WaitingCard = styled.div`
+  position: absolute;
+  left: 50vw;
+  top: 50vh;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 61.4vw;
+  height: 58.2vh;
+  background: #f4f4f4;
+  border: 5px solid #eaeaea;
+  box-shadow: 0px 10px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 98px;
 `;
 
 export const LeftArea = styled.div`
@@ -20,8 +81,8 @@ export const LeftCard = styled(LeftArea)`
 `;
 
 export const RightArea = styled.div`
-  width: 50%;
-  height: 100%;
+  width: auto;
+  /* height: 100%; */
   /* background-color: blue; */
 `;
 
@@ -65,16 +126,22 @@ export const PeopleArea = styled.div`
 `;
 
 export const CardArea = styled.div`
-  height: 80%;
+  height: 86.6vh;
   aspect-ratio: 3 / 5;
-  background-color: gold;
+  /* background-color: gold; */
   display: flex;
 `;
 
 type QuestBoxProps = {
   correct: boolean;
   userClicked: boolean;
+  num: number;
 };
+
+export const QuestBoxDiv = styled.div`
+  width: 100%;
+  height: 100%;
+`;
 
 export const QuestBox = styled.div<QuestBoxProps>`
   width: 100%;
@@ -95,10 +162,13 @@ export const QuestBox = styled.div<QuestBoxProps>`
     height: 100px;
     width: 45%;
     /* margin: 5px 0; */
-    background-color: blue;
-    border: 3px solid #ffffff;
-    box-shadow: 1px 2px 0px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
+    background-color: ${(props) => (props.num === 0 ? '#FF74B6' : '#ffff')};
+    background-color: ${(props) => (props.num === 1 ? '#FF945E' : '#ffff')};
+    background-color: ${(props) => (props.num === 2 ? '#CBA1FF' : '#ffff')};
+    background-color: ${(props) => (props.num === 3 ? '#63BDFF' : '#ffff')};
+    border: 15px solid #ffffff;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
     color: #fff;
     text-shadow: 0px 1px 0px rgba(0, 0, 0, 0.25);
   }
@@ -111,13 +181,32 @@ export const QuestArea = styled.div`
 `;
 
 export const TimerDivide = styled.div`
-  width: 100%;
-  height: 25%;
-  color: ivory;
-  font-size: 3em;
+  width: 21.6vh;
+  height: 21.6vh;
+  color: #ffff;
+  font-size: 4.5em;
+  font-weight: 800;
   display: flex;
   justify-content: center;
-  /* background-color: skyblue; */
+  align-items: center;
+  background: #ffc700;
+  border-radius: 100%;
+`;
+
+export const Question = styled.div`
+  width: 50vw;
+  height: 15vh;
+  background: white;
+  font-size: 2.8em;
+  font-weight: 600;
+  background: #f4f4f4;
+  border: 5px solid #eaeaea;
+  box-shadow: 0px 10px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 47px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 `;
 
 // cv한거

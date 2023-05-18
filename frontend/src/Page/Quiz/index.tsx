@@ -28,6 +28,10 @@ function Quiz() {
   const [gameOver, setGameOver] = useState(true);
   const [fail, setFail] = useState(false);
   const [realTime, setRealTime] = useState('00:00:00');
+  const [incorrectAns, setIncorrectAns] = useState('');
+  const [isStop, setIsStop] = useState(false);
+  const [intervalId, setIntervalId] = useState<any>();
+  const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
   const MINUTES_IN_MS = 0;
@@ -38,6 +42,7 @@ function Quiz() {
   const startQuiz = async () => {
     setLoading(true);
     setGameOver(false);
+    setIsLoading(true); // 문제 번호 띄우는 로딩
     const newQuestions = await fetchQuizQuestions(TOTAL_QUESTIONS);
     setQuestions(newQuestions);
     setScore(0);
@@ -74,12 +79,26 @@ function Quiz() {
       });
       // const date = new Date();
     };
-    const startTimer = () => {
-      setInterval(() => serverTime(), 1000);
-    };
+    // const startTimer = () => {
+    //   const temp = setInterval(() => {
+    //     serverTime();
+    //     if (isStop) {
+    //       console.log('interval', temp);
+    //       clearInterval(temp);
+    //     }
+    //   }, 1000);
+    // };
 
-    startTimer();
-  });
+    // startTimer();
+    let timer;
+    if (!isStop) {
+      timer = setInterval(() => serverTime(), 1000);
+      console.log(timer);
+    } else {
+      console.log('interval clear!!!!!!!!!!!!!!!!!!!!');
+      clearInterval(timer);
+    }
+  }, []);
 
   // 퀴즈 풀이시간 카운트 다운s
   const second = String(Math.floor((timeLeft / 1000) % 60)).padStart(2, '0');
@@ -102,11 +121,21 @@ function Quiz() {
     if (!gameOver) {
       // User's answer
       const answer = e.currentTarget.value;
+      console.log(answer);
+      API.post(`/api/v1/quiz/answer`, {
+        quizIdx: number + 1,
+        answerIdx: answer,
+      }).then((res) => {
+        console.log(res);
+      });
       // Check answer against correct answer
       const correct = questions[number].answer === answer;
       // Add score if answer is correct
       if (correct) setScore((prev) => prev + 1);
-      if (!correct) setFail(true);
+      if (!correct) {
+        setFail(true);
+        setIncorrectAns(answer);
+      }
       // Save the answer in the array for user answers
       const answerObject = {
         question: questions[number].content,
@@ -123,6 +152,7 @@ function Quiz() {
 
   // 다음 문제로
   const nextQuestion = () => {
+    setIsLoading(true);
     return [setNumber(number + 1), setTimeLeft(MINUTES_IN_MS + 600 * 1000)];
   };
   console.log('question', number + 1);
@@ -136,29 +166,39 @@ function Quiz() {
 
   // 메인으로 보내기
   const goHome = () => {
+    setIsStop(true);
     navigate('/');
   };
 
   // div 영역
   if (index === 0) {
     return (
-      <quizStyle.FullArea>
-        <quizStyle.LeftArea>
-          <quizStyle.CharacterDialog>오늘도 완주를 향해 화이팅!</quizStyle.CharacterDialog>
-          {/* 아래 onNext는 백엔드 서버에서 시간 받으면 자동으로 실행되게끔 구현해두어여함 */}
-          <quizStyle.CharacterArea onClick={startQuiz}>
-            <DialogNPC src={charDialog0} />
-          </quizStyle.CharacterArea>
-        </quizStyle.LeftArea>
-        <quizStyle.RightArea>
-          <quizStyle.TimerDivide>시작까지 남은 시간</quizStyle.TimerDivide>
-          <quizStyle.TimerDivide>{realTime}</quizStyle.TimerDivide>
-          <quizStyle.PeopleArea>현재 참여 인원</quizStyle.PeopleArea>
-        </quizStyle.RightArea>
+      <quizStyle.FullArea className="waiting">
+        <quizStyle.WaitingCard>
+          <quizStyle.TimeLeftStyle className="realtime">{realTime}</quizStyle.TimeLeftStyle>
+          <quizStyle.TimeLeftStyle className="count">00 명 참여중</quizStyle.TimeLeftStyle>
+        </quizStyle.WaitingCard>
+        <button style={{ width: '10em', height: '10em' }} type="button" onClick={startQuiz}>
+          퀴즈로 넘어가기
+        </button>
       </quizStyle.FullArea>
     );
   }
   if (index >= 1 && index <= TOTAL_QUESTIONS) {
+    console.log(isLoading);
+    if (isLoading) {
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 30000);
+      return (
+        <quizStyle.FullArea className="quizNumber">
+          <quizStyle.QuizNumber>
+            <div>3</div>
+          </quizStyle.QuizNumber>
+        </quizStyle.FullArea>
+      );
+    }
+
     if (timeLeft !== 0) {
       return (
         <div>
@@ -186,8 +226,8 @@ function Quiz() {
             <quizStyle.CharacterArea onClick={goHome}>틀렸으니 다음기회에</quizStyle.CharacterArea>
           </quizStyle.LeftArea>
           <quizStyle.RightArea>
-            <quizStyle.TimerArea>정답자 수를 보여주는 자리 (생존자)</quizStyle.TimerArea>
-            <quizStyle.PeopleArea>정답률 그래프가 들어갈 자리</quizStyle.PeopleArea>
+            <quizStyle.TimerArea>유저의 오답 : {incorrectAns}</quizStyle.TimerArea>
+            <quizStyle.PeopleArea>문제의 정답 : {questions[number].answer}</quizStyle.PeopleArea>
           </quizStyle.RightArea>
         </quizStyle.FullArea>
       );
@@ -208,6 +248,7 @@ function Quiz() {
       </quizStyle.FullArea>
     );
   }
+
   if (index === TOTAL_QUESTIONS + 1) {
     if (timeLeft !== 0) {
       return (

@@ -13,6 +13,11 @@
   src: url('./Assets/font/Poppins//Poppins-Regular.ttf');
 }
 
+@font-face {
+  font-family: 'Digital';
+  src: url('./Assets/font/digital/DigitalNumbers-Regular.ttf');
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
