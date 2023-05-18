@@ -26,13 +26,16 @@ import homeBtnImg from '../../../Assets/etc/homBtn.png';
 import userIcon from '../../../Assets/etc/user.png';
 import googleSmall from '../../../Assets/etc/googleSmall.png';
 import kakaoSmall from '../../../Assets/etc/kakaoSmall.png';
+import dracoProfile from '../../../Assets/characters/dracoProfile.png';
+import toastProfile from '../../../Assets/characters/toastProfile.png';
+import kittyProfile from '../../../Assets/characters/kittyProfile.png';
 import { API } from '../../../API';
 import UserInfo from './UserInfo';
 
 function EditUserInfo() {
   const [edit, setEdit] = useState(false);
   const editRef = useRef<HTMLInputElement>(null);
-  const { nickname, setNickname, user, setIsLogin, setIsSide, ticket } = userInfoStore();
+  const { nickname, setNickname, user, setIsLogin, setIsSide, profileChar } = userInfoStore();
   const editNickname = () => {
     setEdit(true);
   };
@@ -64,6 +67,7 @@ function EditUserInfo() {
         uid: user.uid,
       },
     });
+
     // logout 시 구글인지 카카오인지 구분해주기
     if (user.providerId === 'Google') {
       signOut(auth);
@@ -71,7 +75,17 @@ function EditUserInfo() {
     setIsLogin(false);
     setIsSide(false);
     console.log('로그아웃');
+    navigate('/');
   };
+
+  let imgSrc;
+  if (profileChar === 0) {
+    imgSrc = kittyProfile;
+  } else if (profileChar === 1) {
+    imgSrc = toastProfile;
+  } else {
+    imgSrc = dracoProfile;
+  }
 
   return (
     <div style={{ position: 'relative' }}>
@@ -97,11 +111,13 @@ function EditUserInfo() {
           <div>내 정보</div>
           <div className="sub">MY PAGE</div>
         </DetailTitle>
-        <DetailFortune>
+        <DetailFortune className="edit">
           <EditUser>
             <EditUserTitle>프로필</EditUserTitle>
             <EditUserContent>
-              <ProfileImg className="edit">뀨</ProfileImg>
+              <ProfileImg className="edit">
+                <img style={{ width: '100%' }} src={imgSrc} alt="" />
+              </ProfileImg>
               <div style={{ display: 'flex', flexDirection: 'column' }}>
                 <EditUserContent className="email">{user.email}</EditUserContent>
                 {!edit ? (

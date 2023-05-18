@@ -82,11 +82,11 @@ function YearSpread() {
           </common.CardBox>
           <common.SideBlock>
             <common.SpreadModal onClick={showModal}>
-              <Year />
+              <Year spreadList={indexList} />
               {modalOpen ? (
                 <common.ModalBackdrop onClick={showModal}>
                   <common.ModalView onClick={(e) => e.stopPropagation()}>
-                    <Year />
+                    <Year spreadList={indexList} />
                     <OptionBtn onClick={showModal}>닫기</OptionBtn>
                   </common.ModalView>
                 </common.ModalBackdrop>
@@ -122,11 +122,11 @@ function YearSpread() {
           </common.CardBox>
           <common.SideBlock>
             <common.SpreadModal onClick={showModal}>
-              <Year />
+              <Year spreadList={indexList} />
               {modalOpen ? (
                 <common.ModalBackdrop onClick={showModal}>
                   <common.ModalView onClick={(e) => e.stopPropagation()}>
-                    <Year />
+                    <Year spreadList={indexList} />
                     <OptionBtn onClick={showModal}>닫기</OptionBtn>
                   </common.ModalView>
                 </common.ModalBackdrop>
@@ -162,11 +162,11 @@ function YearSpread() {
           </common.CardBox>
           <common.SideBlock>
             <common.SpreadModal onClick={showModal}>
-              <Year />
+              <Year spreadList={indexList} />
               {modalOpen ? (
                 <common.ModalBackdrop onClick={showModal}>
                   <common.ModalView onClick={(e) => e.stopPropagation()}>
-                    <Year />
+                    <Year spreadList={indexList} />
                     <OptionBtn onClick={showModal}>닫기</OptionBtn>
                   </common.ModalView>
                 </common.ModalBackdrop>
@@ -202,11 +202,11 @@ function YearSpread() {
           </common.CardBox>
           <common.SideBlock>
             <common.SpreadModal onClick={showModal}>
-              <Year />
+              <Year spreadList={indexList} />
               {modalOpen ? (
                 <common.ModalBackdrop onClick={showModal}>
                   <common.ModalView onClick={(e) => e.stopPropagation()}>
-                    <Year />
+                    <Year spreadList={indexList} />
                     <OptionBtn onClick={showModal}>닫기</OptionBtn>
                   </common.ModalView>
                 </common.ModalBackdrop>
@@ -230,11 +230,11 @@ function YearSpread() {
         <common.CardArea>
           <common.SideBlock />
           <common.CardBox>
-            <Year />
+            <Year spreadList={indexList} />
           </common.CardBox>
           <common.SideBlock>
             <common.SpreadModal onClick={showModal}>
-              <Year />
+              <Year spreadList={indexList} />
               {modalOpen ? (
                 <common.ModalBackdrop onClick={showModal}>
                   <common.ModalView onClick={(e) => e.stopPropagation()}>

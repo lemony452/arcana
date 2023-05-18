@@ -43,7 +43,6 @@ export const ProfileImg = styled.div`
   width: 10vw;
   height: 10vw;
   border-radius: 100%;
-  background: beige;
   justify-content: center;
   align-items: center;
   font-size: 3em;
@@ -163,11 +162,13 @@ export const DetailContent = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  text-align: center;
   width: 75vw;
   height: 100vh;
   left: 25vw;
   top: 0;
   bottom: 0;
+  background: white;
 `;
 
 export const DetailCover = styled.img`
@@ -186,14 +187,14 @@ export const DetailTitle = styled.div`
   justify-content: space-between;
   width: 80%;
   height: 10%;
-  /* margin: 2em 2em 1em 2em; */
+  margin-bottom: 1em;
   border-bottom: solid 2px #eaeaea;
-  margin-bottom: 0.5em;
   color: #3a3a3a;
   &.edit {
-    width: 90%;
+    width: 80%;
     justify-content: flex-start;
     align-items: center;
+    margin-bottom: 0;
   }
   & > .sub {
     font-size: 0.6em;
@@ -222,13 +223,14 @@ export const DetailBox = styled.div`
 export const DetailQuestion = styled.div`
   width: calc(100% - 1em);
   height: 10%;
-  font-size: 1.8em;
-  padding: 0.3em 0 0.3em 1em;
+  font-size: 1.7em;
+  padding: 0.5em 0 0.3em 1em;
   border: 0;
   border-bottom: solid 2px #eaeaea;
   color: #3a3a3a;
   background: white;
   border-radius: 0.1em;
+  text-align: left;
 `;
 
 export const DetailFortune = styled.div`
@@ -236,10 +238,32 @@ export const DetailFortune = styled.div`
   flex-direction: column;
   align-items: flex-start;
   font-size: 1.1em;
-  width: 90%;
+  width: 80%;
   height: 70%;
   color: #3a3a3a;
-  padding: 2em 2em 2em 2.5em;
+  text-align: left;
+  &.edit {
+    padding: 2em 2em 2em 2.5em;
+    justify-content: center;
+    padding: 0, 0, 0, 0;
+  }
+  &.detail {
+    padding: 0 2em 0 2em;
+    margin: 2em 0 2em 0;
+    white-space: pre-wrap;
+    overflow-y: scroll;
+    ::-webkit-scrollbar {
+      width: 5px;
+    }
+    ::-webkit-scrollbar-thumb {
+      height: 70%; /* 스크롤바의 길이 */
+      background: black; /* 스크롤바의 색상 */
+      border-radius: 10px;
+    }
+    ::-webkit-scrollbar-track {
+      background: rgba(33, 122, 244, 0.1); /*스크롤바 뒷 배경 색상*/
+    }
+  }
   /* border-radius: 0.5em; */
 `;
 

@@ -5,7 +5,7 @@ import Month from './month_spread';
 import MonthStart from './month_spread_animation';
 import * as common from '../../Common/common_style';
 import Dialog from '../../../Common/dialog';
-import charDialog1 from '../../../Assets/characters/toast.png';
+import charDialog1 from '../../../Assets/characters/toast.gif';
 import { DialogNPC, OptionBtn } from '../../../Common/common_styled';
 import { MonthDetails } from '../../../Common/conversations';
 import { useLuckyStore } from '../../../Store/User/lucky';
