@@ -10,6 +10,7 @@ import { useFortuneStore, CardState, saveIndexStore } from '../../Store/User/for
 import charDialog0 from '../../Assets/characters/charDialog0.png';
 import { API } from '../../API';
 import { userInfoStore } from '../../Store/User/info';
+import submitBtn from '../../Assets/etc/submitBtn.png';
 
 function Celtic() {
   const [celticText, SetcelticText] = useState(CelticConversations.c1);
@@ -155,9 +156,9 @@ function Celtic() {
           </form>
         ) : (
           <>
-            <OptionBtn onClick={() => OptionClick('사랑운')}>사랑운 어떨까? 💖</OptionBtn>
-            <OptionBtn onClick={() => OptionClick('성공운')}>성공운 궁금해! 👨‍💼</OptionBtn>
-            <OptionBtn onClick={() => OptionClick('재물운')}>재물운 봐줄래? 💸</OptionBtn>
+            <OptionBtn onClick={() => OptionClick('사랑운')}>사랑운 💖</OptionBtn>
+            <OptionBtn onClick={() => OptionClick('성공운')}>성공운 👨‍💼</OptionBtn>
+            <OptionBtn onClick={() => OptionClick('재물운')}>재물운 💸</OptionBtn>
           </>
         )}
       </Dialog>

@@ -12,6 +12,7 @@ import { useLuckyStore } from '../../../Store/User/lucky';
 import { getLuckyCard } from '../../../Common/tarotSelect';
 import { API } from '../../../API';
 import { saveIndexStore } from '../../../Store/User/fortune';
+import next from '../../../Assets/etc/nextButton.png';
 
 function YearSpread() {
   const navigate = useNavigate();
@@ -99,7 +100,12 @@ function YearSpread() {
         </common.ChatArea> */}
         <DialogNPC src={charDialog1} />
         <Dialog content={text.page1} next={false}>
-          {nextBtn && <OptionBtn onClick={onNext}>다음</OptionBtn>}
+          {nextBtn && (
+            <OptionBtn onClick={onNext}>
+              다음
+              <img src={next} alt="next" />
+            </OptionBtn>
+          )}{' '}
         </Dialog>
       </>
     );
@@ -139,7 +145,12 @@ function YearSpread() {
         </common.ChatArea> */}
         <DialogNPC src={charDialog1} />
         <Dialog content={text.page2} next={false}>
-          {nextBtn && <OptionBtn onClick={onNext}>다음</OptionBtn>}
+          {nextBtn && (
+            <OptionBtn onClick={onNext}>
+              다음
+              <img src={next} alt="next" />
+            </OptionBtn>
+          )}{' '}
         </Dialog>
       </>
     );
@@ -179,7 +190,12 @@ function YearSpread() {
         </common.ChatArea> */}
         <DialogNPC src={charDialog1} />
         <Dialog content={text.page3} next={false}>
-          {nextBtn && <OptionBtn onClick={onNext}>다음</OptionBtn>}
+          {nextBtn && (
+            <OptionBtn onClick={onNext}>
+              다음
+              <img src={next} alt="next" />
+            </OptionBtn>
+          )}{' '}
         </Dialog>
       </>
     );
@@ -219,7 +235,12 @@ function YearSpread() {
         </common.ChatArea> */}
         <DialogNPC src={charDialog1} />
         <Dialog content={text.page4} next={false}>
-          {nextBtn && <OptionBtn onClick={onNext}>다음</OptionBtn>}
+          {nextBtn && (
+            <OptionBtn onClick={onNext}>
+              다음
+              <img src={next} alt="next" />
+            </OptionBtn>
+          )}{' '}
         </Dialog>
       </>
     );
