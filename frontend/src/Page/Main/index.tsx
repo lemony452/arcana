@@ -14,6 +14,7 @@ import {
   SideBtn,
   MainBg,
   LoginBtn,
+  ModalBtnBox,
 } from './main_style';
 import Card from './components/card';
 import Character from './components/character';
@@ -68,13 +69,15 @@ function Main() {
   return (
     <MainBg className={cardOrder}>
       {goLogin ? <ModalBackdrop /> : null}
-      {isLogin ? (
-        <SideBtn src={SideBtnImg} onClick={toggleSide} />
-      ) : (
-        <LoginBtn type="button" onClick={toggleSide}>
-          LOGIN
-        </LoginBtn>
-      )}
+      <ModalBtnBox>
+        {isLogin ? (
+          <SideBtn src={SideBtnImg} onClick={toggleSide} />
+        ) : (
+          <LoginBtn type="button" onClick={toggleSide}>
+            LOGIN
+          </LoginBtn>
+        )}
+      </ModalBtnBox>
       {/* <SideBtn src={SideBtnImg} onClick={toggleSide} /> */}
       <SideBar />
       <LoginModal />

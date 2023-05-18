@@ -14,19 +14,19 @@ function YearSpread() {
         animate={{ x: '33.4vw', y: '2.33vh' }}
         transition={{ duration: 1, delay: 1.5, type: 'spring', bounce: 0.3 }}
       >
-        <FilppedCard card={2} size="24.3vh" setTime={2950} />
+        <FilppedCard card={2} size="24.3vh" setTime={2950} type="instant" />
       </layer.TwoCard>
       <layer.TwoCard
         animate={{ x: '49.72vw', y: '2.33vh' }}
         transition={{ duration: 1, delay: 1.625, type: 'spring', bounce: 0.3 }}
       >
-        <FilppedCard card={3} size="24.3vh" setTime={2950} />
+        <FilppedCard card={3} size="24.3vh" setTime={2950} type="instant" />
       </layer.TwoCard>
       <layer.TwoCard
         animate={{ x: '41.55vw', y: '47.3vh' }}
         transition={{ duration: 1, delay: 1.75, type: 'spring', bounce: 0.3 }}
       >
-        <FilppedCard card={1} size="24.3vh" setTime={2950} />
+        <FilppedCard card={1} size="24.3vh" setTime={2950} type="instant" />
       </layer.TwoCard>
     </layer.TimeBox>
   );
