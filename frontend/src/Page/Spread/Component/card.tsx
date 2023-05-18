@@ -79,11 +79,13 @@ interface FilppedCardType {
   card: number;
   size: string;
   setTime: number;
+  type: string;
 }
 
-export function FilppedCard({ card, size, setTime }: FilppedCardType) {
+export function FilppedCard({ card, size, setTime, type }: FilppedCardType) {
   const [flipped, setFlipped] = useState(false);
   const { indexList } = saveIndexStore();
+  const radius = type === 'celtic' ? '5px' : '10px';
 
   const imgSrc = `https://k8d107.p.ssafy.io/api/v1/images/${indexList[card - 1]}.png`;
 
@@ -96,10 +98,10 @@ export function FilppedCard({ card, size, setTime }: FilppedCardType) {
   return (
     <CardStyle.FilppedBody size={size}>
       <CardStyle.FilppedCardBody style={{ transform: flipped ? 'rotateY(180deg)' : 'none' }}>
-        <CardStyle.FilppedBack size={size}>
+        <CardStyle.FilppedBack size={size} radius={radius}>
           <img src={CardBack} alt="CardBack" />
         </CardStyle.FilppedBack>
-        <CardStyle.FilppedFront size={size}>
+        <CardStyle.FilppedFront size={size} radius={radius}>
           <img src={imgSrc} alt="CardFront" />
         </CardStyle.FilppedFront>
       </CardStyle.FilppedCardBody>
