@@ -184,3 +184,63 @@ export const NpcCharacter = styled(motion.div)`
     width: 30vw;
   }
 `;
+
+export const CelticBackground1 = styled.div`
+  position: absolute;
+  width: calc(100vw / 3);
+  height: 100%;
+  left: 0;
+  z-index: -1;
+  > img {
+    width: 100%;
+    height: 100%;
+  }
+`;
+
+export const CelticBackground2 = styled.div`
+  position: absolute;
+  width: calc(100vw / 3);
+  left: calc(100vw / 3);
+  height: 100%;
+  z-index: -1;
+  > img {
+    width: 100%;
+    height: 100%;
+  }
+`;
+
+export const CelticBackground3 = styled.div`
+  position: absolute;
+  width: calc(100vw / 3);
+  right: 0;
+  height: 100%;
+  z-index: -1;
+  > img {
+    width: 100%;
+    height: 100%;
+  }
+`;
+
+export const OtherBackground1 = styled.div`
+  position: absolute;
+  width: 50vw;
+  left: 0;
+  height: 100%;
+  z-index: -1;
+  > img {
+    width: 100%;
+    height: 100%;
+  }
+`;
+
+export const OtherBackground2 = styled.div`
+  position: absolute;
+  width: 50vw;
+  right: 0;
+  height: 100%;
+  z-index: -1;
+  > img {
+    width: 100%;
+    height: 100%;
+  }
+`;

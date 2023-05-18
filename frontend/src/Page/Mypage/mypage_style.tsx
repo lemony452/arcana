@@ -121,6 +121,14 @@ export const MoveBtn = styled.button`
     margin: 0.5em 0 0 0.5em;
     width: 37%;
   }
+  &.close {
+    display: flex;
+    align-items: end;
+    font-size: 1.5em;
+    width: 7em;
+    height: 2em;
+    font-weight: bold;
+  }
 `;
 
 export const MoveBtnImg = styled.img`
@@ -137,6 +145,10 @@ export const MoveBtnImg = styled.img`
   &.back {
     margin-left: -2em;
     width: 100%;
+  }
+  &.close {
+    margin-right: 4px;
+    margin-bottom: 2.5px;
   }
 `;
 
@@ -257,7 +269,7 @@ export const DetailFortune = styled.div`
   color: #3a3a3a;
   text-align: left;
   &.edit {
-    padding: 2em 2em 2em 2.5em;
+    padding: 0em 2em 2em 2.5em;
     justify-content: center;
     padding: 0, 0, 0, 0;
   }
@@ -323,7 +335,7 @@ export const EditUser = styled.div`
   /* margin: 0 4em 0 4em; */
   &.email {
     height: 25%;
-    margin-top: 3em;
+    margin-top: 2em;
   }
 `;
 
@@ -450,4 +462,24 @@ export const LogoSmallImg = styled.img`
   height: 3em;
   margin-left: 1.5em;
   margin-right: 1em;
+`;
+
+export const ChangeSelect = styled.select`
+  background-color: #3a3a3a;
+  color: white;
+  font-size: 1.2em;
+  width: 5em;
+  height: 2em;
+  border-radius: 8px;
+`;
+
+export const ChangeOption = styled.option`
+  font-size: 0.6em;
+`;
+
+export const ChangeBox = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: end;
+  margin-right: 4vw;
 `;
