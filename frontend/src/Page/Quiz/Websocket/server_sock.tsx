@@ -22,6 +22,8 @@ function Chat() {
     const callback = function (res: any) {
       // called when the client receives a STOMP message from the server
       if (res.body) {
+        console.log(user);
+        console.log(res.body);
         alert(res.body);
       } else {
         alert('got empty message');
@@ -74,7 +76,7 @@ function Chat() {
       destination: '/pub/enter',
       body: JSON.stringify({
         type: 'ENTER',
-        uid: token,
+        uid: 'token',
         channel: 'quiz',
         data: 'entrance message',
       }),
