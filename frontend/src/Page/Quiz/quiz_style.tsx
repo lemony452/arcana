@@ -39,6 +39,7 @@ export const RightArea = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
+  margin-left: -3em;
   /* background-color: blue; */
 `;
 
@@ -68,10 +69,29 @@ export const CharacterArea = styled.div`
 export const TimerArea = styled.div`
   height: 50%;
   width: 100%;
-  font-size: 6em;
+  font-size: 6.5em;
   display: flex;
   justify-content: center;
   align-items: center;
+  font-weight: bolder;
+  font-family: Poppins;
+  &.timer {
+    font-family: Digital;
+  }
+  &.nextQ {
+    font-size: 5.5em;
+  }
+  &.fail {
+    font-size: 3.5em;
+    flex-direction: column;
+  }
+  div {
+    font-size: 0.5em;
+    /* letter-spacing: -0.05em; */
+    &.top {
+      font-size: 1em;
+    }
+  }
   /* background-color: skyblue; */
 `;
 
@@ -98,17 +118,34 @@ export const QuestionArea = styled.div`
 export const PeopleArea = styled.div`
   width: 100%;
   height: 30%;
-  font-size: 3em;
+  font-size: 3.8em;
+  font-weight: bolder;
   display: flex;
   justify-content: center;
   align-items: center;
+  &.nextQ {
+    width: 60%;
+    background: #51ca4e;
+    border-radius: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    color: white;
+  }
+  &.fail {
+    background: #ff3030;
+    font-size: 3em;
+  }
+  &.success {
+    background: #51ca4e;
+    font-size: 3em;
+  }
   /* background-color: navy; */
 `;
 
 export const CardArea = styled.div`
   height: 80%;
   aspect-ratio: 3 / 5;
-  background-color: gold;
+  /* background-color: gold; */
   display: flex;
 `;
 
@@ -158,18 +195,23 @@ export const QuestArea = styled.div`
   height: 45%;
   width: 45%;
   background-color: teal;
+  /* background: #f4f4f4; */
+  border: 5px solid #eaeaea;
+  box-shadow: 0px 10px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 47px;
 `;
 
 export const TimerDivide = styled.div`
-  width: 3em;
-  height: 2em;
-  font-size: 2.5em;
+  width: 2.5em;
+  height: 2.5em;
+  font-size: 5em;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: yellow;
+  background-color: #ffc700;
   border-radius: 100%;
   margin-inline: auto;
+  color: white;
 `;
 
 // cv한거

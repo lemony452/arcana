@@ -154,7 +154,7 @@ function Quiz() {
           <quizStyle.TimerArea>시작까지 남은 시간</quizStyle.TimerArea>
         </quizStyle.RightArea> */}
         <quizStyle.StartArea>
-          <quizStyle.TimerArea>{realTime}</quizStyle.TimerArea>
+          <quizStyle.TimerArea className="timer">{realTime}</quizStyle.TimerArea>
           <quizStyle.PeopleArea>명 참여중</quizStyle.PeopleArea>
         </quizStyle.StartArea>
       </quizStyle.FullArea>
@@ -192,8 +192,13 @@ function Quiz() {
             <quizStyle.PeopleArea>정답률 그래프가 들어갈 자리</quizStyle.PeopleArea>
           </quizStyle.RightArea> */}
           <quizStyle.StartArea>
-            <quizStyle.TimerArea>탈락하셨습니다</quizStyle.TimerArea>
-            <quizStyle.PeopleArea onClick={goHome}>메인으로 돌아가기</quizStyle.PeopleArea>
+            <quizStyle.TimerArea className="nextQ fail">
+              <div className="top">탈락하셨습니다😂</div>
+              <div>괜찮아요, 다음에는 더 잘 할 수 있어요.</div>
+            </quizStyle.TimerArea>
+            <quizStyle.PeopleArea className="nextQ fail" onClick={goHome}>
+              메인으로 돌아가기
+            </quizStyle.PeopleArea>
           </quizStyle.StartArea>
         </quizStyle.FullArea>
       );
@@ -212,8 +217,10 @@ function Quiz() {
           <quizStyle.PeopleArea>정답률 그래프가 들어갈 자리</quizStyle.PeopleArea>
         </quizStyle.RightArea> */}
         <quizStyle.StartArea>
-          <quizStyle.TimerArea>정답입니다!</quizStyle.TimerArea>
-          <quizStyle.PeopleArea onClick={nextQuestion}>다음 문제로</quizStyle.PeopleArea>
+          <quizStyle.TimerArea className="nextQ">정답입니다🎉</quizStyle.TimerArea>
+          <quizStyle.PeopleArea className="nextQ" onClick={nextQuestion}>
+            다음 문제로
+          </quizStyle.PeopleArea>
         </quizStyle.StartArea>
       </quizStyle.FullArea>
     );
@@ -261,8 +268,13 @@ function Quiz() {
           <quizStyle.PeopleArea>정답률 그래프가 들어갈 자리</quizStyle.PeopleArea>
         </quizStyle.RightArea> */}
         <quizStyle.StartArea>
-          <quizStyle.TimerArea>모든 문제를 다 풀었어요!</quizStyle.TimerArea>
-          <quizStyle.PeopleArea onClick={goHome}>보상으로 토큰을 줄게요</quizStyle.PeopleArea>
+          <quizStyle.TimerArea className="nextQ fail">
+            <div className="top">축하합니다!🎉</div>
+            <div>모든 문제를 푼 당신에게 드리는 선물입니다!</div>
+          </quizStyle.TimerArea>
+          <quizStyle.PeopleArea className="nextQ success" onClick={goHome}>
+            이벤트 티켓 받기
+          </quizStyle.PeopleArea>
         </quizStyle.StartArea>
       </quizStyle.FullArea>
     );
