@@ -35,8 +35,8 @@ function Main() {
   const { setIsTarotLog, isLogin, isSide, setIsSide, setGoLogin, user, setTarotLog, goLogin } = userInfoStore();
   // const cookie = getCookie('token');
 
-  const goServer = () => {
-    navigate('/server');
+  const goPseudo = () => {
+    navigate('/pseudo');
   };
   const goQuiz = () => {
     navigate('/quiz');
@@ -99,7 +99,7 @@ function Main() {
         <button type="submit" onClick={goQuiz}>
           quiz
         </button>
-        <button type="submit" onClick={goServer}>
+        <button type="submit" onClick={goPseudo}>
           server
         </button>
       </TitleBox>
