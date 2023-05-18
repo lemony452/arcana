@@ -109,9 +109,8 @@ function Quiz() {
   };
 
   useEffect(() => {
-    const onSocket = setTimeout(() => connect(), 1000);
-    clearTimeout(onSocket);
-  });
+    connect();
+  }, []);
 
   // 퀴즈 시작
   const startQuiz = async () => {
