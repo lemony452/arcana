@@ -31,9 +31,10 @@ function SideBar() {
 
   return (
     <Side ref={outside} className={isSide ? 'open' : ''}>
-      <div style={{ position: 'absolute', left: 'calc(25vw - 4.5em)' }}>
-        <MoveBtn type="button" onClick={toggleSide}>
-          <MoveBtnImg className="home" src={next} alt="" />
+      <div style={{ position: 'absolute', left: 'calc(25vw - 7em)' }}>
+        <MoveBtn type="button" onClick={toggleSide} className="close">
+          <MoveBtnImg className="close" src={next} alt="" />
+          닫기
         </MoveBtn>
       </div>
       <SideContent>
