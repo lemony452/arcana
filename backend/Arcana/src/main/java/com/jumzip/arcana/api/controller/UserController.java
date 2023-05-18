@@ -6,6 +6,7 @@ import com.jumzip.arcana.api.request.UpdateNicknameRequest;
 import com.jumzip.arcana.api.request.UserRegisterRequest;
 import com.jumzip.arcana.api.service.KakaoUserService;
 import com.jumzip.arcana.api.service.UserService;
+import com.jumzip.arcana.db.entity.TimeCard;
 import com.jumzip.arcana.db.entity.User;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Tag(description = "USER API", name = "USER")
@@ -69,20 +71,35 @@ public class UserController {
 */
     @Operation(summary = "User DB에 등록", description = "사용자의 정보를 리턴한다")
     @PostMapping("register")
-    public User registerUser(@RequestBody UserRegisterRequest userReq) {
+    public ResponseEntity<?> registerUser(@RequestBody UserRegisterRequest userReq) {
         logger.info("start registerUser");
         logger.info("userReq - " + userReq.toString());
 
-        User user = userService.registerUser(userReq);
+        try {
+            User user = userService.registerUser(userReq);
+            return new ResponseEntity<>(user, HttpStatus.OK);
+        }
 
-        return user;
+        catch (Exception e) {
+            logger.info("User REGISTER ERROR : " + e.getMessage(), e);
+            return new ResponseEntity<>("FAIL", HttpStatus.BAD_REQUEST);
+        }
     }
 
     @Operation(summary = "UserInfo 조회", description = "사용자의 정보를 리턴한다")
     @GetMapping("info")
-    public User GetUserInfo(@RequestHeader String uid) {
-        User user = userService.getUserData(uid);
-        return user;
+    public ResponseEntity<?> GetUserInfo(@RequestHeader String uid) {
+        logger.info("start GET User INFO");
+
+        try {
+            User user = userService.getUserData(uid);
+            return new ResponseEntity<>(user, HttpStatus.OK);
+        }
+
+        catch (Exception e) {
+            logger.info("User INFO GET ERROR : " + e.getMessage(), e);
+            return new ResponseEntity<>("FAIL", HttpStatus.BAD_REQUEST);
+        }
     }
 
     @Operation(summary = "User 닉네임 변경", description = "변경된 닉네임을 리턴한다")
@@ -105,10 +122,19 @@ public class UserController {
 
     @Operation(summary = "User 탈퇴")
     @DeleteMapping("delete")
-    public String DeleteUser(@RequestHeader String uid) {
-        User user = userService.getUserData(uid);
-        userService.deleteUser(uid);
-        return user.getEmail() + " Delete Complete";
+    public ResponseEntity<?> DeleteUser(@RequestHeader String uid) {
+        logger.info("start DELETE User");
+
+        try {
+            User user = userService.getUserData(uid);
+            userService.deleteUser(uid);
+            return new ResponseEntity<>(user.getEmail() + " DELETE SUCCESS", HttpStatus.OK);
+        }
+
+        catch (Exception e) {
+            logger.info("User DELETE ERROR : " + e.getMessage(), e);
+            return new ResponseEntity<>("FAIL", HttpStatus.BAD_REQUEST);
+        }
     }
 
     @Operation(summary = "Kakao 로그인")
@@ -167,9 +193,18 @@ public class UserController {
 
     @Operation(summary = "quiz 후 reward 제공")
     @PutMapping("reward")
-    public String getReward(@RequestParam String uid, @RequestParam int ticket) {
-        int nowTicket = userService.rewardUser(uid, ticket);
-        return "YOUR TICKET : " + nowTicket;
+    public ResponseEntity<?> getReward(@RequestParam String uid, @RequestParam int ticket) {
+        logger.info("start Reward to User");
+
+        try {
+            int nowTicket = userService.rewardUser(uid, ticket);
+            return new ResponseEntity<>("YOUR TICKET : " + nowTicket, HttpStatus.OK);
+        }
+
+        catch (Exception e) {
+            logger.info("Reward ERROR : " + e.getMessage(), e);
+            return new ResponseEntity<>("FAIL", HttpStatus.BAD_REQUEST);
+        }
     }
 
 }
