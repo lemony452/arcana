@@ -207,7 +207,7 @@ export const DetailTitle = styled.div`
   &.edit {
     width: 80%;
     justify-content: flex-start;
-    align-items: center;
+    align-items: end;
     margin-bottom: 0;
   }
   & > .sub {
@@ -304,8 +304,8 @@ export const LogoutBtn = styled.div`
 `;
 
 export const EditNickName = styled.img`
-  width: 1em;
-  margin-left: 0.3em;
+  width: 0.7em;
+  margin-right: 0.3em;
   cursor: pointer;
 `;
 
@@ -318,6 +318,7 @@ export const EditUser = styled.div`
   width: 100%;
   height: 50%;
   flex-direction: column;
+  border-radius: 5px;
   border: solid 2px #eaeaea;
   /* margin: 0 4em 0 4em; */
   &.email {
@@ -336,7 +337,7 @@ export const EditUserTitle = styled.div`
   padding-left: 0.7em;
   border-bottom: solid 2px #eaeaea;
   &.email {
-    height: 58%;
+    height: 87%;
   }
 `;
 
