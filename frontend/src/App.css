@@ -1,6 +1,6 @@
 .App {
   /* text-align: center; */
-  font-family: Poppins;
+  font-family: 'NanumSquare', sans-serif;
 }
 
 @font-face {
@@ -12,6 +12,8 @@
   font-family: 'Poppins';
   src: url('./Assets/font/Poppins//Poppins-Regular.ttf');
 }
+
+@import url('https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css');
 
 .App-logo {
   height: 40vmin;

@@ -122,11 +122,11 @@ export const MoveBtn = styled.button`
     width: 37%;
   }
   &.close {
-    margin-top: 15px;
     display: flex;
-    align-items: center;
+    align-items: end;
     font-size: 1.5em;
     width: 7em;
+    height: 2em;
     font-weight: bold;
   }
 `;
@@ -147,8 +147,8 @@ export const MoveBtnImg = styled.img`
     width: 100%;
   }
   &.close {
-    height: 1em;
     margin-right: 4px;
+    margin-bottom: 2.5px;
   }
 `;
 
