@@ -1,7 +1,15 @@
 import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { DialogNPC, InputText, OptionBtn, SubmitBtn } from '../../Common/common_styled';
+import {
+  DialogNPC,
+  InputText,
+  OptionBtn,
+  SubmitBtn,
+  OtherBackground1,
+  OtherBackground2,
+} from '../../Common/common_styled';
 import Dialog from '../../Common/dialog';
+import charDialog2 from '../../Assets/characters/kitty.gif';
 import Npc from '../../Common/npc';
 import { SpreadBtn } from '../Common/common_style';
 import charDialog0 from '../../Assets/characters/charDialog0.png';
@@ -9,6 +17,8 @@ import { saveIndexStore, useFortuneStore } from '../../Store/User/fortune';
 import { InstantConversations } from '../../Common/conversations';
 import { API } from '../../API';
 import submitBtn from '../../Assets/etc/submitBtn.png';
+import BackgroundImg1 from '../../Assets/etc/otherb1.png';
+import BackgroundImg2 from '../../Assets/etc/otherb2.png';
 
 function Instant() {
   const [instantText, SetInstantText] = useState(InstantConversations.i1);
@@ -52,7 +62,13 @@ function Instant() {
 
   return (
     <div style={{ width: '100vw', height: '100vh', position: 'relative' }}>
-      <Npc num={2} />
+      <OtherBackground1>
+        <img src={BackgroundImg1} alt="" />
+      </OtherBackground1>
+      <OtherBackground2>
+        <img src={BackgroundImg2} alt="" />
+      </OtherBackground2>
+      <DialogNPC src={charDialog2} />
       {/* <DialogNPC src={charDialog0} /> */}
       <Dialog content={instantText} next={next}>
         {next ? (
