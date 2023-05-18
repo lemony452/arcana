@@ -83,11 +83,11 @@ export const InstantDetails = (option: number) => {
   console.log(celticFortune);
 
   const InstantDetail = {
-    page1: `카드를 해석해드리겠습니다!\n질문자 카드 ${celticFortune[0].card.name}은(는) ${celticFortune[0].question}`,
-    page2: `왼쪽 카드 ${celticFortune[1].card.name}은(는) ${celticFortune[1].advice}\n오른쪽 카드 ${celticFortune[2].card.name}(은)는 ${celticFortune[2].advice}`,
-    page3: `왼쪽 카드 ${celticFortune[1].card.name}은(는) ${celticFortune[1].advice}\n중앙 카드 ${
+    page1: `카드를 해석해드리겠습니다!\n질문자 카드는 ${celticFortune[0].card.name}입니다! ${celticFortune[0].question}`,
+    page2: `왼쪽 카드는 ${celticFortune[1].card.name}입니다! ${celticFortune[1].advice}\n오른쪽 카드는 ${celticFortune[2].card.name}입니다! ${celticFortune[2].advice}`,
+    page3: `왼쪽 카드는 ${celticFortune[1].card.name}입니다! ${celticFortune[1].advice}\n중앙 카드는 ${
       celticFortune[2].card.name
-    }은(는) ${celticFortune[2].advice}\n오른쪽 카드 ${celticFortune[option - 1].card.name}은(는) ${
+    }입니다! ${celticFortune[2].advice}\n오른쪽 카드는 ${celticFortune[option - 1].card.name}입니다! ${
       celticFortune[option - 1].advice
     }`,
   };

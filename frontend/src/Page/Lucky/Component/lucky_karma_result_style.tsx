@@ -38,6 +38,7 @@ export const Card = styled(motion.div)<{ back: string; color: string }>`
   background-image: url(${(props) => props.back});
   background-position: center bottom;
   background-size: cover;
+  background-color: rgb(240, 240, 240);
   align-items: end;
   z-index: 1;
 `;

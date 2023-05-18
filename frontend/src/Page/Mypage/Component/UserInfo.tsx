@@ -2,18 +2,18 @@ import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { signOut } from 'firebase/auth';
 import { auth } from '../../../firebase';
-import profile from '../../../Assets/etc/profile.png';
 import cardIcon from '../../../Assets/etc/cardIcon.png';
 import tockenIcon from '../../../Assets/etc/tokenIcon.png';
-import editIcon from '../../../Assets/etc/editIcon.png';
 import logoutIcon from '../../../Assets/etc/logout.png';
 import userIcon from '../../../Assets/etc/user.png';
 import ticketIcon from '../../../Assets/etc/ticket.png';
+import dracoProfile from '../../../Assets/characters/dracoProfile.png';
+import toastProfile from '../../../Assets/characters/toastProfile.png';
+import kittyProfile from '../../../Assets/characters/kittyProfile.png';
 import {
   UserContent,
   Nickname,
   TarotToken,
-  EditNickName,
   ListContent,
   ListIcon,
   MoveBtn,
@@ -27,9 +27,16 @@ import nextBtn from '../../../Assets/etc/nextButton.png';
 import helpBtn from '../../../Assets/etc/help.png';
 
 function UserInfo() {
-  const { isTarotLog, nickname, weeklyCount, setIsLogin, setIsSide, user, ticket } = userInfoStore();
+  const { profileChar, isTarotLog, nickname, weeklyCount, setIsLogin, setIsSide, user, ticket } = userInfoStore();
   const navigate = useNavigate();
-
+  let imgSrc;
+  if (profileChar === 0) {
+    imgSrc = kittyProfile;
+  } else if (profileChar === 1) {
+    imgSrc = toastProfile;
+  } else {
+    imgSrc = dracoProfile;
+  }
   const MoveEditUser = () => {
     navigate('/editUserInfo');
   };
@@ -56,8 +63,9 @@ function UserInfo() {
 
   return (
     <UserContent>
-      <ProfileImg>🐭</ProfileImg>
-      {/* <img style={{ width: '10vw' }} src={profile} alt="" /> */}
+      <ProfileImg>
+        <img style={{ width: '100%' }} src={imgSrc} alt="" />
+      </ProfileImg>
       <Nickname>
         <div>{nickname} 님</div>
       </Nickname>

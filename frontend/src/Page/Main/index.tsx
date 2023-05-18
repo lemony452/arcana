@@ -31,8 +31,7 @@ function Main() {
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   // const [goLogin, setGoLogin] = useState(false);
-  const { isTarotLog, setIsTarotLog, isLogin, isSide, setIsSide, setGoLogin, user, setTarotLog, goLogin } =
-    userInfoStore();
+  const { setIsTarotLog, isLogin, isSide, setIsSide, setGoLogin, user, setTarotLog, goLogin } = userInfoStore();
   // const cookie = getCookie('token');
   const toggleSide = () => {
     // if (cookie) {
