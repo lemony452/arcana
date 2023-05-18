@@ -463,3 +463,23 @@ export const LogoSmallImg = styled.img`
   margin-left: 1.5em;
   margin-right: 1em;
 `;
+
+export const ChangeSelect = styled.select`
+  background-color: #3a3a3a;
+  color: white;
+  font-size: 1.2em;
+  width: 5em;
+  height: 2em;
+  border-radius: 8px;
+`;
+
+export const ChangeOption = styled.option`
+  font-size: 0.6em;
+`;
+
+export const ChangeBox = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: end;
+  margin-right: 4vw;
+`;
