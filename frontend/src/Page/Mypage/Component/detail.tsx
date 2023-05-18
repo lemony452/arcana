@@ -10,8 +10,6 @@ import {
   DetailDate,
   DetailQuestion,
   DetailFortune,
-  ReplayLucky,
-  ReplayTarots,
   MoveBtn,
   MoveBtnImg,
   ListIcon,
@@ -21,8 +19,7 @@ import {
 import { userInfoStore } from '../../../Store/User/info';
 import cardIcon from '../../../Assets/etc/cardIcon.png';
 import homeBtnImg from '../../../Assets/etc/homBtn.png';
-import Tarots from '../../../Assets/etc/tarots.png';
-import Lucky from '../../../Assets/etc/lucky.png';
+import backBtn from '../../../Assets/etc/backBtn.png';
 import ReplayTarotBtn from '../../../Assets/etc/replayTarotBtn.png';
 import ReplayLuckyBtn from '../../../Assets/etc/replayLuckyBtn.png';
 import Pagination from './pagination';
@@ -32,12 +29,20 @@ import CelticSpread from '../../Celtic/celtic_spread';
 import * as common from '../../Common/common_style';
 import { OptionBtn } from '../../../Common/common_styled';
 import LuckyCard from './lucky_card';
+import { useCardStore } from '../../../Store/Main/main';
 
 function TarotListDetail() {
   const navigate = useNavigate();
+  const { setCardOrder } = useCardStore();
   const MoveMain = () => {
+    setCardOrder('celtic');
     navigate('/');
   };
+
+  const MoveBack = () => {
+    navigate(-1);
+  };
+
   const { nickname, tarotLog } = userInfoStore();
   const [temp, setTemp] = useState(tarotLog);
   const reverseTemp = [...tarotLog].reverse(); // 원본 배열은 남겨두고 배열을 복사한 값을 뒤집는다.
@@ -53,15 +58,15 @@ function TarotListDetail() {
 
   let initialOption = temp[0].options;
   if (initialOption === '사랑운') {
-    initialOption += '💘';
+    initialOption = `💘${initialOption}`;
   } else if (initialOption === '재물운') {
-    initialOption += '💸';
+    initialOption = `💸${initialOption}`;
   } else if (initialOption === '성공운') {
-    initialOption += '👨‍💼‍‍';
+    initialOption = `👨‍💼‍‍${initialOption}`;
   } else if (initialOption === '신년운세') {
-    initialOption += '🐰';
+    initialOption = `🐰${initialOption}`;
   } else {
-    initialOption += '✨';
+    initialOption = `✨${initialOption}`;
   }
   const [replay, setReplay] = useState('');
   const [detailQuestion, setQuestion] = useState(temp[0].question);
@@ -94,15 +99,15 @@ function TarotListDetail() {
   const cardList = SliceTemp.map((value: any, idx: number) => {
     let valueOption = value.options;
     if (valueOption === '사랑운') {
-      valueOption += '💘';
+      valueOption = `💘${valueOption}`;
     } else if (valueOption === '재물운') {
-      valueOption += '💸';
+      valueOption = `💸${valueOption}`;
     } else if (valueOption === '성공운') {
-      valueOption += '👨‍💼‍‍';
+      valueOption = `👨‍💼‍‍${valueOption}`;
     } else if (valueOption === '신년운세') {
-      valueOption += '🐰';
+      valueOption = `🐰${valueOption}`;
     } else {
-      valueOption += '✨';
+      valueOption = `✨${valueOption}`;
     }
     const ShowDetail = (detailIdx: number) => {
       setDate(`${value.datetime[0]}.${value.datetime[1]}.${value.datetime[2]}`);
@@ -112,7 +117,7 @@ function TarotListDetail() {
       setOnDetail(detailIdx);
       if (valueOption === '신년운세🐰') {
         setReplay('year');
-      } else if (valueOption === '월별운세✨') {
+      } else if (valueOption === '✨월별운세') {
         setReplay('month');
       } else {
         setReplay('celtic');
@@ -162,7 +167,10 @@ function TarotListDetail() {
   return (
     <div style={{ position: 'relative' }}>
       <Side className="open detail">
-        <div style={{ position: 'absolute', left: 'calc(25vw - 4.5em)' }}>
+        <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
+          <MoveBtn className="back" type="button" onClick={MoveBack}>
+            <MoveBtnImg className="back" src={backBtn} alt="" />
+          </MoveBtn>
           <MoveBtn type="button" onClick={MoveMain}>
             <MoveBtnImg className="home" src={homeBtnImg} alt="" />
           </MoveBtn>
