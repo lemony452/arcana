@@ -109,7 +109,7 @@ function Quiz() {
   };
 
   useEffect(() => {
-    alert('Wkwks');
+    connect();
   });
 
   // 퀴즈 시작
