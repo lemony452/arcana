@@ -53,15 +53,15 @@ function TarotListDetail() {
 
   let initialOption = temp[0].options;
   if (initialOption === '사랑운') {
-    initialOption += '💘';
+    initialOption = `💘${initialOption}`;
   } else if (initialOption === '재물운') {
-    initialOption += '💸';
+    initialOption = `💸${initialOption}`;
   } else if (initialOption === '성공운') {
-    initialOption += '👨‍💼‍‍';
+    initialOption = `👨‍💼‍‍${initialOption}`;
   } else if (initialOption === '신년운세') {
-    initialOption += '🐰';
+    initialOption = `🐰${initialOption}`;
   } else {
-    initialOption += '✨';
+    initialOption = `✨${initialOption}`;
   }
 
   const [replay, setReplay] = useState('');
@@ -84,24 +84,24 @@ function TarotListDetail() {
   const cardList = SliceTemp.map((value: any, idx: number) => {
     let valueOption = value.options;
     if (valueOption === '사랑운') {
-      valueOption += '💘';
+      valueOption = `💘${valueOption}`;
     } else if (valueOption === '재물운') {
-      valueOption += '💸';
+      valueOption = `💸${valueOption}`;
     } else if (valueOption === '성공운') {
-      valueOption += '👨‍💼‍‍';
+      valueOption = `👨‍💼‍‍${valueOption}`;
     } else if (valueOption === '신년운세') {
-      valueOption += '🐰';
+      valueOption = `🐰${valueOption}`;
     } else {
-      valueOption += '✨';
+      valueOption = `✨${valueOption}`;
     }
     const ShowDetail = () => {
       setDate(`${value.datetime[0]}.${value.datetime[1]}.${value.datetime[2]}`);
       setOption(valueOption);
       setQuestion(value.question);
       setCardRes(value.cardsResponse);
-      if (valueOption === '신년운세🐰') {
+      if (valueOption === '🐰신년운세') {
         setReplay('year');
-      } else if (valueOption === '월별운세✨') {
+      } else if (valueOption === '✨월별운세') {
         setReplay('month');
       } else {
         setReplay('celtic');
