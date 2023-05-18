@@ -264,12 +264,7 @@ function CelticSpread() {
         </common.CardArea>
         <DialogNPC src={charDialog0} />
         <Dialog content={text.page5} next={false}>
-          {nextBtn && (
-            <OptionBtn onClick={onNext}>
-              다음
-              <img src={next} alt="next" />
-            </OptionBtn>
-          )}
+          {nextBtn && <OptionBtn onClick={MoveLucky}>럭키!</OptionBtn>}
         </Dialog>
         {/* <common.ChatArea>
           <common.SpreadBtn onClick={onNext}>다음</common.SpreadBtn>
