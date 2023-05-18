@@ -12,6 +12,7 @@ import { API } from '../../API';
 import { getLuckyCard } from '../../Common/tarotSelect';
 import { useLuckyStore } from '../../Store/User/lucky';
 import { saveIndexStore } from '../../Store/User/fortune';
+import next from '../../Assets/etc/nextButton.png';
 
 function CelticSpread() {
   const navigate = useNavigate();
@@ -98,8 +99,12 @@ function CelticSpread() {
         </common.ChatArea> */}
         <DialogNPC src={charDialog0} />
         <Dialog content={text.page1} next={false}>
-          {/* <common.SpreadBtn onClick={onNext}>다음</common.SpreadBtn> */}
-          {nextBtn && <OptionBtn onClick={onNext}>다음</OptionBtn>}
+          {nextBtn && (
+            <OptionBtn onClick={onNext}>
+              다음
+              <img src={next} alt="next" />
+            </OptionBtn>
+          )}
         </Dialog>
       </>
     );
@@ -133,7 +138,12 @@ function CelticSpread() {
         </common.CardArea>
         <DialogNPC src={charDialog0} />
         <Dialog content={text.page2} next={false}>
-          {nextBtn && <OptionBtn onClick={onNext}>다음</OptionBtn>}
+          {nextBtn && (
+            <OptionBtn onClick={onNext}>
+              다음
+              <img src={next} alt="next" />
+            </OptionBtn>
+          )}
         </Dialog>
         {/* <common.ChatArea>
           <common.SpreadBtn onClick={onNext}>다음</common.SpreadBtn>
@@ -170,7 +180,12 @@ function CelticSpread() {
         </common.CardArea>
         <DialogNPC src={charDialog0} />
         <Dialog content={text.page3} next={false}>
-          {nextBtn && <OptionBtn onClick={onNext}>다음</OptionBtn>}
+          {nextBtn && (
+            <OptionBtn onClick={onNext}>
+              다음
+              <img src={next} alt="next" />
+            </OptionBtn>
+          )}
         </Dialog>
         {/* <common.ChatArea>
           <common.SpreadBtn onClick={onNext}>다음</common.SpreadBtn>
@@ -207,7 +222,12 @@ function CelticSpread() {
         </common.CardArea>
         <DialogNPC src={charDialog0} />
         <Dialog content={text.page4} next={false}>
-          {nextBtn && <OptionBtn onClick={onNext}>다음</OptionBtn>}
+          {nextBtn && (
+            <OptionBtn onClick={onNext}>
+              다음
+              <img src={next} alt="next" />
+            </OptionBtn>
+          )}
         </Dialog>
         {/* <common.ChatArea>
           <common.SpreadBtn onClick={onNext}>다음</common.SpreadBtn>
@@ -244,7 +264,12 @@ function CelticSpread() {
         </common.CardArea>
         <DialogNPC src={charDialog0} />
         <Dialog content={text.page5} next={false}>
-          {nextBtn && <OptionBtn onClick={MoveLucky}>럭키!</OptionBtn>}
+          {nextBtn && (
+            <OptionBtn onClick={onNext}>
+              다음
+              <img src={next} alt="next" />
+            </OptionBtn>
+          )}
         </Dialog>
         {/* <common.ChatArea>
           <common.SpreadBtn onClick={onNext}>다음</common.SpreadBtn>

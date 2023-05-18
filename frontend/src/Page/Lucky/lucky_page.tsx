@@ -8,7 +8,7 @@ import LuckyKarmaSelect from './Component/lucky_karma_select';
 import LuckyKarmaResult from './Component/lucky_karma_result';
 import Dialog from '../../Common/dialog';
 import charDialog0 from '../../Assets/characters/draco.png';
-import charDialog1 from '../../Assets/characters/toast.png';
+import charDialog1 from '../../Assets/characters/toast.gif';
 import { DialogNPC, OptionBtn } from '../../Common/common_styled';
 import KakaoIcon from '../../Assets/etc/icon-kakao.png';
 import FackbookIcon from '../../Assets/etc/icon-fackbook.png';

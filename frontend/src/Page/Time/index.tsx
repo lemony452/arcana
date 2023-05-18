@@ -85,8 +85,8 @@ function Time() {
       {/* <DialogNPC src={charDialog0} /> */}
       <Dialog content={celticText} next={next}>
         <>
-          <OptionBtn onClick={() => OptionClick('신년운세')}>신년 운세 봐줘 🐰</OptionBtn>
-          <OptionBtn onClick={() => OptionClick('월별운세')}>월별 운세 봐줘 👻</OptionBtn>
+          <OptionBtn onClick={() => OptionClick('신년운세')}>올해 🐰</OptionBtn>
+          <OptionBtn onClick={() => OptionClick('월별운세')}>이번달 👻</OptionBtn>
         </>
       </Dialog>
     </div>

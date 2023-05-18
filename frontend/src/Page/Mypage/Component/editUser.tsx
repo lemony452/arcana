@@ -109,7 +109,9 @@ function EditUserInfo() {
             alt=""
           />
           <div>내 정보</div>
-          <div className="sub">MY PAGE</div>
+          <div className="sub" style={{ marginLeft: '15px' }}>
+            MY PAGE
+          </div>
         </DetailTitle>
         <DetailFortune className="edit">
           <EditUser>
