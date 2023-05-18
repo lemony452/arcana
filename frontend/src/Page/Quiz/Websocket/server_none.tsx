@@ -21,15 +21,11 @@ function Socket() {
     };
     stomp.subscribe(
       `/sub/channel/quiz`,
-      (res) => {
-        postMessage((prev: any) => {
-          console.log('messages 상태값', onmessage);
-          console.log('변경 전 상태', prev);
-          console.log('수신 데이터', res.body);
-          return [...prev, JSON.parse(res.body)];
-        });
+      function (response) {
+        console.log(response);
+        console.log(JSON.parse(response.body));
       },
-      { id: token },
+      // { id: token },
     );
   };
 
