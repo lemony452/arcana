@@ -8,6 +8,7 @@ import charDialog0 from '../../Assets/characters/charDialog0.png';
 import { saveIndexStore, useFortuneStore } from '../../Store/User/fortune';
 import { InstantConversations } from '../../Common/conversations';
 import { API } from '../../API';
+import submitBtn from '../../Assets/etc/submitBtn.png';
 
 function Instant() {
   const [instantText, SetInstantText] = useState(InstantConversations.i1);
@@ -57,7 +58,9 @@ function Instant() {
         {next ? (
           <form style={{ display: 'flex', alignItems: 'center' }} onSubmit={saveInput}>
             <InputText ref={inputValueRef} type="text" placeholder="고민을 입력해주세요" />
-            <SubmitBtn />
+            <SubmitBtn>
+              <img src={submitBtn} alt="btn" />
+            </SubmitBtn>
           </form>
         ) : (
           <>

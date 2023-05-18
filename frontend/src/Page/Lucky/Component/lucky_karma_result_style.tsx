@@ -6,7 +6,7 @@ export const Body = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: calc(100vh / 1.5);
+  height: 57vh;
 `;
 
 export const CardBody = styled(motion.div)`

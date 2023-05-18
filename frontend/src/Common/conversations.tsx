@@ -6,17 +6,17 @@ export const CelticConversations = {
   c1: '나는 사랑운, 재물운, 취업운을 주로 잘봐!\n어떤걸로 선택할지 나에게 알려줘!',
   c2: {
     사랑운: '사랑운을 선택했구나\n좋아, 내가 사랑의 큐피드가 되어 타로 운세를 봐줄게!\n자세한 고민을 나에게 말해줘!',
-    성공운: '성공운을 선택했구나 좋아, 자세한 고민을 나에게 말해줘!',
-    재물운: '재물운을 선택했구나 좋아, 자세한 고민을 나에게 말해줘!',
+    성공운: '성공운을 선택했구나\n좋아, 자세한 고민을 나에게 말해줘!',
+    재물운: '재물운을 선택했구나\n좋아, 자세한 고민을 나에게 말해줘!',
   },
   c3: '네 고민 잘 들었어! 너에게 어떤 운명의 카드가 나올까 너무 궁금한걸? 카드를 뽑을때까지 기다려줘 :)',
 };
 
 export const TimeConversations = {
-  t1: '반갑네, 신년운세랑 월별운세 궁금해서 왔구려. \n어떤 운세를 보고싶은가?',
+  t1: '반갑네, 올해의 운세와 이번달의 운세가 궁금해서 왔구려. \n어떤 운세를 보고싶은가?',
   t2: {
-    신년운세: '신년운세를 바로 시작해보겠네',
-    월별운세: '월별운세를 바로 시작해보겠네',
+    신년운세: '올해의 운세를 바로 시작해보겠네',
+    월별운세: '이번달의 운세를 바로 시작해보겠네',
   },
 };
 
@@ -51,10 +51,10 @@ export const YearDetails = () => {
   // console.log(tarotList);
 
   const YearDetail = {
-    page1: `월별로 카드를 해석해주겠네\n1월 ${tarotList[0].card.name}의 의미는 ${tarotList[0].ment}\n2월 ${tarotList[1].card.name}의 의미는 ${tarotList[1].ment}\n3월 ${tarotList[2].card.name}의 의미는 ${tarotList[2].ment}`,
-    page2: `4월 ${tarotList[3].card.name}의 의미는 ${tarotList[3].ment}\n5월 ${tarotList[4].card.name}의 의미는 ${tarotList[4].ment}\n6월 ${tarotList[5].card.name}의 의미는 ${tarotList[5].ment}`,
-    page3: `7월 ${tarotList[6].card.name}의 의미는 ${tarotList[6].ment}\n8월 ${tarotList[7].card.name}의 의미는 ${tarotList[7].ment}\n9월 ${tarotList[8].card.name}의 의미는 ${tarotList[8].ment}`,
-    page4: `10월 ${tarotList[9].card.name}의 의미는 ${tarotList[9].ment}\n11월 ${tarotList[10].card.name}의 의미는 ${tarotList[10].ment}\n12월 ${tarotList[11].card.name}의 의미는 ${tarotList[11].ment}`,
+    page1: `월별로 카드를 해석해주겠네\n1월: ${tarotList[0].card.name}의 의미는 ${tarotList[0].ment}\n2월: ${tarotList[1].card.name}의 의미는 ${tarotList[1].ment}\n3월: ${tarotList[2].card.name}의 의미는 ${tarotList[2].ment}`,
+    page2: `4월: ${tarotList[3].card.name}의 의미는 ${tarotList[3].ment}\n5월: ${tarotList[4].card.name}의 의미는 ${tarotList[4].ment}\n6월: ${tarotList[5].card.name}의 의미는 ${tarotList[5].ment}`,
+    page3: `7월: ${tarotList[6].card.name}의 의미는 ${tarotList[6].ment}\n8월: ${tarotList[7].card.name}의 의미는 ${tarotList[7].ment}\n9월: ${tarotList[8].card.name}의 의미는 ${tarotList[8].ment}`,
+    page4: `10월: ${tarotList[9].card.name}의 의미는 ${tarotList[9].ment}\n11월: ${tarotList[10].card.name}의 의미는 ${tarotList[10].ment}\n12월: ${tarotList[11].card.name}의 의미는 ${tarotList[11].ment}`,
     page5: `올 한 해 운세를 요약하자면 ${summary}\n행운 카드를 얻고 싶으면 버튼을 누르게!`,
     page6: `오호, 럭키 카드는 ${lucky.card.name}가 나왔네!!`,
   };
@@ -68,9 +68,9 @@ export const MonthDetails = () => {
   console.log(tarotList);
 
   const MonthDetail = {
-    page1: `이번 달 운세를 해석해주겠네\n1~5일 ${tarotList[0].card.name}의 의미는 ${tarotList[0].ment}\n6~10일 ${tarotList[1].card.name}의 의미는 ${tarotList[1].ment}`,
-    page2: `11~15일 ${tarotList[2].card.name}의 의미는 ${tarotList[2].ment}\n16~20일 ${tarotList[3].card.name}의 의미는 ${tarotList[3].ment}`,
-    page3: `21~25일 ${tarotList[4].card.name}의 의미는 ${tarotList[4].ment}\n25일~ ${tarotList[5].card.name}의 의미는 ${tarotList[5].ment}`,
+    page1: `이번 달 운세를 해석해주겠네\n1~5일: ${tarotList[0].card.name}의 의미는 ${tarotList[0].ment}\n6~10일: ${tarotList[1].card.name}의 의미는 ${tarotList[1].ment}`,
+    page2: `11~15일: ${tarotList[2].card.name}의 의미는 ${tarotList[2].ment}\n16~20일: ${tarotList[3].card.name}의 의미는 ${tarotList[3].ment}`,
+    page3: `21~25일: ${tarotList[4].card.name}의 의미는 ${tarotList[4].ment}\n25일 이후: ${tarotList[5].card.name}의 의미는 ${tarotList[5].ment}`,
     page4: `이번 달 운세를 요약하자면 ${summary}\n행운 카드를 얻고 싶으면 버튼을 누르게!`,
     page5: `오호, 럭키 카드는 ${lucky.card.name}가 나왔네!!`,
   };
