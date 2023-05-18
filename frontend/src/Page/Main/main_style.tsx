@@ -57,7 +57,6 @@ export const SubTitle = styled.div`
   font-size: 1.8vw;
   font-weight: bolder;
   color: black;
-  letter-spacing: 0.1em;
   /* animation: ${blink} 3s infinite; */
 `;
 
@@ -264,26 +263,37 @@ export const PrevBtn = styled.img`
   display: none;
 `;
 
-export const SideBtn = styled.img`
+export const ModalBtnBox = styled.div`
   position: absolute;
-  width: 3vw;
-  height: auto;
-  left: 1vw;
   top: 1vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: auto;
+  height: 8vh;
+`;
+
+export const SideBtn = styled.img`
+  width: 3.5vw;
+  height: 100%;
   cursor: pointer;
-  position: fixed;
   transition: 0.4s ease;
+  padding-inline: 0.7vw;
   z-index: 1;
+  background-color: white;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
 `;
 
 export const LoginBtn = styled.button`
-  position: absolute;
-  top: 0.3em;
-  left: 0.3em;
   font-size: 1.5em;
   font-weight: bold;
   border: 0;
   background: transparent;
   cursor: pointer;
   z-index: 1;
+  background-color: white;
+  padding-inline: 0.7vw;
+  height: 100%;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  color: #3d3d3d;
 `;

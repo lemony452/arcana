@@ -14,6 +14,9 @@ import {
   MoveBtnImg,
   ListIcon,
   DetailBox,
+  ChangeBox,
+  ChangeSelect,
+  ChangeOption,
 } from '../mypage_style';
 // import TarotList from './TarotList';
 import { userInfoStore } from '../../../Store/User/info';
@@ -183,10 +186,12 @@ function TarotListDetail() {
             <div>타로 운세 기록</div>
           </TarotToken>
           {/* e 변수 추가 */}
-          <select onChange={(e: React.ChangeEvent<HTMLSelectElement>) => handleChange(e)}>
-            <option>최신순</option>
-            <option>과거순</option>
-          </select>
+          <ChangeBox>
+            <ChangeSelect onChange={(e: React.ChangeEvent<HTMLSelectElement>) => handleChange(e)}>
+              <ChangeOption>최신순</ChangeOption>
+              <ChangeOption>과거순</ChangeOption>
+            </ChangeSelect>
+          </ChangeBox>
           {cardList}
           <Pagination totalPage={totalPage} pageNum={pageNum} setPage={setPageNum} />
         </TarotListContent>
