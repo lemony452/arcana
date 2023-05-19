@@ -12,6 +12,8 @@ import com.jumzip.arcana.db.repository.QuizRepository;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
+import com.jumzip.arcana.db.repository.SocketRepository;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,6 +29,8 @@ public class QuizServiceImpl implements QuizService {
     private final QuizListRepository quizListRepository;
 
     private final QuizResultRepository quizResultRepository;
+
+    private final SocketRepository socketRepo;
 
     @Override
     public Quiz getQuiz(int quizNum) {
@@ -111,5 +115,14 @@ public class QuizServiceImpl implements QuizService {
     public List<QuizResult> resetQuizResult() {
         return quizResultRepository.resetQuizResult();
     }
+
+    @Override
+    public int getUserCount(String roomId) { return socketRepo.findUserCount(roomId); }
+
+    @Override
+    public void plusUserCount(String roomId) { socketRepo.plusUserCount(roomId); }
+
+    @Override
+    public void minusUserCount(String roomId) { socketRepo.minusUserCount(roomId); }
 
 }

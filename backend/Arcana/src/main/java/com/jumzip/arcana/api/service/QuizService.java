@@ -16,4 +16,7 @@ public interface QuizService {
     List<QuizResultResponse> viewQuizResult();
     List<QuizResult> resetQuizResult();
 
+    int getUserCount(String roomId);
+    void plusUserCount(String roomId);
+    void minusUserCount(String roomId);
 }
