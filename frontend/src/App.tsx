@@ -13,12 +13,13 @@ import LuckyPage from './Page/Lucky/lucky_page';
 import CelticDetail from './Page/Celtic/detail';
 import Instant from './Page/Instant';
 import SpreadCard from './Page/Spread/spread_card';
-import Quiz from './Page/Quiz';
+import Old from './Page/Quiz/old_index';
+import Quiz from './Page/Quiz/index';
 import { KakaoRedirect } from './Page/Login/redirect';
 import TarotListDetail from './Page/Mypage/Component/detail';
 // import Socket from './Page/Quiz/Websocket/NA/server';
 import Sock from './Page/Quiz/Websocket/server_none';
-// import Ws from './Page/Quiz/Websocket/NA/server_ws';
+import Socket from './Page/Quiz/Websocket/server_sock';
 import EditUserInfo from './Page/Mypage/Component/editUser';
 // import Test from './Page/Quiz/test';
 
@@ -44,10 +45,11 @@ function App() {
         <Route path="/lucky" element={<LuckyPage />} />
         <Route path="/celtic/detail" element={<CelticDetail />} />
         <Route path="/spread" element={<SpreadCard />} />
+        <Route path="/old" element={<Old />} />
         <Route path="/quiz" element={<Quiz />} />
         {/* 아래 4개는 소켓연결을 위한 임시 링크들 입니다 */}
-        {/* <Route path="/test" element={<Test />} />
-        <Route path="/server" element={<Socket />} /> */}
+        {/* <Route path="/test" element={<Test />} /> */}
+        <Route path="/server" element={<Socket />} />
         <Route path="/sock" element={<Sock />} />
         {/* <Route path="/ws" element={<Ws />} /> */}
         {/* <Route path="/authgoogle" element={<GoogleRedirect />} /> */}

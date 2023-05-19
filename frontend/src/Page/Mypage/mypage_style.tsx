@@ -60,15 +60,15 @@ export const ProfileImg = styled.div`
 
 export const Nickname = styled.div`
   display: flex;
-  font-size: 1.2em;
-  font-weight: bold;
+  font-size: 1.8em;
+  font-weight: 900;
   text-align: center;
   align-items: center;
   margin-top: 2vh;
   margin-bottom: 4vh;
 `;
 
-export const TarotToken = styled.div`
+export const TarotToken = styled.div<{ click: boolean }>`
   display: flex;
   font-size: 1.2em;
   font-weight: bold;
@@ -83,6 +83,7 @@ export const TarotToken = styled.div`
     margin-bottom: 2em;
     justify-content: center;
   }
+  cursor: ${(props) => (props.click ? 'pointer' : 'default')};
 `;
 
 export const ListContent = styled.div`
@@ -120,10 +121,18 @@ export const MoveBtn = styled.button`
     margin: 0.5em 0 0 0.5em;
     width: 37%;
   }
+  &.close {
+    display: flex;
+    align-items: end;
+    font-size: 1.8em;
+    width: 7em;
+    height: 2em;
+    font-weight: bold;
+  }
 `;
 
 export const MoveBtnImg = styled.img`
-  width: 60%;
+  width: 3vh;
   margin-left: 0.5em;
   &.home {
     width: 2.5em;
@@ -136,6 +145,10 @@ export const MoveBtnImg = styled.img`
   &.back {
     margin-left: -2em;
     width: 100%;
+  }
+  &.close {
+    margin-right: 4px;
+    margin-bottom: 6px;
   }
 `;
 
@@ -152,11 +165,11 @@ export const TarotListContent = styled.div`
   }
 `;
 
-export const TitleBox = styled.div`
+export const TitleBox = styled.div<{ thisId: number; onDetail: number }>`
   display: flex;
   width: 75%;
   height: 2.5em;
-  background: #f4f4f4;
+  background: ${(props) => (props.thisId === props.onDetail ? '#A4A4A4' : '#f4f4f4')};
   border: 1.5px solid #000000;
   box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
@@ -206,7 +219,7 @@ export const DetailTitle = styled.div`
   &.edit {
     width: 80%;
     justify-content: flex-start;
-    align-items: center;
+    align-items: end;
     margin-bottom: 0;
   }
   & > .sub {
@@ -256,7 +269,7 @@ export const DetailFortune = styled.div`
   color: #3a3a3a;
   text-align: left;
   &.edit {
-    padding: 2em 2em 2em 2.5em;
+    padding: 0em 2em 2em 2.5em;
     justify-content: center;
     padding: 0, 0, 0, 0;
   }
@@ -264,7 +277,7 @@ export const DetailFortune = styled.div`
     padding: 0 2em 0 2em;
     margin: 2em 0 2em 0;
     white-space: pre-wrap;
-    overflow-y: scroll;
+    overflow-y: auto;
     ::-webkit-scrollbar {
       width: 5px;
     }
@@ -303,8 +316,8 @@ export const LogoutBtn = styled.div`
 `;
 
 export const EditNickName = styled.img`
-  width: 1em;
-  margin-left: 0.3em;
+  width: 0.7em;
+  margin-right: 0.3em;
   cursor: pointer;
 `;
 
@@ -317,11 +330,12 @@ export const EditUser = styled.div`
   width: 100%;
   height: 50%;
   flex-direction: column;
+  border-radius: 5px;
   border: solid 2px #eaeaea;
   /* margin: 0 4em 0 4em; */
   &.email {
     height: 25%;
-    margin-top: 3em;
+    margin-top: 2em;
   }
 `;
 
@@ -335,7 +349,7 @@ export const EditUserTitle = styled.div`
   padding-left: 0.7em;
   border-bottom: solid 2px #eaeaea;
   &.email {
-    height: 58%;
+    height: 87%;
   }
 `;
 
@@ -347,7 +361,7 @@ export const EditUserContent = styled.div`
   align-items: center;
   color: #3d3d3d;
   &.nickname {
-    font-size: 2.2em;
+    font-size: 1.8em;
     font-weight: bold;
   }
   &.email {
@@ -375,6 +389,7 @@ export const PaginationBtn = styled.button`
 `;
 
 export const HelpIcon = styled.img`
+  margin: auto;
   width: 1em;
   height: 1em;
 `;
@@ -384,7 +399,8 @@ export const Container = styled.div`
   width: fit-content;
   height: fit-content;
   display: inline-block;
-
+  margin-left: 7px;
+  margin-top: 7px;
   &:hover > .tooltip,
   &:active > .tooltip {
     display: block;
@@ -395,7 +411,7 @@ export const Container = styled.div`
     display: none;
     position: absolute;
     bottom: 0;
-    left: 0;
+    left: -5px;
     background-color: #eef3fd;
     border: #7689fd solid 1px;
     border-radius: 5px;
@@ -446,4 +462,35 @@ export const LogoSmallImg = styled.img`
   height: 3em;
   margin-left: 1.5em;
   margin-right: 1em;
+`;
+
+export const ChangeSelect = styled.select`
+  background-color: #3a3a3a;
+  color: white;
+  font-size: 1.2em;
+  width: 5em;
+  height: 2em;
+  border-radius: 8px;
+  padding-left: 5px;
+`;
+
+export const ChangeOption = styled.option`
+  font-size: 1em;
+`;
+
+export const ChangeBox = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: end;
+  margin-right: 4vw;
+`;
+
+export const LuckyLetter = styled.div`
+  position: absolute;
+  top: -5vh;
+  left: 50vh;
+  > img {
+    height: 95vh;
+  }
+  z-index: -1;
 `;

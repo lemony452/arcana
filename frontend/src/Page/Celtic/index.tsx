@@ -1,15 +1,27 @@
 import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getTarot, getTarotNames } from '../../Common/tarotSelect';
-import { OptionBtn, InputText, SubmitBtn, DialogNPC } from '../../Common/common_styled';
+import {
+  OptionBtn,
+  InputText,
+  SubmitBtn,
+  DialogNPC,
+  CelticBackground1,
+  CelticBackground2,
+  CelticBackground3,
+} from '../../Common/common_styled';
 import { CelticConversations } from '../../Common/conversations';
 import Dialog from '../../Common/dialog';
 import Npc from '../../Common/npc';
 import { createCompletion } from '../../Store/FortuneTelling/gpt';
 import { useFortuneStore, CardState, saveIndexStore } from '../../Store/User/fortune';
-import charDialog0 from '../../Assets/characters/charDialog0.png';
+import charDialog0 from '../../Assets/characters/draco.png';
 import { API } from '../../API';
 import { userInfoStore } from '../../Store/User/info';
+import submitBtn from '../../Assets/etc/submitBtn.png';
+import BackgroundImg1 from '../../Assets/etc/celticb1.png';
+import BackgroundImg2 from '../../Assets/etc/celticb2.png';
+import BackgroundImg3 from '../../Assets/etc/celticb3.png';
 
 function Celtic() {
   const [celticText, SetcelticText] = useState(CelticConversations.c1);
@@ -145,19 +157,30 @@ function Celtic() {
 
   return (
     <div style={{ width: '100vw', height: '100vh', position: 'relative' }}>
-      <Npc num={0} />
-      {/* <DialogNPC src={charDialog0} /> */}
+      <CelticBackground1>
+        <img src={BackgroundImg1} alt="bg" />
+      </CelticBackground1>
+      <CelticBackground2>
+        <img src={BackgroundImg2} alt="bg" />
+      </CelticBackground2>
+      <CelticBackground3>
+        <img src={BackgroundImg3} alt="bg" />
+      </CelticBackground3>
+      {/* <Npc num={0} /> */}
+      <DialogNPC src={charDialog0} />
       <Dialog content={celticText} next={next}>
         {next ? (
           <form style={{ display: 'flex', alignItems: 'center' }} onSubmit={saveInput}>
             <InputText ref={inputValueRef} type="text" placeholder="고민을 입력해주세요" />
-            <SubmitBtn />
+            <SubmitBtn>
+              <img src={submitBtn} alt="btn" />
+            </SubmitBtn>
           </form>
         ) : (
           <>
-            <OptionBtn onClick={() => OptionClick('사랑운')}>사랑운 어떨까? 💖</OptionBtn>
-            <OptionBtn onClick={() => OptionClick('성공운')}>성공운 궁금해! 👨‍💼</OptionBtn>
-            <OptionBtn onClick={() => OptionClick('재물운')}>재물운 봐줄래? 💸</OptionBtn>
+            <OptionBtn onClick={() => OptionClick('사랑운')}>사랑운 💖</OptionBtn>
+            <OptionBtn onClick={() => OptionClick('성공운')}>성공운 👨‍💼</OptionBtn>
+            <OptionBtn onClick={() => OptionClick('재물운')}>재물운 💸</OptionBtn>
           </>
         )}
       </Dialog>

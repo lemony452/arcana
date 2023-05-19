@@ -12,6 +12,7 @@ import { useLuckyStore } from '../../../Store/User/lucky';
 import { getLuckyCard } from '../../../Common/tarotSelect';
 import { API } from '../../../API';
 import { saveIndexStore } from '../../../Store/User/fortune';
+import next from '../../../Assets/etc/nextButton.png';
 
 function MonthSpread() {
   const navigate = useNavigate();
@@ -80,13 +81,15 @@ function MonthSpread() {
             </common.DefaultCard>
           </common.CardBox>
           <common.SideBlock>
-            <common.SpreadModal onClick={showModal}>
-              <Month spreadList={indexList} />
+            <common.SpreadModal>
+              <OptionBtn onClick={showModal}>카드</OptionBtn>
               {modalOpen ? (
                 <common.ModalBackdrop onClick={showModal}>
                   <common.ModalView onClick={(e) => e.stopPropagation()}>
                     <Month spreadList={indexList} />
-                    <OptionBtn onClick={showModal}>닫기</OptionBtn>
+                    <OptionBtn className="modal" onClick={showModal}>
+                      닫기
+                    </OptionBtn>
                   </common.ModalView>
                 </common.ModalBackdrop>
               ) : null}
@@ -98,7 +101,12 @@ function MonthSpread() {
         </common.ChatArea> */}
         <DialogNPC src={charDialog1} />
         <Dialog content={text.page1} next={false}>
-          {nextBtn && <OptionBtn onClick={onNext}>다음</OptionBtn>}
+          {nextBtn && (
+            <OptionBtn onClick={onNext}>
+              다음
+              <img src={next} alt="next" />
+            </OptionBtn>
+          )}{' '}
         </Dialog>
       </>
     );
@@ -117,13 +125,15 @@ function MonthSpread() {
             </common.DefaultCard>
           </common.CardBox>
           <common.SideBlock>
-            <common.SpreadModal onClick={showModal}>
-              <Month spreadList={indexList} />
+            <common.SpreadModal>
+              <OptionBtn onClick={showModal}>카드</OptionBtn>
               {modalOpen ? (
                 <common.ModalBackdrop onClick={showModal}>
                   <common.ModalView onClick={(e) => e.stopPropagation()}>
                     <Month spreadList={indexList} />
-                    <OptionBtn onClick={showModal}>닫기</OptionBtn>
+                    <OptionBtn className="modal" onClick={showModal}>
+                      닫기
+                    </OptionBtn>
                   </common.ModalView>
                 </common.ModalBackdrop>
               ) : null}
@@ -135,7 +145,12 @@ function MonthSpread() {
         </common.ChatArea> */}
         <DialogNPC src={charDialog1} />
         <Dialog content={text.page2} next={false}>
-          {nextBtn && <OptionBtn onClick={onNext}>다음</OptionBtn>}
+          {nextBtn && (
+            <OptionBtn onClick={onNext}>
+              다음
+              <img src={next} alt="next" />
+            </OptionBtn>
+          )}{' '}
         </Dialog>
       </>
     );
@@ -154,13 +169,15 @@ function MonthSpread() {
             </common.DefaultCard>
           </common.CardBox>
           <common.SideBlock>
-            <common.SpreadModal onClick={showModal}>
-              <Month spreadList={indexList} />
+            <common.SpreadModal>
+              <OptionBtn onClick={showModal}>카드</OptionBtn>
               {modalOpen ? (
                 <common.ModalBackdrop onClick={showModal}>
                   <common.ModalView onClick={(e) => e.stopPropagation()}>
                     <Month spreadList={indexList} />
-                    <OptionBtn onClick={showModal}>닫기</OptionBtn>
+                    <OptionBtn className="modal" onClick={showModal}>
+                      닫기
+                    </OptionBtn>
                   </common.ModalView>
                 </common.ModalBackdrop>
               ) : null}
@@ -172,7 +189,12 @@ function MonthSpread() {
         </common.ChatArea> */}
         <DialogNPC src={charDialog1} />
         <Dialog content={text.page3} next={false}>
-          {nextBtn && <OptionBtn onClick={onNext}>다음</OptionBtn>}
+          {nextBtn && (
+            <OptionBtn onClick={onNext}>
+              다음
+              <img src={next} alt="next" />
+            </OptionBtn>
+          )}{' '}
         </Dialog>
       </>
     );
@@ -186,8 +208,8 @@ function MonthSpread() {
             <Month spreadList={indexList} />
           </common.CardBox>
           <common.SideBlock>
-            <common.SpreadModal onClick={showModal}>
-              <Month spreadList={indexList} />
+            {/* <common.SpreadModal>
+              <OptionBtn onClick={showModal}>카드</OptionBtn>
               {modalOpen ? (
                 <common.ModalBackdrop onClick={showModal}>
                   <common.ModalView onClick={(e) => e.stopPropagation()}>
@@ -196,7 +218,7 @@ function MonthSpread() {
                   </common.ModalView>
                 </common.ModalBackdrop>
               ) : null}
-            </common.SpreadModal>
+            </common.SpreadModal> */}
           </common.SideBlock>
         </common.CardArea>
         {/* <common.ChatArea>

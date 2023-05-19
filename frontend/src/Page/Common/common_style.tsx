@@ -8,15 +8,13 @@ export const ChatArea = styled.div`
 
 export const CardArea = styled.div`
   width: 100vw;
-  height: 67vh;
-  background-color: #f0f0f0;
+  height: 57vh;
   display: flex;
 `;
 
 export const CardBox = styled.div`
   width: 80%;
   height: 100%;
-  background-color: #f0f0f0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -25,6 +23,7 @@ export const CardBox = styled.div`
 export const SideBlock = styled.div`
   width: 10%;
   height: 100%;
+  margin-top: 20px;
 `;
 
 export const DefaultCard = styled.div`
@@ -92,7 +91,6 @@ export const ModalView = styled.div`
   border-radius: 20px;
   width: 80vw;
   height: 80vh;
-  /* background-color: #ffffff; */
   &.replay {
     margin-left: 20vw;
   }
