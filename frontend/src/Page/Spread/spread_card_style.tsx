@@ -6,16 +6,21 @@ export const Body = styled(motion.div)`
   width: 100%;
 `;
 
-export const NumBody = styled(motion.div)`
+export const NumBody = styled(motion.div)<{ color: string }>`
   position: absolute;
   display: flex;
-  align-items: end;
-  left: 50vw;
-  bottom: calc(100vh / 3 + 3vh);
+  justify-content: center;
+  align-items: center;
+  left: 3vw;
+  width: 12vh;
+  height: 12vh;
+  border-radius: 100%;
+  background-color: ${(props) => props.color};
 `;
 
 export const Num = styled(motion.div)`
-  font-size: 11vh;
+  font-size: 8vh;
+  font-weight: 700;
 `;
 
 export const CardBody = styled(motion.div)`

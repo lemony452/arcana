@@ -10,6 +10,7 @@ import Dialog from '../../../Common/dialog';
 import charDialog2 from '../../../Assets/characters/kitty.gif';
 import { InstantDetails } from '../../../Common/conversations';
 import { saveIndexStore, useFortuneStore } from '../../../Store/User/fortune';
+import next from '../../../Assets/etc/nextButton.png';
 
 function TwoSpread() {
   const navigate = useNavigate();
@@ -32,6 +33,10 @@ function TwoSpread() {
 
   const text = InstantDetails(3);
   console.log(text);
+  const [modalOpen, setModalOpen] = useState(false); // modal
+  const showModal = () => {
+    setModalOpen(!modalOpen);
+  };
 
   // 0일때 카드 고르기를 할지 논의 필요
   if (index === 0) {
@@ -59,7 +64,17 @@ function TwoSpread() {
           </common.CardBox>
           <common.SideBlock>
             <common.SpreadModal>
-              <Two />
+              <OptionBtn onClick={showModal}>카드</OptionBtn>
+              {modalOpen ? (
+                <common.ModalBackdrop onClick={showModal}>
+                  <common.ModalView onClick={(e) => e.stopPropagation()}>
+                    <Two />
+                    <OptionBtn className="modal" onClick={showModal}>
+                      닫기
+                    </OptionBtn>
+                  </common.ModalView>
+                </common.ModalBackdrop>
+              ) : null}
             </common.SpreadModal>
           </common.SideBlock>
         </common.CardArea>
@@ -68,7 +83,12 @@ function TwoSpread() {
         </common.ChatArea> */}
         <DialogNPC src={charDialog2} />
         <Dialog content={text.page1} next={false}>
-          {nextBtn && <OptionBtn onClick={onNext}>다음</OptionBtn>}
+          {nextBtn && (
+            <OptionBtn onClick={onNext}>
+              다음
+              <img src={next} alt="next" />
+            </OptionBtn>
+          )}
         </Dialog>
       </>
     );
@@ -89,7 +109,17 @@ function TwoSpread() {
           </common.CardBox>
           <common.SideBlock>
             <common.SpreadModal>
-              <Two />
+              <OptionBtn onClick={showModal}>카드</OptionBtn>
+              {modalOpen ? (
+                <common.ModalBackdrop onClick={showModal}>
+                  <common.ModalView onClick={(e) => e.stopPropagation()}>
+                    <Two />
+                    <OptionBtn className="modal" onClick={showModal}>
+                      닫기
+                    </OptionBtn>
+                  </common.ModalView>
+                </common.ModalBackdrop>
+              ) : null}
             </common.SpreadModal>
           </common.SideBlock>
         </common.CardArea>

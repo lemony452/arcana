@@ -107,12 +107,14 @@ function EditUserInfo() {
         <DetailTitle className="edit">
           <ListIcon
             className="edit"
-            style={{ width: '1em', marginLeft: '0.3em', marginRight: '0.3em' }}
+            style={{ width: '1em', marginLeft: '0.3em', marginRight: '0.3em', marginBottom: '0.3em' }}
             src={userIcon}
             alt=""
           />
           <div>내 정보</div>
-          <div className="sub">MY PAGE</div>
+          <div className="sub" style={{ marginLeft: '15px', marginBottom: '0.3em' }}>
+            MY PAGE
+          </div>
         </DetailTitle>
         <DetailFortune className="edit">
           <EditUser>
@@ -125,8 +127,8 @@ function EditUserInfo() {
                 <EditUserContent className="email">{user.email}</EditUserContent>
                 {!edit ? (
                   <EditUserContent className="nickname">
-                    {nickname}
                     <EditNickName onClick={editNickname} src={editIcon} alt="" />
+                    {nickname}
                   </EditUserContent>
                 ) : (
                   <EditUserContent>

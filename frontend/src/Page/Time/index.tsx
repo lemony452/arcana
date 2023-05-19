@@ -1,16 +1,25 @@
 import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getTarot, getTarotNames } from '../../Common/tarotSelect';
-import { OptionBtn, InputText, SubmitBtn, DialogNPC } from '../../Common/common_styled';
+import {
+  OptionBtn,
+  InputText,
+  SubmitBtn,
+  DialogNPC,
+  OtherBackground1,
+  OtherBackground2,
+} from '../../Common/common_styled';
 import { TimeConversations } from '../../Common/conversations';
 import Dialog from '../../Common/dialog';
 import Npc from '../../Common/npc';
 // import { TimeGPT } from '../../Store/FortuneTelling/gpt';
 import { useFortuneStore, CardState, saveIndexStore } from '../../Store/User/fortune';
-import charDialog0 from '../../Assets/characters/charDialog0.png';
+import charDialog1 from '../../Assets/characters/toast.gif';
 import { SpreadBtn } from '../Common/common_style';
 import { API } from '../../API';
 import { userInfoStore } from '../../Store/User/info';
+import BackgroundImg1 from '../../Assets/etc/otherb1.png';
+import BackgroundImg2 from '../../Assets/etc/otherb2.png';
 
 function Time() {
   const [celticText, SetcelticText] = useState(TimeConversations.t1);
@@ -81,12 +90,18 @@ function Time() {
 
   return (
     <div style={{ width: '100vw', height: '100vh', position: 'relative' }}>
+      {/* <OtherBackground1>
+        <img src={BackgroundImg1} alt="" />
+      </OtherBackground1>
+      <OtherBackground2>
+        <img src={BackgroundImg2} alt="" />
+      </OtherBackground2> */}
       <Npc num={1} />
-      {/* <DialogNPC src={charDialog0} /> */}
+      {/* <DialogNPC src={charDialog1} /> */}
       <Dialog content={celticText} next={next}>
         <>
-          <OptionBtn onClick={() => OptionClick('신년운세')}>신년 운세 봐줘 🐰</OptionBtn>
-          <OptionBtn onClick={() => OptionClick('월별운세')}>월별 운세 봐줘 👻</OptionBtn>
+          <OptionBtn onClick={() => OptionClick('신년운세')}>신년 운세 🐰</OptionBtn>
+          <OptionBtn onClick={() => OptionClick('월별운세')}>월별 운세 👻</OptionBtn>
         </>
       </Dialog>
     </div>

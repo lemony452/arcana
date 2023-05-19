@@ -12,6 +12,7 @@ import { API } from '../../API';
 import { getLuckyCard } from '../../Common/tarotSelect';
 import { useLuckyStore } from '../../Store/User/lucky';
 import { saveIndexStore } from '../../Store/User/fortune';
+import next from '../../Assets/etc/nextButton.png';
 
 function CelticSpread() {
   const navigate = useNavigate();
@@ -80,13 +81,15 @@ function CelticSpread() {
             </common.DefaultCard>
           </common.CardBox>
           <common.SideBlock>
-            <common.SpreadModal onClick={showModal}>
-              <Celtic spreadList={indexList} />
+            <common.SpreadModal>
+              <OptionBtn onClick={showModal}>카드</OptionBtn>
               {modalOpen ? (
                 <common.ModalBackdrop onClick={showModal}>
                   <common.ModalView onClick={(e) => e.stopPropagation()}>
                     <Celtic spreadList={indexList} />
-                    <OptionBtn onClick={showModal}>닫기</OptionBtn>
+                    <OptionBtn className="modal" onClick={showModal}>
+                      닫기
+                    </OptionBtn>
                   </common.ModalView>
                 </common.ModalBackdrop>
               ) : null}
@@ -98,8 +101,12 @@ function CelticSpread() {
         </common.ChatArea> */}
         <DialogNPC src={charDialog0} />
         <Dialog content={text.page1} next={false}>
-          {/* <common.SpreadBtn onClick={onNext}>다음</common.SpreadBtn> */}
-          {nextBtn && <OptionBtn onClick={onNext}>다음</OptionBtn>}
+          {nextBtn && (
+            <OptionBtn onClick={onNext}>
+              다음
+              <img src={next} alt="next" />
+            </OptionBtn>
+          )}
         </Dialog>
       </>
     );
@@ -118,13 +125,15 @@ function CelticSpread() {
             </common.DefaultCard>
           </common.CardBox>
           <common.SideBlock>
-            <common.SpreadModal onClick={showModal}>
-              <Celtic spreadList={indexList} />
+            <common.SpreadModal>
+              <OptionBtn onClick={showModal}>카드</OptionBtn>
               {modalOpen ? (
                 <common.ModalBackdrop onClick={showModal}>
                   <common.ModalView onClick={(e) => e.stopPropagation()}>
                     <Celtic spreadList={indexList} />
-                    <OptionBtn onClick={showModal}>닫기</OptionBtn>
+                    <OptionBtn className="modal" onClick={showModal}>
+                      닫기
+                    </OptionBtn>
                   </common.ModalView>
                 </common.ModalBackdrop>
               ) : null}
@@ -133,7 +142,12 @@ function CelticSpread() {
         </common.CardArea>
         <DialogNPC src={charDialog0} />
         <Dialog content={text.page2} next={false}>
-          {nextBtn && <OptionBtn onClick={onNext}>다음</OptionBtn>}
+          {nextBtn && (
+            <OptionBtn onClick={onNext}>
+              다음
+              <img src={next} alt="next" />
+            </OptionBtn>
+          )}
         </Dialog>
         {/* <common.ChatArea>
           <common.SpreadBtn onClick={onNext}>다음</common.SpreadBtn>
@@ -155,13 +169,15 @@ function CelticSpread() {
             </common.DefaultCard>
           </common.CardBox>
           <common.SideBlock>
-            <common.SpreadModal onClick={showModal}>
-              <Celtic spreadList={indexList} />
+            <common.SpreadModal>
+              <OptionBtn onClick={showModal}>카드</OptionBtn>
               {modalOpen ? (
                 <common.ModalBackdrop onClick={showModal}>
                   <common.ModalView onClick={(e) => e.stopPropagation()}>
                     <Celtic spreadList={indexList} />
-                    <OptionBtn onClick={showModal}>닫기</OptionBtn>
+                    <OptionBtn className="modal" onClick={showModal}>
+                      닫기
+                    </OptionBtn>
                   </common.ModalView>
                 </common.ModalBackdrop>
               ) : null}
@@ -170,7 +186,12 @@ function CelticSpread() {
         </common.CardArea>
         <DialogNPC src={charDialog0} />
         <Dialog content={text.page3} next={false}>
-          {nextBtn && <OptionBtn onClick={onNext}>다음</OptionBtn>}
+          {nextBtn && (
+            <OptionBtn onClick={onNext}>
+              다음
+              <img src={next} alt="next" />
+            </OptionBtn>
+          )}
         </Dialog>
         {/* <common.ChatArea>
           <common.SpreadBtn onClick={onNext}>다음</common.SpreadBtn>
@@ -192,13 +213,15 @@ function CelticSpread() {
             </common.DefaultCard>
           </common.CardBox>
           <common.SideBlock>
-            <common.SpreadModal onClick={showModal}>
-              <Celtic spreadList={indexList} />
+            <common.SpreadModal>
+              <OptionBtn onClick={showModal}>카드</OptionBtn>
               {modalOpen ? (
                 <common.ModalBackdrop onClick={showModal}>
                   <common.ModalView onClick={(e) => e.stopPropagation()}>
                     <Celtic spreadList={indexList} />
-                    <OptionBtn onClick={showModal}>닫기</OptionBtn>
+                    <OptionBtn className="modal" onClick={showModal}>
+                      닫기
+                    </OptionBtn>
                   </common.ModalView>
                 </common.ModalBackdrop>
               ) : null}
@@ -207,7 +230,12 @@ function CelticSpread() {
         </common.CardArea>
         <DialogNPC src={charDialog0} />
         <Dialog content={text.page4} next={false}>
-          {nextBtn && <OptionBtn onClick={onNext}>다음</OptionBtn>}
+          {nextBtn && (
+            <OptionBtn onClick={onNext}>
+              다음
+              <img src={next} alt="next" />
+            </OptionBtn>
+          )}
         </Dialog>
         {/* <common.ChatArea>
           <common.SpreadBtn onClick={onNext}>다음</common.SpreadBtn>
@@ -229,13 +257,15 @@ function CelticSpread() {
             </common.DefaultCard>
           </common.CardBox>
           <common.SideBlock>
-            <common.SpreadModal onClick={showModal}>
-              <Celtic spreadList={indexList} />
+            <common.SpreadModal>
+              <OptionBtn onClick={showModal}>카드</OptionBtn>
               {modalOpen ? (
                 <common.ModalBackdrop onClick={showModal}>
                   <common.ModalView onClick={(e) => e.stopPropagation()}>
                     <Celtic spreadList={indexList} />
-                    <OptionBtn onClick={showModal}>닫기</OptionBtn>
+                    <OptionBtn className="modal" onClick={showModal}>
+                      닫기
+                    </OptionBtn>
                   </common.ModalView>
                 </common.ModalBackdrop>
               ) : null}
