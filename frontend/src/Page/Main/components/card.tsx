@@ -18,7 +18,13 @@ import MainInstant from '../../../Assets/etc/MainInstant.png';
 import { useFortuneStore } from '../../../Store/User/fortune';
 import { userInfoStore } from '../../../Store/User/info';
 
-function Card({ isOpen }: { isOpen: boolean }) {
+function Card({
+  isOpen,
+  setModalOpen,
+}: {
+  isOpen: boolean;
+  setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}) {
   // navigate hook
   // swiper hook
   // const swiper = useSwiper();
@@ -78,9 +84,13 @@ function Card({ isOpen }: { isOpen: boolean }) {
       setCardOrder('celtic');
       setHover(false);
       // setHover(hover);
-      if (isLogin && weeklyCount > 0) {
-        navigate('/celtic');
-        setWeekly(weeklyCount - 1);
+      if (isLogin) {
+        if (weeklyCount > 0) {
+          navigate('/celtic');
+          setWeekly(weeklyCount - 1);
+        } else {
+          setModalOpen(true);
+        }
       } else {
         setGoLogin(true);
       }
@@ -94,10 +104,14 @@ function Card({ isOpen }: { isOpen: boolean }) {
       setCardOrder('time');
       setHover(false);
       // setHover(hover);
-      if (isLogin && weeklyCount > 0) {
-        setCardOrder('celtic');
-        navigate('/time');
-        setWeekly(weeklyCount - 1);
+      if (isLogin) {
+        if (weeklyCount > 0) {
+          setCardOrder('celtic');
+          navigate('/time');
+          setWeekly(weeklyCount - 1);
+        } else {
+          setModalOpen(true);
+        }
       } else {
         setGoLogin(true);
       }
