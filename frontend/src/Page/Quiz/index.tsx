@@ -219,25 +219,25 @@ function Quiz() {
       console.log('score', score);
       console.log('index', index);
 
-      let timerInterval: any;
-      Swal.fire({
-        icon: 'question',
-        title: '결과가 곧 공개됩니다!',
-        html: '결과 공개까지 {<b></b>} 밀리초 남았습니다.',
-        timer: MINUTES_IN_MS,
-        timerProgressBar: true,
-        allowOutsideClick: false,
-        didOpen: () => {
-          Swal.showLoading();
-          const b = Swal.getHtmlContainer().querySelector('b');
-          timerInterval = setInterval(() => {
-            b.textContent = Swal.getTimerLeft();
-          }, 100);
-        },
-        willClose: () => {
-          clearInterval(timerInterval);
-        },
-      });
+      // let timerInterval: any;
+      // Swal.fire({
+      //   icon: 'question',
+      //   title: '결과가 곧 공개됩니다!',
+      //   html: '결과 공개까지 {<b></b>} 밀리초 남았습니다.',
+      //   timer: MINUTES_IN_MS,
+      //   timerProgressBar: true,
+      //   allowOutsideClick: false,
+      //   didOpen: () => {
+      //     Swal.showLoading();
+      //     const b = Swal.getHtmlContainer().querySelector('b');
+      //     timerInterval = setInterval(() => {
+      //       b.textContent = Swal.getTimerLeft();
+      //     }, 100);
+      //   },
+      //   willClose: () => {
+      //     clearInterval(timerInterval);
+      //   },
+      // });
 
       // Save the answer in the array for user answers
       const answerObject = {
@@ -249,7 +249,7 @@ function Quiz() {
       setUserAnswers((prev) => [...prev, answerObject]);
     }
 
-    // setTimeLeft(0);
+    setTimeLeft(0);
     setIndex(index + 1);
     console.log('Highscore', score);
     console.log('imindex', index);
