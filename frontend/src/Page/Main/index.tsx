@@ -113,7 +113,11 @@ function Main() {
         transition={{ duration: 2.5 }}
         className={cardOrder}
       />
-      <Circle3 className={cardOrder} />
+      <Circle3
+        animate={{ x: [0, -30, 0], y: [0, -10, 0, -20, 0] }}
+        transition={{ duration: 1.7 }}
+        className={cardOrder}
+      />
       <Circle4 animate={{ y: [0, -30, 0] }} transition={{ duration: 2 }} className={cardOrder} />
       <Circle5 animate={{ y: [0, -30, 0] }} transition={{ duration: 2 }} className={cardOrder} />
       <Character />

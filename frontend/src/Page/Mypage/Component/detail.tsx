@@ -240,7 +240,9 @@ function TarotListDetail() {
           <common.ModalBackdrop onClick={showModal}>
             <common.ModalView className="replay" onClick={(e) => e.stopPropagation()}>
               <CelticSpread spreadList={cardlistIdx} />
-              <OptionBtn onClick={showModal}>닫기</OptionBtn>
+              <OptionBtn className="modal" onClick={showModal}>
+                닫기
+              </OptionBtn>
             </common.ModalView>
           </common.ModalBackdrop>
         ) : null}
@@ -248,7 +250,9 @@ function TarotListDetail() {
           <common.ModalBackdrop onClick={showLuckyCard}>
             <common.ModalView className="replay" onClick={(e) => e.stopPropagation()}>
               <LuckyCard npc={replay} cardIdx={cardRes[0].cardIdx} cardMent={cardRes[0].ment} />
-              <OptionBtn onClick={showLuckyCard}>닫기</OptionBtn>
+              <OptionBtn className="modal" onClick={showLuckyCard}>
+                닫기
+              </OptionBtn>
             </common.ModalView>
           </common.ModalBackdrop>
         ) : null}

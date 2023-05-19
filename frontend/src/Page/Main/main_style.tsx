@@ -274,14 +274,15 @@ export const ModalBtnBox = styled.div`
 `;
 
 export const SideBtn = styled.img`
-  width: 3.5vw;
-  height: 100%;
+  width: 2.5vw;
+  height: 70%;
+  margin-left: 0.5em;
   cursor: pointer;
   transition: 0.4s ease;
   padding-inline: 0.7vw;
   z-index: 1;
-  background-color: white;
-  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  /* background-color: white; */
+  /* box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25); */
 `;
 
 export const LoginBtn = styled.button`
@@ -290,10 +291,21 @@ export const LoginBtn = styled.button`
   border: 0;
   background: transparent;
   cursor: pointer;
+  border-radius: 10px;
   z-index: 1;
+  margin-left: 0.5em;
+  padding-inline: 1vw;
+  height: 80%;
   background-color: white;
-  padding-inline: 0.7vw;
-  height: 100%;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
   color: #3d3d3d;
+  &:hover {
+    background-color: #f1daff;
+    transform: scale(1.05);
+  }
+  transition: all 0.1s;
+  > img {
+    margin-left: 7px;
+    height: 1em;
+  }
 `;
