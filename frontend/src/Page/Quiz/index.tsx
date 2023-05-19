@@ -171,10 +171,10 @@ function Quiz() {
           const minutes = String(39 - serverDate.getMinutes()).padStart(2, '0');
           const seconds = String(59 - serverDate.getSeconds()).padStart(2, '0');
           setRealTime(`${hours}:${minutes}:${seconds}`);
-        } else if (serverDate.getHours() === 13 && serverDate.getMinutes() === 40 && serverDate.getSeconds() === 0) {
+        } else if (serverDate.getHours() === 13 && serverDate.getMinutes() === 50 && serverDate.getSeconds() === 0) {
           startQuiz();
         } else {
-          const hours = String(27 - serverDate.getHours()).padStart(2, '0');
+          const hours = String(28 - serverDate.getHours()).padStart(2, '0');
           const minutes = String(59 - serverDate.getMinutes()).padStart(2, '0');
           const seconds = String(59 - serverDate.getSeconds()).padStart(2, '0');
           setRealTime(`${hours}:${minutes}:${seconds}`);
@@ -256,11 +256,11 @@ function Quiz() {
   };
 
   // 다음 문제로
-  const nextQuestion = setTimeout(() => {
-    return [setNumber(number + 1), setTimeLeft(MINUTES_IN_MS + 10 * 1000)];
-  }, 3000);
+  const nextQuestion = () => {
+    return [setNumber(number + 1), setTimeLeft(MINUTES_IN_MS + 600 * 1000)];
+  };
 
-  clearTimeout(nextQuestion);
+  // clearTimeout(nextQuestion);
 
   console.log('question', number + 1);
   console.log(second);
@@ -368,9 +368,9 @@ function Quiz() {
         </quizStyle.RightArea> */}
         <quizStyle.StartArea>
           <quizStyle.TimerArea className="nextQ">정답입니다🎉</quizStyle.TimerArea>
-          {/* <quizStyle.PeopleArea className="nextQ" onClick={nextQuestion}>
+          <quizStyle.PeopleArea className="nextQ" onClick={nextQuestion}>
             다음 문제로
-          </quizStyle.PeopleArea> */}
+          </quizStyle.PeopleArea>
         </quizStyle.StartArea>
       </quizStyle.FullArea>
     );
