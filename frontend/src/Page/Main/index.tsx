@@ -33,6 +33,9 @@ import { ModalBackdrop } from '../Common/common_style';
 import Arcana from '../../Assets/etc/ARCANA.png';
 import QuizBtnImg from '../../Assets/etc/quizBtn.png';
 import QuizWaitingBgm from '../../Assets/bgm/quizWaitingBgm.mp3';
+import * as common from '../Common/common_style';
+import { OptionBtn } from '../../Common/common_styled';
+import AlertImg from '../../Assets/etc/alert.png';
 
 function Main() {
   const [QuizBgm, { stop }] = useSound(QuizWaitingBgm);
@@ -51,6 +54,11 @@ function Main() {
     setTimeout(() => {
       stop();
     }, 10000);
+  };
+
+  const [modalOpen, setModalOpen] = useState(false); // modal
+  const showModal = () => {
+    setModalOpen(false);
   };
 
   const toggleSide = () => {
@@ -87,7 +95,19 @@ function Main() {
 
   return (
     <MainBg className={cardOrder}>
-      {isLogin && isQuiz ? (
+      {modalOpen ? (
+        <common.ModalBackdrop onClick={showModal}>
+          <common.ModalView className="alert">
+            <img src={AlertImg} alt="alert" />
+            <common.ModalText>주간 티켓을</common.ModalText>
+            <common.ModalText>모두 소모하셨습니다!</common.ModalText>
+            <OptionBtn className="modal" onClick={showModal}>
+              닫기
+            </OptionBtn>
+          </common.ModalView>
+        </common.ModalBackdrop>
+      ) : null}
+      {!isLogin && isQuiz ? (
         <QuizBox type="button" onClick={goQuiz}>
           <QuizBtn src={QuizBtnImg} />
         </QuizBox>
@@ -138,7 +158,7 @@ function Main() {
       <Circle5 animate={{ y: [0, -30, 0] }} transition={{ duration: 2 }} className={cardOrder} />
       <Character />
       <CardBox>
-        <Card isOpen={isSide} />
+        <Card isOpen={isSide} setModalOpen={setModalOpen} />
       </CardBox>
     </MainBg>
   );
