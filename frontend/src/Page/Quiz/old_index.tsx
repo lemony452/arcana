@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import SockJS from 'sockjs-client';
-import * as StompJs from '@stomp/stompjs';
-import { disconnect } from 'process';
 import { fetchQuizQuestions, QuestionsState } from './api';
 import * as quizStyle from './quiz_style';
 import * as common from '../Common/common_style';
@@ -10,7 +8,8 @@ import { DialogNPC } from '../../Common/common_styled';
 import charDialog0 from '../../Assets/characters/charDialog0.png';
 import QuestionCard from './question_card';
 import { API } from '../../API';
-import { userInfoStore } from '../../Store/User/info';
+import useSound from '../../Common/useSound';
+import effectSound from '../../Common/effectSound';
 
 export type AnswerObject = {
   question: string;
@@ -37,82 +36,6 @@ function Quiz() {
   const INTERVAL = 1000;
   const [timeLeft, setTimeLeft] = useState<number>(MINUTES_IN_MS);
 
-  const { user } = userInfoStore();
-  const token = user.uid;
-  const [client, changeClient] = useState<any>();
-  const [subscription, changeSubscription] = useState<any>();
-
-  // 퀴즈 서버 접속
-  const connect = async () => {
-    if (token === '') {
-      return;
-    }
-
-    const callback = function (res: any) {
-      // called when the client receives a STOMP message from the server
-      if (res.body) {
-        console.log(user);
-        console.log(res.body);
-        // alert(res.body);
-      } else {
-        console.log('got empty message');
-      }
-    };
-
-    try {
-      const clientdata = await new StompJs.Client({
-        brokerURL: 'wss://k8d107.p.ssafy.io/ws/websocket',
-        // connectHeaders: {
-        //   login: id,
-        //   passcode: 'password',
-        // },
-        debug(str) {
-          console.log(str);
-        },
-        reconnectDelay: 5000,
-        heartbeatIncoming: 4000,
-        heartbeatOutgoing: 4000,
-      });
-
-      let subscriptiondata: any;
-      clientdata.onConnect = await function () {
-        subscriptiondata = clientdata.subscribe('/sub/channel/quiz', callback);
-        changeSubscription(subscriptiondata);
-      };
-
-      const res = await clientdata.activate();
-      console.log(res);
-      changeClient(clientdata);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const disConnect = () => {
-    if (client === null) {
-      return;
-    }
-
-    client.deactivate();
-  };
-
-  const send = () => {
-    client!.publish({
-      destination: '/pub/enter',
-      body: JSON.stringify({
-        type: 'ENTER',
-        uid: token,
-        channel: 'quiz',
-        data: 'entrance message',
-      }),
-      headers: { priority: 9 },
-    });
-  };
-
-  useEffect(() => {
-    connect();
-  }, []);
-
   // 퀴즈 시작
   const startQuiz = async () => {
     setLoading(true);
@@ -124,9 +47,8 @@ function Quiz() {
     setNumber(0);
     setLoading(false);
     // 아래에 있는 걸로 퀴즈 시간 조절
-    setTimeLeft(MINUTES_IN_MS + 10 * 1000);
+    setTimeLeft(MINUTES_IN_MS + 600 * 1000);
     setIndex(index + 1);
-    send();
   };
 
   useEffect(() => {
@@ -162,7 +84,7 @@ function Quiz() {
   });
 
   // 퀴즈 풀이시간 카운트 다운s
-  const second = String(Math.floor((timeLeft / 1000) % 60)).padStart(2, '0');
+  const second = String(Math.floor((timeLeft / 1000) % 9999)).padStart(2, '0');
   useEffect(() => {
     const timer = setInterval(() => {
       setTimeLeft((prevTime) => prevTime - INTERVAL);
@@ -186,8 +108,7 @@ function Quiz() {
       const correct = questions[number].answer === answer;
       // Add score if answer is correct
       if (correct) setScore((prev) => prev + 1);
-      console.log('score', score);
-      console.log('index', index);
+      if (!correct) setFail(true);
       // Save the answer in the array for user answers
       const answerObject = {
         question: questions[number].content,
@@ -197,16 +118,14 @@ function Quiz() {
       };
       setUserAnswers((prev) => [...prev, answerObject]);
     }
-
     setTimeLeft(0);
     setIndex(index + 1);
-    console.log('Highscore', score);
     console.log('imindex', index);
   };
 
   // 다음 문제로
   const nextQuestion = () => {
-    return [setNumber(number + 1), setTimeLeft(MINUTES_IN_MS + 10 * 1000)];
+    return [setNumber(number + 1), setTimeLeft(MINUTES_IN_MS + 600 * 1000)];
   };
   console.log('question', number + 1);
   console.log(second);
@@ -226,18 +145,20 @@ function Quiz() {
   if (index === 0) {
     return (
       <quizStyle.FullArea>
-        <quizStyle.LeftArea>
-          <quizStyle.CharacterDialog>오늘도 완주를 향해 화이팅!</quizStyle.CharacterDialog>
-          {/* 아래 onNext는 백엔드 서버에서 시간 받으면 자동으로 실행되게끔 구현해두어여함 */}
-          <quizStyle.CharacterArea onClick={startQuiz}>
-            <DialogNPC src={charDialog0} />
-          </quizStyle.CharacterArea>
-        </quizStyle.LeftArea>
+        <quizStyle.CharacterArea onClick={startQuiz}>
+          <DialogNPC src={charDialog0} />
+        </quizStyle.CharacterArea>
+        {/* <quizStyle.LeftArea>
+          <quizStyle.CharacterDialog>오늘도 완주를 향해 화이팅!</quizStyle.CharacterDialog> */}
+        {/* 아래 onNext는 백엔드 서버에서 시간 받으면 자동으로 실행되게끔 구현해두어여함 */}
+        {/* </quizStyle.LeftArea>
         <quizStyle.RightArea>
-          <quizStyle.TimerDivide>시작까지 남은 시간</quizStyle.TimerDivide>
-          <quizStyle.TimerDivide>{realTime}</quizStyle.TimerDivide>
-          <quizStyle.PeopleArea>현재 참여 인원</quizStyle.PeopleArea>
-        </quizStyle.RightArea>
+          <quizStyle.TimerArea>시작까지 남은 시간</quizStyle.TimerArea>
+        </quizStyle.RightArea> */}
+        <quizStyle.StartArea>
+          <quizStyle.TimerArea className="timer">{realTime}</quizStyle.TimerArea>
+          <quizStyle.PeopleArea>명 참여중</quizStyle.PeopleArea>
+        </quizStyle.StartArea>
       </quizStyle.FullArea>
     );
   }
@@ -260,31 +181,33 @@ function Quiz() {
         </div>
       );
     }
-    if (score !== number + 1) {
+    if (fail === true) {
       return (
         <quizStyle.FullArea>
-          {loading ? <p>Loading Questions...</p> : null}
+          {/* {loading ? <p>Loading Questions...</p> : null}
           <quizStyle.LeftArea>
             <quizStyle.CharacterDialog>앗 오답이었어요.</quizStyle.CharacterDialog>
-            <quizStyle.CharacterArea
-              onClick={() => {
-                goHome();
-                disConnect();
-              }}
-            >
-              틀렸으니 다음기회에
-            </quizStyle.CharacterArea>
+            <quizStyle.CharacterArea onClick={goHome}>틀렸으니 다음기회에</quizStyle.CharacterArea>
           </quizStyle.LeftArea>
           <quizStyle.RightArea>
             <quizStyle.TimerArea>정답자 수를 보여주는 자리 (생존자)</quizStyle.TimerArea>
             <quizStyle.PeopleArea>정답률 그래프가 들어갈 자리</quizStyle.PeopleArea>
-          </quizStyle.RightArea>
+          </quizStyle.RightArea> */}
+          <quizStyle.StartArea>
+            <quizStyle.TimerArea className="nextQ fail">
+              <div className="top">탈락하셨습니다😂</div>
+              <div>괜찮아요, 다음에는 더 잘 할 수 있어요.</div>
+            </quizStyle.TimerArea>
+            <quizStyle.PeopleArea className="nextQ fail" onClick={goHome}>
+              메인으로 돌아가기
+            </quizStyle.PeopleArea>
+          </quizStyle.StartArea>
         </quizStyle.FullArea>
       );
     }
     return (
       <quizStyle.FullArea>
-        {loading ? <p>Loading Questions...</p> : null}
+        {/* {loading ? <p>Loading Questions...</p> : null}
         <quizStyle.LeftArea>
           <quizStyle.CharacterDialog>
             {!gameOver ? <p className="score">Score: {score}</p> : null}
@@ -294,7 +217,13 @@ function Quiz() {
         <quizStyle.RightArea>
           <quizStyle.TimerArea>정답자 수를 보여주는 자리 (생존자)</quizStyle.TimerArea>
           <quizStyle.PeopleArea>정답률 그래프가 들어갈 자리</quizStyle.PeopleArea>
-        </quizStyle.RightArea>
+        </quizStyle.RightArea> */}
+        <quizStyle.StartArea>
+          <quizStyle.TimerArea className="nextQ">정답입니다🎉</quizStyle.TimerArea>
+          <quizStyle.PeopleArea className="nextQ" onClick={nextQuestion}>
+            다음 문제로
+          </quizStyle.PeopleArea>
+        </quizStyle.StartArea>
       </quizStyle.FullArea>
     );
   }
@@ -319,7 +248,7 @@ function Quiz() {
     }
     return (
       <quizStyle.FullArea>
-        <quizStyle.LeftArea>
+        {/* <quizStyle.LeftArea>
           <quizStyle.CharacterDialog>모든 문제를 다 풀었어요!</quizStyle.CharacterDialog>
           <quizStyle.CharacterArea onClick={showModal}>
             <DialogNPC src={charDialog0} />
@@ -339,7 +268,16 @@ function Quiz() {
         <quizStyle.RightArea>
           <quizStyle.TimerArea>정답자 수를 보여주는 자리 (생존자)</quizStyle.TimerArea>
           <quizStyle.PeopleArea>정답률 그래프가 들어갈 자리</quizStyle.PeopleArea>
-        </quizStyle.RightArea>
+        </quizStyle.RightArea> */}
+        <quizStyle.StartArea>
+          <quizStyle.TimerArea className="nextQ fail">
+            <div className="top">축하합니다!🎉</div>
+            <div>모든 문제를 푼 당신에게 드리는 선물입니다!</div>
+          </quizStyle.TimerArea>
+          <quizStyle.PeopleArea className="nextQ success" onClick={goHome}>
+            이벤트 티켓 받기
+          </quizStyle.PeopleArea>
+        </quizStyle.StartArea>
       </quizStyle.FullArea>
     );
   }

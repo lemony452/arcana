@@ -1,5 +1,5 @@
 import React from 'react';
-import { AnswerObject } from './index';
+import { AnswerObject } from './old_index';
 import * as quizStyle from './quiz_style';
 import * as common from '../Common/common_style';
 
