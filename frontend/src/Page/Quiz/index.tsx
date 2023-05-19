@@ -120,6 +120,15 @@ function Quiz() {
     connect();
   }, []);
 
+  const winOn = () => {
+    win();
+  };
+  useEffect(() => {
+    if (index === TOTAL_QUESTIONS + 1) {
+      winOn();
+    }
+  }, []);
+
   // 퀴즈 시작
   const startQuiz = async () => {
     setLoading(true);
@@ -335,7 +344,7 @@ function Quiz() {
     );
   }
   if (index === TOTAL_QUESTIONS + 1) {
-    win();
+    winOn();
     if (timeLeft !== 0) {
       return (
         <div>
