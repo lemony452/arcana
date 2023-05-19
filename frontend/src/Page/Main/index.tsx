@@ -87,7 +87,7 @@ function Main() {
 
   return (
     <MainBg className={cardOrder}>
-      {!isLogin && isQuiz ? (
+      {isLogin && isQuiz ? (
         <QuizBox type="button" onClick={goQuiz}>
           <QuizBtn src={QuizBtnImg} />
         </QuizBox>
