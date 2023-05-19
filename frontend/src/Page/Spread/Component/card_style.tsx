@@ -55,7 +55,7 @@ export const FilppedCardBody = styled(motion.div)`
   /* border-radius: 10px; */
 `;
 
-export const FilppedBack = styled(motion.div)<{ size: string }>`
+export const FilppedBack = styled(motion.div)<{ size: string; radius: string }>`
   /* background: red; */
   position: absolute;
   width: 100%;
@@ -67,14 +67,14 @@ export const FilppedBack = styled(motion.div)<{ size: string }>`
   > img {
     width: ${(props) => props.size};
     aspect-ratio: 3 / 5;
-    border-radius: 10px;
+    border-radius: ${(props) => props.radius};
     object-fit: cover;
     box-shadow: 1px 1px 3px gray;
   }
   /* border-radius: 10px; */
 `;
 
-export const FilppedFront = styled(motion.div)<{ size: string }>`
+export const FilppedFront = styled(motion.div)<{ size: string; radius: string }>`
   /* background: royalblue; */
   position: absolute;
   width: 100%;
@@ -86,7 +86,7 @@ export const FilppedFront = styled(motion.div)<{ size: string }>`
   > img {
     width: ${(props) => props.size};
     aspect-ratio: 3 / 5;
-    border-radius: 10px;
+    border-radius: ${(props) => props.radius};
     object-fit: cover;
     box-shadow: 1px 1px 3px gray;
   }

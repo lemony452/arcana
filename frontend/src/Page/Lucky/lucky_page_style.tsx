@@ -53,11 +53,19 @@ export const ButtonBox = styled.div`
   width: 100%;
 `;
 
+export const TopBox = styled.div`
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
 export const TopButtonBox = styled.div`
   display: flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
   height: 50px;
   width: 100%;
+  padding-inline: 5px;
 `;
 
 export const TopButtonFont = styled.div`

@@ -1,5 +1,5 @@
 import React from 'react';
-import { AnswerObject } from './index';
+import { AnswerObject } from './old_index';
 import * as quizStyle from './quiz_style';
 import * as common from '../Common/common_style';
 
@@ -26,31 +26,32 @@ const QuestionCard: React.FC<Props> = ({
 }) => (
   <quizStyle.FullArea>
     <quizStyle.LeftCard>
-      Question: {questionNr} / {totalQuestions}
+      {/* Question: {questionNr} / {totalQuestions} */}
       <quizStyle.CardArea>
         <img src={`https://k8d107.p.ssafy.io/api/v1/images/${cardIdx}.png`} alt="questCard" />
       </quizStyle.CardArea>
     </quizStyle.LeftCard>
     <quizStyle.RightArea>
-      <quizStyle.TimerDivide>
-        <p>{timeCount}</p>
-      </quizStyle.TimerDivide>
-      <quizStyle.TimerDivide>
-        <p dangerouslySetInnerHTML={{ __html: question }} />
-      </quizStyle.TimerDivide>
-      <div>
-        {answers.map((answer) => (
-          <quizStyle.QuestBox
+      <quizStyle.RightTop>
+        <quizStyle.QuestionArea>
+          <p dangerouslySetInnerHTML={{ __html: question }} />
+        </quizStyle.QuestionArea>
+        <quizStyle.TimerDivide>{timeCount}</quizStyle.TimerDivide>
+      </quizStyle.RightTop>
+      <quizStyle.QuestBox>
+        {answers.map((answer, idx) => (
+          <quizStyle.QuestOption
             key={answer}
             correct={userAnswer?.correctAnswer === answer}
             userClicked={userAnswer?.answer === answer}
+            quizId={idx}
           >
             <button type="submit" disabled={!!userAnswer} value={answer} onClick={callback}>
               <span dangerouslySetInnerHTML={{ __html: answer }} />
             </button>
-          </quizStyle.QuestBox>
+          </quizStyle.QuestOption>
         ))}
-      </div>
+      </quizStyle.QuestBox>
     </quizStyle.RightArea>
   </quizStyle.FullArea>
 );
