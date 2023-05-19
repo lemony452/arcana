@@ -19,6 +19,16 @@
   src: url('./Assets/font/digital/DigitalNumbers-Regular.ttf');
 }
 
+@font-face {
+  font-family: 'Nanum';
+  src: url('./Assets/font/Nanum/Nanum.ttf');
+}
+
+@font-face {
+  font-family: 'Binggrae';
+  src: url('./Assets/font/Binggrae/Binggrae.ttf');
+}
+
 @import url('https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css');
 
 .App-logo {
