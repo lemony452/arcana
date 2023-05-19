@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import bgImg from '../../Assets/etc/quizbg.png';
 
 export const FullArea = styled.div`
@@ -19,6 +19,9 @@ export const StartArea = styled.div`
   align-items: center;
   background-color: white;
   border-radius: 40px;
+  &.win {
+    position: relative;
+  }
 `;
 
 export const LeftArea = styled.div`
@@ -136,7 +139,8 @@ export const PeopleArea = styled.div`
     font-size: 3em;
   }
   &.success {
-    background: #51ca4e;
+    background: transparent;
+    /* background: #51ca4e; */
     font-size: 3em;
   }
   /* background-color: navy; */
@@ -267,4 +271,25 @@ export const QuizButton = styled.button`
   width: 200px;
   height: 100px;
   background-color: indigo;
+`;
+
+const poppop = keyframes`
+  0% {
+    width: 0%;
+    height: 0%;
+  }
+  100% {
+    width: 10em;
+    height: 10em;
+  }
+`;
+
+export const WinEventTicket = styled.img`
+  position: absolute;
+  top: 70%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 4em;
+  height: 4em;
+  animation: ${poppop} 1s;
 `;
