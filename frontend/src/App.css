@@ -20,6 +20,16 @@
 }
 
 @font-face {
+  font-family: 'Nanum';
+  src: url('./Assets/font/Nanum/Nanum.ttf');
+}
+
+@font-face {
+  font-family: 'Binggrae';
+  src: url('./Assets/font/Binggrae/Binggrae.ttf');
+}
+
+@font-face {
   font-family: 'Binggrae2';
   font-weight: 700;
   font-style: normal;
