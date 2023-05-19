@@ -3,7 +3,7 @@ package com.jumzip.arcana.api.controller;
 import com.jumzip.arcana.api.request.QuizResultRequest;
 import com.jumzip.arcana.api.response.QuizResultResponse;
 import com.jumzip.arcana.api.service.QuizService;
-import com.jumzip.arcana.db.entity.Message;
+import com.jumzip.arcana.db.entity.Messages;
 import com.jumzip.arcana.db.entity.Quiz;
 import com.jumzip.arcana.db.entity.QuizResult;
 import io.swagger.v3.oas.annotations.Operation;
@@ -16,11 +16,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessageSendingOperations;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Tag(description = "Quiz API", name = "QUIZ")
 @RestController
@@ -92,23 +88,35 @@ public class QuizController {
         }
     }
 
+    @Operation(summary = "room User 수", description = "room에 들어와있는 유저 수")
+    @GetMapping("/userCount")
+    public int getUserCount(@RequestParam String roomId) {
+        logger.info("Start getUserCount");
+        return quizService.getUserCount(roomId);
+    }
+
     // SERVERTIME 20:58부터 커넥션 객체 생성 가능 <<<<<< 스케줄러!!
     // 이거... 내쪽에서 어케해줘야함?? API??? 배치+스케줄러 하면 요청없이도 API가 보내지나???
 
     // 페이지 입장 시 uid를 들고 들어온다 -> 메세지타입 Enter, user uid 필요
     @MessageMapping(value = "/enter") // /pub/enter
-    public String quizEnter(Message message) {
+    public int quizEnter(Messages message) {
         //logger.info();
-        operations.convertAndSend("/sub/channel/" + message.getChannel(), message);
-        message.setUserCount(message.getUserCount()+1);
-        return "ENTER Complete";
+        String roomId = message.getRoomId();
+        operations.convertAndSend("/sub/channel/" + roomId, message);
+        message.enterQuiz();
+        quizService.plusUserCount(roomId);
+
+        return quizService.getUserCount(roomId);
     }
 
     // FE에서 틀린 사람 처리/페이지 나간사람 처리 -> Quit 메세지타입, uid 필요
     @MessageMapping(value = "/quit") // /pub/quit
-    public String quizQuit(Message message) {
-        operations.convertAndSend("/sub/channel/" + message.getChannel(), message);
-        message.setUserCount(message.getUserCount()-1);
+    public String quizQuit(Messages message) {
+        String roomId = message.getRoomId();
+        operations.convertAndSend("/sub/channel/" + roomId, message);
+        message.quitQuiz();
+        quizService.minusUserCount(roomId);
         return "QUIT Complete";
     }
 

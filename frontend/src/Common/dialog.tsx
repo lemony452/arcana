@@ -34,6 +34,7 @@ function Dialog({ children, content, next }: CaseProps) {
               strings: content, // 타이핑 효과를 줄 컨텐츠
               autoStart: true, // 자동시작
               delay: 33, // 각 타이핑 간의 간격 => 타이핑 속도
+              cursor: '',
             }}
           />
         </DialogContentStyle>

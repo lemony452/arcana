@@ -1,6 +1,5 @@
 import React, { useRef, useEffect } from 'react';
 import { LoginBg, LoginModalStyle, LoginMent } from './login_style';
-import LoginBgImg from '../../Assets/etc/loginBg.png';
 import { GoogleLogin, KakaoLogin } from './login';
 import { userInfoStore } from '../../Store/User/info';
 

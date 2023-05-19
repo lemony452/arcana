@@ -69,7 +69,7 @@ function UserInfo() {
       <Nickname>
         <div>{nickname} 님</div>
       </Nickname>
-      <TarotToken>
+      <TarotToken click={false}>
         <ListContent>
           <ListIcon src={tockenIcon} alt="" />
           <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -82,7 +82,7 @@ function UserInfo() {
         </ListContent>
         <div style={{ width: '50%' }}>{weeklyCount} / 5</div>
       </TarotToken>
-      <TarotToken>
+      <TarotToken click={false}>
         <ListContent>
           <ListIcon src={ticketIcon} alt="" />
           <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -95,32 +95,29 @@ function UserInfo() {
         </ListContent>
         <div style={{ width: '50%' }}>{ticket} / 2</div>
       </TarotToken>
-      <TarotToken>
+      <TarotToken onClick={MoveEditUser} click>
         <ListContent>
           <ListIcon src={userIcon} alt="" />
           <div>내 정보 관리</div>
         </ListContent>
-        <MoveBtn onClick={MoveEditUser}>
+        <MoveBtn>
           <MoveBtnImg src={nextBtn} alt="" />
         </MoveBtn>
       </TarotToken>
-      <TarotToken>
+      <TarotToken onClick={openTarotList} click>
         <ListContent>
           <ListIcon src={cardIcon} alt="" />
           <div>타로 운세 기록</div>
         </ListContent>
-        <MoveBtn onClick={openTarotList}>
+        <MoveBtn>
           <MoveBtnImg src={nextBtn} alt="" />
         </MoveBtn>
       </TarotToken>
-      <TarotToken>
+      <TarotToken onClick={logout} click>
         <ListContent>
           <ListIcon src={logoutIcon} alt="" />
           <div>로그아웃</div>
         </ListContent>
-        <MoveBtn onClick={logout}>
-          <MoveBtnImg src={nextBtn} alt="" />
-        </MoveBtn>
       </TarotToken>
     </UserContent>
   );

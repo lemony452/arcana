@@ -6,6 +6,39 @@ import styled, { keyframes } from 'styled-components';
 //   display: flex;
 // `;
 
+export const QuizModal = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 390px;
+  height: 280px;
+  background: #f4f4f4;
+  border: 2px solid #eaeaea;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+`;
+export const QuizBox = styled.button`
+  position: absolute;
+  width: 185px;
+  height: 103.6;
+  left: 50%;
+  transform: translate(-50%);
+  top: 0.5em;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  z-index: 3;
+`;
+
+export const QuizBtn = styled.img`
+  position: absolute;
+  left: 1em;
+  top: 1em;
+  :hover {
+    opacity: 0.8;
+  }
+`;
+
 export const MainBg = styled.div`
   position: relative;
   width: 100vw;
@@ -57,7 +90,6 @@ export const SubTitle = styled.div`
   font-size: 1.8vw;
   font-weight: bolder;
   color: black;
-  letter-spacing: 0.1em;
   /* animation: ${blink} 3s infinite; */
 `;
 
@@ -264,26 +296,49 @@ export const PrevBtn = styled.img`
   display: none;
 `;
 
-export const SideBtn = styled.img`
+export const ModalBtnBox = styled.div`
   position: absolute;
-  width: 3vw;
-  height: auto;
-  left: 1vw;
   top: 1vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: auto;
+  height: 8vh;
+`;
+
+export const SideBtn = styled.img`
+  width: 2.5vw;
+  height: 70%;
+  margin-left: 0.5em;
   cursor: pointer;
-  position: fixed;
   transition: 0.4s ease;
+  padding-inline: 0.7vw;
   z-index: 1;
+  /* background-color: white; */
+  /* box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25); */
 `;
 
 export const LoginBtn = styled.button`
-  position: absolute;
-  top: 0.3em;
-  left: 0.3em;
   font-size: 1.5em;
   font-weight: bold;
   border: 0;
   background: transparent;
   cursor: pointer;
+  border-radius: 10px;
   z-index: 1;
+  margin-left: 0.5em;
+  padding-inline: 1vw;
+  height: 80%;
+  background-color: white;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  color: #3d3d3d;
+  &:hover {
+    background-color: #f1daff;
+    transform: scale(1.05);
+  }
+  transition: all 0.1s;
+  > img {
+    margin-left: 7px;
+    height: 1em;
+  }
 `;

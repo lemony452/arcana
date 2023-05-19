@@ -25,7 +25,7 @@ function Card({ isOpen }: { isOpen: boolean }) {
   // console.log('swiper', swiper);
   const navigate = useNavigate();
 
-  const { weeklyCount, setWeekly, isLogin } = userInfoStore();
+  const { weeklyCount, setWeekly, isLogin, setGoLogin } = userInfoStore();
 
   // 캐러셀 이동
   const [prevEl, setPrevEl] = useState<HTMLElement | null>(null);
@@ -81,6 +81,8 @@ function Card({ isOpen }: { isOpen: boolean }) {
       if (isLogin && weeklyCount > 0) {
         navigate('/celtic');
         setWeekly(weeklyCount - 1);
+      } else {
+        setGoLogin(true);
       }
     }
   };
@@ -96,6 +98,8 @@ function Card({ isOpen }: { isOpen: boolean }) {
         setCardOrder('celtic');
         navigate('/time');
         setWeekly(weeklyCount - 1);
+      } else {
+        setGoLogin(true);
       }
     }
   };
@@ -109,6 +113,8 @@ function Card({ isOpen }: { isOpen: boolean }) {
       if (isLogin) {
         setCardOrder('celtic');
         navigate('/instant');
+      } else {
+        setGoLogin(true);
       }
     }
   };
