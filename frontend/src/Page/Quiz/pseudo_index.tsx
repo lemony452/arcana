@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import SockJS from 'sockjs-client';
 import * as StompJs from '@stomp/stompjs';
+import { disconnect } from 'process';
 import { fetchQuizQuestions, QuestionsState } from './api';
 import * as quizStyle from './quiz_style';
 import * as common from '../Common/common_style';
@@ -123,8 +124,9 @@ function Quiz() {
     setNumber(0);
     setLoading(false);
     // 아래에 있는 걸로 퀴즈 시간 조절
-    setTimeLeft(MINUTES_IN_MS + 600 * 1000);
+    setTimeLeft(MINUTES_IN_MS + 10 * 1000);
     setIndex(index + 1);
+    send();
   };
 
   useEffect(() => {
@@ -184,7 +186,8 @@ function Quiz() {
       const correct = questions[number].answer === answer;
       // Add score if answer is correct
       if (correct) setScore((prev) => prev + 1);
-      if (!correct) setFail(true);
+      console.log('score', score);
+      console.log('index', index);
       // Save the answer in the array for user answers
       const answerObject = {
         question: questions[number].content,
@@ -194,14 +197,16 @@ function Quiz() {
       };
       setUserAnswers((prev) => [...prev, answerObject]);
     }
+
     setTimeLeft(0);
     setIndex(index + 1);
+    console.log('Highscore', score);
     console.log('imindex', index);
   };
 
   // 다음 문제로
   const nextQuestion = () => {
-    return [setNumber(number + 1), setTimeLeft(MINUTES_IN_MS + 600 * 1000)];
+    return [setNumber(number + 1), setTimeLeft(MINUTES_IN_MS + 10 * 1000)];
   };
   console.log('question', number + 1);
   console.log(second);
@@ -255,13 +260,20 @@ function Quiz() {
         </div>
       );
     }
-    if (fail === true) {
+    if (score !== number + 1) {
       return (
         <quizStyle.FullArea>
           {loading ? <p>Loading Questions...</p> : null}
           <quizStyle.LeftArea>
             <quizStyle.CharacterDialog>앗 오답이었어요.</quizStyle.CharacterDialog>
-            <quizStyle.CharacterArea onClick={goHome}>틀렸으니 다음기회에</quizStyle.CharacterArea>
+            <quizStyle.CharacterArea
+              onClick={() => {
+                goHome();
+                disConnect();
+              }}
+            >
+              틀렸으니 다음기회에
+            </quizStyle.CharacterArea>
           </quizStyle.LeftArea>
           <quizStyle.RightArea>
             <quizStyle.TimerArea>정답자 수를 보여주는 자리 (생존자)</quizStyle.TimerArea>
