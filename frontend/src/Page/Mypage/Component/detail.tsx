@@ -17,6 +17,7 @@ import {
   ChangeBox,
   ChangeSelect,
   ChangeOption,
+  LuckyLetter,
 } from '../mypage_style';
 // import TarotList from './TarotList';
 import { userInfoStore } from '../../../Store/User/info';
@@ -33,6 +34,7 @@ import * as common from '../../Common/common_style';
 import { OptionBtn } from '../../../Common/common_styled';
 import LuckyCard from './lucky_card';
 import { useCardStore } from '../../../Store/Main/main';
+import Letter from '../../../Assets/etc/letter.png';
 
 function TarotListDetail() {
   const navigate = useNavigate();
@@ -249,6 +251,9 @@ function TarotListDetail() {
         {luckyModalOpen ? (
           <common.ModalBackdrop onClick={showLuckyCard}>
             <common.ModalView className="replay" onClick={(e) => e.stopPropagation()}>
+              <LuckyLetter>
+                <img src={Letter} alt="letter" />
+              </LuckyLetter>
               <LuckyCard npc={replay} cardIdx={cardRes[0].cardIdx} cardMent={cardRes[0].ment} />
               <OptionBtn className="modal" onClick={showLuckyCard}>
                 닫기
