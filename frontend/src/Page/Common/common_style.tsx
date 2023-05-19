@@ -94,6 +94,20 @@ export const ModalView = styled.div`
   &.replay {
     margin-left: 20vw;
   }
+  &.alert {
+    width: 25vw;
+    height: 40vh;
+    background-color: #f4f4f4;
+    justify-content: center;
+    > img {
+      height: 10vh;
+      margin-bottom: 10px;
+    }
+  }
+`;
+
+export const ModalText = styled.div`
+  font-size: 2em;
 `;
 
 export const ToHomeBtn = styled.button`
