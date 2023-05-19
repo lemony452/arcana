@@ -7,6 +7,9 @@ export const Body = styled.div`
   justify-content: center;
   align-items: center;
   height: 57vh;
+  &.modal {
+    margin-top: 15vh;
+  }
 `;
 
 export const CardBody = styled(motion.div)`
