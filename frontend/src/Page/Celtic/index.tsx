@@ -62,13 +62,13 @@ function Celtic() {
       return indexData;
     });
     setIndexList(IndexList);
-    console.log(CardList);
+    // console.log(CardList);
     setTarotList(CardList);
 
     // 10장의 카드이름 목록 리스트
     const TarotList = getTarotNames(tarots);
     setTarotNameList(TarotList);
-    console.log(TarotList);
+    // console.log(TarotList);
     // 고민 입력 플로우로 진행
     SetOption(f);
     SetNext(!next);
@@ -90,7 +90,7 @@ function Celtic() {
     const inputValue = inputValueRef.current?.value;
     if (inputValue!.replace(reg, '').length > 1) {
       setInputValue(inputValue!);
-      console.log(inputValue);
+      // console.log(inputValue);
       // const prompt = `[카드목록][${tarotList}] 카드가 있다. [방식] celtic-cross. ${opt}과 관련된 점을 보고싶다. ${position}번째 카드의 결과만 응답한다. [질문] ${inputValue}`;
       // celtic 2장씩 총 10장의 운세 풀이 요청
       let ans: string[];
@@ -111,19 +111,19 @@ function Celtic() {
         // addFortune(ans);
 
         ans = await createCompletion(t, o, i, cards[0]); // 배열에 카드 2장 풀이 담겨서 출력
-        console.log(ans);
+        // console.log(ans);
         addFortune(ans);
         fortunList = ans;
         ans = await createCompletion(t, o, i, cards[1]); // 배열에 카드 2장 풀이 담겨서 출력
-        console.log(ans);
+        // console.log(ans);
         addFortune(ans);
         fortunList = [...fortunList, ...ans];
         ans = await createCompletion(t, o, i, cards[2]); // 배열에 카드 2장 풀이 담겨서 출력
-        console.log(ans);
+        // console.log(ans);
         addFortune(ans);
         fortunList = [...fortunList, ...ans];
         ans = await createCompletion(t, o, i, cards[3]); // 배열에 카드 2장 풀이 담겨서 출력
-        console.log(ans);
+        // console.log(ans);
         addFortune(ans);
         fortunList = [...fortunList, ...ans];
         ans = await createCompletion(t, o, i, cards[4]); // 배열에 카드 2장 풀이 담겨서 출력
@@ -135,7 +135,7 @@ function Celtic() {
       };
       getAns(tarotNameList, option, inputValue!).then((res) => {
         fortunList = res;
-        console.log(fortunList);
+        // console.log(fortunList);
         setFortune(fortunList);
       });
       // gpt api 호출하고 spread 페이지로 바로 이동됨
@@ -146,7 +146,7 @@ function Celtic() {
         uid: user.uid,
       })
         .then((res) => {
-          console.log(res.data);
+          // console.log(res.data);
           setWeekly(res.data.nowValue);
         })
         .catch((err) => console.log(err));
