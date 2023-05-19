@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import * as StompJs from '@stomp/stompjs';
+import Swal from 'sweetalert2';
 import { fetchQuizQuestions, QuestionsState } from './api';
 import * as quizStyle from './quiz_style';
 import * as common from '../Common/common_style';
@@ -111,6 +112,7 @@ function Quiz() {
 
   useEffect(() => {
     connect();
+    console.log('connected');
   }, []);
 
   // 퀴즈 시작
@@ -188,6 +190,27 @@ function Quiz() {
       if (correct) setScore((prev) => prev + 1);
       console.log('score', score);
       console.log('index', index);
+
+      let timerInterval: any;
+      Swal.fire({
+        icon: 'question',
+        title: '결과가 곧 공개됩니다!',
+        html: '결과 공개까지 <b></b> 밀리초 남았습니다.',
+        timer: MINUTES_IN_MS,
+        timerProgressBar: true,
+        allowOutsideClick: false,
+        didOpen: () => {
+          Swal.showLoading();
+          const b = Swal.getHtmlContainer().querySelector('b');
+          timerInterval = setInterval(() => {
+            b.textContent = Swal.getTimerLeft();
+          }, 100);
+        },
+        willClose: () => {
+          clearInterval(timerInterval);
+        },
+      });
+
       // Save the answer in the array for user answers
       const answerObject = {
         question: questions[number].content,
@@ -198,7 +221,7 @@ function Quiz() {
       setUserAnswers((prev) => [...prev, answerObject]);
     }
 
-    setTimeLeft(0);
+    // setTimeLeft(0);
     setIndex(index + 1);
     console.log('Highscore', score);
     console.log('imindex', index);
