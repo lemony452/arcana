@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import * as StompJs from '@stomp/stompjs';
+import useSound from 'use-sound';
+import Swal from 'sweetalert2';
 import { fetchQuizQuestions, QuestionsState } from './api';
 import * as quizStyle from './quiz_style';
 import * as common from '../Common/common_style';
@@ -9,8 +11,10 @@ import charDialog0 from '../../Assets/characters/charDialog0.png';
 import QuestionCard from './question_card';
 import { API } from '../../API';
 import { userInfoStore } from '../../Store/User/info';
-import useSound from '../../Common/useSound';
-import effectSound from '../../Common/effectSound';
+import ClockBgm from '../../Assets/bgm/clockBgm.mp3';
+import SuccessBgm from '../../Assets/bgm/success.mp3';
+import WinBgm from '../../Assets/bgm/win.mp3';
+import EventTiket from '../../Assets/etc/eventTicket.png';
 
 export type AnswerObject = {
   question: string;
@@ -22,6 +26,9 @@ export type AnswerObject = {
 const TOTAL_QUESTIONS = 5;
 
 function Quiz() {
+  const [win] = useSound(WinBgm);
+  const [success] = useSound(SuccessBgm);
+  const [clockPlay, { stop }] = useSound(ClockBgm);
   const [index, setIndex] = useState(0);
   const [loading, setLoading] = useState(false);
   const [questions, setQuestions] = useState<QuestionsState[]>([]);
@@ -31,6 +38,7 @@ function Quiz() {
   const [gameOver, setGameOver] = useState(true);
   const [fail, setFail] = useState(false);
   const [realTime, setRealTime] = useState('00:00:00');
+  const [userNum, setUserNum] = useState(0);
 
   const navigate = useNavigate();
   const MINUTES_IN_MS = 0;
@@ -42,7 +50,16 @@ function Quiz() {
   const [client, changeClient] = useState<any>();
   const [subscription, changeSubscription] = useState<any>();
 
+  // 유저 숫자 불러오기
+  const userCount = async () => {
+    await API.get(`/api/v1/quiz/userCount?roomId=quiz`).then((res) => {
+      console.log(res);
+      setUserNum(res.data);
+    });
+  };
+
   // 퀴즈 서버 접속
+
   const connect = async () => {
     if (token === '') {
       return;
@@ -82,6 +99,7 @@ function Quiz() {
 
       const res = await clientdata.activate();
       console.log(res);
+      userCount();
       changeClient(clientdata);
     } catch (error) {
       console.log(error);
@@ -111,6 +129,16 @@ function Quiz() {
 
   useEffect(() => {
     connect();
+    console.log('connected');
+  }, []);
+
+  const winOn = () => {
+    win();
+  };
+  useEffect(() => {
+    if (index === TOTAL_QUESTIONS + 1) {
+      winOn();
+    }
   }, []);
 
   // 퀴즈 시작
@@ -138,15 +166,15 @@ function Quiz() {
         const serverDate = new Date(Math.floor(res.data / 1000) * 1000);
         console.log(serverDate.getHours(), serverDate.getMinutes(), serverDate.getSeconds());
         // console.log(typeof serverDate.getHours());
-        if (serverDate.getHours() < 6) {
-          const hours = String(5 - serverDate.getHours()).padStart(2, '0');
-          const minutes = String(59 - serverDate.getMinutes()).padStart(2, '0');
+        if (serverDate.getHours() < 13) {
+          const hours = String(13 - serverDate.getHours()).padStart(2, '0');
+          const minutes = String(39 - serverDate.getMinutes()).padStart(2, '0');
           const seconds = String(59 - serverDate.getSeconds()).padStart(2, '0');
           setRealTime(`${hours}:${minutes}:${seconds}`);
-        } else if (serverDate.getHours() === 6 && serverDate.getMinutes() === 15 && serverDate.getSeconds() === 0) {
+        } else if (serverDate.getHours() === 13 && serverDate.getMinutes() === 50 && serverDate.getSeconds() === 0) {
           startQuiz();
         } else {
-          const hours = String(29 - serverDate.getHours()).padStart(2, '0');
+          const hours = String(28 - serverDate.getHours()).padStart(2, '0');
           const minutes = String(59 - serverDate.getMinutes()).padStart(2, '0');
           const seconds = String(59 - serverDate.getSeconds()).padStart(2, '0');
           setRealTime(`${hours}:${minutes}:${seconds}`);
@@ -166,10 +194,12 @@ function Quiz() {
   useEffect(() => {
     const timer = setInterval(() => {
       setTimeLeft((prevTime) => prevTime - INTERVAL);
+      clockPlay();
     }, INTERVAL);
 
     if (timeLeft <= 0) {
       clearInterval(timer);
+      stop();
       console.log('타이머가 종료되었습니다.');
     }
     return () => {
@@ -188,6 +218,27 @@ function Quiz() {
       if (correct) setScore((prev) => prev + 1);
       console.log('score', score);
       console.log('index', index);
+
+      // let timerInterval: any;
+      // Swal.fire({
+      //   icon: 'question',
+      //   title: '결과가 곧 공개됩니다!',
+      //   html: '결과 공개까지 {<b></b>} 밀리초 남았습니다.',
+      //   timer: MINUTES_IN_MS,
+      //   timerProgressBar: true,
+      //   allowOutsideClick: false,
+      //   didOpen: () => {
+      //     Swal.showLoading();
+      //     const b = Swal.getHtmlContainer().querySelector('b');
+      //     timerInterval = setInterval(() => {
+      //       b.textContent = Swal.getTimerLeft();
+      //     }, 100);
+      //   },
+      //   willClose: () => {
+      //     clearInterval(timerInterval);
+      //   },
+      // });
+
       // Save the answer in the array for user answers
       const answerObject = {
         question: questions[number].content,
@@ -206,8 +257,11 @@ function Quiz() {
 
   // 다음 문제로
   const nextQuestion = () => {
-    return [setNumber(number + 1), setTimeLeft(MINUTES_IN_MS + 10 * 1000)];
+    return [setNumber(number + 1), setTimeLeft(MINUTES_IN_MS + 600 * 1000)];
   };
+
+  // clearTimeout(nextQuestion);
+
   console.log('question', number + 1);
   console.log(second);
 
@@ -219,6 +273,7 @@ function Quiz() {
 
   // 메인으로 보내기
   const goHome = () => {
+    stop();
     navigate('/');
   };
 
@@ -244,7 +299,7 @@ function Quiz() {
         </quizStyle.RightArea> */}
         <quizStyle.StartArea>
           <quizStyle.TimerArea className="timer">{realTime}</quizStyle.TimerArea>
-          <quizStyle.PeopleArea>명 참여중</quizStyle.PeopleArea>
+          <quizStyle.PeopleArea>{userNum}명 참여중</quizStyle.PeopleArea>
         </quizStyle.StartArea>
       </quizStyle.FullArea>
     );
@@ -321,6 +376,7 @@ function Quiz() {
     );
   }
   if (index === TOTAL_QUESTIONS + 1) {
+    // winOn();
     if (timeLeft !== 0) {
       return (
         <div>
@@ -362,7 +418,7 @@ function Quiz() {
           <quizStyle.TimerArea>정답자 수를 보여주는 자리 (생존자)</quizStyle.TimerArea>
           <quizStyle.PeopleArea>정답률 그래프가 들어갈 자리</quizStyle.PeopleArea>
         </quizStyle.RightArea> */}
-        <quizStyle.StartArea>
+        <quizStyle.StartArea className="win">
           <quizStyle.TimerArea className="nextQ fail">
             <div className="top">축하합니다!🎉</div>
             <div>모든 문제를 푼 당신에게 드리는 선물입니다!</div>
@@ -375,7 +431,8 @@ function Quiz() {
               getTicket();
             }}
           >
-            이벤트 티켓 받기
+            {/* 이벤트 티켓 받기 */}
+            <quizStyle.WinEventTicket src={EventTiket} />
           </quizStyle.PeopleArea>
         </quizStyle.StartArea>
       </quizStyle.FullArea>

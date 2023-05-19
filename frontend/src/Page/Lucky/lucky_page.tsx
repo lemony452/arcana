@@ -38,7 +38,7 @@ function LuckyPage() {
   const { luckyMent, lucky } = useLuckyStore();
   const location = useLocation();
   const { user } = userInfoStore();
-  const { option, summary, tarotList, fortune, inputValue } = useFortuneStore();
+  const { option, summary, tarotList, fortune, inputValue, setFortune } = useFortuneStore();
   const userSummary = summary;
 
   // 운세 결과 저장 요청 보낼 변수
@@ -80,7 +80,7 @@ function LuckyPage() {
     },
   ];
 
-  const resultPageHandler = () => {
+  const resultPageHandler = async () => {
     setResultPage(true);
     // 배열에 타로 운세 결과 저장
     if (option === '신년운세' || option === '월별운세') {
@@ -114,6 +114,7 @@ function LuckyPage() {
     })
       .then((res) => {
         console.log(res.data);
+        setFortune([]);
       })
       .catch((err) => {
         console.log(err);
