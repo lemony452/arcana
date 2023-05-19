@@ -10,14 +10,17 @@ export const NumBody = styled(motion.div)<{ color: string }>`
   position: absolute;
   display: flex;
   justify-content: center;
+  align-items: center;
   left: 3vw;
-  width: 15vh;
-  border-radius: 15vh;
+  width: 12vh;
+  height: 12vh;
+  border-radius: 100%;
   background-color: ${(props) => props.color};
 `;
 
 export const Num = styled(motion.div)`
-  font-size: 10vh;
+  font-size: 8vh;
+  font-weight: 700;
 `;
 
 export const CardBody = styled(motion.div)`

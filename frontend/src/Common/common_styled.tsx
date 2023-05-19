@@ -16,9 +16,9 @@ export const DialogContent = styled.div<{ color: string }>`
   bottom: 2vh;
   height: 32vh;
   /* text-align: center; */
-  filter: drop-shadow(0px 6px 10px rgba(0, 0, 0, 0.5));
+  filter: drop-shadow(0px 6px 4px rgba(0, 0, 0, 0.5));
   /* background: ${(props) => props.color}; */
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: #f4f4f4;
   flex-direction: row;
   justify-content: flex-end;
   border-radius: 45px;
@@ -39,8 +39,7 @@ export const DialogName = styled.div<{ color: string }>`
   height: 8vh;
   left: 21vw;
   width: 12vw;
-  font-style: normal;
-  font-weight: 700;
+  font-family: 'Binggrae2';
   font-size: 2em;
   line-height: 48px;
   display: flex;
@@ -55,9 +54,9 @@ export const DialogName = styled.div<{ color: string }>`
 
 export const DialogContentStyle = styled.div<{ color: string }>`
   display: flex;
-  width: 100%;
+  width: 90%;
   height: auto;
-  font-size: 1.2em;
+  font-size: 1.4em;
   white-space: pre-wrap;
   padding: 5px 20px;
   margin: 4vh 4vh;
@@ -96,7 +95,7 @@ export const OptionGroup = styled.div`
 
 export const OptionBtn = styled.button`
   background: #fffffe;
-  border: 3px solid rgb(150, 150, 150);
+  border: 3px solid #eaeaea;
   box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 20px;
   font-size: 1.5em;
@@ -113,6 +112,9 @@ export const OptionBtn = styled.button`
   > img {
     margin-left: 7px;
     height: 1em;
+  }
+  &.modal {
+    margin-top: 30px;
   }
 `;
 
@@ -193,7 +195,7 @@ export const CelticBackground1 = styled.div`
   z-index: -1;
   > img {
     width: 100%;
-    height: 100%;
+    height: 70%;
   }
 `;
 
@@ -205,7 +207,7 @@ export const CelticBackground2 = styled.div`
   z-index: -1;
   > img {
     width: 100%;
-    height: 100%;
+    height: 70%;
   }
 `;
 
@@ -217,7 +219,7 @@ export const CelticBackground3 = styled.div`
   z-index: -1;
   > img {
     width: 100%;
-    height: 100%;
+    height: 70%;
   }
 `;
 

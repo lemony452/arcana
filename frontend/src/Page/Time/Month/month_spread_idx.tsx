@@ -81,13 +81,15 @@ function MonthSpread() {
             </common.DefaultCard>
           </common.CardBox>
           <common.SideBlock>
-            <common.SpreadModal onClick={showModal}>
-              <Month spreadList={indexList} />
+            <common.SpreadModal>
+              <OptionBtn onClick={showModal}>카드</OptionBtn>
               {modalOpen ? (
                 <common.ModalBackdrop onClick={showModal}>
                   <common.ModalView onClick={(e) => e.stopPropagation()}>
                     <Month spreadList={indexList} />
-                    <OptionBtn onClick={showModal}>닫기</OptionBtn>
+                    <OptionBtn className="modal" onClick={showModal}>
+                      닫기
+                    </OptionBtn>
                   </common.ModalView>
                 </common.ModalBackdrop>
               ) : null}
@@ -123,13 +125,15 @@ function MonthSpread() {
             </common.DefaultCard>
           </common.CardBox>
           <common.SideBlock>
-            <common.SpreadModal onClick={showModal}>
-              <Month spreadList={indexList} />
+            <common.SpreadModal>
+              <OptionBtn onClick={showModal}>카드</OptionBtn>
               {modalOpen ? (
                 <common.ModalBackdrop onClick={showModal}>
                   <common.ModalView onClick={(e) => e.stopPropagation()}>
                     <Month spreadList={indexList} />
-                    <OptionBtn onClick={showModal}>닫기</OptionBtn>
+                    <OptionBtn className="modal" onClick={showModal}>
+                      닫기
+                    </OptionBtn>
                   </common.ModalView>
                 </common.ModalBackdrop>
               ) : null}
@@ -165,13 +169,15 @@ function MonthSpread() {
             </common.DefaultCard>
           </common.CardBox>
           <common.SideBlock>
-            <common.SpreadModal onClick={showModal}>
-              <Month spreadList={indexList} />
+            <common.SpreadModal>
+              <OptionBtn onClick={showModal}>카드</OptionBtn>
               {modalOpen ? (
                 <common.ModalBackdrop onClick={showModal}>
                   <common.ModalView onClick={(e) => e.stopPropagation()}>
                     <Month spreadList={indexList} />
-                    <OptionBtn onClick={showModal}>닫기</OptionBtn>
+                    <OptionBtn className="modal" onClick={showModal}>
+                      닫기
+                    </OptionBtn>
                   </common.ModalView>
                 </common.ModalBackdrop>
               ) : null}
@@ -202,8 +208,8 @@ function MonthSpread() {
             <Month spreadList={indexList} />
           </common.CardBox>
           <common.SideBlock>
-            <common.SpreadModal onClick={showModal}>
-              <Month spreadList={indexList} />
+            {/* <common.SpreadModal>
+              <OptionBtn onClick={showModal}>카드</OptionBtn>
               {modalOpen ? (
                 <common.ModalBackdrop onClick={showModal}>
                   <common.ModalView onClick={(e) => e.stopPropagation()}>
@@ -212,7 +218,7 @@ function MonthSpread() {
                   </common.ModalView>
                 </common.ModalBackdrop>
               ) : null}
-            </common.SpreadModal>
+            </common.SpreadModal> */}
           </common.SideBlock>
         </common.CardArea>
         {/* <common.ChatArea>

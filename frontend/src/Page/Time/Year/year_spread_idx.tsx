@@ -5,7 +5,7 @@ import Year from './year_spread';
 import YearStart from './year_spread_animation';
 import * as common from '../../Common/common_style';
 import Dialog from '../../../Common/dialog';
-import charDialog1 from '../../../Assets/characters/toast.png';
+import charDialog1 from '../../../Assets/characters/toast.gif';
 import { DialogNPC, OptionBtn } from '../../../Common/common_styled';
 import { YearDetails } from '../../../Common/conversations';
 import { useLuckyStore } from '../../../Store/User/lucky';
@@ -82,13 +82,15 @@ function YearSpread() {
             </common.DefaultCard>
           </common.CardBox>
           <common.SideBlock>
-            <common.SpreadModal onClick={showModal}>
-              <Year spreadList={indexList} />
+            <common.SpreadModal>
+              <OptionBtn onClick={showModal}>카드</OptionBtn>
               {modalOpen ? (
                 <common.ModalBackdrop onClick={showModal}>
                   <common.ModalView onClick={(e) => e.stopPropagation()}>
                     <Year spreadList={indexList} />
-                    <OptionBtn onClick={showModal}>닫기</OptionBtn>
+                    <OptionBtn className="modal" onClick={showModal}>
+                      닫기
+                    </OptionBtn>
                   </common.ModalView>
                 </common.ModalBackdrop>
               ) : null}
@@ -127,13 +129,15 @@ function YearSpread() {
             </common.DefaultCard>
           </common.CardBox>
           <common.SideBlock>
-            <common.SpreadModal onClick={showModal}>
-              <Year spreadList={indexList} />
+            <common.SpreadModal>
+              <OptionBtn onClick={showModal}>카드</OptionBtn>
               {modalOpen ? (
                 <common.ModalBackdrop onClick={showModal}>
                   <common.ModalView onClick={(e) => e.stopPropagation()}>
                     <Year spreadList={indexList} />
-                    <OptionBtn onClick={showModal}>닫기</OptionBtn>
+                    <OptionBtn className="modal" onClick={showModal}>
+                      닫기
+                    </OptionBtn>
                   </common.ModalView>
                 </common.ModalBackdrop>
               ) : null}
@@ -172,13 +176,15 @@ function YearSpread() {
             </common.DefaultCard>
           </common.CardBox>
           <common.SideBlock>
-            <common.SpreadModal onClick={showModal}>
-              <Year spreadList={indexList} />
+            <common.SpreadModal>
+              <OptionBtn onClick={showModal}>카드</OptionBtn>
               {modalOpen ? (
                 <common.ModalBackdrop onClick={showModal}>
                   <common.ModalView onClick={(e) => e.stopPropagation()}>
                     <Year spreadList={indexList} />
-                    <OptionBtn onClick={showModal}>닫기</OptionBtn>
+                    <OptionBtn className="modal" onClick={showModal}>
+                      닫기
+                    </OptionBtn>
                   </common.ModalView>
                 </common.ModalBackdrop>
               ) : null}
@@ -217,13 +223,15 @@ function YearSpread() {
             </common.DefaultCard>
           </common.CardBox>
           <common.SideBlock>
-            <common.SpreadModal onClick={showModal}>
-              <Year spreadList={indexList} />
+            <common.SpreadModal>
+              <OptionBtn onClick={showModal}>카드</OptionBtn>
               {modalOpen ? (
                 <common.ModalBackdrop onClick={showModal}>
                   <common.ModalView onClick={(e) => e.stopPropagation()}>
                     <Year spreadList={indexList} />
-                    <OptionBtn onClick={showModal}>닫기</OptionBtn>
+                    <OptionBtn className="modal" onClick={showModal}>
+                      닫기
+                    </OptionBtn>
                   </common.ModalView>
                 </common.ModalBackdrop>
               ) : null}
@@ -254,8 +262,8 @@ function YearSpread() {
             <Year spreadList={indexList} />
           </common.CardBox>
           <common.SideBlock>
-            <common.SpreadModal onClick={showModal}>
-              <Year spreadList={indexList} />
+            {/* <common.SpreadModal>
+              <OptionBtn onClick={showModal}>카드</OptionBtn>
               {modalOpen ? (
                 <common.ModalBackdrop onClick={showModal}>
                   <common.ModalView onClick={(e) => e.stopPropagation()}>
@@ -263,7 +271,7 @@ function YearSpread() {
                   </common.ModalView>
                 </common.ModalBackdrop>
               ) : null}
-            </common.SpreadModal>
+            </common.SpreadModal> */}
           </common.SideBlock>
         </common.CardArea>
         {/* <common.ChatArea>
