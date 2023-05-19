@@ -46,11 +46,8 @@ function Main() {
     navigate('/pseudo');
   };
   const goQuiz = () => {
-    QuizBgm();
+    // QuizBgm();
     navigate('/quiz');
-    setTimeout(() => {
-      stop();
-    }, 10000);
   };
 
   const toggleSide = () => {

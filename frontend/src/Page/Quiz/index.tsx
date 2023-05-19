@@ -344,7 +344,7 @@ function Quiz() {
     );
   }
   if (index === TOTAL_QUESTIONS + 1) {
-    winOn();
+    // winOn();
     if (timeLeft !== 0) {
       return (
         <div>
