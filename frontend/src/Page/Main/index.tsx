@@ -15,6 +15,9 @@ import {
   MainBg,
   LoginBtn,
   ModalBtnBox,
+  QuizModal,
+  QuizBtn,
+  QuizBox,
 } from './main_style';
 import Card from './components/card';
 import Character from './components/character';
@@ -27,6 +30,7 @@ import { userInfoStore } from '../../Store/User/info';
 import { API } from '../../API';
 import { ModalBackdrop } from '../Common/common_style';
 import Arcana from '../../Assets/etc/ARCANA.png';
+import QuizBtnImg from '../../Assets/etc/quizBtn.png';
 
 function Main() {
   const navigate = useNavigate();
@@ -34,7 +38,7 @@ function Main() {
   // const [goLogin, setGoLogin] = useState(false);
   const { setIsTarotLog, isLogin, isSide, setIsSide, setGoLogin, user, setTarotLog, goLogin } = userInfoStore();
   // const cookie = getCookie('token');
-
+  const [isQuiz, setQuiz] = useState(true);
   const goPseudo = () => {
     navigate('/pseudo');
   };
@@ -76,6 +80,11 @@ function Main() {
 
   return (
     <MainBg className={cardOrder}>
+      {!isLogin && isQuiz ? (
+        <QuizBox type="button" onClick={goQuiz}>
+          <QuizBtn src={QuizBtnImg} />
+        </QuizBox>
+      ) : null}
       {goLogin ? <ModalBackdrop /> : null}
       <ModalBtnBox>
         {isLogin ? (
@@ -96,12 +105,12 @@ function Main() {
         </TitleImg>
         <SubTitle>당신의 마음을 듣고 읽어주는 타로 프렌즈</SubTitle>
         {/* 임시버튼 */}
-        <button type="submit" onClick={goQuiz}>
+        {/* <button type="submit" onClick={goQuiz}>
           quiz
         </button>
         <button type="submit" onClick={goPseudo}>
           server
-        </button>
+        </button> */}
       </TitleBox>
       <StyledCircle
         // animate={{ scale: [1, 1.05, 1] }}
