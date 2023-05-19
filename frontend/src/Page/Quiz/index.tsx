@@ -8,6 +8,8 @@ import { DialogNPC } from '../../Common/common_styled';
 import charDialog0 from '../../Assets/characters/charDialog0.png';
 import QuestionCard from './question_card';
 import { API } from '../../API';
+import useSound from '../../Common/useSound';
+import effectSound from '../../Common/effectSound';
 
 export type AnswerObject = {
   question: string;
