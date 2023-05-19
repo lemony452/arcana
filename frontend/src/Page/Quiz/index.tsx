@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import * as StompJs from '@stomp/stompjs';
-import SockJS from 'sockjs-client';
 import useSound from 'use-sound';
+import Swal from 'sweetalert2';
 import { fetchQuizQuestions, QuestionsState } from './api';
 import * as quizStyle from './quiz_style';
 import * as common from '../Common/common_style';
@@ -38,6 +38,7 @@ function Quiz() {
   const [gameOver, setGameOver] = useState(true);
   const [fail, setFail] = useState(false);
   const [realTime, setRealTime] = useState('00:00:00');
+  const [userNum, setUserNum] = useState(0);
 
   const navigate = useNavigate();
   const MINUTES_IN_MS = 0;
@@ -49,7 +50,16 @@ function Quiz() {
   const [client, changeClient] = useState<any>();
   const [subscription, changeSubscription] = useState<any>();
 
+  // 유저 숫자 불러오기
+  const userCount = async () => {
+    await API.get(`/api/v1/quiz/userCount?roomId=quiz`).then((res) => {
+      console.log(res);
+      setUserNum(res.data);
+    });
+  };
+
   // 퀴즈 서버 접속
+
   const connect = async () => {
     if (token === '') {
       return;
@@ -89,6 +99,7 @@ function Quiz() {
 
       const res = await clientdata.activate();
       console.log(res);
+      userCount();
       changeClient(clientdata);
     } catch (error) {
       console.log(error);
@@ -118,6 +129,7 @@ function Quiz() {
 
   useEffect(() => {
     connect();
+    console.log('connected');
   }, []);
 
   const winOn = () => {
@@ -203,13 +215,30 @@ function Quiz() {
       // Check answer against correct answer
       const correct = questions[number].answer === answer;
       // Add score if answer is correct
-      if (correct) {
-        console.log('score', score);
-        console.log('index', index);
-        setScore((prev) => prev + 1);
-        success();
-      }
-      if (!correct) setFail(true);
+      if (correct) setScore((prev) => prev + 1);
+      console.log('score', score);
+      console.log('index', index);
+
+      let timerInterval: any;
+      Swal.fire({
+        icon: 'question',
+        title: '결과가 곧 공개됩니다!',
+        html: '결과 공개까지 {<b></b>} 밀리초 남았습니다.',
+        timer: MINUTES_IN_MS,
+        timerProgressBar: true,
+        allowOutsideClick: false,
+        didOpen: () => {
+          Swal.showLoading();
+          const b = Swal.getHtmlContainer().querySelector('b');
+          timerInterval = setInterval(() => {
+            b.textContent = Swal.getTimerLeft();
+          }, 100);
+        },
+        willClose: () => {
+          clearInterval(timerInterval);
+        },
+      });
+
       // Save the answer in the array for user answers
       const answerObject = {
         question: questions[number].content,
@@ -220,16 +249,19 @@ function Quiz() {
       setUserAnswers((prev) => [...prev, answerObject]);
     }
 
-    setTimeLeft(0);
+    // setTimeLeft(0);
     setIndex(index + 1);
     console.log('Highscore', score);
     console.log('imindex', index);
   };
 
   // 다음 문제로
-  const nextQuestion = () => {
+  const nextQuestion = setTimeout(() => {
     return [setNumber(number + 1), setTimeLeft(MINUTES_IN_MS + 10 * 1000)];
-  };
+  }, 3000);
+
+  clearTimeout(nextQuestion);
+
   console.log('question', number + 1);
   console.log(second);
 
@@ -267,7 +299,7 @@ function Quiz() {
         </quizStyle.RightArea> */}
         <quizStyle.StartArea>
           <quizStyle.TimerArea className="timer">{realTime}</quizStyle.TimerArea>
-          <quizStyle.PeopleArea>명 참여중</quizStyle.PeopleArea>
+          <quizStyle.PeopleArea>{userNum}명 참여중</quizStyle.PeopleArea>
         </quizStyle.StartArea>
       </quizStyle.FullArea>
     );
@@ -336,9 +368,9 @@ function Quiz() {
         </quizStyle.RightArea> */}
         <quizStyle.StartArea>
           <quizStyle.TimerArea className="nextQ">정답입니다🎉</quizStyle.TimerArea>
-          <quizStyle.PeopleArea className="nextQ" onClick={nextQuestion}>
+          {/* <quizStyle.PeopleArea className="nextQ" onClick={nextQuestion}>
             다음 문제로
-          </quizStyle.PeopleArea>
+          </quizStyle.PeopleArea> */}
         </quizStyle.StartArea>
       </quizStyle.FullArea>
     );
