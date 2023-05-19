@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import SockJS from 'sockjs-client';
+import useSound from 'use-sound';
 import { fetchQuizQuestions, QuestionsState } from './api';
 import * as quizStyle from './quiz_style';
 import * as common from '../Common/common_style';
@@ -8,8 +9,10 @@ import { DialogNPC } from '../../Common/common_styled';
 import charDialog0 from '../../Assets/characters/charDialog0.png';
 import QuestionCard from './question_card';
 import { API } from '../../API';
-import useSound from '../../Common/useSound';
-import effectSound from '../../Common/effectSound';
+import ClockBgm from '../../Assets/bgm/clockBgm.mp3';
+import SuccessBgm from '../../Assets/bgm/success.mp3';
+import WinBgm from '../../Assets/bgm/win.mp3';
+import EventTiket from '../../Assets/etc/eventTicket.png';
 
 export type AnswerObject = {
   question: string;
@@ -21,6 +24,9 @@ export type AnswerObject = {
 const TOTAL_QUESTIONS = 5;
 
 function Quiz() {
+  const [win] = useSound(WinBgm);
+  const [success] = useSound(SuccessBgm);
+  const [clockPlay, { stop }] = useSound(ClockBgm);
   const [index, setIndex] = useState(0);
   const [loading, setLoading] = useState(false);
   const [questions, setQuestions] = useState<QuestionsState[]>([]);
@@ -88,10 +94,12 @@ function Quiz() {
   useEffect(() => {
     const timer = setInterval(() => {
       setTimeLeft((prevTime) => prevTime - INTERVAL);
+      clockPlay();
     }, INTERVAL);
 
     if (timeLeft <= 0) {
       clearInterval(timer);
+      stop();
       console.log('타이머가 종료되었습니다.');
     }
     return () => {
@@ -107,7 +115,10 @@ function Quiz() {
       // Check answer against correct answer
       const correct = questions[number].answer === answer;
       // Add score if answer is correct
-      if (correct) setScore((prev) => prev + 1);
+      if (correct) {
+        setScore((prev) => prev + 1);
+        success();
+      }
       if (!correct) setFail(true);
       // Save the answer in the array for user answers
       const answerObject = {
@@ -138,6 +149,7 @@ function Quiz() {
 
   // 메인으로 보내기
   const goHome = () => {
+    stop();
     navigate('/');
   };
 
@@ -228,6 +240,7 @@ function Quiz() {
     );
   }
   if (index === TOTAL_QUESTIONS + 1) {
+    win();
     if (timeLeft !== 0) {
       return (
         <div>
@@ -269,13 +282,14 @@ function Quiz() {
           <quizStyle.TimerArea>정답자 수를 보여주는 자리 (생존자)</quizStyle.TimerArea>
           <quizStyle.PeopleArea>정답률 그래프가 들어갈 자리</quizStyle.PeopleArea>
         </quizStyle.RightArea> */}
-        <quizStyle.StartArea>
+        <quizStyle.StartArea className="win">
           <quizStyle.TimerArea className="nextQ fail">
             <div className="top">축하합니다!🎉</div>
             <div>모든 문제를 푼 당신에게 드리는 선물입니다!</div>
           </quizStyle.TimerArea>
           <quizStyle.PeopleArea className="nextQ success" onClick={goHome}>
-            이벤트 티켓 받기
+            {/* 이벤트 티켓 받기 */}
+            <quizStyle.WinEventTicket src={EventTiket} />
           </quizStyle.PeopleArea>
         </quizStyle.StartArea>
       </quizStyle.FullArea>
