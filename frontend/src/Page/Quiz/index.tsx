@@ -166,15 +166,15 @@ function Quiz() {
         const serverDate = new Date(Math.floor(res.data / 1000) * 1000);
         console.log(serverDate.getHours(), serverDate.getMinutes(), serverDate.getSeconds());
         // console.log(typeof serverDate.getHours());
-        if (serverDate.getHours() < 6) {
-          const hours = String(5 - serverDate.getHours()).padStart(2, '0');
-          const minutes = String(59 - serverDate.getMinutes()).padStart(2, '0');
+        if (serverDate.getHours() < 13) {
+          const hours = String(13 - serverDate.getHours()).padStart(2, '0');
+          const minutes = String(39 - serverDate.getMinutes()).padStart(2, '0');
           const seconds = String(59 - serverDate.getSeconds()).padStart(2, '0');
           setRealTime(`${hours}:${minutes}:${seconds}`);
-        } else if (serverDate.getHours() === 6 && serverDate.getMinutes() === 15 && serverDate.getSeconds() === 0) {
+        } else if (serverDate.getHours() === 13 && serverDate.getMinutes() === 40 && serverDate.getSeconds() === 0) {
           startQuiz();
         } else {
-          const hours = String(29 - serverDate.getHours()).padStart(2, '0');
+          const hours = String(27 - serverDate.getHours()).padStart(2, '0');
           const minutes = String(59 - serverDate.getMinutes()).padStart(2, '0');
           const seconds = String(59 - serverDate.getSeconds()).padStart(2, '0');
           setRealTime(`${hours}:${minutes}:${seconds}`);
