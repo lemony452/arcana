@@ -90,14 +90,14 @@ function Time() {
 
   return (
     <div style={{ width: '100vw', height: '100vh', position: 'relative' }}>
-      <OtherBackground1>
+      {/* <OtherBackground1>
         <img src={BackgroundImg1} alt="" />
       </OtherBackground1>
       <OtherBackground2>
         <img src={BackgroundImg2} alt="" />
-      </OtherBackground2>
-      {/* <Npc num={1} /> */}
-      <DialogNPC src={charDialog1} />
+      </OtherBackground2> */}
+      <Npc num={1} />
+      {/* <DialogNPC src={charDialog1} /> */}
       <Dialog content={celticText} next={next}>
         <>
           <OptionBtn onClick={() => OptionClick('신년운세')}>신년 운세 🐰</OptionBtn>

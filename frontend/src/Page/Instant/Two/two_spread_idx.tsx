@@ -33,6 +33,10 @@ function TwoSpread() {
 
   const text = InstantDetails(3);
   console.log(text);
+  const [modalOpen, setModalOpen] = useState(false); // modal
+  const showModal = () => {
+    setModalOpen(!modalOpen);
+  };
 
   // 0일때 카드 고르기를 할지 논의 필요
   if (index === 0) {
@@ -60,7 +64,17 @@ function TwoSpread() {
           </common.CardBox>
           <common.SideBlock>
             <common.SpreadModal>
-              <Two />
+              <OptionBtn onClick={showModal}>카드</OptionBtn>
+              {modalOpen ? (
+                <common.ModalBackdrop onClick={showModal}>
+                  <common.ModalView onClick={(e) => e.stopPropagation()}>
+                    <Two />
+                    <OptionBtn className="modal" onClick={showModal}>
+                      닫기
+                    </OptionBtn>
+                  </common.ModalView>
+                </common.ModalBackdrop>
+              ) : null}
             </common.SpreadModal>
           </common.SideBlock>
         </common.CardArea>
@@ -95,7 +109,17 @@ function TwoSpread() {
           </common.CardBox>
           <common.SideBlock>
             <common.SpreadModal>
-              <Two />
+              <OptionBtn onClick={showModal}>카드</OptionBtn>
+              {modalOpen ? (
+                <common.ModalBackdrop onClick={showModal}>
+                  <common.ModalView onClick={(e) => e.stopPropagation()}>
+                    <Two />
+                    <OptionBtn className="modal" onClick={showModal}>
+                      닫기
+                    </OptionBtn>
+                  </common.ModalView>
+                </common.ModalBackdrop>
+              ) : null}
             </common.SpreadModal>
           </common.SideBlock>
         </common.CardArea>

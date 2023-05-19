@@ -54,10 +54,11 @@ export const Cardcontent = styled(motion.div)`
   text-align: center;
   word-break: keep-all;
   margin-right: 2vw;
-  margin-bottom: 11vh;
+  margin-bottom: 9vh;
   max-width: 25vw;
   line-height: 200%;
-  font-size: 1.7vw;
+  font-size: 3vw;
+  font-family: 'NanumDaHaengCe';
   z-index: 2;
 `;
 
@@ -84,7 +85,7 @@ export const MarkContentTitle = styled(motion.div)`
   text-align: center;
   font-size: 2vw;
   font-family: DaysOne;
-  letter-spacing: 0.5vw;
+  letter-spacing: 0.2vw;
   font-weight: bolder;
   color: white;
   -webkit-text-stroke: 1px black;
