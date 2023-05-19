@@ -23,6 +23,7 @@ export const CardBox = styled.div`
 export const SideBlock = styled.div`
   width: 10%;
   height: 100%;
+  margin-top: 20px;
 `;
 
 export const DefaultCard = styled.div`

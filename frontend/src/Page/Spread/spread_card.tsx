@@ -29,7 +29,7 @@ function SpreadCard() {
   useEffect(() => {
     if (location.state === 'celtic') {
       setNeedCardNum(10);
-      setSpreadContent('카드를 10장 선택해');
+      setSpreadContent('카드를 10장 선택해줘!');
     }
     if (location.state === 'year') {
       setNeedCardNum(12);

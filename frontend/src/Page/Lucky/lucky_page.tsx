@@ -214,39 +214,41 @@ function LuckyPage() {
         {!resultPage && checkSelectState === true && <OptionBtn onClick={resultPageHandler}>공유하기</OptionBtn>}
         {resultPage && (
           <luckyPage.ButtonBox>
-            <luckyPage.TopButtonFont>공유하기</luckyPage.TopButtonFont>
-            <luckyPage.TopButtonBox>
-              <FacebookShareButton url={shareImg}>
-                <motion.img
-                  whileHover={{ scale: 1.1 }}
-                  src={FackbookIcon}
-                  alt="facebookicon"
-                  width="32px"
-                  height="32px"
-                />
-              </FacebookShareButton>
-              <TwitterShareButton title={cardList[selectCard].result} url="https://k8d107.p.ssafy.io">
-                <motion.img
-                  whileHover={{ scale: 1.1 }}
-                  src={TwitterIcon}
-                  alt="twittericon"
-                  width="32px"
-                  height="32px"
-                />
-              </TwitterShareButton>
-              <TelegramShareButton title={cardList[selectCard].result} url="https://k8d107.p.ssafy.io">
-                <motion.img
-                  whileHover={{ scale: 1.1 }}
-                  src={TelegramIcon}
-                  alt="telegramicon"
-                  width="32px"
-                  height="32px"
-                />
-              </TelegramShareButton>
-              <luckyPage.Button onClick={sendKakao}>
-                <motion.img whileHover={{ scale: 1.1 }} src={KakaoIcon} alt="kakaoicon" width="32px" height="32px" />
-              </luckyPage.Button>
-            </luckyPage.TopButtonBox>
+            <luckyPage.TopBox>
+              <luckyPage.TopButtonFont>공유하기</luckyPage.TopButtonFont>
+              <luckyPage.TopButtonBox>
+                <FacebookShareButton url={shareImg}>
+                  <motion.img
+                    whileHover={{ scale: 1.1 }}
+                    src={FackbookIcon}
+                    alt="facebookicon"
+                    width="32px"
+                    height="32px"
+                  />
+                </FacebookShareButton>
+                <TwitterShareButton title={cardList[selectCard].result} url="https://k8d107.p.ssafy.io">
+                  <motion.img
+                    whileHover={{ scale: 1.1 }}
+                    src={TwitterIcon}
+                    alt="twittericon"
+                    width="32px"
+                    height="32px"
+                  />
+                </TwitterShareButton>
+                <TelegramShareButton title={cardList[selectCard].result} url="https://k8d107.p.ssafy.io">
+                  <motion.img
+                    whileHover={{ scale: 1.1 }}
+                    src={TelegramIcon}
+                    alt="telegramicon"
+                    width="32px"
+                    height="32px"
+                  />
+                </TelegramShareButton>
+                <luckyPage.Button onClick={sendKakao}>
+                  <motion.img whileHover={{ scale: 1.1 }} src={KakaoIcon} alt="kakaoicon" width="32px" height="32px" />
+                </luckyPage.Button>
+              </luckyPage.TopButtonBox>
+            </luckyPage.TopBox>
             <luckyPage.BottonButtonBox>
               <luckyPage.Button onClick={capture} style={{ marginInline: '5px' }}>
                 캡처

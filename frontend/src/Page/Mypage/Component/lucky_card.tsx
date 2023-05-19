@@ -17,7 +17,7 @@ function LuckyCard({ npc, cardIdx, cardMent }: LuckyCardType) {
   const color = npc === 'celtic' ? '#cba1ff' : '#ff945e';
 
   return (
-    <luckResult.Body>
+    <luckResult.Body className="modal">
       <luckResult.CardBody>
         <luckResult.CardFront
           initial={{ x: '-13vw', y: '1vh' }}

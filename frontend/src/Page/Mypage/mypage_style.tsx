@@ -60,8 +60,8 @@ export const ProfileImg = styled.div`
 
 export const Nickname = styled.div`
   display: flex;
-  font-size: 1.2em;
-  font-weight: bold;
+  font-size: 1.8em;
+  font-weight: 900;
   text-align: center;
   align-items: center;
   margin-top: 2vh;
@@ -124,7 +124,7 @@ export const MoveBtn = styled.button`
   &.close {
     display: flex;
     align-items: end;
-    font-size: 1.5em;
+    font-size: 1.8em;
     width: 7em;
     height: 2em;
     font-weight: bold;
@@ -148,7 +148,7 @@ export const MoveBtnImg = styled.img`
   }
   &.close {
     margin-right: 4px;
-    margin-bottom: 2.5px;
+    margin-bottom: 6px;
   }
 `;
 
@@ -361,7 +361,7 @@ export const EditUserContent = styled.div`
   align-items: center;
   color: #3d3d3d;
   &.nickname {
-    font-size: 2.2em;
+    font-size: 1.8em;
     font-weight: bold;
   }
   &.email {
@@ -400,7 +400,7 @@ export const Container = styled.div`
   height: fit-content;
   display: inline-block;
   margin-left: 7px;
-
+  margin-top: 7px;
   &:hover > .tooltip,
   &:active > .tooltip {
     display: block;
@@ -411,7 +411,7 @@ export const Container = styled.div`
     display: none;
     position: absolute;
     bottom: 0;
-    left: 0;
+    left: -5px;
     background-color: #eef3fd;
     border: #7689fd solid 1px;
     border-radius: 5px;
@@ -471,10 +471,11 @@ export const ChangeSelect = styled.select`
   width: 5em;
   height: 2em;
   border-radius: 8px;
+  padding-left: 5px;
 `;
 
 export const ChangeOption = styled.option`
-  font-size: 0.6em;
+  font-size: 1em;
 `;
 
 export const ChangeBox = styled.div`
@@ -482,4 +483,14 @@ export const ChangeBox = styled.div`
   display: flex;
   justify-content: end;
   margin-right: 4vw;
+`;
+
+export const LuckyLetter = styled.div`
+  position: absolute;
+  top: -5vh;
+  left: 50vh;
+  > img {
+    height: 95vh;
+  }
+  z-index: -1;
 `;
