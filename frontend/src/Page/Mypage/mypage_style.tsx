@@ -484,3 +484,13 @@ export const ChangeBox = styled.div`
   justify-content: end;
   margin-right: 4vw;
 `;
+
+export const LuckyLetter = styled.div`
+  position: absolute;
+  top: -5vh;
+  left: 50vh;
+  > img {
+    height: 95vh;
+  }
+  z-index: -1;
+`;
