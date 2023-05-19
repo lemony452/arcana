@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import SockJS from 'sockjs-client';
+import * as StompJs from '@stomp/stompjs';
 import { fetchQuizQuestions, QuestionsState } from './api';
 import * as quizStyle from './quiz_style';
 import * as common from '../Common/common_style';
@@ -8,6 +8,7 @@ import { DialogNPC } from '../../Common/common_styled';
 import charDialog0 from '../../Assets/characters/charDialog0.png';
 import QuestionCard from './question_card';
 import { API } from '../../API';
+import { userInfoStore } from '../../Store/User/info';
 import useSound from '../../Common/useSound';
 import effectSound from '../../Common/effectSound';
 
@@ -36,6 +37,82 @@ function Quiz() {
   const INTERVAL = 1000;
   const [timeLeft, setTimeLeft] = useState<number>(MINUTES_IN_MS);
 
+  const { user } = userInfoStore();
+  const token = user.uid;
+  const [client, changeClient] = useState<any>();
+  const [subscription, changeSubscription] = useState<any>();
+
+  // 퀴즈 서버 접속
+  const connect = async () => {
+    if (token === '') {
+      return;
+    }
+
+    const callback = function (res: any) {
+      // called when the client receives a STOMP message from the server
+      if (res.body) {
+        console.log(user);
+        console.log(res.body);
+        // alert(res.body);
+      } else {
+        console.log('got empty message');
+      }
+    };
+
+    try {
+      const clientdata = await new StompJs.Client({
+        brokerURL: 'wss://k8d107.p.ssafy.io/ws/websocket',
+        // connectHeaders: {
+        //   login: id,
+        //   passcode: 'password',
+        // },
+        debug(str) {
+          console.log(str);
+        },
+        reconnectDelay: 5000,
+        heartbeatIncoming: 4000,
+        heartbeatOutgoing: 4000,
+      });
+
+      let subscriptiondata: any;
+      clientdata.onConnect = await function () {
+        subscriptiondata = clientdata.subscribe('/sub/channel/quiz', callback);
+        changeSubscription(subscriptiondata);
+      };
+
+      const res = await clientdata.activate();
+      console.log(res);
+      changeClient(clientdata);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const disConnect = () => {
+    if (client === null) {
+      return;
+    }
+
+    client.deactivate();
+  };
+
+  const send = () => {
+    client!.publish({
+      destination: '/pub/enter',
+      body: JSON.stringify({
+        type: 'ENTER',
+        uid: token,
+        channel: 'quiz',
+        data: 'entrance message',
+      }),
+      headers: { priority: 9 },
+    });
+  };
+
+  useEffect(() => {
+    connect();
+  }, []);
+
   // 퀴즈 시작
   const startQuiz = async () => {
     setLoading(true);
@@ -47,8 +124,9 @@ function Quiz() {
     setNumber(0);
     setLoading(false);
     // 아래에 있는 걸로 퀴즈 시간 조절
-    setTimeLeft(MINUTES_IN_MS + 600 * 1000);
+    setTimeLeft(MINUTES_IN_MS + 10 * 1000);
     setIndex(index + 1);
+    send();
   };
 
   useEffect(() => {
@@ -84,7 +162,7 @@ function Quiz() {
   });
 
   // 퀴즈 풀이시간 카운트 다운s
-  const second = String(Math.floor((timeLeft / 1000) % 9999)).padStart(2, '0');
+  const second = String(Math.floor((timeLeft / 1000) % 60)).padStart(2, '0');
   useEffect(() => {
     const timer = setInterval(() => {
       setTimeLeft((prevTime) => prevTime - INTERVAL);
@@ -108,7 +186,8 @@ function Quiz() {
       const correct = questions[number].answer === answer;
       // Add score if answer is correct
       if (correct) setScore((prev) => prev + 1);
-      if (!correct) setFail(true);
+      console.log('score', score);
+      console.log('index', index);
       // Save the answer in the array for user answers
       const answerObject = {
         question: questions[number].content,
@@ -118,14 +197,16 @@ function Quiz() {
       };
       setUserAnswers((prev) => [...prev, answerObject]);
     }
+
     setTimeLeft(0);
     setIndex(index + 1);
+    console.log('Highscore', score);
     console.log('imindex', index);
   };
 
   // 다음 문제로
   const nextQuestion = () => {
-    return [setNumber(number + 1), setTimeLeft(MINUTES_IN_MS + 600 * 1000)];
+    return [setNumber(number + 1), setTimeLeft(MINUTES_IN_MS + 10 * 1000)];
   };
   console.log('question', number + 1);
   console.log(second);
@@ -139,6 +220,12 @@ function Quiz() {
   // 메인으로 보내기
   const goHome = () => {
     navigate('/');
+  };
+
+  const ticket = 1;
+
+  const getTicket = async () => {
+    await API.put(`/api/v1/user/reward?uid=${token}&ticket=${ticket}`);
   };
 
   // div 영역
@@ -181,7 +268,7 @@ function Quiz() {
         </div>
       );
     }
-    if (fail === true) {
+    if (score !== number + 1) {
       return (
         <quizStyle.FullArea>
           {/* {loading ? <p>Loading Questions...</p> : null}
@@ -198,7 +285,13 @@ function Quiz() {
               <div className="top">탈락하셨습니다😂</div>
               <div>괜찮아요, 다음에는 더 잘 할 수 있어요.</div>
             </quizStyle.TimerArea>
-            <quizStyle.PeopleArea className="nextQ fail" onClick={goHome}>
+            <quizStyle.PeopleArea
+              className="nextQ fail"
+              onClick={() => {
+                goHome();
+                disConnect();
+              }}
+            >
               메인으로 돌아가기
             </quizStyle.PeopleArea>
           </quizStyle.StartArea>
@@ -274,7 +367,14 @@ function Quiz() {
             <div className="top">축하합니다!🎉</div>
             <div>모든 문제를 푼 당신에게 드리는 선물입니다!</div>
           </quizStyle.TimerArea>
-          <quizStyle.PeopleArea className="nextQ success" onClick={goHome}>
+          <quizStyle.PeopleArea
+            className="nextQ success"
+            onClick={() => {
+              goHome();
+              disConnect();
+              getTicket();
+            }}
+          >
             이벤트 티켓 받기
           </quizStyle.PeopleArea>
         </quizStyle.StartArea>
