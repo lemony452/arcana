@@ -6,6 +6,39 @@ import styled, { keyframes } from 'styled-components';
 //   display: flex;
 // `;
 
+export const QuizModal = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 390px;
+  height: 280px;
+  background: #f4f4f4;
+  border: 2px solid #eaeaea;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+`;
+export const QuizBox = styled.button`
+  position: absolute;
+  width: 185px;
+  height: 103.6;
+  left: 50%;
+  transform: translate(-50%);
+  top: 0.5em;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  z-index: 3;
+`;
+
+export const QuizBtn = styled.img`
+  position: absolute;
+  left: 1em;
+  top: 1em;
+  :hover {
+    opacity: 0.8;
+  }
+`;
+
 export const MainBg = styled.div`
   position: relative;
   width: 100vw;
