@@ -62,14 +62,14 @@ function Instant() {
 
   return (
     <div style={{ width: '100vw', height: '100vh', position: 'relative' }}>
-      <OtherBackground1>
+      {/* <OtherBackground1>
         <img src={BackgroundImg1} alt="" />
       </OtherBackground1>
       <OtherBackground2>
         <img src={BackgroundImg2} alt="" />
       </OtherBackground2>
-      <DialogNPC src={charDialog2} />
-      {/* <DialogNPC src={charDialog0} /> */}
+      <DialogNPC src={charDialog2} /> */}
+      <Npc num={2} />
       <Dialog content={instantText} next={next}>
         {next ? (
           <form style={{ display: 'flex', alignItems: 'center' }} onSubmit={saveInput}>

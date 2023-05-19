@@ -29,6 +29,18 @@
   src: url('./Assets/font/Binggrae/Binggrae.ttf');
 }
 
+@font-face {
+  font-family: 'Binggrae2';
+  font-weight: 700;
+  font-style: normal;
+  src: url('https://cdn.jsdelivr.net/gh/webfontworld/binggrae/Binggrae2Bold.eot');
+  src: url('https://cdn.jsdelivr.net/gh/webfontworld/binggrae/Binggrae2Bold.eot?#iefix') format('embedded-opentype'),
+       url('https://cdn.jsdelivr.net/gh/webfontworld/binggrae/Binggrae2Bold.woff2') format('woff2'),
+       url('https://cdn.jsdelivr.net/gh/webfontworld/binggrae/Binggrae2Bold.woff') format('woff'),
+       url('https://cdn.jsdelivr.net/gh/webfontworld/binggrae/Binggrae2Bold.ttf') format("truetype");
+  font-display: swap;
+} 
+
 @import url('https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css');
 
 .App-logo {
