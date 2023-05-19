@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import useSound from 'use-sound';
 import {
   Circle2,
   Circle3,
@@ -31,11 +32,13 @@ import { API } from '../../API';
 import { ModalBackdrop } from '../Common/common_style';
 import Arcana from '../../Assets/etc/ARCANA.png';
 import QuizBtnImg from '../../Assets/etc/quizBtn.png';
+import QuizWaitingBgm from '../../Assets/bgm/quizWaitingBgm.mp3';
 import * as common from '../Common/common_style';
 import { OptionBtn } from '../../Common/common_styled';
 import AlertImg from '../../Assets/etc/alert.png';
 
 function Main() {
+  const [QuizBgm, { stop }] = useSound(QuizWaitingBgm);
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   // const [goLogin, setGoLogin] = useState(false);
@@ -46,7 +49,11 @@ function Main() {
     navigate('/pseudo');
   };
   const goQuiz = () => {
+    QuizBgm();
     navigate('/quiz');
+    setTimeout(() => {
+      stop();
+    }, 10000);
   };
 
   const [modalOpen, setModalOpen] = useState(false); // modal

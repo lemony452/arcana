@@ -93,7 +93,7 @@ function UserInfo() {
             </Container>
           </div>
         </ListContent>
-        <div style={{ width: '50%' }}>{ticket} / 2</div>
+        <div style={{ width: '50%' }}>{ticket} 개</div>
       </TarotToken>
       <TarotToken onClick={MoveEditUser} click>
         <ListContent>
