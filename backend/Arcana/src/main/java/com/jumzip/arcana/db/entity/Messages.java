@@ -5,10 +5,10 @@ import lombok.*;
 @Getter @Setter @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Message {
+public class Messages {
     private String type;
     private String uid;
-    private String channel;
+    private String roomId;
     private Object Data;
     private int userCount;
 
