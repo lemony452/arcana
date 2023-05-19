@@ -53,9 +53,9 @@ function Quiz() {
       if (res.body) {
         console.log(user);
         console.log(res.body);
-        alert(res.body);
+        // alert(res.body);
       } else {
-        alert('got empty message');
+        console.log('got empty message');
       }
     };
 
