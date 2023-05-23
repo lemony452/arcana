@@ -114,6 +114,7 @@ function Quiz() {
     client.deactivate();
   };
 
+  // 접속시 퀴즈라는 이름의 방이 없으면 본인이 호스트가 되어 생성해야 됨
   const send = () => {
     client!.publish({
       destination: '/pub/enter',
