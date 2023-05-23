@@ -5,12 +5,21 @@
 ## 목차
 
 - [프로젝트 진행 기간](#프로젝트-진행-기간)
+
 - [Arcana 개요](#arcana-개요)
+
 - [주요 기술 (Service Architecture)](#주요-기술-service-architecture)
+
+- [핵심 기술](#핵심-기술)
+
 - [협업 툴 및 환경](#협업-툴-및-환경)
+
 - [팀원](#팀원)
+
 - [서비스화면](#서비스-화면)
+
 - [프로젝트 산출물](#프로젝트-산출물)  
+  
   <br>
 
 ## 프로젝트 진행 기간
@@ -45,6 +54,18 @@ Arcana(이하 아르카나)는 가벼운 질문부터 개인적인 고민까지 
 ## 주요 기술 (Service Architecture)
 
 ![system_architecture](./images/system_architecture.png)
+
+<br>
+
+## 핵심 기술
+
+![슬라이드1.PNG](C:\Users\SSAFY\Desktop\자율PJT\개발\S08P31D107\images\gpt.PNG)
+
+<br>
+
+![슬라이드2.PNG](C:\Users\SSAFY\Desktop\자율PJT\개발\S08P31D107\images\kobart.PNG)
+
+<br>
 
 ## 협업 툴 및 환경
 
