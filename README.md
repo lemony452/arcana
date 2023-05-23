@@ -59,11 +59,11 @@ Arcana(이하 아르카나)는 가벼운 질문부터 개인적인 고민까지 
 
 ## 핵심 기술
 
-![슬라이드1.PNG](C:\Users\SSAFY\Desktop\자율PJT\개발\S08P31D107\images\gpt.PNG)
+![슬라이드1.PNG](C:\Users\SSAFY\Desktop\자율PJT\개발\S08P31D107\images\gpt.png)
 
 <br>
 
-![슬라이드2.PNG](C:\Users\SSAFY\Desktop\자율PJT\개발\S08P31D107\images\kobart.PNG)
+![슬라이드2.PNG](C:\Users\SSAFY\Desktop\자율PJT\개발\S08P31D107\images\kobart.png)
 
 <br>
 
