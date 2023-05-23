@@ -16,15 +16,10 @@ export const SelectedCardBody = styled(motion.div)`
   position: relative;
   transition: 0.4s;
   transform-style: preserve-3d;
-  /* border: 2px black solid; */
-  /* border-radius: 10px; */
 `;
 
 export const SelectedBack = styled(motion.div)`
-  /* background: red; */
   position: absolute;
-  /* width: 100%;
-  height: 100%; */
   text-align: center;
   backface-visibility: hidden;
   transition: 0.5s;
@@ -42,7 +37,6 @@ export const FilppedBody = styled(motion.div)<{ size: string }>`
   width: ${(props) => props.size};
   aspect-ratio: 3 / 5;
   perspective: 1100px;
-  /* cursor: pointer; */
 `;
 
 export const FilppedCardBody = styled(motion.div)`
@@ -51,12 +45,9 @@ export const FilppedCardBody = styled(motion.div)`
   position: relative;
   transition: 1s;
   transform-style: preserve-3d;
-  /* border: 2px black solid; */
-  /* border-radius: 10px; */
 `;
 
 export const FilppedBack = styled(motion.div)<{ size: string; radius: string }>`
-  /* background: red; */
   position: absolute;
   width: 100%;
   height: 100%;
@@ -71,11 +62,9 @@ export const FilppedBack = styled(motion.div)<{ size: string; radius: string }>`
     object-fit: cover;
     box-shadow: 1px 1px 3px gray;
   }
-  /* border-radius: 10px; */
 `;
 
 export const FilppedFront = styled(motion.div)<{ size: string; radius: string }>`
-  /* background: royalblue; */
   position: absolute;
   width: 100%;
   height: 100%;

@@ -1,18 +1,14 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-// import TarotList from './Component/TarotList';
+import React, { useEffect, useRef } from 'react';
 import UserInfo from './Component/UserInfo';
-import { Side, SideContent, LogoutBtn, MoveBtn, MoveBtnImg } from './mypage_style';
+import { Side, SideContent, MoveBtn, MoveBtnImg } from './mypage_style';
 import { userInfoStore } from '../../Store/User/info';
 import next from '../../Assets/etc/nextButton(reverse).png';
 
 function SideBar() {
   const outside = useRef<any>();
   const { isSide, setIsSide } = userInfoStore();
-  const navigate = useNavigate();
 
   const toggleSide = () => {
-    // setIsOpen(false);
     setIsSide(false);
   };
 

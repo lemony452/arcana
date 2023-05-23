@@ -1,13 +1,7 @@
 import React from 'react';
-import { useFortuneStore } from '../../Store/User/fortune';
 import * as layer from './celtic_spread_style';
 
 function CelticSpread() {
-  const { fortune, tarotList, option, inputValue } = useFortuneStore();
-  console.log(fortune);
-  console.log(tarotList);
-  console.log(option);
-  console.log(inputValue);
   return (
     <layer.CelticBox>
       <layer.CelticPartOne>

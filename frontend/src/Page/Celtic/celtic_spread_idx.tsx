@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import * as layer from './celtic_spread_style';
 import Celtic from './celtic_spread';
@@ -9,7 +9,6 @@ import { CelticDetails } from '../../Common/conversations';
 import charDialog0 from '../../Assets/characters/draco.png';
 import { DialogNPC, OptionBtn } from '../../Common/common_styled';
 import { API } from '../../API';
-import { getLuckyCard } from '../../Common/tarotSelect';
 import { useLuckyStore } from '../../Store/User/lucky';
 import { saveIndexStore } from '../../Store/User/fortune';
 import next from '../../Assets/etc/nextButton.png';
@@ -35,14 +34,10 @@ function CelticSpread() {
     setModalOpen(!modalOpen);
   };
 
-  const { lucky, setLuckyMent, setLucky } = useLuckyStore();
+  const { setLuckyMent, setLucky } = useLuckyStore();
   const MoveLucky = async () => {
     // 럭키카드 api
     await API.get(`/api/v1/tarot/lucky/`).then((res: any) => {
-      console.log(res);
-      // setLuckyNum(res.data.card.idx);
-      // setLuckyName(res.data.card.name);
-      console.log('lucky api 결과 : ', res.data);
       setLucky({
         card: res.data.card,
         ment: res.data.luckyment,
@@ -96,9 +91,6 @@ function CelticSpread() {
             </common.SpreadModal>
           </common.SideBlock>
         </common.CardArea>
-        {/* <common.ChatArea>
-          <common.SpreadBtn onClick={onNext}>다음</common.SpreadBtn>
-        </common.ChatArea> */}
         <DialogNPC src={charDialog0} />
         <Dialog content={text.page1} next={false}>
           {nextBtn && (
@@ -149,9 +141,6 @@ function CelticSpread() {
             </OptionBtn>
           )}
         </Dialog>
-        {/* <common.ChatArea>
-          <common.SpreadBtn onClick={onNext}>다음</common.SpreadBtn>
-        </common.ChatArea> */}
       </>
     );
   }
@@ -193,9 +182,6 @@ function CelticSpread() {
             </OptionBtn>
           )}
         </Dialog>
-        {/* <common.ChatArea>
-          <common.SpreadBtn onClick={onNext}>다음</common.SpreadBtn>
-        </common.ChatArea> */}
       </>
     );
   }
@@ -237,9 +223,6 @@ function CelticSpread() {
             </OptionBtn>
           )}
         </Dialog>
-        {/* <common.ChatArea>
-          <common.SpreadBtn onClick={onNext}>다음</common.SpreadBtn>
-        </common.ChatArea> */}
       </>
     );
   }
@@ -276,9 +259,6 @@ function CelticSpread() {
         <Dialog content={text.page5} next={false}>
           {nextBtn && <OptionBtn onClick={MoveLucky}>럭키!</OptionBtn>}
         </Dialog>
-        {/* <common.ChatArea>
-          <common.SpreadBtn onClick={onNext}>다음</common.SpreadBtn>
-        </common.ChatArea> */}
       </>
     );
   }

@@ -19,7 +19,6 @@ import {
   ChangeOption,
   LuckyLetter,
 } from '../mypage_style';
-// import TarotList from './TarotList';
 import { userInfoStore } from '../../../Store/User/info';
 import cardIcon from '../../../Assets/etc/cardIcon.png';
 import homeBtnImg from '../../../Assets/etc/homBtn.png';
@@ -48,12 +47,11 @@ function TarotListDetail() {
     navigate(-1);
   };
 
-  const { nickname, tarotLog } = userInfoStore();
+  const { tarotLog } = userInfoStore();
   const [temp, setTemp] = useState(tarotLog);
   const reverseTemp = [...tarotLog].reverse(); // 원본 배열은 남겨두고 배열을 복사한 값을 뒤집는다.
 
   const handleChange = (event: any) => {
-    // event.preventDefault();
     if (event.target.value === '과거순') {
       setTemp(reverseTemp);
     } else {
@@ -79,7 +77,6 @@ function TarotListDetail() {
   const [detailOption, setOption] = useState(initialOption);
   const [detailDate, setDate] = useState(`${temp[0].datetime[0]}.${temp[0].datetime[1]}.${temp[0].datetime[2]}`);
   const [cardRes, setCardRes] = useState(temp[0].cardsResponse);
-  // const res = temp.length % 5 ? Math.floor(temp.length / 5) + 1 : Math.floor(temp.length / 5);
   const limit = 5;
   const totalPage = Math.ceil(temp.length / limit);
   const [pageNum, setPageNum] = useState(1);
@@ -146,19 +143,6 @@ function TarotListDetail() {
     );
   });
 
-  // const ReplayTarotCard = (option: string) => {
-  //   console.log(cardRes);
-  //   for (let i = 2; i < cardRes.length; i += 1) {
-  //     cardlistIdx[i - 1] = cardRes[i].cardIdx;
-  //   }
-  //   console.log(cardlistIdx);
-  //   if (option === '신년운세' || option === '월별운세') {
-  //     setReplay('time');
-  //   } else {
-  //     setReplay('celtic');
-  //   }
-  // };
-
   const [modalOpen, setModalOpen] = useState(false); // modal
   const [luckyModalOpen, setLuckyModalOpen] = useState(false); // modal
   const showModal = () => {
@@ -182,8 +166,6 @@ function TarotListDetail() {
         </div>
         <TarotListContent className="detail">
           <TarotToken className="detail" click={false}>
-            {/* <ListContent>
-            </ListContent> */}
             <ListIcon src={cardIcon} alt="" />
             <div>타로 운세 기록</div>
           </TarotToken>
@@ -216,12 +198,11 @@ function TarotListDetail() {
         <DetailBox>
           <DetailQuestion>▶ {detailQuestion ? `${detailQuestion}` : `당신의 운세 결과`}</DetailQuestion>
           <DetailFortune className="detail">
-            {cardRes.map((value: any, idx: number) => (
+            {cardRes.map((value: any) => (
               <div style={{ marginBottom: '0.3em' }}>{value.ment}</div>
             ))}
           </DetailFortune>
         </DetailBox>
-        {/* {replay === 'time' ? <MonthSpread spreadList={cardlistIdx!} /> : null} */}
         {replay === 'month' && modalOpen ? (
           <common.ModalBackdrop onClick={showModal}>
             <common.ModalView className="replay" onClick={(e) => e.stopPropagation()}>

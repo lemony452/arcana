@@ -3,13 +3,12 @@ import { useNavigate } from 'react-router-dom';
 import * as layer from '../select_style';
 import Two from './two_spread';
 import TwoStart from './two_spread_animation';
-import TwoNum from './two_spread_num';
 import * as common from '../../Common/common_style';
 import { DialogNPC, OptionBtn } from '../../../Common/common_styled';
 import Dialog from '../../../Common/dialog';
 import charDialog2 from '../../../Assets/characters/kitty.gif';
 import { InstantDetails } from '../../../Common/conversations';
-import { saveIndexStore, useFortuneStore } from '../../../Store/User/fortune';
+import { saveIndexStore } from '../../../Store/User/fortune';
 import next from '../../../Assets/etc/nextButton.png';
 
 function TwoSpread() {
@@ -78,9 +77,6 @@ function TwoSpread() {
             </common.SpreadModal>
           </common.SideBlock>
         </common.CardArea>
-        {/* <common.ChatArea>
-          <common.SpreadBtn onClick={onNext}>다음</common.SpreadBtn>
-        </common.ChatArea> */}
         <DialogNPC src={charDialog2} />
         <Dialog content={text.page1} next={false}>
           {nextBtn && (
@@ -123,9 +119,6 @@ function TwoSpread() {
             </common.SpreadModal>
           </common.SideBlock>
         </common.CardArea>
-        {/* <common.ChatArea>
-          <common.SpreadBtn onClick={toHome}>홈으로</common.SpreadBtn>
-        </common.ChatArea> */}
         <DialogNPC src={charDialog2} />
         <Dialog content={text.page2} next={false}>
           {nextBtn && <OptionBtn onClick={toHome}>메인으로</OptionBtn>}

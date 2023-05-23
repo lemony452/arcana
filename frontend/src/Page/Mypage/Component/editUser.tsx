@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import { auth } from '../../../firebase';
 import { userInfoStore } from '../../../Store/User/info';
 import {
-  Nickname,
   EditNickName,
   EditInputBox,
   SideContent,
@@ -51,7 +50,6 @@ function EditUserInfo() {
   const saveNickName = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const name = editRef.current?.value;
-    // setNickname(name!);
     setEdit(false);
     API.put(`/api/v1/user/nickname`, {
       uid: user.uid,
@@ -103,7 +101,6 @@ function EditUserInfo() {
         </SideContent>
       </Side>
       <DetailContent>
-        {/* <DetailCover src={LoveCoverImg} /> */}
         <DetailTitle className="edit">
           <ListIcon
             className="edit"

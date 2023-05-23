@@ -3,8 +3,6 @@ import styled from 'styled-components';
 export const Side = styled.div`
   width: 25vw;
   height: 100vh;
-  /* background: linear-gradient(180deg, #ffffff 0.01%, #f1e9e4 100%);
-  box-shadow: 5px 0px 5px rgba(0, 0, 0, 0.71); */
   background: linear-gradient(169.59deg, #f4f4f4 0%, #eaeaea 95.02%);
   box-shadow: 5px 0px 5px rgba(0, 0, 0, 0.5);
   left: -55%;
@@ -40,7 +38,6 @@ export const UserContent = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  /* margin-top: 15vh; */
 `;
 
 export const ProfileImg = styled.div`
@@ -156,7 +153,6 @@ export const TarotListContent = styled.div`
   display: flex;
   width: 100%;
   height: 100%;
-  /* font-size: ; */
   align-items: center;
   flex-direction: column;
   &.detail {
@@ -203,10 +199,8 @@ export const DetailCover = styled.img`
 `;
 
 export const DetailTitle = styled.div`
-  /* position: absolute; */
   font-size: 3em;
   font-weight: bold;
-  /* margin: 2em 0 1em 3em; */
   display: flex;
   text-align: center;
   align-items: flex-end;
@@ -290,23 +284,16 @@ export const DetailFortune = styled.div`
       background: rgba(33, 122, 244, 0.1); /*스크롤바 뒷 배경 색상*/
     }
   }
-  /* border-radius: 0.5em; */
 `;
 
 export const ReplayTarots = styled.div`
-  /* position: absolute; */
   display: flex;
   align-items: center;
-  /* right: 1em; */
-  /* bottom: 4em; */
 `;
 
 export const ReplayLucky = styled.div`
-  /* position: absolute; */
   display: flex;
   align-items: center;
-  /* right: 1em; */
-  /* bottom: 1em; */
 `;
 
 export const LogoutBtn = styled.div`
@@ -332,7 +319,6 @@ export const EditUser = styled.div`
   flex-direction: column;
   border-radius: 5px;
   border: solid 2px #eaeaea;
-  /* margin: 0 4em 0 4em; */
   &.email {
     height: 25%;
     margin-top: 2em;
@@ -374,11 +360,9 @@ export const EditUserContent = styled.div`
 `;
 
 export const PaginationContent = styled.div`
-  /* position: absolute; */
   display: flex;
   flex-direction: row;
   margin-top: 2em;
-  /* top: 85vh; */
 `;
 
 export const PaginationBtn = styled.button`
