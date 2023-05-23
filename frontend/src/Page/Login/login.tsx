@@ -1,7 +1,5 @@
-import React, { useEffect, useState, createContext } from 'react';
-import { Cookies } from 'react-cookie';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from 'firebase/auth';
+import React from 'react';
+import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { auth } from '../../firebase';
 import { GoogleBtn, KakaoBtn } from './login_style';
 import googleBtnImg from '../../Assets/etc/googleBtn.png';
@@ -12,7 +10,7 @@ import { API } from '../../API';
 
 export function GoogleLogin() {
   // 구글 인가 코드 요청
-  const { setProfileChar, setUser, setIsLogin, setNickname, user, setWeekly, setTicket, setGoLogin } = userInfoStore();
+  const { setProfileChar, setUser, setIsLogin, setNickname, setWeekly, setTicket, setGoLogin } = userInfoStore();
   let isUser = false;
   let userData: any;
   const login = async () => {
@@ -38,11 +36,6 @@ export function GoogleLogin() {
     });
 
     const RegisterUser = () => {
-      // console.log('-----------------');
-      // console.log('isUser', isUser);
-      // console.log(userData);
-      // console.log(userData.uid);
-      // console.log(userData.email);
       if (isUser) {
         API.post(`/api/v1/user/register`, {
           uid: userData.uid,
@@ -75,17 +68,12 @@ export function GoogleLogin() {
       });
   };
 
-  return (
-    // <a href={GOOGLE_URI}>
-    // </a>
-    <GoogleBtn onClick={login} src={googleBtnImg} />
-  );
+  return <GoogleBtn onClick={login} src={googleBtnImg} />;
 }
 
 export function KakaoLogin() {
   const { REACT_APP_KAKAO_CLIENT_ID } = process.env;
   // 카카오 인가 코드 요청
-  // const KAKAO_REDIRECT_URI = `https://k8d107.p.ssafy.io/api/v1/user/kakao`;
   const KAKAO_REDIRECT_URI = `https://k8d107.p.ssafy.io/authkakao`;
   const KAKAO_URI = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${REACT_APP_KAKAO_CLIENT_ID}&redirect_uri=${KAKAO_REDIRECT_URI}`;
 

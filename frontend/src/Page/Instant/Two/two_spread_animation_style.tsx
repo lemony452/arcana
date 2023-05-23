@@ -9,7 +9,6 @@ export const TimeBox = styled(motion.div)`
 `;
 
 export const TwoCard = styled(motion.div)`
-  /* background-color: gold; */
   position: absolute;
   width: 18vh;
   height: calc(18vh * 5 / 3);

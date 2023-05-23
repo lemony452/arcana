@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
-// import BackGround from '../../../Assets/etc/luckybackground.svg';
 
 export const Body = styled.div`
   display: flex;
@@ -45,13 +44,6 @@ export const Card = styled(motion.div)<{ back: string; color: string }>`
   align-items: end;
   z-index: 1;
 `;
-
-// export const CardTitle = styled(motion.div)`
-//   height: 5vh;
-//   text-align: center;
-//   font-size: 3vh;
-//   margin-inline: auto;
-// `;
 
 export const Cardcontent = styled(motion.div)`
   text-align: center;

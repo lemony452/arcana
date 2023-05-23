@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { Swiper, SwiperSlide, useSwiper } from 'swiper/react';
+import { Swiper, SwiperSlide } from 'swiper/react';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
 // eslint-disable-next-line import/no-unresolved
@@ -9,8 +9,7 @@ import 'swiper/css';
 // eslint-disable-next-line import/no-unresolved
 import 'swiper/css/navigation';
 import { useCardStore, useHoverStore } from '../../../Store/Main/main';
-import { StyledCard, StyledCircle, NextBtn, PrevBtn } from '../main_style';
-import Character from './character';
+import { StyledCard, NextBtn, PrevBtn } from '../main_style';
 import NextBtnImg from '../../../Assets/etc/nextButton.png';
 import MainCeltic from '../../../Assets/etc/MainCeltic.png';
 import MainTime from '../../../Assets/etc/MainTime.png';
@@ -27,8 +26,6 @@ function Card({
 }) {
   // navigate hook
   // swiper hook
-  // const swiper = useSwiper();
-  // console.log('swiper', swiper);
   const navigate = useNavigate();
 
   const { weeklyCount, setWeekly, isLogin, setGoLogin } = userInfoStore();
@@ -51,30 +48,7 @@ function Card({
   };
 
   // celtic, instant, time 카드 순서 변수
-  const { cardOrder, setCardOrder } = useCardStore();
-
-  // let temp = cardOrder;
-  // const NextClick = () => {
-  //   if (temp === 'instant') {
-  //     temp = 'celtic';
-  //   } else if (temp === 'time') {
-  //     temp = 'instant';
-  //   } else {
-  //     temp = 'time';
-  //   }
-  //   setCardOrder(temp);
-  // };
-
-  // const PrevClick = () => {
-  //   if (temp === 'instant') {
-  //     temp = 'time';
-  //   } else if (temp === 'time') {
-  //     temp = 'celtic';
-  //   } else {
-  //     temp = 'instant';
-  //   }
-  //   setCardOrder(temp);
-  // };
+  const { setCardOrder } = useCardStore();
 
   // celtic 페이지로 이동
   const MoveCeltic = () => {
@@ -149,18 +123,11 @@ function Card({
       modules={[Navigation, Pagination, Scrollbar, A11y]}
       navigation={{ nextEl, prevEl }}
       pagination={{ clickable: true }}
-      // onSlideChange={(ddd) => console.log(geSlideDataIndex(ddd))}
       onActiveIndexChange={(page) => setImg(page.realIndex)}
       loop
     >
       <NextBtn src={NextBtnImg} ref={(node) => setNextEl(node)} />
       <PrevBtn src={NextBtnImg} ref={(node) => setPrevEl(node)} />
-      {/* <button type="button" ref={(node) => setNextEl(node)} onClick={NextClick}>
-        Slide Next
-      </button> */}
-      {/* <button type="button" ref={(node) => setPrevEl(node)} onClick={PrevClick}>
-        Slide Prev
-      </button> */}
       <SwiperSlide>
         <StyledCard onClick={MoveCeltic} onMouseEnter={Hovering} onMouseLeave={Hovering} src={MainCeltic} />
       </SwiperSlide>

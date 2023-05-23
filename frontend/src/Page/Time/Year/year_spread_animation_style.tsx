@@ -9,7 +9,6 @@ export const TimeBox = styled(motion.div)`
 `;
 
 export const YearCard = styled(motion.div)`
-  /* background-color: gold; */
   position: absolute;
   width: 16vh;
   height: calc(16vh * 5 / 3);

@@ -9,7 +9,6 @@ import charDialog1 from '../../../Assets/characters/toast.gif';
 import { DialogNPC, OptionBtn } from '../../../Common/common_styled';
 import { YearDetails } from '../../../Common/conversations';
 import { useLuckyStore } from '../../../Store/User/lucky';
-import { getLuckyCard } from '../../../Common/tarotSelect';
 import { API } from '../../../API';
 import { saveIndexStore } from '../../../Store/User/fortune';
 import next from '../../../Assets/etc/nextButton.png';
@@ -33,14 +32,10 @@ function YearSpread() {
   };
   const { indexList } = saveIndexStore();
   const imgSrc = (num: number) => `https://k8d107.p.ssafy.io/api/v1/images/${indexList[num - 1]}.png`;
-  const { lucky, setLuckyMent, setLucky } = useLuckyStore();
+  const { setLuckyMent, setLucky } = useLuckyStore();
   const MoveLucky = async () => {
     // 럭키카드 api
     await API.get(`/api/v1/tarot/lucky/`).then((res: any) => {
-      console.log(res);
-      // setLuckyNum(res.data.card.idx);
-      // setLuckyName(res.data.card.name);
-      console.log('lucky api 결과 : ', res.data);
       setLucky({
         card: res.data.card,
         ment: res.data.luckyment,
@@ -51,7 +46,6 @@ function YearSpread() {
   };
 
   const text = YearDetails();
-  // console.log(text);
 
   if (index === 0) {
     return (
@@ -97,9 +91,6 @@ function YearSpread() {
             </common.SpreadModal>
           </common.SideBlock>
         </common.CardArea>
-        {/* <common.ChatArea>
-          <common.SpreadBtn onClick={onNext}>다음</common.SpreadBtn>
-        </common.ChatArea> */}
         <DialogNPC src={charDialog1} />
         <Dialog content={text.page1} next={false}>
           {nextBtn && (
@@ -144,9 +135,6 @@ function YearSpread() {
             </common.SpreadModal>
           </common.SideBlock>
         </common.CardArea>
-        {/* <common.ChatArea>
-          <common.SpreadBtn onClick={onNext}>다음</common.SpreadBtn>
-        </common.ChatArea> */}
         <DialogNPC src={charDialog1} />
         <Dialog content={text.page2} next={false}>
           {nextBtn && (
@@ -191,9 +179,6 @@ function YearSpread() {
             </common.SpreadModal>
           </common.SideBlock>
         </common.CardArea>
-        {/* <common.ChatArea>
-          <common.SpreadBtn onClick={onNext}>다음</common.SpreadBtn>
-        </common.ChatArea> */}
         <DialogNPC src={charDialog1} />
         <Dialog content={text.page3} next={false}>
           {nextBtn && (
@@ -238,9 +223,6 @@ function YearSpread() {
             </common.SpreadModal>
           </common.SideBlock>
         </common.CardArea>
-        {/* <common.ChatArea>
-          <common.SpreadBtn onClick={onNext}>다음</common.SpreadBtn>
-        </common.ChatArea> */}
         <DialogNPC src={charDialog1} />
         <Dialog content={text.page4} next={false}>
           {nextBtn && (
@@ -261,22 +243,8 @@ function YearSpread() {
           <common.CardBox>
             <Year spreadList={indexList} />
           </common.CardBox>
-          <common.SideBlock>
-            {/* <common.SpreadModal>
-              <OptionBtn onClick={showModal}>카드</OptionBtn>
-              {modalOpen ? (
-                <common.ModalBackdrop onClick={showModal}>
-                  <common.ModalView onClick={(e) => e.stopPropagation()}>
-                    <OptionBtn onClick={showModal}>닫기</OptionBtn>
-                  </common.ModalView>
-                </common.ModalBackdrop>
-              ) : null}
-            </common.SpreadModal> */}
-          </common.SideBlock>
+          <common.SideBlock />
         </common.CardArea>
-        {/* <common.ChatArea>
-          <common.SpreadBtn onClick={MoveLucky}>럭키!</common.SpreadBtn>
-        </common.ChatArea> */}
         <DialogNPC src={charDialog1} />
         <Dialog content={text.page5} next={false}>
           {nextBtn && <OptionBtn onClick={MoveLucky}>럭키!</OptionBtn>}

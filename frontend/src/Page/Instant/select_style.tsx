@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 export const MainBox = styled.div`
-  /* background-color: blue; */
   width: 100vw;
   height: 100vh;
   display: flex;
@@ -11,7 +10,6 @@ export const MainBox = styled.div`
 `;
 
 export const SelectBox = styled.div`
-  /* background-color: red; */
   height: 90%;
   display: flex;
   flex-direction: column;
@@ -22,7 +20,6 @@ export const SelectBox = styled.div`
 export const SelectPartOne = styled.div`
   width: 100%;
   height: 50%;
-  /* background-color: pink; */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -30,7 +27,6 @@ export const SelectPartOne = styled.div`
 export const SelectPartTwo = styled.div`
   width: 100%;
   height: 50%;
-  /* background-color: violet; */
   display: flex;
   align-items: center;
   justify-content: space-around;

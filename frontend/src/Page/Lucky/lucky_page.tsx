@@ -140,22 +140,6 @@ function LuckyPage() {
     }
   }, []);
 
-  // const accessToken =
-  //   'IGQVJVaG56V0FpdXNoaVFrcG5YcGp3ZAHEySUo4ZAkhIeTN2NjBtNUdRWEh1dl8tVTBIUHJiRmQ3MmFTNVZAWcVJFLW43eGc4Y3dWLWhESGFMU0FJRUNpSjF6b2kzU2RPd09GSzUzQVZAQTnFsX1c4S2RXRQZDZD';
-  // const mediaUrl = 'https://api.instagram.com/v1/media/';
-
-  // const postLinkToInstagram = async () => {
-  //   try {
-  //     const response = await axios.post(mediaUrl, {
-  //       access_token: accessToken,
-  //       caption: 'Check out my homepage!',
-  //       url: 'http://localhost:3000',
-  //     });
-  //     console.log('Link posted successfully:', response.data);
-  //   } catch (error) {
-  //     console.error('Error posting link:', error);
-  //   }
-  // };
   const capture = () => {
     const downloadImg = (url: string, imgName: string) => {
       const downImg = document.createElement('a');

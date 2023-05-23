@@ -43,13 +43,6 @@ function LuckyKarmaResult({ selectCard, cardList, npc }: LuckyKarmaResultType) {
           color={color}
         >
           <div>
-            {/* <luckResult.CardTitle
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: [-10, 0] }}
-            transition={{ delay: 1.2, duration: 0.5 }}
-          >
-            {cardList[selectCard].num}.{cardList[selectCard].title}
-          </luckResult.CardTitle> */}
             <luckResult.Cardcontent
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: [10, 0] }}

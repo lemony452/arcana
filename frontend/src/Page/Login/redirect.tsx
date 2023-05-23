@@ -1,8 +1,5 @@
 import React, { useEffect } from 'react';
-import axios from 'axios';
-import { useCookies } from 'react-cookie';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { setCookie } from './cookie';
 import { API } from '../../API';
 import { userInfoStore } from '../../Store/User/info';
 
@@ -33,7 +30,6 @@ import { userInfoStore } from '../../Store/User/info';
 // }
 
 export function KakaoRedirect() {
-  // const code = new URL(window.location.href).searchParams.get('code');
   const location = useLocation();
   const URLcode = location.search.split('=')[1];
   console.log(URLcode);
@@ -44,8 +40,6 @@ export function KakaoRedirect() {
     const login = async () => {
       const num = Math.floor(Math.random() * 3); // 0, 1, 2 난수
       console.log('카카오 로그인 중');
-      // await window.open(KAKAO_URI);
-      // const URLcode = new URL(document.location).searchParams.get('code');
       await API.get(`/api/v1/user/kakao?code=${URLcode}`).then((res) => {
         console.log(res);
         userData = res.data;
@@ -71,7 +65,6 @@ export function KakaoRedirect() {
           console.log(res);
           setWeekly(res.data.weekly_count);
           setTicket(res.data.ticket);
-          // setNickname(res.data.nickname);
         })
         .catch((err) => {
           console.log(err);

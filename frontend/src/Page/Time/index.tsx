@@ -1,38 +1,22 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getTarot, getTarotNames } from '../../Common/tarotSelect';
-import {
-  OptionBtn,
-  InputText,
-  SubmitBtn,
-  DialogNPC,
-  OtherBackground1,
-  OtherBackground2,
-} from '../../Common/common_styled';
+import { OptionBtn } from '../../Common/common_styled';
 import { TimeConversations } from '../../Common/conversations';
 import Dialog from '../../Common/dialog';
 import Npc from '../../Common/npc';
-// import { TimeGPT } from '../../Store/FortuneTelling/gpt';
-import { useFortuneStore, CardState, saveIndexStore } from '../../Store/User/fortune';
-import charDialog1 from '../../Assets/characters/toast.gif';
-import { SpreadBtn } from '../Common/common_style';
+import { useFortuneStore, saveIndexStore } from '../../Store/User/fortune';
 import { API } from '../../API';
 import { userInfoStore } from '../../Store/User/info';
-import BackgroundImg1 from '../../Assets/etc/otherb1.png';
-import BackgroundImg2 from '../../Assets/etc/otherb2.png';
 
 function Time() {
   const [celticText, SetcelticText] = useState(TimeConversations.t1);
   const [next, SetNext] = useState(false);
-  // const [option, SetOption] = useState('');
-  const inputValueRef = useRef<HTMLInputElement>(null);
   const { setOption, setTarotList, setSummary, setQuestion } = useFortuneStore();
   const navigate = useNavigate();
   const { setIndexList } = saveIndexStore(); // 카드 인덱스
   const { user, setWeekly } = userInfoStore();
 
   // time 옵션 선택 함수
-  // let TarotList: CardState[];
   let timements = '';
   let IndexList: number[];
   let spreadOption;
@@ -61,7 +45,6 @@ function Time() {
       setIndexList(IndexList);
       setTarotList(resData);
       console.log(timements);
-      // addFortune(timements);
     });
 
     SetcelticText(TimeConversations.t2[f]);
@@ -90,14 +73,7 @@ function Time() {
 
   return (
     <div style={{ width: '100vw', height: '100vh', position: 'relative' }}>
-      {/* <OtherBackground1>
-        <img src={BackgroundImg1} alt="" />
-      </OtherBackground1>
-      <OtherBackground2>
-        <img src={BackgroundImg2} alt="" />
-      </OtherBackground2> */}
       <Npc num={1} />
-      {/* <DialogNPC src={charDialog1} /> */}
       <Dialog content={celticText} next={next}>
         <>
           <OptionBtn onClick={() => OptionClick('신년운세')}>신년 운세 🐰</OptionBtn>

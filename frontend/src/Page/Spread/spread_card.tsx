@@ -94,12 +94,6 @@ function SpreadCard() {
 
   return (
     <spreadCard.Body>
-      {/* <spreadCard.NumBody>
-        <spreadCard.Num>
-          선택 {selectedCardList.length} / {needCardNum}
-        </spreadCard.Num>
-        <spreadCard.Button onClick={confirmedHandler}>클릭</spreadCard.Button>
-      </spreadCard.NumBody> */}
       <spreadCard.CardBody animate={confirmedCard ? 'move' : 'start'} variants={variants}>
         {cardList.map((card, index) => (
           <SelectedCard
