@@ -172,7 +172,7 @@ function Quiz() {
           const minutes = String(39 - serverDate.getMinutes()).padStart(2, '0');
           const seconds = String(59 - serverDate.getSeconds()).padStart(2, '0');
           setRealTime(`${hours}:${minutes}:${seconds}`);
-        } else if (serverDate.getHours() === 17 && serverDate.getMinutes() === 17 && serverDate.getSeconds() === 0) {
+        } else if (serverDate.getHours() === 17 && serverDate.getMinutes() === 21 && serverDate.getSeconds() === 0) {
           startQuiz();
         } else {
           const hours = String(28 - serverDate.getHours()).padStart(2, '0');
