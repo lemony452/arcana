@@ -104,11 +104,11 @@ function Main() {
           </common.ModalView>
         </common.ModalBackdrop>
       ) : null}
-      {isLogin && isQuiz ? (
+      {/* {isLogin && isQuiz ? (
         <QuizBox type="button" onClick={goQuiz}>
           <QuizBtn src={QuizBtnImg} />
         </QuizBox>
-      ) : null}
+      ) : null} */}
       {goLogin ? <ModalBackdrop /> : null}
       <ModalBtnBox>
         {isLogin ? (
