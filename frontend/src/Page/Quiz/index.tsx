@@ -186,28 +186,28 @@ function Quiz() {
   // 서버 시간 불러오기
   const serverTime = async () => {
     console.log('서버시간은 밀리초가 있는 유닉스');
-    await API.get(`/api/v1/quiz/servertime`).then((res) => {
-      // console.log(res.data);
-      // console.log(typeof res.data);
-      const serverDate = new Date(Math.floor(res.data / 1000) * 1000);
-      console.log(serverDate.getHours(), serverDate.getMinutes(), serverDate.getSeconds());
-      let hours = serverDate.getHours();
-      let minutes = serverDate.getMinutes();
-      let seconds = serverDate.getSeconds();
-      if (serverDate.getHours() < 13) {
-        hours = 12 - hours;
-        minutes = 30 - minutes;
-        seconds = 59 - seconds;
-        // setRealTime(`${hours}:${minutes}:${seconds}`);
-      }
-      setHour(hours);
-      setMin(minutes);
-      setSec(seconds);
-    });
+    // await API.get(`/api/v1/quiz/servertime`).then((res) => {
+    //   // console.log(res.data);
+    //   // console.log(typeof res.data);
+    //   const serverDate = new Date(Math.floor(res.data / 1000) * 1000);
+    //   console.log(serverDate.getHours(), serverDate.getMinutes(), serverDate.getSeconds());
+    //   let hours = serverDate.getHours();
+    //   let minutes = serverDate.getMinutes();
+    //   let seconds = serverDate.getSeconds();
+    //   if (serverDate.getHours() < 13) {
+    //     hours = 12 - hours;
+    //     minutes = 30 - minutes;
+    //     seconds = 59 - seconds;
+    //     // setRealTime(`${hours}:${minutes}:${seconds}`);
+    //   }
+    //   setHour(hours);
+    //   setMin(minutes);
+    //   setSec(seconds);
+    // });
     // 임시
-    // setHour(0);
-    // setMin(0);
-    // setSec(10);
+    setHour(0);
+    setMin(0);
+    setSec(10);
   };
 
   useEffect(() => {
