@@ -38,6 +38,10 @@ function Quiz() {
   const [gameOver, setGameOver] = useState(true);
   const [fail, setFail] = useState(false);
   const [realTime, setRealTime] = useState('00:00:00');
+  const [hour, setHour] = useState(99); // 시
+  const [min, setMin] = useState(99); // 분
+  const [sec, setSec] = useState(99); // 초
+
   const [userNum, setUserNum] = useState(0);
 
   const navigate = useNavigate();
@@ -142,6 +146,27 @@ function Quiz() {
     }
   }, []);
 
+  // 이벤트 대기방 타이머 계산
+  const loadingTimer = () => {
+    if (sec !== 0) {
+      console.log('초 감소');
+      setSec((prev) => prev - 1);
+    } else if (sec === 0 && min !== 0) {
+      console.log('분 감소');
+      setMin((prev) => prev - 1);
+      setSec(59);
+    } else if (sec === 0 && min === 0 && hour !== 0) {
+      console.log('시 감소');
+      setHour((prev) => prev - 1);
+      setMin(59);
+      setSec(59);
+    } else if (sec === 0 && min === 0 && hour === 0) {
+      setSec(0);
+      setMin(0);
+      setHour(0);
+    }
+  };
+
   // 퀴즈 시작
   const startQuiz = async () => {
     setLoading(true);
@@ -158,37 +183,83 @@ function Quiz() {
     send();
   };
 
-  useEffect(() => {
-    const serverTime = async () => {
-      // console.log('서버시간은 밀리초가 있는 유닉스');
-      await API.get(`/api/v1/quiz/servertime`).then((res) => {
-        // console.log(res.data);
-        // console.log(typeof res.data);
-        const serverDate = new Date(Math.floor(res.data / 1000) * 1000);
-        console.log(serverDate.getHours(), serverDate.getMinutes(), serverDate.getSeconds());
-        // console.log(typeof serverDate.getHours());
-        if (serverDate.getHours() < 13) {
-          const hours = String(13 - serverDate.getHours()).padStart(2, '0');
-          const minutes = String(39 - serverDate.getMinutes()).padStart(2, '0');
-          const seconds = String(59 - serverDate.getSeconds()).padStart(2, '0');
-          setRealTime(`${hours}:${minutes}:${seconds}`);
-        } else if (serverDate.getHours() === 17 && serverDate.getMinutes() === 21 && serverDate.getSeconds() === 0) {
-          startQuiz();
-        } else {
-          const hours = String(28 - serverDate.getHours()).padStart(2, '0');
-          const minutes = String(59 - serverDate.getMinutes()).padStart(2, '0');
-          const seconds = String(59 - serverDate.getSeconds()).padStart(2, '0');
-          setRealTime(`${hours}:${minutes}:${seconds}`);
-        }
-      });
-      // const date = new Date();
-    };
-    const startTimer = () => {
-      setInterval(() => serverTime(), 1000);
-    };
+  // 서버 시간 불러오기
+  const serverTime = async () => {
+    console.log('서버시간은 밀리초가 있는 유닉스');
+    await API.get(`/api/v1/quiz/servertime`).then((res) => {
+      // console.log(res.data);
+      // console.log(typeof res.data);
+      const serverDate = new Date(Math.floor(res.data / 1000) * 1000);
+      console.log(serverDate.getHours(), serverDate.getMinutes(), serverDate.getSeconds());
+      let hours = serverDate.getHours();
+      let minutes = serverDate.getMinutes();
+      let seconds = serverDate.getSeconds();
+      if (serverDate.getHours() < 13) {
+        hours = 12 - hours;
+        minutes = 30 - minutes;
+        seconds = 59 - seconds;
+        // setRealTime(`${hours}:${minutes}:${seconds}`);
+      }
+      setHour(hours);
+      setMin(minutes);
+      setSec(seconds);
+    });
+    // 임시
+    // setHour(0);
+    // setMin(0);
+    // setSec(10);
+  };
 
-    startTimer();
-  });
+  useEffect(() => {
+    serverTime();
+  }, []);
+
+  useEffect(() => {
+    console.log('시 : 분 : 초', hour, min, sec);
+    const timer = setInterval(loadingTimer, 1000);
+    if (hour === 0 && min === 0 && sec === 0) {
+      console.log('타이머 끝');
+      startQuiz(); // 퀴즈 시작
+    } else {
+      const realHour = String(hour).padStart(2, '0');
+      const realMin = String(min).padStart(2, '0');
+      const realSec = String(sec).padStart(2, '0');
+      setRealTime(`${realHour}:${realMin}:${realSec}`);
+    }
+    return () => clearInterval(timer);
+  }, [hour, min, sec]);
+
+  // useEffect(() => {
+  //   const serverTime = async () => {
+  //     // console.log('서버시간은 밀리초가 있는 유닉스');
+  //     await API.get(`/api/v1/quiz/servertime`).then((res) => {
+  //       // console.log(res.data);
+  //       // console.log(typeof res.data);
+  //       const serverDate = new Date(Math.floor(res.data / 1000) * 1000);
+  //       console.log(serverDate.getHours(), serverDate.getMinutes(), serverDate.getSeconds());
+  //       // console.log(typeof serverDate.getHours());
+  //       if (serverDate.getHours() < 13) {
+  //         const hours = String(13 - serverDate.getHours()).padStart(2, '0');
+  //         const minutes = String(39 - serverDate.getMinutes()).padStart(2, '0');
+  //         const seconds = String(59 - serverDate.getSeconds()).padStart(2, '0');
+  //         setRealTime(`${hours}:${minutes}:${seconds}`);
+  //       } else if (serverDate.getHours() === 17 && serverDate.getMinutes() === 21 && serverDate.getSeconds() === 0) {
+  //         startQuiz();
+  //       } else {
+  //         const hours = String(28 - serverDate.getHours()).padStart(2, '0');
+  //         const minutes = String(59 - serverDate.getMinutes()).padStart(2, '0');
+  //         const seconds = String(59 - serverDate.getSeconds()).padStart(2, '0');
+  //         setRealTime(`${hours}:${minutes}:${seconds}`);
+  //       }
+  //     });
+  //     // const date = new Date();
+  //   };
+  //   const startTimer = () => {
+  //     setInterval(() => serverTime(), 1000);
+  //   };
+
+  //   startTimer();
+  // });
 
   // 퀴즈 풀이시간 카운트 다운s
   const second = String(Math.floor((timeLeft / 1000) % 60)).padStart(2, '0');
