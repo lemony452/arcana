@@ -1,7 +1,7 @@
 pipeline {
     agent any
          environment {
-            imagename = "d107final/docker-fe"
+            imagename = "d107final/arcana-fe"
             registryCredential = 'jumzip@d107'
             dockerImage = ''
         }
@@ -56,7 +56,7 @@ pipeline {
             steps {
                 echo 'push Docker...'
                     script {
-                        sh 'docker push d107final/docker-fe'
+                        sh 'docker push d107final/arcana-fe'
                     }
             }
 
@@ -70,18 +70,18 @@ pipeline {
             steps {
                 echo 'pull Docker...'
 
-                sh 'docker pull d107final/docker-fe'
+                sh 'docker pull d107final/arcana-fe'
 
                 echo 'Clean image...'
                 sh '''
-                    if test "`docker ps -aq --filter name=docker-fe`"; then
-                    docker stop docker-fe
-                    docker rm docker-fe
+                    if test "`docker ps -aq --filter name=arcana-fe`"; then
+                    docker stop arcana-fe
+                    docker rm arcana-fe
                     fi
                 '''
 
                 echo 'run Docker...'
-                sh 'docker run -d --name docker-fe -p 19100:3000 d107final/docker-fe'
+                sh 'docker run -d --name arcana-fe -p 19100:3000 d107final/arcana-fe'
 
             }
         }
