@@ -23,7 +23,7 @@ export type AnswerObject = {
   correctAnswer: string;
 };
 
-const TOTAL_QUESTIONS = 5;
+const TOTAL_QUESTIONS = 2;
 
 function Quiz() {
   const [win] = useSound(WinBgm);
@@ -279,37 +279,48 @@ function Quiz() {
     };
   }, [timeLeft]);
 
+  // 다음 문제로
+  const nextQuestion = () => {
+    return [setNumber(number + 1), setTimeLeft(MINUTES_IN_MS + 10 * 1000)];
+  };
+
   // 퀴즈 정답 확인
-  const checkAnswer = (e: any) => {
+  const checkAnswer = async (e: any) => {
+    const answer = e.currentTarget.value;
+    // Check answer against correct answer
+    const correct = questions[number].answer === answer;
     if (!gameOver) {
       // User's answer
-      const answer = e.currentTarget.value;
-      // Check answer against correct answer
-      const correct = questions[number].answer === answer;
       // Add score if answer is correct
       if (correct) setScore((prev) => prev + 1);
       console.log('score', score);
       console.log('index', index);
 
-      // let timerInterval: any;
-      // Swal.fire({
-      //   icon: 'question',
-      //   title: '결과가 곧 공개됩니다!',
-      //   html: '결과 공개까지 {<b></b>} 밀리초 남았습니다.',
-      //   timer: MINUTES_IN_MS,
-      //   timerProgressBar: true,
-      //   allowOutsideClick: false,
-      //   didOpen: () => {
-      //     Swal.showLoading();
-      //     const b = Swal.getHtmlContainer().querySelector('b');
-      //     timerInterval = setInterval(() => {
-      //       b.textContent = Swal.getTimerLeft();
-      //     }, 100);
-      //   },
-      //   willClose: () => {
-      //     clearInterval(timerInterval);
-      //   },
-      // });
+      let timerInterval: any;
+      await Swal.fire({
+        icon: 'question',
+        title: '결과가 곧 공개됩니다!',
+        // html: '결과 공개까지 {<b></b>} 밀리초 남았습니다.',
+        timer: timeLeft,
+        // 시간 타이머 바
+        timerProgressBar: true,
+        // 외부클릭시 모달창 꺼짐 방지
+        allowOutsideClick: false,
+        didOpen: () => {
+          Swal.showLoading();
+          const b = Swal.getHtmlContainer()?.querySelector('b');
+          console.log('b', b);
+          // if문 주석처리하면 돌아감. 하지만 작동 안하면 안 넘어가짐
+          // if (typeof b === 'undefined') {
+          //   timerInterval = setInterval(() => {
+          //     b.textContent = Swal.getTimerLeft();
+          //   }, 100);
+          // }
+        },
+        willClose: () => {
+          // clearInterval(timerInterval);
+        },
+      });
 
       // Save the answer in the array for user answers
       const answerObject = {
@@ -321,15 +332,13 @@ function Quiz() {
       setUserAnswers((prev) => [...prev, answerObject]);
     }
 
-    setTimeLeft(0);
-    setIndex(index + 1);
+    // setTimeLeft(0);
+    await setIndex(index + 1);
+    if (correct && number < TOTAL_QUESTIONS - 1) {
+      await nextQuestion();
+    }
     console.log('Highscore', score);
     console.log('imindex', index);
-  };
-
-  // 다음 문제로
-  const nextQuestion = () => {
-    return [setNumber(number + 1), setTimeLeft(MINUTES_IN_MS + 600 * 1000)];
   };
 
   // clearTimeout(nextQuestion);
@@ -425,27 +434,29 @@ function Quiz() {
         </quizStyle.FullArea>
       );
     }
-    return (
-      <quizStyle.FullArea>
-        {/* {loading ? <p>Loading Questions...</p> : null}
-        <quizStyle.LeftArea>
-          <quizStyle.CharacterDialog>
-            {!gameOver ? <p className="score">Score: {score}</p> : null}
-          </quizStyle.CharacterDialog>
-          <quizStyle.CharacterArea onClick={nextQuestion}>일단 누르면 다음 문제로</quizStyle.CharacterArea>
-        </quizStyle.LeftArea>
-        <quizStyle.RightArea>
-          <quizStyle.TimerArea>정답자 수를 보여주는 자리 (생존자)</quizStyle.TimerArea>
-          <quizStyle.PeopleArea>정답률 그래프가 들어갈 자리</quizStyle.PeopleArea>
-        </quizStyle.RightArea> */}
-        <quizStyle.StartArea>
-          <quizStyle.TimerArea className="nextQ">정답입니다🎉</quizStyle.TimerArea>
-          <quizStyle.PeopleArea className="nextQ" onClick={nextQuestion}>
-            다음 문제로
-          </quizStyle.PeopleArea>
-        </quizStyle.StartArea>
-      </quizStyle.FullArea>
-    );
+    if (score === number + 1 && index < TOTAL_QUESTIONS) {
+      return (
+        <quizStyle.FullArea>
+          {/* {loading ? <p>Loading Questions...</p> : null}
+          <quizStyle.LeftArea>
+            <quizStyle.CharacterDialog>
+              {!gameOver ? <p className="score">Score: {score}</p> : null}
+            </quizStyle.CharacterDialog>
+            <quizStyle.CharacterArea onClick={nextQuestion}>일단 누르면 다음 문제로</quizStyle.CharacterArea>
+          </quizStyle.LeftArea>
+          <quizStyle.RightArea>
+            <quizStyle.TimerArea>정답자 수를 보여주는 자리 (생존자)</quizStyle.TimerArea>
+            <quizStyle.PeopleArea>정답률 그래프가 들어갈 자리</quizStyle.PeopleArea>
+          </quizStyle.RightArea> */}
+          <quizStyle.StartArea>
+            <quizStyle.TimerArea className="nextQ">정답입니다🎉</quizStyle.TimerArea>
+            <quizStyle.PeopleArea className="nextQ" onClick={nextQuestion}>
+              다음 문제로
+            </quizStyle.PeopleArea>
+          </quizStyle.StartArea>
+        </quizStyle.FullArea>
+      );
+    }
   }
   if (index === TOTAL_QUESTIONS + 1) {
     // winOn();
