@@ -108,7 +108,7 @@ pipeline {
 
                 echo 'run Docker...'
                 // 도커 중복시 삭제하고 덮어씌우기 처리 안했으니까 해야함
-                sh 'docker run -d --name arcana-be -p 19101:18081 -v images:/images d107final/arcana-be'
+                sh 'docker run -d --name arcana-be -p 19101:18081 -v arcana_images:/images d107final/arcana-be'
 
             }
         }
