@@ -32,7 +32,7 @@ function Chat() {
 
     try {
       const clientdata = await new StompJs.Client({
-        brokerURL: 'wss://k8d107.p.ssafy.io/ws/websocket',
+        brokerURL: 'wss://arcana.aeoragy.com/ws/websocket',
         // connectHeaders: {
         //   login: id,
         //   passcode: 'password',

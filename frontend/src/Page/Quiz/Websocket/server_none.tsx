@@ -4,7 +4,7 @@ import { Client, Stomp } from '@stomp/stompjs';
 import { userInfoStore } from '../../../Store/User/info';
 
 function Socket() {
-  const sock = new SockJS(`https://k8d107.p.ssafy.io/ws`);
+  const sock = new SockJS(`https://arcana.aeoragy.com/ws`);
   const stomp = Stomp.over(sock);
   const { user } = userInfoStore();
   const token = user.uid;

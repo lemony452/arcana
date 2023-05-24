@@ -74,7 +74,7 @@ export function GoogleLogin() {
 export function KakaoLogin() {
   const { REACT_APP_KAKAO_CLIENT_ID } = process.env;
   // 카카오 인가 코드 요청
-  const KAKAO_REDIRECT_URI = `https://k8d107.p.ssafy.io/authkakao`;
+  const KAKAO_REDIRECT_URI = `https://arcana.aeoragy.com/authkakao`;
   const KAKAO_URI = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${REACT_APP_KAKAO_CLIENT_ID}&redirect_uri=${KAKAO_REDIRECT_URI}`;
 
   return (

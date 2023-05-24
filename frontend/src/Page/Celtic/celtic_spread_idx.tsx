@@ -26,7 +26,7 @@ function CelticSpread() {
     return setIndex(index + 1);
   };
   const { indexList } = saveIndexStore();
-  const imgSrc = (num: number) => `https://k8d107.p.ssafy.io/api/v1/images/${indexList[num - 1]}.png`;
+  const imgSrc = (num: number) => `https://arcana.aeoragy.com/api/v1/images/${indexList[num - 1]}.png`;
   console.log(index);
 
   const [modalOpen, setModalOpen] = useState(false); // modal

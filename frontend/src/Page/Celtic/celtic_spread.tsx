@@ -2,7 +2,7 @@ import React from 'react';
 import * as layer from './celtic_spread_style';
 
 function CelticSpread({ spreadList }: { spreadList: number[] }) {
-  const imgSrc = (num: number) => `https://k8d107.p.ssafy.io/api/v1/images/${spreadList[num - 1]}.png`;
+  const imgSrc = (num: number) => `https://arcana.aeoragy.com/api/v1/images/${spreadList[num - 1]}.png`;
   return (
     <layer.CelticBox>
       <layer.CelticPartOne>

@@ -86,7 +86,7 @@ export function FilppedCard({ card, size, setTime, type }: FilppedCardType) {
   const { indexList } = saveIndexStore();
   const radius = type === 'celtic' ? '5px' : '10px';
 
-  const imgSrc = `https://k8d107.p.ssafy.io/api/v1/images/${indexList[card - 1]}.png`;
+  const imgSrc = `https://arcana.aeoragy.com/api/v1/images/${indexList[card - 1]}.png`;
 
   useEffect(() => {
     setTimeout(() => {

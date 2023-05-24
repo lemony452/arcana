@@ -28,7 +28,7 @@ const QuestionCard: React.FC<Props> = ({
     <quizStyle.LeftCard>
       {/* Question: {questionNr} / {totalQuestions} */}
       <quizStyle.CardArea>
-        <img src={`https://k8d107.p.ssafy.io/api/v1/images/${cardIdx}.png`} alt="questCard" />
+        <img src={`https://arcana.aeoragy.com/api/v1/images/${cardIdx}.png`} alt="questCard" />
       </quizStyle.CardArea>
     </quizStyle.LeftCard>
     <quizStyle.RightArea>

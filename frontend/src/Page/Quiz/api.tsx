@@ -23,7 +23,7 @@ export type QuestionsState = Question & { answers: string[] };
 // };
 
 export const fetchQuizQuestions = async (amount: number): Promise<QuestionsState[]> => {
-  const endpoint = `https://k8d107.p.ssafy.io/api/v1/quiz/quizlist`;
+  const endpoint = `https://arcana.aeoragy.com/api/v1/quiz/quizlist`;
   const data = await (await fetch(endpoint)).json();
   console.log(data);
   return data.map((content: Question) => ({

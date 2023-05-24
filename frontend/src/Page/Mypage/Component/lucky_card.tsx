@@ -21,7 +21,7 @@ function LuckyCard({ npc, cardIdx, cardMent }: LuckyCardType) {
       <luckResult.CardBody>
         <luckResult.CardFront
           initial={{ x: '-13vw', y: '1vh' }}
-          src={`https://k8d107.p.ssafy.io/api/v1/images/${cardIdx}.png`}
+          src={`https://arcana.aeoragy.com/api/v1/images/${cardIdx}.png`}
           alt="CardF"
         />
         <luckResult.Card back={srcBack} color={color}>

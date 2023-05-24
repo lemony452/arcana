@@ -53,7 +53,7 @@ function LuckyPage() {
   const cardList = [
     {
       index: 0,
-      front: `https://k8d107.p.ssafy.io/api/v1/images/${lucky.card.idx}.png`,
+      front: `https://arcana.aeoragy.com/api/v1/images/${lucky.card.idx}.png`,
       num: lucky.card.idx,
       title: lucky.card.name,
       contentCeltic: `행운카드는 ${lucky.card.name} 이 나왔어!\n${lucky.ment}`,
@@ -62,7 +62,7 @@ function LuckyPage() {
     },
     {
       index: 1,
-      front: `https://k8d107.p.ssafy.io/api/v1/images/${lucky.card.idx}.png`,
+      front: `https://arcana.aeoragy.com/api/v1/images/${lucky.card.idx}.png`,
       num: lucky.card.idx,
       title: lucky.card.name,
       contentCeltic: `행운카드는 ${lucky.card.name} 이 나왔어!\n${lucky.ment}`,
@@ -71,7 +71,7 @@ function LuckyPage() {
     },
     {
       index: 2,
-      front: `https://k8d107.p.ssafy.io/api/v1/images/${lucky.card.idx}.png`,
+      front: `https://arcana.aeoragy.com/api/v1/images/${lucky.card.idx}.png`,
       num: lucky.card.idx,
       title: lucky.card.name,
       contentCeltic: `행운카드는 ${lucky.card.name} 이 나왔어!\n${lucky.ment}`,
@@ -130,7 +130,7 @@ function LuckyPage() {
   const cardContent = npc === 0 ? cardContentCeltic : cardContentTime;
   const dialogImg = npc === 0 ? charDialog0 : charDialog1;
 
-  const shareImg = `https://k8d107.p.ssafy.io/api/v1/images/${lucky.card.idx}.png`;
+  const shareImg = `https://arcana.aeoragy.com/api/v1/images/${lucky.card.idx}.png`;
   useEffect(() => {
     if (location.state === 'celtic') {
       setNpc(0);
@@ -162,14 +162,14 @@ function LuckyPage() {
         description: cardList[selectCard].result, // 공유 내용
         imageUrl: shareImg, // 공유 이미지
         link: {
-          webUrl: 'https://k8d107.p.ssafy.io', // 공유 링크
+          webUrl: 'https://arcana.aeoragy.com', // 공유 링크
         },
       },
       buttons: [
         {
           title: '내 운세 점치러 가기', // 공유 초대 링크 타이틀
           link: {
-            webUrl: 'https://k8d107.p.ssafy.io', // 공유 초대 링크
+            webUrl: 'https://arcana.aeoragy.com', // 공유 초대 링크
           },
         },
       ],
@@ -211,7 +211,7 @@ function LuckyPage() {
                     height="32px"
                   />
                 </FacebookShareButton>
-                <TwitterShareButton title={cardList[selectCard].result} url="https://k8d107.p.ssafy.io">
+                <TwitterShareButton title={cardList[selectCard].result} url="https://arcana.aeoragy.com">
                   <motion.img
                     whileHover={{ scale: 1.1 }}
                     src={TwitterIcon}
@@ -220,7 +220,7 @@ function LuckyPage() {
                     height="32px"
                   />
                 </TwitterShareButton>
-                <TelegramShareButton title={cardList[selectCard].result} url="https://k8d107.p.ssafy.io">
+                <TelegramShareButton title={cardList[selectCard].result} url="https://arcana.aeoragy.com">
                   <motion.img
                     whileHover={{ scale: 1.1 }}
                     src={TelegramIcon}
