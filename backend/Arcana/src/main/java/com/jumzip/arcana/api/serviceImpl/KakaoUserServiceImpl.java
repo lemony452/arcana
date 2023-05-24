@@ -38,10 +38,9 @@ public class KakaoUserServiceImpl implements KakaoUserService {
 
     private final UserService userService;
 
-
     @Override
     public User kakaoLogin(String code, HttpServletResponse response)
-        throws JsonProcessingException {
+            throws JsonProcessingException {
 
         // 1. "인가 코드"로 "액세스 토큰" 요청
         String accessToken = getAccessToken(code);
@@ -73,18 +72,17 @@ public class KakaoUserServiceImpl implements KakaoUserService {
         MultiValueMap<String, String> body = new LinkedMultiValueMap<>();
         body.add("grant_type", "authorization_code");
         body.add("client_id", CLIENT_ID);
-        body.add("redirect_uri", "https://k8d107.p.ssafy.io/authkakao");
+        body.add("redirect_uri", "https://arcana.aeoragy.com/authkakao");
         body.add("code", code);
 
         // HTTP 요청 보내기
         HttpEntity<MultiValueMap<String, String>> kakaoTokenRequest = new HttpEntity<>(body, headers);
         RestTemplate rt = new RestTemplate();
         ResponseEntity<String> response = rt.exchange(
-            "https://kauth.kakao.com/oauth/token",
-            HttpMethod.POST,
-            kakaoTokenRequest,
-            String.class
-        );
+                "https://kauth.kakao.com/oauth/token",
+                HttpMethod.POST,
+                kakaoTokenRequest,
+                String.class);
 
         // HTTP 응답 (JSON) -> 액세스 토큰 파싱
         String responseBody = response.getBody();
@@ -106,11 +104,10 @@ public class KakaoUserServiceImpl implements KakaoUserService {
         HttpEntity<MultiValueMap<String, String>> kakaoUserInfoRequest = new HttpEntity<>(headers);
         RestTemplate rt = new RestTemplate();
         ResponseEntity<String> response = rt.exchange(
-            "https://kapi.kakao.com/v2/user/me",
-            HttpMethod.POST,
-            kakaoUserInfoRequest,
-            String.class
-        );
+                "https://kapi.kakao.com/v2/user/me",
+                HttpMethod.POST,
+                kakaoUserInfoRequest,
+                String.class);
 
         // responseBody에 있는 정보를 꺼냄
         String responseBody = response.getBody();
@@ -145,8 +142,7 @@ public class KakaoUserServiceImpl implements KakaoUserService {
             userRepository.saveUser(kakaoUserInfo);
 
             return kakaoUserInfo;
-        }
-        else {
+        } else {
             logger.info("kakao user is " + kakaoUser.getEmail());
 
             return kakaoUser;

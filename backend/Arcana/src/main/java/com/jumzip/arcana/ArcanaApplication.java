@@ -13,7 +13,7 @@ import java.util.Date;
 import java.util.TimeZone;
 
 @EnableScheduling
-@OpenAPIDefinition(servers = {@Server(url = "https://k8d107.p.ssafy.io", description = "Default Server URL")})
+@OpenAPIDefinition(servers = { @Server(url = "https://arcana.aeoragy.com", description = "Default Server URL") })
 @SpringBootApplication
 public class ArcanaApplication {
     private final Logger logger = LoggerFactory.getLogger(ArcanaApplication.class);
