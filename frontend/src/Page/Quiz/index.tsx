@@ -62,18 +62,18 @@ function Quiz() {
   };
 
   // 접속시 퀴즈라는 이름의 방이 없으면 본인이 호스트가 되어 생성해야 됨
-  const send = () => {
-    client!.publish({
-      destination: '/pub/enter',
-      body: JSON.stringify({
-        type: 'ENTER',
-        uid: token,
-        channel: 'quiz',
-        data: 'entrance message',
-      }),
-      headers: { priority: 9 },
-    });
-  };
+  // const send = () => {
+  //   client!.publish({
+  //     destination: '/pub/enter',
+  //     body: JSON.stringify({
+  //       type: 'ENTER',
+  //       uid: token,
+  //       channel: 'quiz',
+  //       data: 'entrance message',
+  //     }),
+  //     headers: { priority: 9 },
+  //   });
+  // };
 
   // 퀴즈 시작
   const startQuiz = async () => {
@@ -88,17 +88,20 @@ function Quiz() {
     // 아래에 있는 걸로 퀴즈 시간 조절
     setTimeLeft(MINUTES_IN_MS + 10 * 1000);
     setIndex(index + 1);
-    send();
+    // send();
   };
 
   // 이벤트 대기방 타이머 계산
   const loadingTimer = () => {
     if (sec !== 0) {
+      console.log('초 감소');
       setSec((prev) => prev - 1);
-    } else if (min !== 0) {
+    } else if (sec === 0 && min !== 0) {
+      console.log('분 감소');
       setMin((prev) => prev - 1);
       setSec(59);
-    } else {
+    } else if (sec === 0 && min === 0 && hour !== 0) {
+      console.log('시 감소');
       setHour((prev) => prev - 1);
       setMin(59);
       setSec(59);
@@ -130,82 +133,88 @@ function Quiz() {
     // });
     // 임시
     setHour(0);
-    setMin(5);
-    setSec(0);
+    setMin(0);
+    setSec(10);
   };
+
+  useEffect(() => {
+    serverTime();
+  }, []);
 
   useEffect(() => {
     const timer = setInterval(loadingTimer, 1000);
-    const realHour = String(hour).padStart(2, '0');
-    const realMin = String(min).padStart(2, '0');
-    const realSec = String(sec).padStart(2, '0');
-    setRealTime(`${realHour}:${realMin}:${realSec}`);
-    if (hour === 0 && min === 0 && sec === 0) {
-      clearInterval(timer);
+    if (hour === 0 && min === 0 && sec === -1) {
+      console.log('타이머 끝');
+    } else {
+      const realHour = String(hour).padStart(2, '0');
+      const realMin = String(min).padStart(2, '0');
+      const realSec = String(sec).padStart(2, '0');
+      setRealTime(`${realHour}:${realMin}:${realSec}`);
     }
-  }, [sec, min, hour]);
+    return () => clearInterval(timer);
+  }, [hour, min, sec]);
 
   // 퀴즈 서버 접속
 
-  const connect = async () => {
-    if (token === '') {
-      return;
-    }
+  // const connect = async () => {
+  //   if (token === '') {
+  //     return;
+  //   }
 
-    const callback = function (res: any) {
-      // called when the client receives a STOMP message from the server
-      if (res.body) {
-        console.log(user);
-        console.log(res.body);
-        // alert(res.body);
-      } else {
-        console.log('got empty message');
-      }
-    };
+  // const callback = function (res: any) {
+  //   // called when the client receives a STOMP message from the server
+  //   if (res.body) {
+  //     console.log(user);
+  //     console.log(res.body);
+  //     // alert(res.body);
+  //   } else {
+  //     console.log('got empty message');
+  //   }
+  // };
 
-    try {
-      const clientdata = await new StompJs.Client({
-        brokerURL: 'wss://k8d107.p.ssafy.io/ws/websocket',
-        // connectHeaders: {
-        //   login: id,
-        //   passcode: 'password',
-        // },
-        debug(str) {
-          console.log(str);
-        },
-        reconnectDelay: 5000,
-        heartbeatIncoming: 4000,
-        heartbeatOutgoing: 4000,
-      });
+  //   try {
+  //     const clientdata = await new StompJs.Client({
+  //       brokerURL: 'wss://k8d107.p.ssafy.io/ws/websocket',
+  //       // connectHeaders: {
+  //       //   login: id,
+  //       //   passcode: 'password',
+  //       // },
+  //       debug(str) {
+  //         console.log(str);
+  //       },
+  //       reconnectDelay: 5000,
+  //       heartbeatIncoming: 4000,
+  //       heartbeatOutgoing: 4000,
+  //     });
 
-      let subscriptiondata: any;
-      clientdata.onConnect = await function () {
-        subscriptiondata = clientdata.subscribe('/sub/channel/quiz', callback);
-        changeSubscription(subscriptiondata);
-      };
+  //     let subscriptiondata: any;
+  //     clientdata.onConnect = await function () {
+  //       subscriptiondata = clientdata.subscribe('/sub/channel/quiz', callback);
+  //       changeSubscription(subscriptiondata);
+  //     };
 
-      const res = await clientdata.activate();
-      console.log(res);
-      userCount();
-      changeClient(clientdata);
-      serverTime();
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  //     const res = await clientdata.activate();
+  //     console.log(res);
+  //     userCount();
+  //     changeClient(clientdata);
+  //     serverTime();
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
-  const disConnect = () => {
-    if (client === null) {
-      return;
-    }
+  // const disConnect = () => {
+  //   if (client === null) {
+  //     return;
+  //   }
 
-    client.deactivate();
-  };
+  //   client.deactivate();
+  // };
 
-  useEffect(() => {
-    connect();
-    console.log('connected');
-  }, []);
+  // useEffect(() => {
+  //   connect();
+  //   console.log('connected');
+  // }, []);
 
   const winOn = () => {
     win();
@@ -371,7 +380,7 @@ function Quiz() {
               className="nextQ fail"
               onClick={() => {
                 goHome();
-                disConnect();
+                // disConnect();
               }}
             >
               메인으로 돌아가기
@@ -454,7 +463,7 @@ function Quiz() {
             className="nextQ success"
             onClick={() => {
               goHome();
-              disConnect();
+              // disConnect();
               getTicket();
             }}
           >
