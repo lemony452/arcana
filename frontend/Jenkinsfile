@@ -56,8 +56,10 @@ pipeline {
             steps {
                 echo 'push Docker...'
                     script {
-                        sh 'docker push d107final/arcana-fe'
-                    }
+                        docker.withRegistry('', registryCredential) {
+                            dockerImage.push() 
+    		        }
+                }
             }
 
             post {
