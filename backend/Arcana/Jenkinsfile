@@ -1,7 +1,7 @@
 pipeline {
     agent any
          environment {
-            imagename = "d107final/docker-be"
+            imagename = "d107final/arcana-be"
             registryCredential = 'jumzip@d107'
             dockerImage = ''
         }
@@ -15,10 +15,10 @@ pipeline {
         stage('git clone') {
             steps {
                 checkout scmGit(
-                    branches: [[name: 'dev-be']],
+                    branches: [[name: 'aeoragy-be']],
                     extensions: [],
                     userRemoteConfigs: [[
-                        credentialsId: 'BEmanager',
+                        credentialsId: 'arcanaJenkins',
                         url: 'https://lab.ssafy.com/s08-final/S08P31D107.git'
                     ]]
                 )
@@ -80,7 +80,8 @@ pipeline {
             steps {
                 echo 'push Docker...'
                     script {
-                        sh 'docker push d107final/docker-be'
+                        docker.withRegistry('', registryCredential) {
+                            dockerImage.push() 
                     }
             }
 
@@ -94,19 +95,19 @@ pipeline {
             steps {
                 echo 'pull Docker...'
 
-                sh 'docker pull d107final/docker-be'
+                sh 'docker pull d107final/arcana-be'
 
                 echo 'Clean image...'
                 sh '''
-                    if test "`docker ps -aq --filter name=docker-be`"; then
-                    docker stop docker-be
-                    docker rm docker-be
+                    if test "`docker ps -aq --filter name=arcana-be`"; then
+                    docker stop arcana-be
+                    docker rm arcana-be
                     fi
                 '''
 
                 echo 'run Docker...'
                 // 도커 중복시 삭제하고 덮어씌우기 처리 안했으니까 해야함
-                sh 'docker run -d --name docker-be -p 18081:18081 -v images:/images d107final/docker-be'
+                sh 'docker run -d --name arcana-be -p 19101:18081 -v images:/images d107final/arcana-be'
 
             }
         }
