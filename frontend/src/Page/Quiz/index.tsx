@@ -38,6 +38,9 @@ function Quiz() {
   const [gameOver, setGameOver] = useState(true);
   const [fail, setFail] = useState(false);
   const [realTime, setRealTime] = useState('00:00:00');
+  const [hour, setHour] = useState(0); // 시
+  const [min, setMin] = useState(0); // 분
+  const [sec, setSec] = useState(0); // 초
   const [userNum, setUserNum] = useState(0);
 
   const navigate = useNavigate();
@@ -57,6 +60,90 @@ function Quiz() {
       setUserNum(res.data);
     });
   };
+
+  // 접속시 퀴즈라는 이름의 방이 없으면 본인이 호스트가 되어 생성해야 됨
+  const send = () => {
+    client!.publish({
+      destination: '/pub/enter',
+      body: JSON.stringify({
+        type: 'ENTER',
+        uid: token,
+        channel: 'quiz',
+        data: 'entrance message',
+      }),
+      headers: { priority: 9 },
+    });
+  };
+
+  // 퀴즈 시작
+  const startQuiz = async () => {
+    setLoading(true);
+    setGameOver(false);
+    const newQuestions = await fetchQuizQuestions(TOTAL_QUESTIONS);
+    setQuestions(newQuestions);
+    setScore(0);
+    setUserAnswers([]);
+    setNumber(0);
+    setLoading(false);
+    // 아래에 있는 걸로 퀴즈 시간 조절
+    setTimeLeft(MINUTES_IN_MS + 10 * 1000);
+    setIndex(index + 1);
+    send();
+  };
+
+  // 이벤트 대기방 타이머 계산
+  const loadingTimer = () => {
+    if (sec !== 0) {
+      setSec((prev) => prev - 1);
+    } else if (min !== 0) {
+      setMin((prev) => prev - 1);
+      setSec(59);
+    } else {
+      setHour((prev) => prev - 1);
+      setMin(59);
+      setSec(59);
+    }
+  };
+
+  // 서버 시간 불러오기
+  const serverTime = async () => {
+    console.log('서버시간은 밀리초가 있는 유닉스');
+    // await API.get(`/api/v1/quiz/servertime`).then((res) => {
+    //   // console.log(res.data);
+    //   // console.log(typeof res.data);
+    //   const serverDate = new Date(Math.floor(res.data / 1000) * 1000);
+    //   console.log(serverDate.getHours(), serverDate.getMinutes(), serverDate.getSeconds());
+    //   let hours = serverDate.getHours();
+    //   let minutes = serverDate.getMinutes();
+    //   let seconds = serverDate.getSeconds();
+    //   if (serverDate.getHours() < 13) {
+    //     hours = 13 - hours;
+    //     minutes = 39 - minutes;
+    //     seconds = 59 - seconds;
+    //     // setRealTime(`${hours}:${minutes}:${seconds}`);
+    //   } else if (serverDate.getHours() === 17 && serverDate.getMinutes() === 21 && serverDate.getSeconds() === 0) {
+    //     startQuiz();
+    //   }
+    //   setHour(hours);
+    //   setMin(minutes);
+    //   setSec(seconds);
+    // });
+    // 임시
+    setHour(0);
+    setMin(5);
+    setSec(0);
+  };
+
+  useEffect(() => {
+    const timer = setInterval(loadingTimer, 1000);
+    const realHour = String(hour).padStart(2, '0');
+    const realMin = String(min).padStart(2, '0');
+    const realSec = String(sec).padStart(2, '0');
+    setRealTime(`${realHour}:${realMin}:${realSec}`);
+    if (hour === 0 && min === 0 && sec === 0) {
+      clearInterval(timer);
+    }
+  }, [sec, min, hour]);
 
   // 퀴즈 서버 접속
 
@@ -101,6 +188,7 @@ function Quiz() {
       console.log(res);
       userCount();
       changeClient(clientdata);
+      serverTime();
     } catch (error) {
       console.log(error);
     }
@@ -112,20 +200,6 @@ function Quiz() {
     }
 
     client.deactivate();
-  };
-
-  // 접속시 퀴즈라는 이름의 방이 없으면 본인이 호스트가 되어 생성해야 됨
-  const send = () => {
-    client!.publish({
-      destination: '/pub/enter',
-      body: JSON.stringify({
-        type: 'ENTER',
-        uid: token,
-        channel: 'quiz',
-        data: 'entrance message',
-      }),
-      headers: { priority: 9 },
-    });
   };
 
   useEffect(() => {
@@ -141,54 +215,6 @@ function Quiz() {
       winOn();
     }
   }, []);
-
-  // 퀴즈 시작
-  const startQuiz = async () => {
-    setLoading(true);
-    setGameOver(false);
-    const newQuestions = await fetchQuizQuestions(TOTAL_QUESTIONS);
-    setQuestions(newQuestions);
-    setScore(0);
-    setUserAnswers([]);
-    setNumber(0);
-    setLoading(false);
-    // 아래에 있는 걸로 퀴즈 시간 조절
-    setTimeLeft(MINUTES_IN_MS + 10 * 1000);
-    setIndex(index + 1);
-    send();
-  };
-
-  useEffect(() => {
-    const serverTime = async () => {
-      // console.log('서버시간은 밀리초가 있는 유닉스');
-      await API.get(`/api/v1/quiz/servertime`).then((res) => {
-        // console.log(res.data);
-        // console.log(typeof res.data);
-        const serverDate = new Date(Math.floor(res.data / 1000) * 1000);
-        console.log(serverDate.getHours(), serverDate.getMinutes(), serverDate.getSeconds());
-        // console.log(typeof serverDate.getHours());
-        if (serverDate.getHours() < 13) {
-          const hours = String(13 - serverDate.getHours()).padStart(2, '0');
-          const minutes = String(39 - serverDate.getMinutes()).padStart(2, '0');
-          const seconds = String(59 - serverDate.getSeconds()).padStart(2, '0');
-          setRealTime(`${hours}:${minutes}:${seconds}`);
-        } else if (serverDate.getHours() === 17 && serverDate.getMinutes() === 21 && serverDate.getSeconds() === 0) {
-          startQuiz();
-        } else {
-          const hours = String(28 - serverDate.getHours()).padStart(2, '0');
-          const minutes = String(59 - serverDate.getMinutes()).padStart(2, '0');
-          const seconds = String(59 - serverDate.getSeconds()).padStart(2, '0');
-          setRealTime(`${hours}:${minutes}:${seconds}`);
-        }
-      });
-      // const date = new Date();
-    };
-    const startTimer = () => {
-      setInterval(() => serverTime(), 1000);
-    };
-
-    startTimer();
-  });
 
   // 퀴즈 풀이시간 카운트 다운s
   const second = String(Math.floor((timeLeft / 1000) % 60)).padStart(2, '0');
