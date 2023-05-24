@@ -18,7 +18,7 @@ pipeline {
                     branches: [[name: 'aeoragy-fe']],
                     extensions: [],
                     userRemoteConfigs: [[
-                        credentialsId: 'jumzip@d107',
+                        credentialsId: 'arcanaJenkins',
                         url: 'https://lab.ssafy.com/s08-final/S08P31D107.git'
                     ]]
                 )
