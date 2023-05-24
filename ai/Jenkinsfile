@@ -1,7 +1,7 @@
 pipeline {
     agent any
          environment {
-            imagename = "d107final/docker-ai"
+            imagename = "d107final/arcana-ai"
             registryCredential = 'jumzip@d107'
             dockerImage = ''
         }
@@ -15,10 +15,10 @@ pipeline {
         stage('git clone') {
             steps {
                 checkout scmGit(
-                    branches: [[name: 'dev-ai']],
+                    branches: [[name: 'aeoragy-ai']],
                     extensions: [],
                     userRemoteConfigs: [[
-                        credentialsId: 'BEmanager',
+                        credentialsId: 'arcanaJenkins',
                         url: 'https://lab.ssafy.com/s08-final/S08P31D107.git'
                     ]]
                 )
@@ -55,9 +55,12 @@ pipeline {
         stage('push Docker') {
             steps {
                 echo 'push Docker...'
-                    script {
-                        sh 'docker push d107final/docker-ai'
+                
+                script {
+                    docker.withRegistry('', registryCredential) {
+                        dockerImage.push() 
                     }
+                }
             }
 
             post {
@@ -70,18 +73,18 @@ pipeline {
             steps {
                 echo 'pull Docker...'
 
-                sh 'docker pull d107final/docker-ai'
+                sh 'docker pull d107final/arcana-ai'
 
                 echo 'Clean image...'
                 sh '''
-                    if test "`docker ps -aq --filter name=docker-ai`"; then
-                    docker stop docker-ai
-                    docker rm docker-ai
+                    if test "`docker ps -aq --filter name=arcana-ai`"; then
+                    docker stop arcana-ai
+                    docker rm arcana-ai
                     fi
                 '''
 
                 echo 'run Docker...'
-                sh 'docker run -d --name docker-ai -p 18082:18082 d107final/docker-ai'
+                sh 'docker run -d --name arcana-ai -p 19102:18082 d107final/arcana-ai'
 
             }
         }
