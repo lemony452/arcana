@@ -8,7 +8,11 @@
 
 - [Arcana 개요](#arcana-개요)
 
-- [주요 기술 (Service Architecture)](#주요-기술-service-architecture)
+- [메뉴 구조도](#메뉴-구조도)
+
+- [와이어 프레임](#와이어-프레임)
+
+- [주요 기술 (서비스 구조도)](#주요-기술-service-architecture)
 
 - [핵심 기술](#핵심-기술)
 
@@ -49,6 +53,11 @@ Arcana(이하 아르카나)는 가벼운 질문부터 개인적인 고민까지 
 ## 메뉴 구조도
 
 ![menu_structure](./images/menu_structure.png)
+<br>
+
+## 와이어 프레임
+
+![wire_frame](./images/wire_freame.png)
 <br>
 
 ## 주요 기술 (Service Architecture)
@@ -217,9 +226,9 @@ Arcana(이하 아르카나)는 가벼운 질문부터 개인적인 고민까지 
 
 ## 프로젝트 산출물
 
-- 메뉴 구조
-- Git 전략
-- Service Architecture
+- 메뉴 구조도
+- 와이어 프레임
+- 서비스 구조도
 - Convention
 - API 명세서
 - ERD
